@@ -535,9 +535,9 @@ GameObject:
   - component: {fileID: 1604993678}
   - component: {fileID: 1604993682}
   - component: {fileID: 1604993683}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerCube
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -628,9 +628,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   states:
-  - {fileID: 11400000, guid: a9c6cb64726034249903e3be1be8f845, type: 2}
   - {fileID: 11400000, guid: cc2007b6257324245928546528a4b157, type: 2}
+  - {fileID: 11400000, guid: 9cc536dac17e4cb498d08112e4ba448d, type: 2}
   currentState: {fileID: 0}
+  GroundCheckLayer:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!54 &1604993683
 Rigidbody:
   m_ObjectHideFlags: 0

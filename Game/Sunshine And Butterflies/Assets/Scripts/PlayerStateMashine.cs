@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class PlayerStateMashine : StateMachine
 {
+    public float HorizontalDirection { get; set; }
+    public float VerticalDirection { get; set; }
+    public LayerMask GroundCheckLayer;
+
 
     protected override void Awake()
     {
