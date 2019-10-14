@@ -9,8 +9,8 @@ public class PlayerStateMashine : StateMachine
 
     protected override void Awake()
     {
-      
-       
+
+        base.Awake();
     }
 
     /// <summary>
@@ -27,9 +27,21 @@ public class PlayerStateMashine : StateMachine
         //EventHandeler.Current.RegisterListener(EventHandeler.EVENT_TYPE.CinematicFreeze, CinematicFreeze);
         //EventHandeler.Current.RegisterListener(EventHandeler.EVENT_TYPE.CinematicResume, CinematicResume);
 
-       
-
+        EventHandeler.Current.RegisterListener(EventHandeler.EVENT_TYPE.PressButton, ChangeState);
+        
     }
-    
-   
+
+    //public void OnTest()
+    //{
+    //    TestEventInfo tei = new TestEventInfo { };
+    //    EventHandeler.Current.FireEvent(EventHandeler.EVENT_TYPE.TestEvent, tei);
+    //}
+
+    private void ChangeState(EventInfo info)
+    {
+        PressButtonEventInfo pbei = (PressButtonEventInfo)info;
+        Debug.Log(pbei.number);
+    }
+
+
 }
