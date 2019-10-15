@@ -42,7 +42,7 @@ public class PlayerBaseState : State
     public void Interact()
     {
         RaycastHit ray;
-        if (Input.GetKeyDown(KeyCode.Space)) // placeholder
+        if (Input.GetButtonDown("Interact1")) // placeholder
         {
 
             if(Physics.Raycast(owner.transform.position, owner.transform.forward, out ray, 2.0f, interactionLayer)){

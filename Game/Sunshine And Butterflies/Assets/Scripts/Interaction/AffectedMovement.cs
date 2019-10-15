@@ -15,7 +15,7 @@ public class AffectedMovement : AffectedObject
         }
         else
         {
-            transform.position = endPosition.position;
+            transform.position = startPosition;
         }
     }
 
