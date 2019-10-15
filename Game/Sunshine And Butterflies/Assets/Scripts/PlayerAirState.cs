@@ -29,11 +29,11 @@ public class PlayerAirState : PlayerBaseState
     public void ApplyAirVelocity()
     {
         Vector2 direction = new Vector2(HorizontalDirection, VerticalDirection);
-        Vector2 currentVelocity = new Vector2(rgb.velocity.x, rgb.velocity.z);
+        Vector2 currentVelocity = new Vector2(rb.velocity.x, rb.velocity.z);
         float turndot = Vector2.Dot(currentVelocity, direction);
         if(turndot < 0.3)
         {
-            rgb.velocity += (new Vector3(HorizontalDirection, 0, VerticalDirection) * 0.05f);
+            rb.velocity += (new Vector3(HorizontalDirection, 0, VerticalDirection) * 0.05f);
 
         }
         //if (new Vector3(rgb.velocity.x, 0, rgb.velocity.y).magnitude >= 2.51f)

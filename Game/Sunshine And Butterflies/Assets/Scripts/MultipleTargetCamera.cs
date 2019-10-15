@@ -46,7 +46,10 @@ public class MultipleTargetCamera : MonoBehaviour
     private float GreatestDistance()
     {
         Bounds bound = new Bounds(players[0].position, Vector3.zero);
-        bound.Encapsulate(players[1].position);
+        for (int i = 1; i < players.Count; i++)
+        {
+            bound.Encapsulate(players[i].position);
+        }
         return bound.size.x;
     }
 
@@ -54,7 +57,11 @@ public class MultipleTargetCamera : MonoBehaviour
     {
         
         Bounds bound = new Bounds(players[0].position, Vector3.zero);
-        bound.Encapsulate(players[1].position);
+        for(int i = 0; i < players.Count; i++)
+        {
+            bound.Encapsulate(players[i].position);
+        }
+        
         
 
         return bound.center;

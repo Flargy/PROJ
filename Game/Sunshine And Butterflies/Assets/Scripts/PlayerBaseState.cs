@@ -12,7 +12,7 @@ public class PlayerBaseState : State
     protected LayerMask interactionLayer { get { return owner.interactionLayer; } }
 
     protected PlayerStateMashine owner;
-    protected Rigidbody rgb;
+    protected Rigidbody rb;
 
     protected float moveSpeed = 6.0f;
     protected float airMltiplier = 1.0f;
@@ -22,7 +22,7 @@ public class PlayerBaseState : State
     public override void Initialize(StateMachine owner) {
         this.owner = (PlayerStateMashine)owner;
 
-        rgb = owner.GetComponent<Rigidbody>();
+        rb = owner.GetComponent<Rigidbody>();
         
         
     }
@@ -31,7 +31,17 @@ public class PlayerBaseState : State
     {
         ApplyVelocity(); // kommer behövas för carry state
         Interact();
+        TurnToFace();
       
+    }
+
+    public void TurnToFace()
+    {
+        Vector3 movementVector = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        if (movementVector != Vector3.zero)
+        {
+            owner.transform.rotation = Quaternion.LookRotation(movementVector);
+        }
     }
 
     public void MovementInput() // kommer behövas för carry state
@@ -48,7 +58,7 @@ public class PlayerBaseState : State
         RaycastHit ray;
         if (Input.GetButtonDown("Interact1") && carryingBox == false) // placeholder
         {
-            Debug.Log("interacting");
+
             if (Physics.Raycast(owner.transform.position, owner.transform.forward, out ray, 2.0f, interactionLayer))
             {
                 if (ray.collider.CompareTag("CarryBox"))
@@ -69,7 +79,7 @@ public class PlayerBaseState : State
         
         else if (carryingBox == true && Input.GetButtonDown("Interact1")) //Ska brytas ut till egen state
         {
-            Debug.Log("dropping");
+
             carryBox.GetComponent<InteractionPickUp>().Drop();
             carryingBox = false;
         }
@@ -77,12 +87,12 @@ public class PlayerBaseState : State
 
     public void ApplyVelocity()
     {
-        rgb.velocity = (new Vector3(HorizontalDirection, 0, VerticalDirection) * moveSpeed) + new Vector3(0, rgb.velocity.y, 0);
-        if (new Vector3(rgb.velocity.x, 0, rgb.velocity.z).magnitude >= 2.51f)
+        rb.velocity = (new Vector3(HorizontalDirection, 0, VerticalDirection) * moveSpeed) + new Vector3(0, rb.velocity.y, 0);
+        if (new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude >= 2.51f)
         {
-            float yVelocity = rgb.velocity.y;
-            rgb.velocity = Vector3.ClampMagnitude(rgb.velocity, 2.5f);
-            rgb.velocity = new Vector3(rgb.velocity.x, yVelocity, rgb.velocity.z);
+            float yVelocity = rb.velocity.y;
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, 2.5f);
+            rb.velocity = new Vector3(rb.velocity.x, yVelocity, rb.velocity.z);
         }
     }
 

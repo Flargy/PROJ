@@ -5,14 +5,27 @@ using UnityEngine;
 public class Affected2WayDoor : AffectedObject
 {
     [SerializeField] private List<PressurePlate> plates;
+    private bool doorIsOpen = false;
+    private Vector3 startPosition;
 
     public override void ExecuteAction()
     {
         if (plates[0].GetPushed() == true && plates[1].GetPushed() == true)
         {
-            Debug.Log("open");
+            
+            doorIsOpen = true;
+            transform.position += Vector3.down * 5;
         }
         else
-            Debug.Log("close");
+        {
+            doorIsOpen = false;
+            transform.position = startPosition;
+        }
+            
+    }
+
+    private void Start()
+    {
+        startPosition = transform.position;
     }
 }

@@ -30,7 +30,7 @@ public class PlayerMoveState : PlayerBaseState
         if (Input.GetButtonDown("Jump1") && GroundCheck())
         {
 
-            rgb.velocity += Vector3.up * jumpPower;
+            rb.velocity += Vector3.up * jumpPower;
         }
     }
 

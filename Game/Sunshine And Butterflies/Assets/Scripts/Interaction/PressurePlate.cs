@@ -10,14 +10,13 @@ public class PressurePlate : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         itemsOnPad++;
-        Debug.Log("Item added, now at: " + itemsOnPad);
+
         affectedObject.ExecuteAction();
     }
 
     private void OnTriggerExit(Collider other)
     {
         itemsOnPad--;
-        Debug.Log("item removed, now at: " + itemsOnPad);
         affectedObject.ExecuteAction();
     }
 
