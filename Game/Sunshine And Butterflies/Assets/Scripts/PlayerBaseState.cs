@@ -8,7 +8,8 @@ public class PlayerBaseState : State
 {
     protected float HorizontalDirection { get { return owner.HorizontalDirection; } set { owner.HorizontalDirection = value; } }
     protected float VerticalDirection { get { return owner.VerticalDirection; } set { owner.VerticalDirection = value; } }
-    protected LayerMask layer { get { return owner.GroundCheckLayer; } }
+    protected LayerMask groundLayer { get { return owner.groundCheckLayer; } }
+    protected LayerMask interactionLayer { get { return owner.interactionLayer; } }
 
     protected PlayerStateMashine owner;
     protected Rigidbody rgb;
@@ -27,7 +28,7 @@ public class PlayerBaseState : State
     public override void Update()
     {
         ApplyVelocity();
-        
+        Interact();
       
     }
 
@@ -38,7 +39,18 @@ public class PlayerBaseState : State
 
     }
 
+    public void Interact()
+    {
+        RaycastHit ray;
+        if (Input.GetButtonDown("Interact1")) // placeholder
+        {
 
+            if(Physics.Raycast(owner.transform.position, owner.transform.forward, out ray, 2.0f, interactionLayer)){
+                Interactable interactionObject = ray.collider.GetComponent<Interactable>();
+                interactionObject.DistanceCheck(owner.transform.position);
+            }
+        }
+    }
 
     public void ApplyVelocity()
     {
@@ -52,7 +64,7 @@ public class PlayerBaseState : State
 
     public bool GroundCheck()
     {
-        if (Physics.Raycast(owner.transform.position, Vector3.down, 0.55f, layer))
+        if (Physics.Raycast(owner.transform.position, Vector3.down, 0.55f, groundLayer))
         {
             return true;
         }
