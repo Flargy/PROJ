@@ -10,8 +10,13 @@ public abstract class EventInfo
 
 }
 //Time Events
-public class NightEventInfo : EventInfo
+public class TestEventInfo : EventInfo
 {
+}
+
+public class PressButtonEventInfo: EventInfo
+{
+    public int number;
 }
 
 

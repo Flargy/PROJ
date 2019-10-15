@@ -13,7 +13,7 @@ public abstract class StateMachine : MonoBehaviour
     [SerializeField] private State currentState;
     private State[] stateClones;
 
-
+    // Instansierar listan med states och lägger till dem till en dictionary
     protected virtual void Awake()
     {
         stateClones = states;
@@ -38,6 +38,7 @@ public abstract class StateMachine : MonoBehaviour
         currentState.Update();
     }
 
+    // Hämtar vilken state objektet ska använda sig av
     public T GetState<T>()
     {
         Type type = typeof(T);
@@ -46,6 +47,7 @@ public abstract class StateMachine : MonoBehaviour
         return (T)Convert.ChangeType(stateDictionary[type], type);
     }
 
+    // Byter state till <T>
     public void TransitionTo<T>()
     {
         currentState.Exit();
@@ -53,6 +55,7 @@ public abstract class StateMachine : MonoBehaviour
         currentState.Enter();
     }
 
+    // Byter till state newState som är en instans av en State
     public void TransitionTo(State newState)
     {
         currentState.Exit();
@@ -60,6 +63,7 @@ public abstract class StateMachine : MonoBehaviour
         currentState.Enter();
     }
 
+    // Byter till state genom index
     public void TransitionTo(int newstate)
     {
         currentState.Exit();
