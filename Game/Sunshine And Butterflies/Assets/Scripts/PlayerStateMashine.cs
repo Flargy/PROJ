@@ -8,7 +8,8 @@ public class PlayerStateMashine : StateMachine
 {
     public float HorizontalDirection { get; set; }
     public float VerticalDirection { get; set; }
-    public LayerMask GroundCheckLayer;
+    public LayerMask groundCheckLayer;
+    public LayerMask interactionLayer;
 
 
     protected override void Awake()
