@@ -10,6 +10,11 @@ public class Interactable : MonoBehaviour
         // will be overwritten by inheritage
     }
 
+    public virtual void Interact(GameObject player)
+    {
+
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
