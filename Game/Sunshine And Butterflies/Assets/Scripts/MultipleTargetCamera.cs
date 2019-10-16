@@ -25,6 +25,7 @@ public class MultipleTargetCamera : MonoBehaviour
     private void LateUpdate()
     {
         Move();
+        Zoom();
 
     }
 
