@@ -4,25 +4,32 @@ using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
 {
-    [SerializeField] private AffectedObject affectedObject;
+    [SerializeField] private List<AffectedObject> affectedObject;
+    [SerializeField] private int desiredNrOfObjects = 0;
     private int itemsOnPad;
 
     private void OnTriggerEnter(Collider other)
     {
         itemsOnPad++;
 
-        affectedObject.ExecuteAction();
+        foreach(AffectedObject affected in affectedObject)
+        {
+            affected.ExecuteAction();
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         itemsOnPad--;
-        affectedObject.ExecuteAction();
+        foreach (AffectedObject affected in affectedObject)
+        {
+            affected.ExecuteAction();
+        }
     }
 
     public bool GetPushed()
     {
-        if(itemsOnPad > 0)
+        if(itemsOnPad >= desiredNrOfObjects)
         {
             return true;
         }
