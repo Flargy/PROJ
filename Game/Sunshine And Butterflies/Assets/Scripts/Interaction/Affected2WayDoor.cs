@@ -10,7 +10,7 @@ public class Affected2WayDoor : AffectedObject
 
     public override void ExecuteAction()
     {
-        if (plates[0].GetPushed() == true && plates[1].GetPushed() == true)
+        if (plates[0].GetPushed() == true)
         {
             
             doorIsOpen = true;
