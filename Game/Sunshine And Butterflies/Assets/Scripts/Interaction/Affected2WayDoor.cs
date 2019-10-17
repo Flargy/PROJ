@@ -10,28 +10,32 @@ public class Affected2WayDoor : AffectedObject
 
     public override void ExecuteAction()
     {
-
-        foreach (PressurePlate pressedPlate in plates)
+        if (doorIsOpen == false)
         {
-            if (pressedPlate.GetPushed() == false)
+            foreach (PressurePlate pressedPlate in plates)
             {
-                doorIsOpen = false;
-                break;
-            }
-            else
-            {
-                doorIsOpen = true;
+                if (pressedPlate.GetPushed() == false)
+                {
+                    doorIsOpen = false;
+                    break;
+                }
+                else
+                {
+                    doorIsOpen = true;
+                }
+
             }
 
-        }
-
-        if (doorIsOpen == true)
-        {
-            transform.position += Vector3.down * 5;
+            if (doorIsOpen == true)
+            {
+                transform.position += Vector3.down * 5;
+            }
+            
         }
         else
         {
             transform.position = startPosition;
+            doorIsOpen = false;
         }
 
 

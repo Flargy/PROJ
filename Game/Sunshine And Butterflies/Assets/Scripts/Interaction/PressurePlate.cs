@@ -5,7 +5,7 @@ using UnityEngine;
 public class PressurePlate : MonoBehaviour
 {
     [SerializeField] private List<AffectedObject> affectedObject;
-    [SerializeField] private int desiredNrOfObjects = 0;
+    [SerializeField] private int desiredNrOfObjects = 1;
     private int itemsOnPad;
 
     private void OnTriggerEnter(Collider other)
