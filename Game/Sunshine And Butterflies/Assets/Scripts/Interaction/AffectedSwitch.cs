@@ -7,8 +7,7 @@ public class AffectedSwitch : AffectedObject
 
     public override void ExecuteAction()
     {
-        
-        
+        gameObject.SetActive(!gameObject.activeSelf);
 
     }
 

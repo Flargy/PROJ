@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractionSwitch : MonoBehaviour
+public class InteractionSwitch : Interactable
 {
-    [SerializeField] private AffectedObject firstAffectedObject;
-    [SerializeField] private AffectedObject otherAffectedObject;
+    [SerializeField] public List<AffectedSwitch> affectedObjects;
 
-
-    //interact funktion()
-
-    //avaktivera objekt
-    //aktivera det andra objektet
-    // iterera
+    public override void Interact(GameObject player)
+    {
+        foreach(AffectedSwitch affected in affectedObjects)
+        {
+  
+            affected.ExecuteAction();
+        
+        }
+    }
 
 }

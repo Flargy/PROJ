@@ -62,7 +62,6 @@ public class NewPlayerScript : MonoBehaviour
                 
                 Interactable interactionObject = ray.collider.GetComponent<Interactable>();
                 interactionObject.DistanceCheck(gameObject);
-                CarryingAObject = true;
                 
                
             }
