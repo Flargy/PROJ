@@ -9,9 +9,21 @@ public class InteractionPickUp : Interactable
     private bool isPickedUp;
     private GameObject currentHolder;
 
-    void Start()
+    public float holdDistance = 0.5f;
+    public float holdOffset = 1.0f;
+
+    private void Start()
     {
         rgb = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        if (isPickedUp == true)
+        {
+            rgb.MovePosition(currentHolder.transform.position + currentHolder.transform.up * holdOffset + currentHolder.transform.forward * holdDistance);
+            
+        }
     }
 
     public override void Interact(GameObject player)
@@ -20,9 +32,10 @@ public class InteractionPickUp : Interactable
         {
 
             rgb.useGravity = false;
-            rgb.isKinematic = true;
+            //rgb.isKinematic = true;
             transform.position += Vector3.up;
-            transform.parent = player.transform;
+            //rgb.MovePosition(transform.position + transform.forward * holdDistance * Time.deltaTime);
+            //transform.parent = player.transform;
             isPickedUp = true;
             currentHolder = player;
             player.GetComponent<NewPlayerScript>().PickUpObject(gameObject);
@@ -39,7 +52,7 @@ public class InteractionPickUp : Interactable
     {
         isPickedUp = false;
         rgb.useGravity = true;
-        rgb.isKinematic = false;
+        //rgb.isKinematic = false;
         transform.parent = null;
     }
 }
