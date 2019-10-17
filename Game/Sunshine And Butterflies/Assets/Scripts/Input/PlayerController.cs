@@ -100,7 +100,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""Fish"",
                     ""type"": ""Button"",
                     ""id"": ""706631f6-4242-439c-994c-b2b9874965e7"",
                     ""expectedControlType"": """",
@@ -146,7 +146,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""Fish"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -175,7 +175,7 @@ public class PlayerController : IInputActionCollection, IDisposable
         m_QTE = asset.FindActionMap("QTE", throwIfNotFound: true);
         m_QTE_Rat = m_QTE.FindAction("Rat", throwIfNotFound: true);
         m_QTE_Bunny = m_QTE.FindAction("Bunny", throwIfNotFound: true);
-        m_QTE_Newaction = m_QTE.FindAction("New action", throwIfNotFound: true);
+        m_QTE_Fish = m_QTE.FindAction("Fish", throwIfNotFound: true);
         m_QTE_Dragon = m_QTE.FindAction("Dragon", throwIfNotFound: true);
     }
 
@@ -277,7 +277,7 @@ public class PlayerController : IInputActionCollection, IDisposable
     private IQTEActions m_QTEActionsCallbackInterface;
     private readonly InputAction m_QTE_Rat;
     private readonly InputAction m_QTE_Bunny;
-    private readonly InputAction m_QTE_Newaction;
+    private readonly InputAction m_QTE_Fish;
     private readonly InputAction m_QTE_Dragon;
     public struct QTEActions
     {
@@ -285,7 +285,7 @@ public class PlayerController : IInputActionCollection, IDisposable
         public QTEActions(PlayerController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Rat => m_Wrapper.m_QTE_Rat;
         public InputAction @Bunny => m_Wrapper.m_QTE_Bunny;
-        public InputAction @Newaction => m_Wrapper.m_QTE_Newaction;
+        public InputAction @Fish => m_Wrapper.m_QTE_Fish;
         public InputAction @Dragon => m_Wrapper.m_QTE_Dragon;
         public InputActionMap Get() { return m_Wrapper.m_QTE; }
         public void Enable() { Get().Enable(); }
@@ -302,9 +302,9 @@ public class PlayerController : IInputActionCollection, IDisposable
                 Bunny.started -= m_Wrapper.m_QTEActionsCallbackInterface.OnBunny;
                 Bunny.performed -= m_Wrapper.m_QTEActionsCallbackInterface.OnBunny;
                 Bunny.canceled -= m_Wrapper.m_QTEActionsCallbackInterface.OnBunny;
-                Newaction.started -= m_Wrapper.m_QTEActionsCallbackInterface.OnNewaction;
-                Newaction.performed -= m_Wrapper.m_QTEActionsCallbackInterface.OnNewaction;
-                Newaction.canceled -= m_Wrapper.m_QTEActionsCallbackInterface.OnNewaction;
+                Fish.started -= m_Wrapper.m_QTEActionsCallbackInterface.OnFish;
+                Fish.performed -= m_Wrapper.m_QTEActionsCallbackInterface.OnFish;
+                Fish.canceled -= m_Wrapper.m_QTEActionsCallbackInterface.OnFish;
                 Dragon.started -= m_Wrapper.m_QTEActionsCallbackInterface.OnDragon;
                 Dragon.performed -= m_Wrapper.m_QTEActionsCallbackInterface.OnDragon;
                 Dragon.canceled -= m_Wrapper.m_QTEActionsCallbackInterface.OnDragon;
@@ -318,9 +318,9 @@ public class PlayerController : IInputActionCollection, IDisposable
                 Bunny.started += instance.OnBunny;
                 Bunny.performed += instance.OnBunny;
                 Bunny.canceled += instance.OnBunny;
-                Newaction.started += instance.OnNewaction;
-                Newaction.performed += instance.OnNewaction;
-                Newaction.canceled += instance.OnNewaction;
+                Fish.started += instance.OnFish;
+                Fish.performed += instance.OnFish;
+                Fish.canceled += instance.OnFish;
                 Dragon.started += instance.OnDragon;
                 Dragon.performed += instance.OnDragon;
                 Dragon.canceled += instance.OnDragon;
@@ -338,7 +338,7 @@ public class PlayerController : IInputActionCollection, IDisposable
     {
         void OnRat(InputAction.CallbackContext context);
         void OnBunny(InputAction.CallbackContext context);
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnFish(InputAction.CallbackContext context);
         void OnDragon(InputAction.CallbackContext context);
     }
 }

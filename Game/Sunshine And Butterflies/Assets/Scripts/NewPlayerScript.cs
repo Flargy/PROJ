@@ -57,7 +57,7 @@ public class NewPlayerScript : MonoBehaviour
         if (CarryingAObject == false) // placeholder
         {
 
-            if (Physics.Raycast(transform.position, transform.forward, out ray, 2.0f, interactionLayer))
+            if (Physics.CapsuleCast(transform.position + Vector3.up * 0.75f, transform.position + Vector3.down * 0.30f, 0.5f, transform.forward, out ray, 2.0f, interactionLayer))
             {
                 
                 Interactable interactionObject = ray.collider.GetComponent<Interactable>();
