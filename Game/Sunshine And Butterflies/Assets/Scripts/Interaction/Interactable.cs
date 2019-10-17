@@ -5,15 +5,12 @@ public class Interactable : MonoBehaviour
     public float interactionRadius = 2.0f; // Position for player to stand when interacting
     
 
-    public virtual void Interact()
+    public virtual void Interact(GameObject player)
     {
         // will be overwritten by inheritage
     }
 
-    public virtual void Interact(GameObject player)
-    {
-
-    }
+    
 
     private void OnDrawGizmosSelected()
     {
@@ -21,11 +18,11 @@ public class Interactable : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, interactionRadius);
     }
 
-    public void DistanceCheck(Vector3 playerPosition)
+    public void DistanceCheck(GameObject player)
     {
-        if((playerPosition - transform.position).sqrMagnitude < interactionRadius * interactionRadius)
+        if((player.transform.position - transform.position).sqrMagnitude < interactionRadius * interactionRadius)
         {
-            Interact();
+            Interact(player);
         }
     }
 

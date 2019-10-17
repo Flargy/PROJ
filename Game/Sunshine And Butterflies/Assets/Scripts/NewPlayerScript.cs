@@ -13,9 +13,9 @@ public class NewPlayerScript : MonoBehaviour
     private Rigidbody rb = null;
     private Vector2 movementVector = Vector2.zero;
     private bool interacting = false;
-    private bool carryingABox = false;
+    private bool CarryingAObject = false;
     private bool airBorne = false;
-    private GameObject carriedBox;
+    private GameObject carriedObject;
     private float jumpGroundCheckDelay = 0.0f;
 
     void Start()
@@ -54,33 +54,37 @@ public class NewPlayerScript : MonoBehaviour
     public void OnInteract()
     {
         RaycastHit ray;
-        if (carryingABox == false) // placeholder
+        if (CarryingAObject == false) // placeholder
         {
 
             if (Physics.Raycast(transform.position, transform.forward, out ray, 2.0f, interactionLayer))
             {
-                if (ray.collider.CompareTag("CarryBox"))
-                {
-                    carriedBox = ray.collider.gameObject;
-                    Interactable interactionObject = ray.collider.GetComponent<Interactable>();
-                    interactionObject.Interact(gameObject);
-                    carryingABox = true;
-                    Debug.Log(carryingABox);
-                }
-                else
-                {
-                    Interactable interactionObject = ray.collider.GetComponent<Interactable>();
-                    interactionObject.DistanceCheck(transform.position);
-                }
+                
+                Interactable interactionObject = ray.collider.GetComponent<Interactable>();
+                interactionObject.DistanceCheck(gameObject);
+                CarryingAObject = true;
+                
+               
             }
         }
 
-        else if (carryingABox == true) //Ska brytas ut till egen state
+        else if (CarryingAObject == true && carriedObject != null) //Ska brytas ut till egen state
         {
 
-            carriedBox.GetComponent<InteractionPickUp>().Drop();
-            carryingABox = false;
+            carriedObject.GetComponent<Interactable>().Interact(gameObject);
         }
+    }
+
+    public void PickUpObject(GameObject carried)
+    {
+        carriedObject = carried;
+        CarryingAObject = true;
+    }
+
+    public void DropObject()
+    {
+        carriedObject = null;
+        CarryingAObject = false;
     }
 
     public void ApplyGroundVelocity()
@@ -96,8 +100,10 @@ public class NewPlayerScript : MonoBehaviour
 
     public bool GroundCheck()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, 0.8f, groundLayer))
+        BoxCollider box = GetComponent<BoxCollider>();
+        if (Physics.BoxCast(transform.position + Vector3.up, new Vector3(0.5f, 0.75f, 0.5f), Vector3.down, transform.rotation, 1.5f, groundLayer))
         {
+            Debug.Log(true);
             return true;
         }
         return false;

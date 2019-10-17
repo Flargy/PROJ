@@ -72,7 +72,7 @@ public class PlayerBaseState : State
                 else
                 {
                     Interactable interactionObject = ray.collider.GetComponent<Interactable>();
-                    interactionObject.DistanceCheck(owner.transform.position);
+                    interactionObject.DistanceCheck(owner.gameObject);
                 }
             }
         }

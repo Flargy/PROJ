@@ -6,7 +6,7 @@ public class InteractionButton : Interactable
 {
     [SerializeField] private AffectedObject affectedObject;
 
-    public override void Interact()
+    public override void Interact(GameObject player)
     {
         affectedObject.ExecuteAction();
     }

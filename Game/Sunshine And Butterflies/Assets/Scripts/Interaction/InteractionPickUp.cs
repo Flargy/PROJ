@@ -7,6 +7,7 @@ public class InteractionPickUp : Interactable
 
     private Rigidbody rgb;
     private bool isPickedUp;
+    private GameObject currentHolder;
 
     void Start()
     {
@@ -23,7 +24,14 @@ public class InteractionPickUp : Interactable
             transform.position += Vector3.up;
             transform.parent = player.transform;
             isPickedUp = true;
+            currentHolder = player;
+            player.GetComponent<NewPlayerScript>().PickUpObject(gameObject);
 
+        }
+        else
+        {
+            Drop();
+            player.GetComponent<NewPlayerScript>().DropObject();
         }
     }
 
