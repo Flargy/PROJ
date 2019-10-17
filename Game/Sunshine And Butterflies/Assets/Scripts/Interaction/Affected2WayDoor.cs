@@ -10,18 +10,31 @@ public class Affected2WayDoor : AffectedObject
 
     public override void ExecuteAction()
     {
-        if (plates[0].GetPushed() == true)
+
+        foreach (PressurePlate pressedPlate in plates)
         {
-            
-            doorIsOpen = true;
+            if (pressedPlate.GetPushed() == false)
+            {
+                doorIsOpen = false;
+                break;
+            }
+            else
+            {
+                doorIsOpen = true;
+            }
+
+        }
+
+        if (doorIsOpen == true)
+        {
             transform.position += Vector3.down * 5;
         }
         else
         {
-            doorIsOpen = false;
             transform.position = startPosition;
         }
-            
+
+
     }
 
     private void Start()
