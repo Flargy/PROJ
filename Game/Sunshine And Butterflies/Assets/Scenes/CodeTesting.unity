@@ -1099,8 +1099,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   players:
   - {fileID: 1604993681}
-  offset: {x: 0, y: 4.34, z: -4.95}
-  maxZoom: 10
+  - {fileID: 1766254718}
+  offset: {x: -0.3, y: 11.35, z: -11.15}
+  maxZoom: 20
   minZoom: 30
   zoomLimiter: 50
 --- !u!1 &1121778475
@@ -1309,9 +1310,9 @@ GameObject:
   - component: {fileID: 1604993679}
   - component: {fileID: 1604993678}
   - component: {fileID: 1604993682}
+  - component: {fileID: 1604993685}
   - component: {fileID: 1604993683}
   - component: {fileID: 1604993684}
-  - component: {fileID: 1604993685}
   m_Layer: 8
   m_Name: PlayerCube
   m_TagString: Player
@@ -1470,6 +1471,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionRadius: 2
   otherPlayer: {fileID: 1766254711}
+  horizontalYeetForce: 300
+  verticalYeetForce: 40
 --- !u!1 &1701865331
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,6 +1769,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionRadius: 2
   otherPlayer: {fileID: 1604993677}
+  horizontalYeetForce: 300
+  verticalYeetForce: 40
 --- !u!1 &1791054193
 GameObject:
   m_ObjectHideFlags: 0

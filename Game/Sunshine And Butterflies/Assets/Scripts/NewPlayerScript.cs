@@ -114,10 +114,8 @@ public class NewPlayerScript : MonoBehaviour
         BoxCollider box = GetComponent<BoxCollider>();
         if (Physics.BoxCast(transform.position + Vector3.up, new Vector3(0.5f, 0.75f, 0.5f), Vector3.down, transform.rotation, 1.5f, groundLayer))
         {
-            Debug.Log(true);
             return true;
         }
-        Debug.Log("Not on gorund");
         return false;
     }
 
@@ -147,6 +145,14 @@ public class NewPlayerScript : MonoBehaviour
         {
             rb.velocity += Vector3.up * jumpPower;
             airBorne = true;
+        }
+    }
+
+    public void OnToss()
+    {
+        if(CarryingAObject == true)
+        {
+            carriedObject.GetComponent<Interactable>().Toss();
         }
     }
 

@@ -10,6 +10,11 @@ public class Interactable : MonoBehaviour
         // will be overwritten by inheritage
     }
 
+    public virtual void Toss()
+    {
+
+    }
+
     
 
     private void OnDrawGizmosSelected()

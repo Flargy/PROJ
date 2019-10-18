@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class InteractionPickUp : Interactable
 {
+    [SerializeField] private float horizontalYeetForce = 300.0f;
+    [SerializeField] private float verticalYeetForce = 40.0f;
 
-    private Rigidbody rgb;
+    private Rigidbody rb;
     private bool isPickedUp;
     private GameObject currentHolder;
 
@@ -14,14 +16,14 @@ public class InteractionPickUp : Interactable
 
     private void Start()
     {
-        rgb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
         if (isPickedUp == true)
         {
-            rgb.MovePosition(currentHolder.transform.position + currentHolder.transform.up * holdOffset + currentHolder.transform.forward * holdDistance);
+            rb.MovePosition(currentHolder.transform.position + currentHolder.transform.up * holdOffset + currentHolder.transform.forward * holdDistance);
             
         }
     }
@@ -31,7 +33,7 @@ public class InteractionPickUp : Interactable
         if(isPickedUp == false)
         {
 
-            rgb.useGravity = false;
+            rb.useGravity = false;
             //rgb.isKinematic = true;
             transform.position += Vector3.up;
             //rgb.MovePosition(transform.position + transform.forward * holdDistance * Time.deltaTime);
@@ -51,8 +53,16 @@ public class InteractionPickUp : Interactable
     public void Drop()
     {
         isPickedUp = false;
-        rgb.useGravity = true;
+        rb.useGravity = true;
         //rgb.isKinematic = false;
         transform.parent = null;
+    }
+
+    public override void Toss()
+    {
+        isPickedUp = false;
+        rb.useGravity = true;
+        //thisPlayer.Released();
+        rb.AddForce((currentHolder.transform.rotation * Vector3.forward * horizontalYeetForce) + (Vector3.up * verticalYeetForce));
     }
 }
