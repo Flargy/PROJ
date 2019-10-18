@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3866192555793244453}
   - component: {fileID: 1274222993}
   - component: {fileID: 1339301099900889633}
+  - component: {fileID: 5980944686775673272}
   m_Layer: 8
   m_Name: PlayerCube
   m_TagString: Player
@@ -160,3 +161,19 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5980944686775673272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8971211494208141751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f762d230ce0f674d8a318e5353b4cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionRadius: 2
+  otherPlayer: {fileID: 0}
+  horizontalYeetForce: 300
+  verticalYeetForce: 40
