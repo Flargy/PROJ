@@ -171,6 +171,7 @@ public class NewPlayerScript : MonoBehaviour
     public void Released()
     {
         isLifted = false;
+        airBorne = true;
     }
 
     public void BreakFree()
