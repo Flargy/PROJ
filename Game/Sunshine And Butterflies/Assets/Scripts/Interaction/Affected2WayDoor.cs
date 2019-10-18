@@ -5,12 +5,13 @@ using UnityEngine;
 public class Affected2WayDoor : AffectedObject
 {
     [SerializeField] private List<PressurePlate> plates;
+    [SerializeField] private bool usesPlates = false;
     private bool doorIsOpen = false;
     private Vector3 startPosition;
 
     public override void ExecuteAction()
     {
-        if (doorIsOpen == false)
+        if (doorIsOpen == false && usesPlates == true)
         {
             foreach (PressurePlate pressedPlate in plates)
             {
@@ -32,10 +33,23 @@ public class Affected2WayDoor : AffectedObject
             }
             
         }
-        else
+        else if(usesPlates == true)
         {
             transform.position = startPosition;
             doorIsOpen = false;
+        }
+
+        if(usesPlates == false)
+        {
+            doorIsOpen = !doorIsOpen;
+            if (doorIsOpen == true)
+            {
+                transform.position += Vector3.down * 5;
+            }
+            else
+            {
+                transform.position = startPosition;
+            }
         }
 
 
