@@ -49,6 +49,7 @@ public class InteractionPickUp : Interactable
 
     public void Drop()
     {
+        currentHolder = null;
         isPickedUp = false;
         rb.useGravity = true;
         transform.parent = null;
@@ -56,6 +57,8 @@ public class InteractionPickUp : Interactable
 
     public override void Toss()
     {
+        currentHolder = null;
+        currentHolder.GetComponent<NewPlayerScript>().DropObject();
         isPickedUp = false;
         rb.useGravity = true;
         rb.AddForce((currentHolder.transform.rotation * Vector3.forward * horizontalYeetForce) + (Vector3.up * verticalYeetForce));

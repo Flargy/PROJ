@@ -78,7 +78,6 @@ public class NewPlayerScript : MonoBehaviour
 
             else if (CarryingAObject == true && carriedObject != null) 
             {
-
                 carriedObject.GetComponent<Interactable>().Interact(gameObject);
             }
         }

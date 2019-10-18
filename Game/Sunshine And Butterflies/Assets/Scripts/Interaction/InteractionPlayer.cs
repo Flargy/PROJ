@@ -51,6 +51,7 @@ public class InteractionPlayer : Interactable
         isLifted = false;
         rb.useGravity = true;
         //thisPlayer.Released();
+        otherPlayer.GetComponent<NewPlayerScript>().DropObject();
         rb.AddForce((otherPlayer.transform.rotation * Vector3.forward * horizontalYeetForce) + (Vector3.up * verticalYeetForce));
     }
 
