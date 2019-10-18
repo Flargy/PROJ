@@ -17,29 +17,36 @@ public class NewPlayerScript : MonoBehaviour
     private bool airBorne = false;
     private GameObject carriedObject;
     private float jumpGroundCheckDelay = 0.0f;
+    private bool isLifted = false;
+    private bool canBeLifted = true;
+    private Interactable interactScript = null;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        interactScript = GetComponent<Interactable>();
     }
 
     void Update()
     {
-        if(airBorne == false && interacting == false)
+        
+        if (airBorne == false && interacting == false && isLifted == false)
         {
             ApplyGroundVelocity();
             TurnToFace();
         }
-        else if(airBorne == true)
+        else if (airBorne == true && isLifted == false)
         {
             jumpGroundCheckDelay += Time.deltaTime;
             ApplyAirVelocity();
-            if(GroundCheck() == true && jumpGroundCheckDelay >= 0.3f)
+            TurnToFace();
+            if (GroundCheck() == true && jumpGroundCheckDelay >= 0.3f)
             {
                 airBorne = false;
                 jumpGroundCheckDelay = 0.0f;
             }
         }
+        
     }
 
     public void TurnToFace()
@@ -53,35 +60,40 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnInteract()
     {
-        RaycastHit ray;
-        if (CarryingAObject == false) // placeholder
+        if (isLifted == false)
         {
-
-            if (Physics.CapsuleCast(transform.position + Vector3.up * 0.75f, transform.position + Vector3.down * 0.30f, 0.5f, transform.forward, out ray, 2.0f, interactionLayer))
+            RaycastHit ray;
+            if (CarryingAObject == false) // placeholder
             {
-                
-                Interactable interactionObject = ray.collider.GetComponent<Interactable>();
-                interactionObject.DistanceCheck(gameObject);
-                
-               
+
+                if (Physics.CapsuleCast(transform.position + Vector3.up * 0.75f, transform.position + Vector3.down * 0.30f, 0.5f, transform.forward, out ray, 2.0f, interactionLayer))
+                {
+
+                    Interactable interactionObject = ray.collider.GetComponent<Interactable>();
+                    interactionObject.DistanceCheck(gameObject);
+
+
+                }
             }
-        }
 
-        else if (CarryingAObject == true && carriedObject != null) //Ska brytas ut till egen state
-        {
+            else if (CarryingAObject == true && carriedObject != null) //Ska brytas ut till egen state
+            {
 
-            carriedObject.GetComponent<Interactable>().Interact(gameObject);
+                carriedObject.GetComponent<Interactable>().Interact(gameObject);
+            }
         }
     }
 
     public void PickUpObject(GameObject carried)
     {
+        canBeLifted = false;
         carriedObject = carried;
         CarryingAObject = true;
     }
 
     public void DropObject()
     {
+        canBeLifted = true;
         carriedObject = null;
         CarryingAObject = false;
     }
@@ -105,6 +117,7 @@ public class NewPlayerScript : MonoBehaviour
             Debug.Log(true);
             return true;
         }
+        Debug.Log("Not on gorund");
         return false;
     }
 
@@ -122,15 +135,43 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
-        movementVector = value.Get<Vector2>();
+        if (isLifted == false)
+        {
+            movementVector = value.Get<Vector2>();
+        }
     }
 
     public void OnJump()
     {
-        if (GroundCheck() == true && interacting == false)
+        if (GroundCheck() == true && interacting == false && isLifted == false)
         {
             rb.velocity += Vector3.up * jumpPower;
             airBorne = true;
         }
     }
+
+    //Player to player interactions
+
+    public bool CanBeLifted()
+    {
+        return canBeLifted;
+    }
+
+    public void BecomeLifted()
+    {
+        //GetComponent<PlayerInput>().currentActionMap = QTE;
+        isLifted = true;
+    }
+
+    public void Released()
+    {
+        isLifted = false;
+    }
+
+    public void BreakFree()
+    {
+
+    }
+
+
 }

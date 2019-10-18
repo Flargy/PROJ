@@ -41,6 +41,14 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Toss"",
+                    ""type"": ""Button"",
+                    ""id"": ""930456eb-2fd5-49bd-b692-cd82276a4bcc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -76,6 +84,17 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b4869036-4bf6-4dfb-ba3e-868128fa5c4c"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Toss"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -84,7 +103,7 @@ public class PlayerController : IInputActionCollection, IDisposable
             ""id"": ""aacd3b51-d0b1-4e5a-b57e-d3bee2768d4c"",
             ""actions"": [
                 {
-                    ""name"": ""Rat"",
+                    ""name"": ""Down"",
                     ""type"": ""Button"",
                     ""id"": ""1ba6a6ec-31f3-453e-beda-89306f2aaf6d"",
                     ""expectedControlType"": """",
@@ -92,7 +111,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Bunny"",
+                    ""name"": ""Right"",
                     ""type"": ""Button"",
                     ""id"": ""961aa867-a4c9-457d-bf27-27716a00b9e8"",
                     ""expectedControlType"": """",
@@ -100,7 +119,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Fish"",
+                    ""name"": ""Up"",
                     ""type"": ""Button"",
                     ""id"": ""706631f6-4242-439c-994c-b2b9874965e7"",
                     ""expectedControlType"": """",
@@ -108,7 +127,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Dragon"",
+                    ""name"": ""Left"",
                     ""type"": ""Button"",
                     ""id"": ""ea804d83-7d78-4a7d-bf0d-bc2f4c968c17"",
                     ""expectedControlType"": """",
@@ -124,7 +143,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Rat"",
+                    ""action"": ""Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -135,7 +154,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Bunny"",
+                    ""action"": ""Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -146,7 +165,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Fish"",
+                    ""action"": ""Up"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -157,7 +176,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dragon"",
+                    ""action"": ""Left"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -171,12 +190,13 @@ public class PlayerController : IInputActionCollection, IDisposable
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
+        m_Gameplay_Toss = m_Gameplay.FindAction("Toss", throwIfNotFound: true);
         // QTE
         m_QTE = asset.FindActionMap("QTE", throwIfNotFound: true);
-        m_QTE_Rat = m_QTE.FindAction("Rat", throwIfNotFound: true);
-        m_QTE_Bunny = m_QTE.FindAction("Bunny", throwIfNotFound: true);
-        m_QTE_Fish = m_QTE.FindAction("Fish", throwIfNotFound: true);
-        m_QTE_Dragon = m_QTE.FindAction("Dragon", throwIfNotFound: true);
+        m_QTE_Down = m_QTE.FindAction("Down", throwIfNotFound: true);
+        m_QTE_Right = m_QTE.FindAction("Right", throwIfNotFound: true);
+        m_QTE_Up = m_QTE.FindAction("Up", throwIfNotFound: true);
+        m_QTE_Left = m_QTE.FindAction("Left", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +249,7 @@ public class PlayerController : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_Interact;
+    private readonly InputAction m_Gameplay_Toss;
     public struct GameplayActions
     {
         private PlayerController m_Wrapper;
@@ -236,6 +257,7 @@ public class PlayerController : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
+        public InputAction @Toss => m_Wrapper.m_Gameplay_Toss;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -254,6 +276,9 @@ public class PlayerController : IInputActionCollection, IDisposable
                 Interact.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
                 Interact.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
                 Interact.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
+                Toss.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToss;
+                Toss.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToss;
+                Toss.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToss;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -267,6 +292,9 @@ public class PlayerController : IInputActionCollection, IDisposable
                 Interact.started += instance.OnInteract;
                 Interact.performed += instance.OnInteract;
                 Interact.canceled += instance.OnInteract;
+                Toss.started += instance.OnToss;
+                Toss.performed += instance.OnToss;
+                Toss.canceled += instance.OnToss;
             }
         }
     }
@@ -275,18 +303,18 @@ public class PlayerController : IInputActionCollection, IDisposable
     // QTE
     private readonly InputActionMap m_QTE;
     private IQTEActions m_QTEActionsCallbackInterface;
-    private readonly InputAction m_QTE_Rat;
-    private readonly InputAction m_QTE_Bunny;
-    private readonly InputAction m_QTE_Fish;
-    private readonly InputAction m_QTE_Dragon;
+    private readonly InputAction m_QTE_Down;
+    private readonly InputAction m_QTE_Right;
+    private readonly InputAction m_QTE_Up;
+    private readonly InputAction m_QTE_Left;
     public struct QTEActions
     {
         private PlayerController m_Wrapper;
         public QTEActions(PlayerController wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Rat => m_Wrapper.m_QTE_Rat;
-        public InputAction @Bunny => m_Wrapper.m_QTE_Bunny;
-        public InputAction @Fish => m_Wrapper.m_QTE_Fish;
-        public InputAction @Dragon => m_Wrapper.m_QTE_Dragon;
+        public InputAction @Down => m_Wrapper.m_QTE_Down;
+        public InputAction @Right => m_Wrapper.m_QTE_Right;
+        public InputAction @Up => m_Wrapper.m_QTE_Up;
+        public InputAction @Left => m_Wrapper.m_QTE_Left;
         public InputActionMap Get() { return m_Wrapper.m_QTE; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -296,34 +324,34 @@ public class PlayerController : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_QTEActionsCallbackInterface != null)
             {
-                Rat.started -= m_Wrapper.m_QTEActionsCallbackInterface.OnRat;
-                Rat.performed -= m_Wrapper.m_QTEActionsCallbackInterface.OnRat;
-                Rat.canceled -= m_Wrapper.m_QTEActionsCallbackInterface.OnRat;
-                Bunny.started -= m_Wrapper.m_QTEActionsCallbackInterface.OnBunny;
-                Bunny.performed -= m_Wrapper.m_QTEActionsCallbackInterface.OnBunny;
-                Bunny.canceled -= m_Wrapper.m_QTEActionsCallbackInterface.OnBunny;
-                Fish.started -= m_Wrapper.m_QTEActionsCallbackInterface.OnFish;
-                Fish.performed -= m_Wrapper.m_QTEActionsCallbackInterface.OnFish;
-                Fish.canceled -= m_Wrapper.m_QTEActionsCallbackInterface.OnFish;
-                Dragon.started -= m_Wrapper.m_QTEActionsCallbackInterface.OnDragon;
-                Dragon.performed -= m_Wrapper.m_QTEActionsCallbackInterface.OnDragon;
-                Dragon.canceled -= m_Wrapper.m_QTEActionsCallbackInterface.OnDragon;
+                Down.started -= m_Wrapper.m_QTEActionsCallbackInterface.OnDown;
+                Down.performed -= m_Wrapper.m_QTEActionsCallbackInterface.OnDown;
+                Down.canceled -= m_Wrapper.m_QTEActionsCallbackInterface.OnDown;
+                Right.started -= m_Wrapper.m_QTEActionsCallbackInterface.OnRight;
+                Right.performed -= m_Wrapper.m_QTEActionsCallbackInterface.OnRight;
+                Right.canceled -= m_Wrapper.m_QTEActionsCallbackInterface.OnRight;
+                Up.started -= m_Wrapper.m_QTEActionsCallbackInterface.OnUp;
+                Up.performed -= m_Wrapper.m_QTEActionsCallbackInterface.OnUp;
+                Up.canceled -= m_Wrapper.m_QTEActionsCallbackInterface.OnUp;
+                Left.started -= m_Wrapper.m_QTEActionsCallbackInterface.OnLeft;
+                Left.performed -= m_Wrapper.m_QTEActionsCallbackInterface.OnLeft;
+                Left.canceled -= m_Wrapper.m_QTEActionsCallbackInterface.OnLeft;
             }
             m_Wrapper.m_QTEActionsCallbackInterface = instance;
             if (instance != null)
             {
-                Rat.started += instance.OnRat;
-                Rat.performed += instance.OnRat;
-                Rat.canceled += instance.OnRat;
-                Bunny.started += instance.OnBunny;
-                Bunny.performed += instance.OnBunny;
-                Bunny.canceled += instance.OnBunny;
-                Fish.started += instance.OnFish;
-                Fish.performed += instance.OnFish;
-                Fish.canceled += instance.OnFish;
-                Dragon.started += instance.OnDragon;
-                Dragon.performed += instance.OnDragon;
-                Dragon.canceled += instance.OnDragon;
+                Down.started += instance.OnDown;
+                Down.performed += instance.OnDown;
+                Down.canceled += instance.OnDown;
+                Right.started += instance.OnRight;
+                Right.performed += instance.OnRight;
+                Right.canceled += instance.OnRight;
+                Up.started += instance.OnUp;
+                Up.performed += instance.OnUp;
+                Up.canceled += instance.OnUp;
+                Left.started += instance.OnLeft;
+                Left.performed += instance.OnLeft;
+                Left.canceled += instance.OnLeft;
             }
         }
     }
@@ -333,12 +361,13 @@ public class PlayerController : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnToss(InputAction.CallbackContext context);
     }
     public interface IQTEActions
     {
-        void OnRat(InputAction.CallbackContext context);
-        void OnBunny(InputAction.CallbackContext context);
-        void OnFish(InputAction.CallbackContext context);
-        void OnDragon(InputAction.CallbackContext context);
+        void OnDown(InputAction.CallbackContext context);
+        void OnRight(InputAction.CallbackContext context);
+        void OnUp(InputAction.CallbackContext context);
+        void OnLeft(InputAction.CallbackContext context);
     }
 }
