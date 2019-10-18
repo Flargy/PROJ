@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
 {
-    [SerializeField] private List<AffectedObject> affectedObject;
+    [SerializeField] private List<AffectedObject> affectedObject = null;
     [SerializeField] private int desiredNrOfObjects = 1;
     private int itemsOnPad;
 

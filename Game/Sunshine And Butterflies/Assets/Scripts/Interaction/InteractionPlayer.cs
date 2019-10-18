@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InteractionPlayer : Interactable
 {
-    [SerializeField] private GameObject otherPlayer;
+    [SerializeField] private GameObject otherPlayer = null;
     [SerializeField] private float horizontalYeetForce = 300.0f;
     [SerializeField] private float verticalYeetForce = 40.0f;
 

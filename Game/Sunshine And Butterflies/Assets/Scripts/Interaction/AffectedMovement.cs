@@ -2,8 +2,8 @@
 
 public class AffectedMovement : AffectedObject
 {
-    [SerializeField] private Vector3 startPosition;
-    [SerializeField] private Transform endPosition;
+    [SerializeField] private Vector3 startPosition = Vector3.zero;
+    [SerializeField] private Transform endPosition = null;
 
 
 

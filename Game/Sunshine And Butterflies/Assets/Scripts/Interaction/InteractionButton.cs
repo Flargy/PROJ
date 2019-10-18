@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InteractionButton : Interactable
 {
-    [SerializeField] private AffectedObject affectedObject;
+    [SerializeField] private AffectedObject affectedObject = null;
 
     public override void Interact(GameObject player)
     {

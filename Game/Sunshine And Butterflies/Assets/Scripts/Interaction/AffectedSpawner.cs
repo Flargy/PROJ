@@ -2,8 +2,8 @@
 
 public class AffectedSpawner : AffectedObject
 {
-    [SerializeField] private GameObject spawnPrefab;
-    [SerializeField] private Transform spawnLocation;
+    [SerializeField] private GameObject spawnPrefab = null;
+    [SerializeField] private Transform spawnLocation = null;
     
     private GameObject spawnObject;
 

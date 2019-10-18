@@ -34,10 +34,7 @@ public class InteractionPickUp : Interactable
         {
 
             rb.useGravity = false;
-            //rgb.isKinematic = true;
             transform.position += Vector3.up;
-            //rgb.MovePosition(transform.position + transform.forward * holdDistance * Time.deltaTime);
-            //transform.parent = player.transform;
             isPickedUp = true;
             currentHolder = player;
             player.GetComponent<NewPlayerScript>().PickUpObject(gameObject);
@@ -54,7 +51,6 @@ public class InteractionPickUp : Interactable
     {
         isPickedUp = false;
         rb.useGravity = true;
-        //rgb.isKinematic = false;
         transform.parent = null;
     }
 
@@ -62,7 +58,6 @@ public class InteractionPickUp : Interactable
     {
         isPickedUp = false;
         rb.useGravity = true;
-        //thisPlayer.Released();
         rb.AddForce((currentHolder.transform.rotation * Vector3.forward * horizontalYeetForce) + (Vector3.up * verticalYeetForce));
     }
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MultipleTargetCamera : MonoBehaviour
 {
-    [SerializeField] private List<Transform> players;
-    [SerializeField] private Vector3 offset;
+    [SerializeField] private List<Transform> players = null;
+    [SerializeField] private Vector3 offset = Vector3.zero;
     [SerializeField] private float maxZoom = 10;
     [SerializeField] private float minZoom = 30;
     [SerializeField] private float zoomLimiter = 50;

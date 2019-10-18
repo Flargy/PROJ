@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class NewPlayerScript : MonoBehaviour
 {
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private LayerMask interactionLayer;
+    [SerializeField] private LayerMask groundLayer = 1;
+    [SerializeField] private LayerMask interactionLayer = 1;
     [SerializeField] private float moveSpeed = 6.0f;
     [SerializeField] private float jumpPower = 5.0f;
 
@@ -76,7 +76,7 @@ public class NewPlayerScript : MonoBehaviour
                 }
             }
 
-            else if (CarryingAObject == true && carriedObject != null) //Ska brytas ut till egen state
+            else if (CarryingAObject == true && carriedObject != null) 
             {
 
                 carriedObject.GetComponent<Interactable>().Interact(gameObject);
