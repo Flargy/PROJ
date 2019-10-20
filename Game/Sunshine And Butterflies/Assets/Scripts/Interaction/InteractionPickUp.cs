@@ -13,6 +13,7 @@ public class InteractionPickUp : Interactable
 
     public float holdDistance = 0.5f;
     public float holdOffset = 1.0f;
+    
 
     private void Start()
     {
@@ -49,6 +50,8 @@ public class InteractionPickUp : Interactable
 
     public void Drop()
     {
+        currentHolder.GetComponent<NewPlayerScript>().DropObject();
+        rb.AddForce((currentHolder.transform.rotation * Vector3.forward * horizontalYeetForce / 10) + (Vector3.up * verticalYeetForce / 10));
         currentHolder = null;
         isPickedUp = false;
         rb.useGravity = true;

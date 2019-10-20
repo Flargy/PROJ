@@ -179,5 +179,4 @@ public class NewPlayerScript : MonoBehaviour
 
     }
 
-
 }
