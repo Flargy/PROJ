@@ -140,7 +140,7 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnJump()
     {
-        if (GroundCheck() == true && interacting == false && isLifted == false)
+        if (GroundCheck() == true && interacting == false && isLifted == false && carriedObject == false)
         {
             rb.velocity += Vector3.up * jumpPower;
             airBorne = true;
