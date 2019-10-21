@@ -163,9 +163,15 @@ public class NewPlayerScript : MonoBehaviour
         return canBeLifted;
     }
 
+    public void SwapLiftingState()
+    {
+        canBeLifted = !canBeLifted;
+    }
+
     public void BecomeLifted()
     {
         //GetComponent<PlayerInput>().currentActionMap = QTE;
+        
         isLifted = true;
     }
 

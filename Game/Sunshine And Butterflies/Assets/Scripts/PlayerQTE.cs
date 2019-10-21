@@ -27,21 +27,21 @@ public class PlayerQTE : MonoBehaviour
 
     public void OnLeft()
     {
-        currentLever.ReceiveAnswer(2);
+        currentLever.ReceiveAnswer(1);
     }
 
     public void OnRight()
     {
-
+        currentLever.ReceiveAnswer(3);
     }
 
     public void OnUp()
     {
-
+        currentLever.ReceiveAnswer(2);
     }
 
     public void OnDown()
     {
-
+        currentLever.ReceiveAnswer(0);
     }
 }

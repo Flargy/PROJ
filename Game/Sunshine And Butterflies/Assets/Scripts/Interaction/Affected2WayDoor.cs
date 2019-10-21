@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Affected2WayDoor : AffectedObject
 {
-    [SerializeField] private List<PressurePlate> plates;
+    [SerializeField] private List<PressurePlate> plates = null;
     [SerializeField] private bool usesPlates = false;
     private bool doorIsOpen = false;
     private Vector3 startPosition;

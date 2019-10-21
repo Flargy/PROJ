@@ -58,5 +58,6 @@ public class InteractionPlayer : Interactable
 
     public void GetPutDown()
     {
+        otherPlayer.GetComponent<NewPlayerScript>().DropObject();
     }
 }
