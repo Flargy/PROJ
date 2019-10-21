@@ -7,6 +7,7 @@ public class InteractionPlayer : Interactable
     [SerializeField] private GameObject otherPlayer = null;
     [SerializeField] private float horizontalYeetForce = 300.0f;
     [SerializeField] private float verticalYeetForce = 40.0f;
+    [SerializeField] private float verticalOffest = 1.0f;
 
     private NewPlayerScript thisPlayer;
     
@@ -23,7 +24,7 @@ public class InteractionPlayer : Interactable
     {
         if (isLifted)
         {
-            rb.MovePosition(otherPlayer.transform.position + Vector3.up * 3);
+            rb.MovePosition(otherPlayer.transform.position + Vector3.up * verticalOffest);
         }
     }
 

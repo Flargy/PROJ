@@ -181,24 +181,4 @@ public class NewPlayerScript : MonoBehaviour
     }
 
     
-
-    public void OnLeft()
-    {
-
-    }
-
-    public void OnRight()
-    {
-        
-    }
-
-    public void OnUp()
-    {
-        
-    }
-
-    public void OnDown()
-    {
-
-    }
 }
