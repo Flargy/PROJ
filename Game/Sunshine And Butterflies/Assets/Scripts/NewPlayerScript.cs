@@ -81,6 +81,7 @@ public class NewPlayerScript : MonoBehaviour
                 carriedObject.GetComponent<Interactable>().Interact(gameObject);
             }
         }
+
     }
 
     public void PickUpObject(GameObject carried)
@@ -140,7 +141,7 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnJump()
     {
-        if (GroundCheck() == true && interacting == false && isLifted == false && carriedObject == false)
+        if (GroundCheck() == true && interacting == false && isLifted == false && CarryingAObject == false)
         {
             rb.velocity += Vector3.up * jumpPower;
             airBorne = true;
@@ -179,4 +180,25 @@ public class NewPlayerScript : MonoBehaviour
 
     }
 
+    
+
+    public void OnLeft()
+    {
+
+    }
+
+    public void OnRight()
+    {
+        
+    }
+
+    public void OnUp()
+    {
+        
+    }
+
+    public void OnDown()
+    {
+
+    }
 }
