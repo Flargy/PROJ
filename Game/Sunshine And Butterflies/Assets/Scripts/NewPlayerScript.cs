@@ -20,9 +20,13 @@ public class NewPlayerScript : MonoBehaviour
     private bool isLifted = false;
     private bool canBeLifted = true;
     private Interactable interactScript = null;
+    private CapsuleCollider capsule = null;
+    private Vector3 capsuleTop = Vector3.zero;
+    private Vector3 capsuleBottom = Vector3.zero;
 
     void Start()
     {
+        capsule = GetComponent<CapsuleCollider>();
         rb = GetComponent<Rigidbody>();
         interactScript = GetComponent<Interactable>();
     }
@@ -65,8 +69,9 @@ public class NewPlayerScript : MonoBehaviour
             RaycastHit ray;
             if (CarryingAObject == false) // placeholder
             {
-
-                if (Physics.CapsuleCast(transform.position + Vector3.up * 0.75f, transform.position + Vector3.down * 0.30f, 0.5f, transform.forward, out ray, 2.0f, interactionLayer))
+                capsuleTop = transform.position + (capsule.center + Vector3.up * (capsule.height / 2 - capsule.radius));
+                capsuleBottom = transform.position + (capsule.center + Vector3.down * (capsule.height / 2 - capsule.radius));
+                if (Physics.CapsuleCast(capsuleTop, capsuleBottom, capsule.radius, transform.forward, out ray, 2, interactionLayer))
                 {
 
                     Interactable interactionObject = ray.collider.GetComponent<Interactable>();
@@ -111,8 +116,9 @@ public class NewPlayerScript : MonoBehaviour
 
     public bool GroundCheck()
     {
-        BoxCollider box = GetComponent<BoxCollider>();
-        if (Physics.BoxCast(transform.position + Vector3.up, new Vector3(0.5f, 0.75f, 0.5f), Vector3.down, transform.rotation, 1.5f, groundLayer))
+        capsuleTop = transform.position + capsule.center + Vector3.up * (capsule.height / 2.1f - capsule.radius);
+        capsuleBottom = transform.position + capsule.center + Vector3.down * (capsule.height / 2.1f - capsule.radius);
+        if (Physics.CapsuleCast(capsuleTop, capsuleBottom, capsule.radius, Vector3.down, 0.15f, groundLayer))
         {
             return true;
         }

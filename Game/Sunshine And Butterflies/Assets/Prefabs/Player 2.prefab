@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &282259991428468377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6017255429612791060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08095675ac7b28942978d35e3a021749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3387182717231766691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -72,15 +84,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8971211494208141749, guid: 817b562ffd698dd4781e1f886a1cb8a1,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c2505eac8eca8b544bf93208e55474a3, type: 2}
     - target: {fileID: 3866192555793244453, guid: 817b562ffd698dd4781e1f886a1cb8a1,
         type: 3}
       propertyPath: interactionLayer.m_Bits
       value: 768
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866192555793244453, guid: 817b562ffd698dd4781e1f886a1cb8a1,
+        type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 257
       objectReference: {fileID: 0}
     - target: {fileID: 5980944686775673272, guid: 817b562ffd698dd4781e1f886a1cb8a1,
         type: 3}
@@ -88,5 +100,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5089755446774057481, guid: 07eceb29cd30cb24fa48d57650dea131,
         type: 3}
+    - target: {fileID: 8971211494208141749, guid: 817b562ffd698dd4781e1f886a1cb8a1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c2505eac8eca8b544bf93208e55474a3, type: 2}
+    - target: {fileID: 1339301099900889633, guid: 817b562ffd698dd4781e1f886a1cb8a1,
+        type: 3}
+      propertyPath: m_Height
+      value: 1.192411
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339301099900889633, guid: 817b562ffd698dd4781e1f886a1cb8a1,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.5937946
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 817b562ffd698dd4781e1f886a1cb8a1, type: 3}
+--- !u!1 &6017255429612791060 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8971211494208141751, guid: 817b562ffd698dd4781e1f886a1cb8a1,
+    type: 3}
+  m_PrefabInstance: {fileID: 3387182717231766691}
+  m_PrefabAsset: {fileID: 0}
