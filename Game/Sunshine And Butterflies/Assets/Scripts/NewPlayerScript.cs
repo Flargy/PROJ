@@ -67,7 +67,7 @@ public class NewPlayerScript : MonoBehaviour
         if (isLifted == false)
         {
             RaycastHit ray;
-            if (CarryingAObject == false) // placeholder
+            if (CarryingAObject == false) 
             {
                 capsuleTop = transform.position -(transform.forward * 0.1f) + (capsule.center + Vector3.up * (capsule.height / 2 - capsule.radius));
                 capsuleBottom = transform.position - (transform.forward * 0.1f) + (capsule.center + Vector3.down * (capsule.height / 2 - capsule.radius));
