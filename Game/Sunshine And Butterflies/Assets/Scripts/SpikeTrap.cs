@@ -18,5 +18,14 @@ public class SpikeTrap : MonoBehaviour
             yield return new WaitForSeconds(3f);
         }
     }
-    
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("You are dead");
+            //Die();
+        }
+    }
+
 }

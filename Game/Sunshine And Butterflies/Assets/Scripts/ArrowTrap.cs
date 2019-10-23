@@ -13,10 +13,6 @@ public class ArrowTrap : MonoBehaviour
     public float fireTimer = 3f;
     public float timer = 0f;
     // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -31,10 +27,10 @@ public class ArrowTrap : MonoBehaviour
 
     void FireArrows()
     {
-        arrowNum = Random.Range(1, arrowSpawns.Length);
+        arrowNum = arrowSpawns.Length;
         for (int i = 0; i < arrowNum; i++)
         {
-            GameObject arrowPos = arrowSpawns[Random.Range(0, arrowSpawns.Length)];
+            //GameObject arrowPos = arrowSpawns(arrow);
             Instantiate(arrow, arrowPos.transform.position, arrowPos.transform.rotation);
         }
 
@@ -43,7 +39,7 @@ public class ArrowTrap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timerBased)
+        if (timerBased == true)
         {
             if (timer <= fireTimer)
             {
