@@ -93,16 +93,7 @@ public class NewPlayerScript : MonoBehaviour
         }
 
 
-        //else
-        //{
-
-        //    //Position.rotation = Quaternion.RotateTowards(Position.rotation, Quaternion.LookRotation(LookDirection), 180.0f * Time.deltaTime);
-        //    transform.LookAt(transform.position + faceDirection);
-        //    faceDirection += lookDirection * Time.deltaTime * 2;
-        //    if (faceDirection.magnitude > 1)
-        //        faceDirection = faceDirection.normalized;
-        //    //Position.LookAt(Position.position + FaceDirection);
-        //}
+       
 
     }
 
