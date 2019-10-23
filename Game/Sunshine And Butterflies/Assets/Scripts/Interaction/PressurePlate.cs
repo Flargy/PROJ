@@ -14,7 +14,10 @@ public class PressurePlate : MonoBehaviour
 
         foreach(AffectedObject affected in affectedObject)
         {
-            affected.ExecuteAction();
+            if(itemsOnPad == desiredNrOfObjects)
+            {
+                affected.ExecuteAction();
+            }
         }
     }
 
@@ -23,7 +26,10 @@ public class PressurePlate : MonoBehaviour
         itemsOnPad--;
         foreach (AffectedObject affected in affectedObject)
         {
-            affected.ExecuteAction();
+            if(itemsOnPad < desiredNrOfObjects)
+            {
+                affected.ExecuteAction();
+            }
         }
     }
 

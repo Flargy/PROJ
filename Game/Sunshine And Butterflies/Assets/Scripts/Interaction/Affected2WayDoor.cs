@@ -18,10 +18,12 @@ public class Affected2WayDoor : AffectedObject
                 if (pressedPlate.GetPushed() == false)
                 {
                     doorIsOpen = false;
+                    
                     break;
                 }
-                else
+                else if (pressedPlate.GetPushed() == true)
                 {
+                    
                     doorIsOpen = true;
                 }
 

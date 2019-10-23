@@ -23,6 +23,9 @@ public class NewPlayerScript : MonoBehaviour
     private CapsuleCollider capsule = null;
     private Vector3 capsuleTop = Vector3.zero;
     private Vector3 capsuleBottom = Vector3.zero;
+    private Vector3 lookDirection = Vector3.zero;
+    private Vector3 faceDirection = Vector3.zero;
+    private Vector3 rotationVector = Vector3.zero;
 
     void Start()
     {
@@ -37,19 +40,21 @@ public class NewPlayerScript : MonoBehaviour
         if (airBorne == false && interacting == false && isLifted == false)
         {
             ApplyGroundVelocity();
-            TurnToFace();
+            //TurnToFace();
         }
         else if (airBorne == true && isLifted == false)
         {
             jumpGroundCheckDelay += Time.deltaTime;
             ApplyAirVelocity();
-            TurnToFace();
+            //TurnToFace();
             if (GroundCheck() == true && jumpGroundCheckDelay >= 0.3f)
             {
                 airBorne = false;
                 jumpGroundCheckDelay = 0.0f;
             }
         }
+
+        FaceTowardsDirection();
         
     }
 
@@ -60,6 +65,45 @@ public class NewPlayerScript : MonoBehaviour
         {
             transform.rotation = Quaternion.LookRotation(movementVector);
         }
+    }
+
+    private void FaceTowardsDirection()
+    {
+        if (movementVector.magnitude >= 0.01f)
+        {
+            lookDirection = new Vector3(movementVector.x, 0, movementVector.y);
+            faceDirection += lookDirection.normalized * Time.deltaTime * 10;
+            if (faceDirection.magnitude > 1)
+            {
+                faceDirection = faceDirection.normalized;
+            }
+            transform.LookAt(transform.position + faceDirection);
+
+
+        }
+        else if(rotationVector.magnitude >= 0.01f)
+        {
+            lookDirection = new Vector3(rotationVector.x, 0, rotationVector.y);
+            faceDirection += lookDirection.normalized * Time.deltaTime * 6;
+            if (faceDirection.magnitude > 1)
+            {
+                faceDirection = faceDirection.normalized;
+            }
+            transform.LookAt(transform.position + faceDirection);
+        }
+
+
+        //else
+        //{
+
+        //    //Position.rotation = Quaternion.RotateTowards(Position.rotation, Quaternion.LookRotation(LookDirection), 180.0f * Time.deltaTime);
+        //    transform.LookAt(transform.position + faceDirection);
+        //    faceDirection += lookDirection * Time.deltaTime * 2;
+        //    if (faceDirection.magnitude > 1)
+        //        faceDirection = faceDirection.normalized;
+        //    //Position.LookAt(Position.position + FaceDirection);
+        //}
+
     }
 
     public void OnInteract()
@@ -160,6 +204,13 @@ public class NewPlayerScript : MonoBehaviour
         {
             carriedObject.GetComponent<Interactable>().Toss();
         }
+    }
+
+    
+
+    public void OnRotate(InputValue value)
+    {
+        rotationVector = value.Get<Vector2>();
     }
 
     //Player to player interactions

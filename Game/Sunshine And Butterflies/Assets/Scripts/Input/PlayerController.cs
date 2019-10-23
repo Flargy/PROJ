@@ -49,6 +49,14 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""2a84f250-b0c8-4d5a-b9b7-9ad5f18e7bbc"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -93,6 +101,17 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Toss"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cae967dc-75ea-4ff5-a9c4-5f5c61f96d8f"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -191,6 +210,7 @@ public class PlayerController : IInputActionCollection, IDisposable
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
         m_Gameplay_Toss = m_Gameplay.FindAction("Toss", throwIfNotFound: true);
+        m_Gameplay_Rotate = m_Gameplay.FindAction("Rotate", throwIfNotFound: true);
         // QTE
         m_QTE = asset.FindActionMap("QTE", throwIfNotFound: true);
         m_QTE_Down = m_QTE.FindAction("Down", throwIfNotFound: true);
@@ -250,6 +270,7 @@ public class PlayerController : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_Interact;
     private readonly InputAction m_Gameplay_Toss;
+    private readonly InputAction m_Gameplay_Rotate;
     public struct GameplayActions
     {
         private PlayerController m_Wrapper;
@@ -258,6 +279,7 @@ public class PlayerController : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
         public InputAction @Toss => m_Wrapper.m_Gameplay_Toss;
+        public InputAction @Rotate => m_Wrapper.m_Gameplay_Rotate;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -279,6 +301,9 @@ public class PlayerController : IInputActionCollection, IDisposable
                 Toss.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToss;
                 Toss.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToss;
                 Toss.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToss;
+                Rotate.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotate;
+                Rotate.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotate;
+                Rotate.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotate;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -295,6 +320,9 @@ public class PlayerController : IInputActionCollection, IDisposable
                 Toss.started += instance.OnToss;
                 Toss.performed += instance.OnToss;
                 Toss.canceled += instance.OnToss;
+                Rotate.started += instance.OnRotate;
+                Rotate.performed += instance.OnRotate;
+                Rotate.canceled += instance.OnRotate;
             }
         }
     }
@@ -362,6 +390,7 @@ public class PlayerController : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnToss(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
     }
     public interface IQTEActions
     {
