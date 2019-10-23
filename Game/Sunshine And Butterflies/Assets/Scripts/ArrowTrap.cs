@@ -27,10 +27,10 @@ public class ArrowTrap : MonoBehaviour
 
     void FireArrows()
     {
-        arrowNum = arrowSpawns.Length;
+        arrowNum = Random.Range(1, arrowSpawns.Length);
         for (int i = 0; i < arrowNum; i++)
         {
-            //GameObject arrowPos = arrowSpawns(arrow);
+            GameObject arrowPos = arrowSpawns[Random.Range(0, arrowSpawns.Length)];
             Instantiate(arrow, arrowPos.transform.position, arrowPos.transform.rotation);
         }
 
