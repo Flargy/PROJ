@@ -8,7 +8,6 @@ public class ArrowTrap : MonoBehaviour
     public GameObject[] arrowSpawns;
     public GameObject arrow;
 
-    public int arrowNum;
     public bool timerBased;
     public float fireTimer = 3f;
     public float timer = 0f;
@@ -27,11 +26,10 @@ public class ArrowTrap : MonoBehaviour
 
     void FireArrows()
     {
-        arrowNum = Random.Range(1, arrowSpawns.Length);
-        for (int i = 0; i < arrowNum; i++)
+        for (int i = 0; i < arrowSpawns.Length; i++)
         {
-            GameObject arrowPos = arrowSpawns[Random.Range(0, arrowSpawns.Length)];
-            Instantiate(arrow, arrowPos.transform.position, arrowPos.transform.rotation);
+
+            Instantiate(arrow, arrowSpawns[i].transform.position, arrowSpawns[i].transform.rotation);
         }
 
     }
