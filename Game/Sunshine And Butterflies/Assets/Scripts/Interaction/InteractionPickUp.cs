@@ -33,7 +33,7 @@ public class InteractionPickUp : Interactable
     {
         if(isPickedUp == false)
         {
-
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
             rb.useGravity = false;
             transform.position += Vector3.up;
             isPickedUp = true;

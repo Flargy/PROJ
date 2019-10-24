@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TrapDoor : MonoBehaviour
 {
-
     public Rigidbody leftDoor;
     public Rigidbody rightDoor;
 
@@ -12,6 +11,7 @@ public class TrapDoor : MonoBehaviour
 
     void Start()
     {
+
         leftDoor.useGravity = false;
         leftDoor.isKinematic = true;
         rightDoor.useGravity = false;
