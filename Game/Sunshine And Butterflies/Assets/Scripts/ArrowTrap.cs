@@ -13,10 +13,6 @@ public class ArrowTrap : MonoBehaviour
     public float fireTimer = 3f;
     public float timer = 0f;
     // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -43,7 +39,7 @@ public class ArrowTrap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timerBased)
+        if (timerBased == true)
         {
             if (timer <= fireTimer)
             {
