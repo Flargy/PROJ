@@ -25,14 +25,14 @@ public class PlayerQTE : MonoBehaviour
         playerInput.SwitchCurrentActionMap("Gameplay");
     }
 
+    public void OnDown()
+    {
+        currentLever.ReceiveAnswer(0);
+    }
+
     public void OnLeft()
     {
         currentLever.ReceiveAnswer(1);
-    }
-
-    public void OnRight()
-    {
-        currentLever.ReceiveAnswer(3);
     }
 
     public void OnUp()
@@ -40,8 +40,10 @@ public class PlayerQTE : MonoBehaviour
         currentLever.ReceiveAnswer(2);
     }
 
-    public void OnDown()
+    public void OnRight()
     {
-        currentLever.ReceiveAnswer(0);
+        currentLever.ReceiveAnswer(3);
     }
+
+
 }

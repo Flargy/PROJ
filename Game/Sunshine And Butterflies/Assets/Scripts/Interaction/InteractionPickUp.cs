@@ -41,7 +41,7 @@ public class InteractionPickUp : Interactable
             player.GetComponent<NewPlayerScript>().PickUpObject(gameObject);
 
         }
-        else
+        else if(player == currentHolder)
         {
             Drop();
             player.GetComponent<NewPlayerScript>().DropObject();

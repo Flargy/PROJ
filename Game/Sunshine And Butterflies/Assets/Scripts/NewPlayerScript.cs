@@ -202,14 +202,18 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnCrouch()
     {
-        if(CarryingAObject == false && canBeLifted == true && airBorne == false && interacting == false && crouching == false)
+        Crouch();
+    }
+
+    private void Crouch()
+    {
+        if (CarryingAObject == false && canBeLifted == true && airBorne == false && interacting == false && crouching == false && isLifted == false)
         {
             capsule.enabled = false;
             box.enabled = true;
             crouching = true;
-            //go into crouch
         }
-        else if(crouching == true)
+        else if (crouching == true && isLifted == false)
         {
             capsule.enabled = true;
             box.enabled = false;
@@ -248,6 +252,13 @@ public class NewPlayerScript : MonoBehaviour
     {
         isLifted = false;
         airBorne = true;
+        if (crouching == true)
+        {
+            capsule.enabled = true;
+            box.enabled = false;
+            crouching = false;
+        }
+
     }
 
     public void BreakFree()
