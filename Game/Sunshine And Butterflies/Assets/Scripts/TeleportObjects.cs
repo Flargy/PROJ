@@ -18,6 +18,7 @@ public class TeleportObjects : MonoBehaviour
 
     private IEnumerator MoveBox(GameObject box)
     {
+        box.GetComponent<Interactable>().Teleport();
         box.SetActive(false);
         box.GetComponent<Rigidbody>().velocity = Vector3.zero;
         yield return new WaitForSeconds(transferTime);

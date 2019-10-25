@@ -55,7 +55,7 @@ public class InteractionPickUp : Interactable
         currentHolder = null;
         isPickedUp = false;
         rb.useGravity = true;
-        transform.parent = null;
+        rb.constraints = RigidbodyConstraints.None;
     }
 
     public override void Toss()
@@ -65,5 +65,18 @@ public class InteractionPickUp : Interactable
         isPickedUp = false;
         rb.useGravity = true;
         currentHolder = null;
+        rb.constraints = RigidbodyConstraints.None;
+
+    }
+
+    public override void Teleport()
+    {
+        currentHolder.GetComponent<NewPlayerScript>().DropObject();
+        currentHolder = null;
+        isPickedUp = false;
+        rb.useGravity = true;
+        rb.constraints = RigidbodyConstraints.None;
+
+
     }
 }

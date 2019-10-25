@@ -15,6 +15,11 @@ public class Interactable : MonoBehaviour
 
     }
 
+    public virtual void Teleport()
+    {
+
+    }
+
     
 
     private void OnDrawGizmosSelected()

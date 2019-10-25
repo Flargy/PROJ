@@ -15,12 +15,14 @@ public class NewPlayerScript : MonoBehaviour
     private bool interacting = false;
     private bool CarryingAObject = false;
     private bool airBorne = false;
+    private bool crouching = false;
     private GameObject carriedObject;
     private float jumpGroundCheckDelay = 0.0f;
     private bool isLifted = false;
     private bool canBeLifted = true;
     private Interactable interactScript = null;
     private CapsuleCollider capsule = null;
+    private BoxCollider box = null;
     private Vector3 capsuleTop = Vector3.zero;
     private Vector3 capsuleBottom = Vector3.zero;
     private Vector3 lookDirection = Vector3.zero;
@@ -30,6 +32,7 @@ public class NewPlayerScript : MonoBehaviour
     void Start()
     {
         capsule = GetComponent<CapsuleCollider>();
+        box = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
         interactScript = GetComponent<Interactable>();
     }
@@ -37,7 +40,7 @@ public class NewPlayerScript : MonoBehaviour
     void Update()
     {
         
-        if (airBorne == false && interacting == false && isLifted == false)
+        if (airBorne == false && interacting == false && isLifted == false && crouching == false)
         {
             ApplyGroundVelocity();
             //TurnToFace();
@@ -99,7 +102,7 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnInteract()
     {
-        if (isLifted == false)
+        if (isLifted == false && crouching == false)
         {
             RaycastHit ray;
             if (CarryingAObject == false) 
@@ -174,7 +177,7 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
-        if (isLifted == false)
+        if (isLifted == false && interacting == false && crouching == false)
         {
             movementVector = value.Get<Vector2>();
         }
@@ -182,7 +185,7 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnJump()
     {
-        if (GroundCheck() == true && interacting == false && isLifted == false && CarryingAObject == false)
+        if (GroundCheck() == true && interacting == false && isLifted == false && CarryingAObject == false && crouching == false)
         {
             rb.velocity += Vector3.up * jumpPower;
             airBorne = true;
@@ -191,13 +194,31 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnToss()
     {
-        if(CarryingAObject == true)
+        if(CarryingAObject == true && carriedObject != null)
         {
             carriedObject.GetComponent<Interactable>().Toss();
         }
     }
 
+    public void OnCrouch()
+    {
+        if(CarryingAObject == false && canBeLifted == true && airBorne == false && interacting == false && crouching == false)
+        {
+            capsule.enabled = false;
+            box.enabled = true;
+            crouching = true;
+            //go into crouch
+        }
+        else if(crouching == true)
+        {
+            capsule.enabled = true;
+            box.enabled = false;
+            crouching = false;
+        }
+    }
+
     
+        
 
     public void OnRotate(InputValue value)
     {
