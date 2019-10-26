@@ -5,12 +5,21 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
 
+    public AudioClip fireSound;
+    public AudioClip hitSound;
+
+    public AudioSource arrowSound;
+
     public float arrowVelocity;
     public float arroLife = 2.0f;
     private float timer = 0;
     // Start is called before the first frame update
     void Start()
     {
+        arrowSound = gameObject.GetComponent<AudioSource>();
+        arrowSound.clip = fireSound;
+        arrowSound.Play();
+
         gameObject.GetComponent<Rigidbody>().velocity = transform.forward * arrowVelocity;
     }
 
