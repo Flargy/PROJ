@@ -8,7 +8,7 @@ public class Arrow : MonoBehaviour
     public AudioClip fireSound;
     public AudioClip hitSound;
 
-    public AudioSource arrowSound;
+    private AudioSource arrowSound;
 
     public float arrowVelocity;
     public float arroLife = 2.0f;
@@ -16,11 +16,12 @@ public class Arrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.GetComponent<Rigidbody>().velocity = transform.forward * arrowVelocity;
+
         arrowSound = gameObject.GetComponent<AudioSource>();
         arrowSound.clip = fireSound;
         arrowSound.Play();
 
-        gameObject.GetComponent<Rigidbody>().velocity = transform.forward * arrowVelocity;
     }
 
     private void OnTriggerEnter(Collider other)

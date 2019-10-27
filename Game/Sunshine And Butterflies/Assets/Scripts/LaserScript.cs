@@ -5,6 +5,10 @@ using UnityEngine;
 public class LaserScript : MonoBehaviour
 {
 
+    public AudioClip laserBeamSound;
+
+    private AudioSource laserSound;
+
     public Transform startPoint;
     public Transform endPoint;
     LineRenderer laserLine;
@@ -14,9 +18,11 @@ public class LaserScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("ToggleLaserTrap", 0, 5f);
+        laserSound = gameObject.GetComponent<AudioSource>();
+
+        InvokeRepeating("ToggleLaserTrap", 0, 2.5f);
         laserLine = GetComponent<LineRenderer>();
-       laserLine.SetWidth(.2f, .2f);
+        laserLine.SetWidth(.2f, .2f);
     }
 
     // Update is called once per frame
@@ -31,6 +37,9 @@ public class LaserScript : MonoBehaviour
     {
         trapEnable = !trapEnable;
         Laser.SetActive(trapEnable);
+        laserSound.clip = laserBeamSound;
+        laserSound.Play();
+        
     }
 
     private void OnTriggerEnter(Collider other)
