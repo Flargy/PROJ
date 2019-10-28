@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Affected2WayDoor : AffectedObject
+public class AffectedDoor : AffectedObject
 {
     [SerializeField] private List<PressurePlate> plates = null;
     [SerializeField] private bool usesPlates = false;

@@ -3,6 +3,8 @@
 public class Interactable : MonoBehaviour
 {
     public float interactionRadius = 2.0f; // Position for player to stand when interacting
+    public float interactionCooldownTimer = 2.0f;
+    public bool interacting = false;
     
 
     public virtual void Interact(GameObject player)

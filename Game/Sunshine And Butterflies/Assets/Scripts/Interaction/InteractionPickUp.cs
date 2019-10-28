@@ -71,9 +71,13 @@ public class InteractionPickUp : Interactable
 
     public override void Teleport()
     {
-        currentHolder.GetComponent<NewPlayerScript>().DropObject();
-        currentHolder = null;
-        isPickedUp = false;
+        if(currentHolder != null)
+        {
+            currentHolder.GetComponent<NewPlayerScript>().DropObject();
+            currentHolder = null;
+
+        }
+            isPickedUp = false;
         rb.useGravity = true;
         rb.constraints = RigidbodyConstraints.None;
 

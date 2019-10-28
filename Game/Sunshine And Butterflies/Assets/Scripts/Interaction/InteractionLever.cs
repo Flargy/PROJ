@@ -9,7 +9,7 @@ public class InteractionLever : Interactable
     private PlayerQTE interactingPlayer = null;
     private int correctAnswer = 0;
     private int playerAnswer = 0;
-    private bool interacting = false;
+    //private bool interacting = false;
     private bool abortQTE = false;
     private float QTETimer = 3.0f;
     private bool takeInput = true;
@@ -93,7 +93,7 @@ public class InteractionLever : Interactable
 
     private IEnumerator InteractionCooldown()
     {
-        yield return new WaitForSeconds(4.0f);
+        yield return new WaitForSeconds(interactionCooldownTimer);
         interacting = false;
     }
 }

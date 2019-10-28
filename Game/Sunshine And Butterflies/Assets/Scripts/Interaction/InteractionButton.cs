@@ -8,7 +8,18 @@ public class InteractionButton : Interactable
 
     public override void Interact(GameObject player)
     {
-        affectedObject.ExecuteAction();
+        if (interacting == false)
+        {
+            affectedObject.ExecuteAction();
+            interacting = true;
+            StartCoroutine(InteractionCooldown());
+        }
+    }
+
+    private IEnumerator InteractionCooldown()
+    {
+        yield return new WaitForSeconds(interactionCooldownTimer);
+        interacting = false;
     }
 
     

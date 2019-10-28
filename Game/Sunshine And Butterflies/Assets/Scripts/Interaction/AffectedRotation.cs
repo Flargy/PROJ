@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AffectedMovement : AffectedObject
+public class AffectedRotation : AffectedObject
 {
     [SerializeField] private Vector3 startPosition = Vector3.zero;
     [SerializeField] private Transform endPosition = null;
@@ -14,7 +14,7 @@ public class AffectedMovement : AffectedObject
 
     public override void ExecuteAction()
     {
-        
+
         StartCoroutine(ChangePosition());
     }
 
@@ -27,7 +27,7 @@ public class AffectedMovement : AffectedObject
 
     private IEnumerator ChangePosition()
     {
-        while(lerpTime < actionDuration)
+        while (lerpTime < actionDuration)
         {
             t += Time.deltaTime / actionDuration;
             transform.position = Vector3.Lerp(goFromPosition, goToPosition, t);
@@ -35,7 +35,7 @@ public class AffectedMovement : AffectedObject
             yield return new WaitForEndOfFrame();
         }
 
-        if(goFromPosition == startPosition)
+        if (goFromPosition == startPosition)
         {
             goFromPosition = transform.position;
             goToPosition = startPosition;
@@ -48,6 +48,4 @@ public class AffectedMovement : AffectedObject
         t = 0.0f;
         lerpTime = 0.0f;
     }
-
-    
 }

@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 1274222993}
   - component: {fileID: 1339301099900889633}
   - component: {fileID: 5980944686775673272}
+  - component: {fileID: 4488989250008169950}
+  - component: {fileID: 21045138272880561}
   m_Layer: 8
   m_Name: PlayerCube
   m_TagString: Player
@@ -174,7 +176,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionRadius: 2
+  interactionCooldownTimer: 2
+  interacting: 0
   otherPlayer: {fileID: 0}
   horizontalYeetForce: 300
   verticalYeetForce: 40
   verticalOffest: 1.25
+--- !u!65 &4488989250008169950
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8971211494208141751}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.7999609, y: 0.62612295, z: 0.4398214}
+  m_Center: {x: 0, y: 0.30732524, z: -0.004319206}
+--- !u!114 &21045138272880561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8971211494208141751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08095675ac7b28942978d35e3a021749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
