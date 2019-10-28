@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class AffectedRotation : AffectedObject
 {
-    [SerializeField] private Vector3 startPosition = Vector3.zero;
-    [SerializeField] private Transform endPosition = null;
+    [SerializeField] private Vector3 endRotation = Vector3.zero;
 
     private float lerpTime = 0;
     private float t = 0;
-    private Vector3 goToPosition = Vector3.zero;
-    private Vector3 goFromPosition = Vector3.zero;
+    private Vector3 fromRotation = Vector3.zero;
+    private Vector3 originalRotation = Vector3.zero;
+    private Vector3 toRotation = Vector3.zero;
+    
 
     public override void ExecuteAction()
     {
@@ -20,9 +21,9 @@ public class AffectedRotation : AffectedObject
 
     private void Start()
     {
-        startPosition = transform.position;
-        goToPosition = endPosition.position;
-        goFromPosition = startPosition;
+        originalRotation = transform.rotation.eulerAngles;
+        fromRotation = transform.rotation.eulerAngles;
+        toRotation = endRotation;
     }
 
     private IEnumerator ChangePosition()
@@ -30,20 +31,20 @@ public class AffectedRotation : AffectedObject
         while (lerpTime < actionDuration)
         {
             t += Time.deltaTime / actionDuration;
-            transform.position = Vector3.Lerp(goFromPosition, goToPosition, t);
+            transform.rotation = Quaternion.Euler(Vector3.Lerp(fromRotation, toRotation, t));
             lerpTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
 
-        if (goFromPosition == startPosition)
+        if (fromRotation == originalRotation)
         {
-            goFromPosition = transform.position;
-            goToPosition = startPosition;
+            fromRotation = transform.rotation.eulerAngles;
+            toRotation = originalRotation;
         }
         else
         {
-            goToPosition = endPosition.position;
-            goFromPosition = transform.position;
+            toRotation = endRotation;
+            fromRotation = transform.rotation.eulerAngles;
         }
         t = 0.0f;
         lerpTime = 0.0f;
