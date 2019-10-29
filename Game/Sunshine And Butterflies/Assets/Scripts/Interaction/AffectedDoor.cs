@@ -14,53 +14,65 @@ public class AffectedDoor : AffectedObject
     private Vector3 originalRotation = Vector3.zero;
     private Vector3 toRotation = Vector3.zero;
     private bool doorIsOpen = false;
+    private bool coroutineIsRunning = false;
+    private bool openDoor = true;
     private Vector3 startPosition;
+    private Coroutine openAndCloseDoors = null;
 
     public override void ExecuteAction()
     {
-        if (doorIsOpen == false && usesPlates == true)
+        Debug.Log("Coroutine boolean early: " + coroutineIsRunning);
+      
+
+        if (coroutineIsRunning == false)
         {
-            foreach (PressurePlate pressedPlate in plates)
+            if (doorIsOpen == false && usesPlates == true)
             {
-                if (pressedPlate.GetPushed() == false)
+                foreach (PressurePlate pressedPlate in plates)
                 {
-                    doorIsOpen = false;
-                    
-                    break;
+                    if (pressedPlate.GetPushed() == false)
+                    {
+                        doorIsOpen = false;
+
+                        break;
+                    }
+                    else if (pressedPlate.GetPushed() == true)
+                    {
+
+                        doorIsOpen = true;
+                    }
+
                 }
-                else if (pressedPlate.GetPushed() == true)
+
+                if (doorIsOpen == true && coroutineIsRunning == false)
                 {
-                    
-                    doorIsOpen = true;
+                    openAndCloseDoors = StartCoroutine(RotateDoors());
                 }
 
             }
-
-            if (doorIsOpen == true)
+            else if (usesPlates == true && coroutineIsRunning == false)
             {
-                transform.position += Vector3.down * 5;
+                openAndCloseDoors = StartCoroutine(RotateDoors());
+                doorIsOpen = false;
             }
-            
+
+            if (usesPlates == false)
+            {
+                
+                if (coroutineIsRunning == false)
+                {
+                    openAndCloseDoors = StartCoroutine(RotateDoors());
+                }
+
+            }
         }
-        else if(usesPlates == true)
+
+        else if(coroutineIsRunning == true)
         {
-            transform.position = startPosition;
-            doorIsOpen = false;
-        }
+            AbortCoroutine();
+            Debug.Log("Coroutine boolean abort: " + coroutineIsRunning);
 
-        if(usesPlates == false)
-        {
-            doorIsOpen = !doorIsOpen;
-            if (doorIsOpen == true)
-            {
-                StartCoroutine(ChangePosition());
-            }
-            else
-            {
-                StartCoroutine(ChangePosition());
-            }
         }
-
 
     }
 
@@ -72,9 +84,9 @@ public class AffectedDoor : AffectedObject
         toRotation = endRotation;
     }
 
-    private IEnumerator ChangePosition()
+    private IEnumerator RotateDoors()
     {
-        Debug.Log("rotating");
+        coroutineIsRunning = true;
         while (lerpTime < actionDuration)
         {
             t += Time.deltaTime / actionDuration;
@@ -83,7 +95,20 @@ public class AffectedDoor : AffectedObject
             yield return new WaitForEndOfFrame();
         }
 
-        if (fromRotation == originalRotation)
+        ChangeRotationValues();
+        
+    }
+
+    private void AbortCoroutine()
+    {
+        ChangeRotationValues();
+        openAndCloseDoors = StartCoroutine(RotateDoors());
+        StopCoroutine(openAndCloseDoors);
+    }
+
+    private void ChangeRotationValues()
+    {
+        if (openDoor == true)
         {
             fromRotation = transform.rotation.eulerAngles;
             toRotation = originalRotation;
@@ -93,6 +118,8 @@ public class AffectedDoor : AffectedObject
             toRotation = endRotation;
             fromRotation = transform.rotation.eulerAngles;
         }
+        openDoor = !openDoor;
+        coroutineIsRunning = false;
         t = 0.0f;
         lerpTime = 0.0f;
     }

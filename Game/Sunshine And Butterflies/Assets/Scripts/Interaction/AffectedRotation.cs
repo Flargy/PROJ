@@ -16,7 +16,7 @@ public class AffectedRotation : AffectedObject
     public override void ExecuteAction()
     {
 
-        StartCoroutine(ChangePosition());
+        StartCoroutine(ChangeRotation());
     }
 
     private void Start()
@@ -26,7 +26,7 @@ public class AffectedRotation : AffectedObject
         toRotation = endRotation;
     }
 
-    private IEnumerator ChangePosition()
+    private IEnumerator ChangeRotation()
     {
         while (lerpTime < actionDuration)
         {
