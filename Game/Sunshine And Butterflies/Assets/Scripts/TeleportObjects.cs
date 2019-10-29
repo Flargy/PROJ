@@ -6,6 +6,7 @@ public class TeleportObjects : MonoBehaviour
 {
     [SerializeField] private Transform teleportToLocation = null;
     [SerializeField] private float transferTime = 2.0f;
+    [SerializeField] private float transportForce = 2.0f;
 
 
     private void OnTriggerEnter(Collider other)
@@ -20,9 +21,11 @@ public class TeleportObjects : MonoBehaviour
     {
         box.GetComponent<Interactable>().Teleport();
         box.SetActive(false);
-        box.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        box.transform.rotation = teleportToLocation.rotation;
+        box.GetComponent<Rigidbody>().velocity = teleportToLocation.forward * transportForce;
         yield return new WaitForSeconds(transferTime);
         box.transform.position = teleportToLocation.position;
         box.SetActive(true);
+
     }
 }

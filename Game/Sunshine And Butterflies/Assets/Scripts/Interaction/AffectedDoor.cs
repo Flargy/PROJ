@@ -20,9 +20,7 @@ public class AffectedDoor : AffectedObject
     private Coroutine openAndCloseDoors = null;
 
     public override void ExecuteAction()
-    {
-        Debug.Log("Coroutine boolean early: " + coroutineIsRunning);
-      
+    {      
 
         if (coroutineIsRunning == false)
         {
@@ -70,8 +68,6 @@ public class AffectedDoor : AffectedObject
         else if(coroutineIsRunning == true)
         {
             AbortCoroutine();
-            Debug.Log("Coroutine boolean abort: " + coroutineIsRunning);
-
         }
 
     }
