@@ -259,9 +259,9 @@ public class NewPlayerScript : MonoBehaviour
 
     
 
-    public void ChangeSpawnPoint(Vector3 newSpawnPoint)
+    public void ChangeSpawnPoint()
     {
-        respawnPoint = newSpawnPoint;
+        respawnPoint = transform.position;
     }
 
     public void Respawn()

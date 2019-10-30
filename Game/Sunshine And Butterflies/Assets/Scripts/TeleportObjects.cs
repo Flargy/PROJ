@@ -21,7 +21,8 @@ public class TeleportObjects : MonoBehaviour
     {
         box.GetComponent<Interactable>().Teleport();
         box.SetActive(false);
-        box.transform.rotation = Quaternion.Euler(teleportToLocation.rotation.x, teleportToLocation.rotation.y + 90, teleportToLocation.rotation.z);
+        box.transform.rotation = teleportToLocation.rotation;
+        //Quaternion.Euler(teleportToLocation.rotation.x, teleportToLocation.rotation.y + 90, teleportToLocation.rotation.z)
         box.GetComponent<Rigidbody>().velocity = teleportToLocation.forward * transportForce;
         yield return new WaitForSeconds(transferTime);
         box.transform.position = teleportToLocation.position;
