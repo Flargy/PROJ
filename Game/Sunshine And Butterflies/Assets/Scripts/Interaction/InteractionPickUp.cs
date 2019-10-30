@@ -26,6 +26,7 @@ public class InteractionPickUp : Interactable
         if (isPickedUp == true)
         {
             rb.MovePosition(currentHolder.transform.position + currentHolder.transform.up * holdOffset + currentHolder.transform.forward * holdDistance);
+            transform.rotation = currentHolder.transform.rotation;
             
         }
     }
@@ -34,6 +35,7 @@ public class InteractionPickUp : Interactable
     {
         if(isPickedUp == false)
         {
+            transform.rotation = Quaternion.Euler(Vector3.zero); ;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             rb.useGravity = false;
             transform.position += Vector3.up;
