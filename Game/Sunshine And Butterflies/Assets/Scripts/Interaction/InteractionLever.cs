@@ -7,6 +7,7 @@ public class InteractionLever : Interactable
     [SerializeField] private AffectedObject affected = null;
     [SerializeField] private GameObject rendererHolder = null;
     [SerializeField] private List<Sprite> sprites = null;
+    [SerializeField] private GameObject camera = null;
 
     private PlayerQTE interactingPlayer = null;
     private int correctAnswer = 0;
@@ -31,7 +32,7 @@ public class InteractionLever : Interactable
         {
             affected.ExecuteAction();
             rendererHolder.SetActive(true);
-            rendererHolder.transform.LookAt(Camera.main.transform.position, Vector3.up);
+            rendererHolder.transform.LookAt(camera.transform.position, Vector3.up); // saknar main
             interactingPlayer = player.GetComponent<PlayerQTE>();
             interactingPlayer.GetComponent<NewPlayerScript>().SwapLiftingState();
             interactingPlayer.SwapToQTE(this);
@@ -75,6 +76,7 @@ public class InteractionLever : Interactable
             abortQTE = false;
             correctAnswer = 0;
             interactingPlayer = null;
+            renderQTE.sprite = null;
             playerHasAnswered = false;
             StartCoroutine(InteractionCooldown());
             affected.ExecuteAction();
