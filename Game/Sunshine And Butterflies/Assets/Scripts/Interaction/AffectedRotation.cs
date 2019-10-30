@@ -15,8 +15,8 @@ public class AffectedRotation : AffectedObject
 
     public override void ExecuteAction()
     {
-
         StartCoroutine(ChangeRotation());
+        
     }
 
     private void Start()
@@ -24,6 +24,7 @@ public class AffectedRotation : AffectedObject
         originalRotation = transform.rotation.eulerAngles;
         fromRotation = transform.rotation.eulerAngles;
         toRotation = endRotation;
+        
     }
 
     private IEnumerator ChangeRotation()

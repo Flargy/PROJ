@@ -5,6 +5,8 @@ using UnityEngine;
 public class InteractionLever : Interactable
 {
     [SerializeField] private AffectedObject affected = null;
+    [SerializeField] private GameObject rendererHolder = null;
+    [SerializeField] private List<Sprite> sprites = null;
 
     private PlayerQTE interactingPlayer = null;
     private int correctAnswer = 0;
@@ -14,12 +16,22 @@ public class InteractionLever : Interactable
     private float QTETimer = 3.0f;
     private bool takeInput = true;
     private bool playerHasAnswered = false;
+    private SpriteRenderer renderQTE = null;
+
+
+    private void Start()
+    {
+        renderQTE = rendererHolder.GetComponent<SpriteRenderer>();
+        rendererHolder.SetActive(false);
+    }
 
     public override void Interact(GameObject player)
     {
         if (interacting == false)
         {
             affected.ExecuteAction();
+            rendererHolder.SetActive(true);
+            rendererHolder.transform.LookAt(Camera.main.transform.position, Vector3.up);
             interactingPlayer = player.GetComponent<PlayerQTE>();
             interactingPlayer.GetComponent<NewPlayerScript>().SwapLiftingState();
             interactingPlayer.SwapToQTE(this);
@@ -43,6 +55,7 @@ public class InteractionLever : Interactable
         if(playerAnswer == correctAnswer)
         {
             abortQTE = false;
+            renderQTE.sprite = null;
         }
         else
         {
@@ -64,13 +77,15 @@ public class InteractionLever : Interactable
             interactingPlayer = null;
             playerHasAnswered = false;
             StartCoroutine(InteractionCooldown());
-            
+            affected.ExecuteAction();
+
         }
     }
 
     private void DisplayWantedInput()
     {
         Debug.Log(correctAnswer);
+        renderQTE.sprite = sprites[correctAnswer];
     }
 
     private IEnumerator StartQTE()
