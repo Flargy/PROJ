@@ -75,8 +75,8 @@ public class AffectedDoor : AffectedObject
     private void Start()
     {
         startPosition = transform.position;
-        originalRotation = transform.rotation.eulerAngles;
-        fromRotation = transform.rotation.eulerAngles;
+        originalRotation = transform.localRotation.eulerAngles;
+        fromRotation = transform.localRotation.eulerAngles;
         toRotation = endRotation;
     }
 
@@ -86,7 +86,7 @@ public class AffectedDoor : AffectedObject
         while (lerpTime < actionDuration)
         {
             t += Time.deltaTime / actionDuration;
-            transform.rotation = Quaternion.Euler(Vector3.Lerp(fromRotation, toRotation, t));
+            transform.localRotation = Quaternion.Euler(Vector3.Lerp(fromRotation, toRotation, t));
             lerpTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
@@ -106,13 +106,13 @@ public class AffectedDoor : AffectedObject
     {
         if (openDoor == true)
         {
-            fromRotation = transform.rotation.eulerAngles;
+            fromRotation = transform.localRotation.eulerAngles;
             toRotation = originalRotation;
         }
         else
         {
             toRotation = endRotation;
-            fromRotation = transform.rotation.eulerAngles;
+            fromRotation = transform.localRotation.eulerAngles;
         }
         openDoor = !openDoor;
         coroutineIsRunning = false;

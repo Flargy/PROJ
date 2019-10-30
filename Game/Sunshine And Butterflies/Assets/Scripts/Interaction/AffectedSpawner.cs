@@ -11,7 +11,8 @@ public class AffectedSpawner : AffectedObject
     {
         if(spawnObject == null)
         {
-            spawnObject = (GameObject)Instantiate(spawnPrefab, spawnLocation.position, Quaternion.identity);
+            spawnObject = (GameObject)Instantiate(spawnPrefab, spawnLocation.position, spawnLocation.rotation);
+            spawnObject.GetComponent<Rigidbody>().velocity = spawnLocation.forward * 2;
         }
     }
 }

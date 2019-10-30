@@ -219,6 +219,66 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""BreakingFree"",
+            ""id"": ""6008c894-6479-47bb-92da-6bc6735d1360"",
+            ""actions"": [
+                {
+                    ""name"": ""BreakFree"",
+                    ""type"": ""Button"",
+                    ""id"": ""5614f8fb-bfb3-4307-8df6-bf5ac34652b2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c7a463ce-afd5-4494-8d27-58b65857ef18"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BreakFree"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""609dde72-cf00-469b-b3a5-c8799e2c0bb1"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BreakFree"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""929baefa-c214-4d3a-a82d-2398523b0c74"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BreakFree"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dd02760a-624f-43a1-b62d-90c8e49f4294"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BreakFree"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -237,6 +297,9 @@ public class PlayerController : IInputActionCollection, IDisposable
         m_QTE_Right = m_QTE.FindAction("Right", throwIfNotFound: true);
         m_QTE_Up = m_QTE.FindAction("Up", throwIfNotFound: true);
         m_QTE_Left = m_QTE.FindAction("Left", throwIfNotFound: true);
+        // BreakingFree
+        m_BreakingFree = asset.FindActionMap("BreakingFree", throwIfNotFound: true);
+        m_BreakingFree_BreakFree = m_BreakingFree.FindAction("BreakFree", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -412,6 +475,39 @@ public class PlayerController : IInputActionCollection, IDisposable
         }
     }
     public QTEActions @QTE => new QTEActions(this);
+
+    // BreakingFree
+    private readonly InputActionMap m_BreakingFree;
+    private IBreakingFreeActions m_BreakingFreeActionsCallbackInterface;
+    private readonly InputAction m_BreakingFree_BreakFree;
+    public struct BreakingFreeActions
+    {
+        private PlayerController m_Wrapper;
+        public BreakingFreeActions(PlayerController wrapper) { m_Wrapper = wrapper; }
+        public InputAction @BreakFree => m_Wrapper.m_BreakingFree_BreakFree;
+        public InputActionMap Get() { return m_Wrapper.m_BreakingFree; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BreakingFreeActions set) { return set.Get(); }
+        public void SetCallbacks(IBreakingFreeActions instance)
+        {
+            if (m_Wrapper.m_BreakingFreeActionsCallbackInterface != null)
+            {
+                BreakFree.started -= m_Wrapper.m_BreakingFreeActionsCallbackInterface.OnBreakFree;
+                BreakFree.performed -= m_Wrapper.m_BreakingFreeActionsCallbackInterface.OnBreakFree;
+                BreakFree.canceled -= m_Wrapper.m_BreakingFreeActionsCallbackInterface.OnBreakFree;
+            }
+            m_Wrapper.m_BreakingFreeActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                BreakFree.started += instance.OnBreakFree;
+                BreakFree.performed += instance.OnBreakFree;
+                BreakFree.canceled += instance.OnBreakFree;
+            }
+        }
+    }
+    public BreakingFreeActions @BreakingFree => new BreakingFreeActions(this);
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -427,5 +523,9 @@ public class PlayerController : IInputActionCollection, IDisposable
         void OnRight(InputAction.CallbackContext context);
         void OnUp(InputAction.CallbackContext context);
         void OnLeft(InputAction.CallbackContext context);
+    }
+    public interface IBreakingFreeActions
+    {
+        void OnBreakFree(InputAction.CallbackContext context);
     }
 }

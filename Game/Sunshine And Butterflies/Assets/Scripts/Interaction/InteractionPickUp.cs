@@ -10,13 +10,14 @@ public class InteractionPickUp : Interactable
     private Rigidbody rb;
     private bool isPickedUp;
     private GameObject currentHolder;
-
+    private Vector3 respawnPoint = Vector3.zero;
     public float holdDistance = 0.5f;
     public float holdOffset = 1.0f;
     
 
     private void Start()
     {
+        respawnPoint = transform.position;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -82,5 +83,11 @@ public class InteractionPickUp : Interactable
         rb.constraints = RigidbodyConstraints.None;
 
 
+    }
+
+    public void Respawn()
+    {
+        rb.velocity = Vector3.zero;
+        transform.position = respawnPoint;
     }
 }

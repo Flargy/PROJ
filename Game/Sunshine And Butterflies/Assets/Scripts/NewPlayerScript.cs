@@ -28,6 +28,7 @@ public class NewPlayerScript : MonoBehaviour
     private Vector3 lookDirection = Vector3.zero;
     private Vector3 faceDirection = Vector3.zero;
     private Vector3 rotationVector = Vector3.zero;
+    private Vector3 respawnPoint = Vector3.zero;
 
     void Start()
     {
@@ -219,10 +220,7 @@ public class NewPlayerScript : MonoBehaviour
             box.enabled = false;
             crouching = false;
         }
-    }
-
-    
-        
+    }  
 
     public void OnRotate(InputValue value)
     {
@@ -243,8 +241,6 @@ public class NewPlayerScript : MonoBehaviour
 
     public void BecomeLifted()
     {
-        //GetComponent<PlayerInput>().currentActionMap = QTE;
-        
         isLifted = true;
     }
 
@@ -261,9 +257,17 @@ public class NewPlayerScript : MonoBehaviour
 
     }
 
-    public void BreakFree()
-    {
+    
 
+    public void ChangeSpawnPoint(Vector3 newSpawnPoint)
+    {
+        respawnPoint = newSpawnPoint;
+    }
+
+    public void Respawn()
+    {
+        rb.velocity = Vector3.zero;
+        transform.position = respawnPoint; 
     }
 
     

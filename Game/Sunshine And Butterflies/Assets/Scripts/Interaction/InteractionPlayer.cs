@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InteractionPlayer : Interactable
 {
@@ -13,9 +14,11 @@ public class InteractionPlayer : Interactable
     
     private Rigidbody rb = null;
     private bool isLifted = false;
+    private PlayerInput playerInput = null;
 
     private void Start()
     {
+        playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
         thisPlayer = GetComponent<NewPlayerScript>();
     }
@@ -37,12 +40,10 @@ public class InteractionPlayer : Interactable
             rb.useGravity = false;
             otherPlayer.GetComponent<NewPlayerScript>().PickUpObject(gameObject);
             thisPlayer.BecomeLifted();
+            playerInput.SwitchCurrentActionMap("BreakingFree");
         }
          else if(isLifted == true)
         {
-            isLifted = false;
-            rb.useGravity = true;
-            thisPlayer.Released();
             GetPutDown();
         }
     }
@@ -54,10 +55,21 @@ public class InteractionPlayer : Interactable
         thisPlayer.Released();
         otherPlayer.GetComponent<NewPlayerScript>().DropObject();
         rb.AddForce((otherPlayer.transform.rotation * Vector3.forward * horizontalYeetForce) + (Vector3.up * verticalYeetForce));
+        playerInput.SwitchCurrentActionMap("Gameplay");
     }
 
     public void GetPutDown()
     {
+        thisPlayer.Released();
+        isLifted = false;
+        rb.useGravity = true;
         otherPlayer.GetComponent<NewPlayerScript>().DropObject();
+        playerInput.SwitchCurrentActionMap("Gameplay");
+
+    }
+
+    public void OnBreakFree()
+    {
+        GetPutDown();
     }
 }
