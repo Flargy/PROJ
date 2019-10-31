@@ -6,7 +6,15 @@ public class PressurePlate : MonoBehaviour
 {
     [SerializeField] private List<AffectedObject> affectedObject = null;
     [SerializeField] private int desiredNrOfObjects = 1;
+    [SerializeField] private Material activatedColor = null;
+    [SerializeField] private MeshRenderer colorObject = null;
     private int itemsOnPad;
+    private Material startingColor = null;
+
+    private void Start()
+    {
+        startingColor = colorObject.material;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,6 +25,7 @@ public class PressurePlate : MonoBehaviour
             if(itemsOnPad == desiredNrOfObjects)
             {
                 affected.ExecuteAction();
+                colorObject.material = activatedColor;
             }
         }
     }
@@ -29,6 +38,7 @@ public class PressurePlate : MonoBehaviour
             if(itemsOnPad < desiredNrOfObjects)
             {
                 affected.ExecuteAction();
+                colorObject.material = startingColor;
             }
         }
     }
