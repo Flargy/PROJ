@@ -5,7 +5,7 @@ using UnityEngine;
 public class AffectedMovement : AffectedObject
 {
     [SerializeField] private Vector3 startPosition = Vector3.zero;
-    [SerializeField] private Transform endPosition = null;
+    [SerializeField] private Vector3 endPosition = Vector3.zero;
 
     private float lerpTime = 0;
     private float t = 0;
@@ -21,7 +21,7 @@ public class AffectedMovement : AffectedObject
     private void Start()
     {
         startPosition = transform.position;
-        goToPosition = endPosition.position;
+        goToPosition = endPosition;
         goFromPosition = startPosition;
     }
 
@@ -42,7 +42,7 @@ public class AffectedMovement : AffectedObject
         }
         else
         {
-            goToPosition = endPosition.position;
+            goToPosition = endPosition;
             goFromPosition = transform.position;
         }
         t = 0.0f;
