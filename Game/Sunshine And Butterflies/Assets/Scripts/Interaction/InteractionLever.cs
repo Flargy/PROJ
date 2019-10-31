@@ -15,7 +15,7 @@ public class InteractionLever : Interactable
     private int playerAnswer = 0;
     //private bool interacting = false;
     private bool abortQTE = false;
-    
+    private float originalQTETimer = 0.0f;
     private bool takeInput = true;
     private bool playerHasAnswered = false;
     private SpriteRenderer renderQTE = null;
@@ -25,6 +25,7 @@ public class InteractionLever : Interactable
     {
         renderQTE = rendererHolder.GetComponent<SpriteRenderer>();
         rendererHolder.SetActive(false);
+        originalQTETimer = QTETimer;
     }
 
     public override void Interact(GameObject player)
@@ -72,7 +73,7 @@ public class InteractionLever : Interactable
         {
             interactingPlayer.GetComponent<NewPlayerScript>().SwapLiftingState();
             interactingPlayer.SwapToMovement();
-            QTETimer = 4.0f;
+            QTETimer = originalQTETimer;
             playerAnswer = 0;
             abortQTE = false;
             correctAnswer = 0;
