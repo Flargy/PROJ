@@ -6,6 +6,8 @@ public class InteractionButton : Interactable
 {
     [SerializeField] private AffectedObject affectedObject = null;
     [SerializeField] private GameObject button = null;
+    [SerializeField] private bool onTimer = false;
+    [SerializeField] private float durationToClose = 2.0f;
 
     private Vector3 startPosition = Vector3.zero;
     private float lerpTime = 0;
@@ -21,6 +23,10 @@ public class InteractionButton : Interactable
             interacting = true;
             StartCoroutine(InteractionCooldown());
             StartCoroutine(ButtonMovement());
+            if(onTimer == true)
+            {
+                StartCoroutine(OnATimer());
+            }
         }
     }
 
@@ -58,6 +64,12 @@ public class InteractionButton : Interactable
         }
         t = 0.0f;
         lerpTime = 0.0f;
+    }
+
+    private IEnumerator OnATimer()
+    {
+        yield return new WaitForSeconds(durationToClose);
+        affectedObject.ExecuteAction();
     }
 
     
