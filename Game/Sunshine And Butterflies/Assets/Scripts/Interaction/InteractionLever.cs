@@ -40,6 +40,7 @@ public class InteractionLever : Interactable
             interactingPlayer.GetComponent<NewPlayerScript>().SwapLiftingState();
             interactingPlayer.SwapToQTE(this);
             activateQTE = StartCoroutine(StartQTE());
+            interacting = true;
         }
     }
 

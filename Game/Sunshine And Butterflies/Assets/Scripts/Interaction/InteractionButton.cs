@@ -32,7 +32,7 @@ public class InteractionButton : Interactable
 
     private void Start()
     {
-        pressedPosition = button.transform.position - (transform.InverseTransformDirection(transform.right) * 0.1f);
+        pressedPosition = button.transform.position - ((button.transform.up * 0.1f));
         notPressedPosition = button.transform.position;
     }
 
