@@ -6,6 +6,7 @@ public class InteractionPickUp : Interactable
 {
     [SerializeField] private float horizontalYeetForce = 300.0f;
     [SerializeField] private float verticalYeetForce = 40.0f;
+    [SerializeField] private Vector3 offsetVector = Vector3.zero;
 
     private Rigidbody rb;
     private bool isPickedUp;
