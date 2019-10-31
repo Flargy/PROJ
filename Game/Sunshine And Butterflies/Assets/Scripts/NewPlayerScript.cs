@@ -29,6 +29,7 @@ public class NewPlayerScript : MonoBehaviour
     private Vector3 faceDirection = Vector3.zero;
     private Vector3 rotationVector = Vector3.zero;
     private Vector3 respawnPoint = Vector3.zero;
+    private Animator anim = null;
 
     void Start()
     {
@@ -36,6 +37,7 @@ public class NewPlayerScript : MonoBehaviour
         box = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
         interactScript = GetComponent<Interactable>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -181,6 +183,7 @@ public class NewPlayerScript : MonoBehaviour
         if (isLifted == false && interacting == false && crouching == false)
         {
             movementVector = value.Get<Vector2>();
+            anim.SetFloat("Moving", movementVector.normalized.magnitude);
         }
     }
 
