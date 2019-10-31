@@ -8,13 +8,14 @@ public class InteractionLever : Interactable
     [SerializeField] private GameObject rendererHolder = null;
     [SerializeField] private List<Sprite> sprites = null;
     [SerializeField] private GameObject camera = null;
-
+    [SerializeField] private float QTETimer = 3.0f;
+    [SerializeField] private float cutoffTime = 0.15f;
     private PlayerQTE interactingPlayer = null;
     private int correctAnswer = 0;
     private int playerAnswer = 0;
     //private bool interacting = false;
     private bool abortQTE = false;
-    private float QTETimer = 3.0f;
+    
     private bool takeInput = true;
     private bool playerHasAnswered = false;
     private SpriteRenderer renderQTE = null;
@@ -98,7 +99,7 @@ public class InteractionLever : Interactable
             correctAnswer = Random.Range(correctAnswer + 1, 4) % 4;
             DisplayWantedInput();
             yield return new WaitForSeconds(QTETimer);
-            QTETimer -= 0.15f;
+            QTETimer -= cutoffTime;
             if(playerHasAnswered == false)
             {
                 abortQTE = true;
