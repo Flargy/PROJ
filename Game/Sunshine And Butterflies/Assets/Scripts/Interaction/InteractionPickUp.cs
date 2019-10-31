@@ -26,7 +26,7 @@ public class InteractionPickUp : Interactable
     {
         if (isPickedUp == true)
         {
-            rb.MovePosition(currentHolder.transform.position + currentHolder.transform.up * holdOffset + currentHolder.transform.forward * holdDistance);
+            rb.MovePosition(currentHolder.transform.position + offsetVector);
             transform.rotation = currentHolder.transform.rotation;
             
         }
@@ -36,7 +36,8 @@ public class InteractionPickUp : Interactable
     {
         if(isPickedUp == false)
         {
-            transform.rotation = Quaternion.Euler(Vector3.zero); ;
+            transform.rotation = Quaternion.Euler(Vector3.zero);
+            rb.velocity = Vector3.zero;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             rb.useGravity = false;
             transform.position += Vector3.up;
@@ -55,7 +56,7 @@ public class InteractionPickUp : Interactable
     public void Drop()
     {
         currentHolder.GetComponent<NewPlayerScript>().DropObject();
-        rb.AddForce((currentHolder.transform.rotation * Vector3.forward * horizontalYeetForce / 10) + (Vector3.up * verticalYeetForce / 10));
+        rb.AddForce((currentHolder.transform.rotation * Vector3.forward * horizontalYeetForce / 3) + (Vector3.up * verticalYeetForce / 3));
         currentHolder = null;
         isPickedUp = false;
         rb.useGravity = true;

@@ -19,6 +19,7 @@ public class InteractionLever : Interactable
     private bool takeInput = true;
     private bool playerHasAnswered = false;
     private SpriteRenderer renderQTE = null;
+    private Coroutine activateQTE = null;
 
 
     private void Start()
@@ -38,7 +39,7 @@ public class InteractionLever : Interactable
             interactingPlayer = player.GetComponent<PlayerQTE>();
             interactingPlayer.GetComponent<NewPlayerScript>().SwapLiftingState();
             interactingPlayer.SwapToQTE(this);
-            StartCoroutine(StartQTE());
+            activateQTE = StartCoroutine(StartQTE());
         }
     }
 
@@ -63,6 +64,7 @@ public class InteractionLever : Interactable
         else
         {
             abortQTE = true;
+            StopCoroutine(activateQTE);
             StopQTE();
         }
     }
@@ -88,7 +90,6 @@ public class InteractionLever : Interactable
 
     private void DisplayWantedInput()
     {
-        Debug.Log(correctAnswer);
         renderQTE.sprite = sprites[correctAnswer];
     }
 
