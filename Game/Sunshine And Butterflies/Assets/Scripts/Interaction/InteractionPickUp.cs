@@ -7,19 +7,19 @@ public class InteractionPickUp : Interactable
     [SerializeField] private float horizontalYeetForce = 300.0f;
     [SerializeField] private float verticalYeetForce = 40.0f;
     [SerializeField] private Vector3 offsetVector = Vector3.zero;
+    [SerializeField] private Transform respawnPoint = null;
 
     private Rigidbody rb;
     private bool isPickedUp;
     private GameObject currentHolder;
-    private Vector3 respawnPoint = Vector3.zero;
     public float holdDistance = 0.5f;
     public float holdOffset = 1.0f;
     
 
     private void Start()
     {
-        respawnPoint = transform.position;
         rb = GetComponent<Rigidbody>();
+        
     }
 
     private void Update()
@@ -91,7 +91,11 @@ public class InteractionPickUp : Interactable
 
     public void Respawn()
     {
-        rb.velocity = Vector3.zero;
-        transform.position = respawnPoint;
+        if(respawnPoint != null)
+        { 
+            rb.velocity = Vector3.zero;
+            transform.position = respawnPoint.position;
+            transform.rotation = respawnPoint.localRotation;
+        }
     }
 }

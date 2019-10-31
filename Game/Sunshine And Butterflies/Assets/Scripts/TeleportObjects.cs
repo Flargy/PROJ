@@ -26,6 +26,7 @@ public class TeleportObjects : MonoBehaviour
         box.GetComponent<Rigidbody>().velocity = teleportToLocation.forward * transportForce;
         yield return new WaitForSeconds(transferTime);
         box.transform.position = teleportToLocation.position;
+        box.transform.rotation = teleportToLocation.localRotation;
         box.SetActive(true);
 
     }

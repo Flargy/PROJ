@@ -94,8 +94,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1.0160296, z: 0.17987075}
-  m_Center: {x: 0, y: 0, z: 0.05134186}
+  m_Size: {x: 0.5, y: 1.1309853, z: 0.26053753}
+  m_Center: {x: 0, y: 0, z: 0.1}
 --- !u!114 &4089153280740270447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,13 +111,17 @@ MonoBehaviour:
   interactionRadius: 1
   interactionCooldownTimer: 2
   interacting: 0
-  affected: {fileID: 0}
+  affected:
+  - {fileID: 0}
   rendererHolder: {fileID: 6677522397642399378}
   sprites:
   - {fileID: 21300000, guid: 5c0411dd7fedc7f4d8fcd0208dc969a1, type: 3}
   - {fileID: 21300000, guid: 2a65f82f839a6a140958add34b21ed02, type: 3}
   - {fileID: 21300000, guid: f849bf5f5fce6ca4eb4370884fc88327, type: 3}
   - {fileID: 21300000, guid: aacfd7c5211733e448806556e80e51c5, type: 3}
+  sceneCamera: {fileID: 0}
+  QTETimer: 3
+  cutoffTime: 0.15
 --- !u!1 &6677522397642399378
 GameObject:
   m_ObjectHideFlags: 0

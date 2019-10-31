@@ -10,7 +10,7 @@ public class RespawnTrigger : MonoBehaviour
         {
             other.GetComponent<NewPlayerScript>().Respawn();
         }
-        else if (other.CompareTag("Box"))
+        else if (other.CompareTag("CarryBox"))
         {
             other.GetComponent<InteractionPickUp>().Respawn();
         }
