@@ -14,15 +14,15 @@ public class Interactable : MonoBehaviour
 
     public virtual void Toss()
     {
-
+        // will be overwritten by inheritage
     }
 
     public virtual void Teleport()
     {
-
+        // will be overwritten by inheritage
     }
 
-    
+
 
     private void OnDrawGizmosSelected()
     {
