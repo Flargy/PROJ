@@ -20,7 +20,7 @@ public class AffectedDoor : AffectedObject
     private Coroutine openAndCloseDoors = null;
 
     public override void ExecuteAction()
-    {      
+    {
 
         if (coroutineIsRunning == false)
         {
@@ -98,8 +98,8 @@ public class AffectedDoor : AffectedObject
     private void AbortCoroutine()
     {
         ChangeRotationValues();
-        openAndCloseDoors = StartCoroutine(RotateDoors());
         StopCoroutine(openAndCloseDoors);
+        openAndCloseDoors = StartCoroutine(RotateDoors());
     }
 
     private void ChangeRotationValues()
@@ -108,12 +108,14 @@ public class AffectedDoor : AffectedObject
         {
             fromRotation = transform.localRotation.eulerAngles;
             toRotation = originalRotation;
+            doorIsOpen = true;
         }
         else
         {
             toRotation = endRotation;
             fromRotation = transform.localRotation.eulerAngles;
         }
+        
         openDoor = !openDoor;
         coroutineIsRunning = false;
         t = 0.0f;
