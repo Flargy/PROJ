@@ -13,68 +13,67 @@ public class AffectedDoor : AffectedObject
     private Vector3 fromRotation = Vector3.zero;
     private Vector3 originalRotation = Vector3.zero;
     private Vector3 toRotation = Vector3.zero;
-    private bool doorIsOpen = false;
     private bool coroutineIsRunning = false;
     private bool openDoor = true;
-    private Vector3 startPosition;
     private Coroutine openAndCloseDoors = null;
 
     public override void ExecuteAction()
     {
-
-        if (coroutineIsRunning == false)
+        if(coroutineIsRunning == true)
         {
-            if (doorIsOpen == false && usesPlates == true)
+            StopCoroutine(openAndCloseDoors);
+            coroutineIsRunning = false;
+            
+        }
+        fromRotation = transform.localRotation.eulerAngles;
+        t = 0.0f;
+        lerpTime = 0.0f;
+        if (usesPlates == true)
+        {
+            foreach (PressurePlate pressedPlate in plates)
             {
-                foreach (PressurePlate pressedPlate in plates)
+                if (pressedPlate.GetPushed() == false)
                 {
-                    if (pressedPlate.GetPushed() == false)
-                    {
-                        doorIsOpen = false;
+                    openDoor = false;
 
-                        break;
-                    }
-                    else if (pressedPlate.GetPushed() == true)
-                    {
-
-                        doorIsOpen = true;
-                    }
-
+                    break;
                 }
-
-                if (doorIsOpen == true && coroutineIsRunning == false)
+                else if (pressedPlate.GetPushed() == true)
                 {
-                    openAndCloseDoors = StartCoroutine(RotateDoors());
+
+                    openDoor = true;
                 }
 
             }
-            else if (usesPlates == true && coroutineIsRunning == false)
+            ChangeRotationValues();
+
+            if (openDoor == true)
             {
                 openAndCloseDoors = StartCoroutine(RotateDoors());
-                doorIsOpen = false;
             }
-
-            if (usesPlates == false)
+            else 
             {
-                
-                if (coroutineIsRunning == false)
-                {
-                    openAndCloseDoors = StartCoroutine(RotateDoors());
-                }
-
+                openAndCloseDoors = StartCoroutine(RotateDoors());
             }
+
         }
 
-        else if(coroutineIsRunning == true)
+        if (usesPlates == false)
         {
-            AbortCoroutine();
+            if (coroutineIsRunning == false)
+            {
+                openAndCloseDoors = StartCoroutine(RotateDoors());
+            }
+
         }
+        
+
+        
 
     }
 
     private void Start()
     {
-        startPosition = transform.position;
         originalRotation = transform.localRotation.eulerAngles;
         fromRotation = transform.localRotation.eulerAngles;
         toRotation = endRotation;
@@ -90,35 +89,32 @@ public class AffectedDoor : AffectedObject
             lerpTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-
-        ChangeRotationValues();
-        
+        if(usesPlates == false)
+        {
+            ChangeRotationValues();
+        }
+        coroutineIsRunning = false;
+     
     }
-
-    private void AbortCoroutine()
-    {
-        ChangeRotationValues();
-        StopCoroutine(openAndCloseDoors);
-        openAndCloseDoors = StartCoroutine(RotateDoors());
-    }
+    
 
     private void ChangeRotationValues()
     {
         if (openDoor == true)
         {
             fromRotation = transform.localRotation.eulerAngles;
-            toRotation = originalRotation;
-            doorIsOpen = true;
+            toRotation = endRotation;
         }
         else
         {
-            toRotation = endRotation;
+            toRotation = originalRotation;
             fromRotation = transform.localRotation.eulerAngles;
         }
         
-        openDoor = !openDoor;
-        coroutineIsRunning = false;
+        ;
         t = 0.0f;
         lerpTime = 0.0f;
     }
+
+    
 }
