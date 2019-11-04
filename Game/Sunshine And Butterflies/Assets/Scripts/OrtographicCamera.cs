@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,6 +23,7 @@ public class OrtographicCamera : MonoBehaviour
     private void LateUpdate()
     {
         Move();
+        Zoom();
     }
 
     private void Move()
@@ -54,5 +56,39 @@ public class OrtographicCamera : MonoBehaviour
         desiredPosition = averagePosition;
     }
 
+    private void Zoom()
+    {
+        float requiredSize = FindRequiredSize();
+        cameraReference.orthographicSize = Mathf.SmoothDamp(cameraReference.orthographicSize, requiredSize, ref zoomSpeed, delayTime);
+    }
 
+    private float FindRequiredSize()
+    {
+        Vector3 desiredLocalPosition = transform.InverseTransformPoint(desiredPosition);
+
+        float size = 0.0f;
+
+        foreach(Transform target in players)
+        {
+            if (!target.gameObject.activeSelf)
+            {
+                continue;
+            }
+            Vector3 targetLocalPosition = transform.InverseTransformPoint(target.position);
+
+            Vector3 desiredPositionToTarget = targetLocalPosition - desiredLocalPosition;
+
+            size = Mathf.Max(size, Mathf.Abs(desiredPositionToTarget.y));
+
+            size = Mathf.Max(size, Mathf.Abs(desiredPositionToTarget.x) / cameraReference.aspect);
+        }
+
+        size += screenOffset;
+
+        size = Mathf.Max(size, minimumSize);
+
+        return size;
+    }
+
+    
 }
