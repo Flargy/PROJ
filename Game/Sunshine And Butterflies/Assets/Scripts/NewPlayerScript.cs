@@ -193,6 +193,7 @@ public class NewPlayerScript : MonoBehaviour
         {
             rb.velocity += Vector3.up * jumpPower;
             airBorne = true;
+            anim.SetTrigger("isJumping");
         }
     }
 
@@ -216,12 +217,14 @@ public class NewPlayerScript : MonoBehaviour
             capsule.enabled = false;
             box.enabled = true;
             crouching = true;
+            anim.SetBool("isCrouching", true);
         }
         else if (crouching == true && isLifted == false)
         {
             capsule.enabled = true;
             box.enabled = false;
             crouching = false;
+            anim.SetBool("isCrouching", false);
         }
     }  
 
