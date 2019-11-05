@@ -5,17 +5,23 @@ using UnityEngine;
 public class GUIManager : MonoBehaviour
 {
 
-    public void Play()
+
+    public void PlayButton()
     {
         Application.LoadLevel("StartTest");
     }
 
-    public void Options()
+    public void OptionsButton()
     {
 
     }
 
-    public void Exit()
+    public void BackButton()
+    {
+        Application.LoadLevel("MenuTest");
+    }
+
+    public void ExitButton()
     {
         
     }
