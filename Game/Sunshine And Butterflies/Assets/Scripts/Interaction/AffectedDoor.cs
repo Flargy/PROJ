@@ -23,6 +23,10 @@ public class AffectedDoor : AffectedObject
         {
             StopCoroutine(openAndCloseDoors);
             coroutineIsRunning = false;
+            if(usesPlates == false)
+            {
+                ChangeRotationValues();
+            }
             
         }
         fromRotation = transform.localRotation.eulerAngles;
