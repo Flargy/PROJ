@@ -279,6 +279,82 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Menu"",
+            ""id"": ""111ae079-8c85-4e49-883c-a837293f14d3"",
+            ""actions"": [
+                {
+                    ""name"": ""Accept"",
+                    ""type"": ""Button"",
+                    ""id"": ""90c657bf-8e1c-4d8d-82b0-cfa06cf34814"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""befc1fcb-2521-4385-8482-e1efee24a67c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""9958dc47-e8e9-4765-afd5-c40723e3c255"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5b673d4a-53d9-4ff3-9047-797795ce6798"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Accept"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""21f9c631-6f65-4b37-ab23-7de7a1149f02"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f025ae0b-d6a2-487d-ad6e-ba9b691c3acf"",
+                    ""path"": ""<Gamepad>/dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4865cbb9-396c-46b7-8b6a-b099dc64fe93"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -300,6 +376,11 @@ public class PlayerController : IInputActionCollection, IDisposable
         // BreakingFree
         m_BreakingFree = asset.FindActionMap("BreakingFree", throwIfNotFound: true);
         m_BreakingFree_BreakFree = m_BreakingFree.FindAction("BreakFree", throwIfNotFound: true);
+        // Menu
+        m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
+        m_Menu_Accept = m_Menu.FindAction("Accept", throwIfNotFound: true);
+        m_Menu_Move = m_Menu.FindAction("Move", throwIfNotFound: true);
+        m_Menu_Back = m_Menu.FindAction("Back", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -508,6 +589,55 @@ public class PlayerController : IInputActionCollection, IDisposable
         }
     }
     public BreakingFreeActions @BreakingFree => new BreakingFreeActions(this);
+
+    // Menu
+    private readonly InputActionMap m_Menu;
+    private IMenuActions m_MenuActionsCallbackInterface;
+    private readonly InputAction m_Menu_Accept;
+    private readonly InputAction m_Menu_Move;
+    private readonly InputAction m_Menu_Back;
+    public struct MenuActions
+    {
+        private PlayerController m_Wrapper;
+        public MenuActions(PlayerController wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Accept => m_Wrapper.m_Menu_Accept;
+        public InputAction @Move => m_Wrapper.m_Menu_Move;
+        public InputAction @Back => m_Wrapper.m_Menu_Back;
+        public InputActionMap Get() { return m_Wrapper.m_Menu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuActions instance)
+        {
+            if (m_Wrapper.m_MenuActionsCallbackInterface != null)
+            {
+                Accept.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnAccept;
+                Accept.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnAccept;
+                Accept.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnAccept;
+                Move.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnMove;
+                Move.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnMove;
+                Move.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnMove;
+                Back.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
+                Back.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
+                Back.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
+            }
+            m_Wrapper.m_MenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                Accept.started += instance.OnAccept;
+                Accept.performed += instance.OnAccept;
+                Accept.canceled += instance.OnAccept;
+                Move.started += instance.OnMove;
+                Move.performed += instance.OnMove;
+                Move.canceled += instance.OnMove;
+                Back.started += instance.OnBack;
+                Back.performed += instance.OnBack;
+                Back.canceled += instance.OnBack;
+            }
+        }
+    }
+    public MenuActions @Menu => new MenuActions(this);
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -527,5 +657,11 @@ public class PlayerController : IInputActionCollection, IDisposable
     public interface IBreakingFreeActions
     {
         void OnBreakFree(InputAction.CallbackContext context);
+    }
+    public interface IMenuActions
+    {
+        void OnAccept(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
+        void OnBack(InputAction.CallbackContext context);
     }
 }
