@@ -94,6 +94,10 @@ public class AffectedDoor : AffectedObject
             ChangeRotationValues();
         }
         coroutineIsRunning = false;
+        if(usesPlates == false)
+        {
+            ChangeRotationValues();
+        }
      
     }
     
