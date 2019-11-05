@@ -18,27 +18,33 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        itemsOnPad++;
-
-        foreach(AffectedObject affected in affectedObject)
+        if (other.CompareTag("Player") || other.CompareTag("CarryBox"))
         {
-            if(itemsOnPad == desiredNrOfObjects)
+            itemsOnPad++;
+
+            foreach (AffectedObject affected in affectedObject)
             {
-                affected.ExecuteAction();
-                colorObject.material = activatedColor;
+                if (itemsOnPad == desiredNrOfObjects)
+                {
+                    affected.ExecuteAction();
+                    colorObject.material = activatedColor;
+                }
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        itemsOnPad--;
-        foreach (AffectedObject affected in affectedObject)
+        if (other.CompareTag("Player") || other.CompareTag("CarryBox"))
         {
-            if(itemsOnPad < desiredNrOfObjects)
+            itemsOnPad--;
+            foreach (AffectedObject affected in affectedObject)
             {
-                affected.ExecuteAction();
-                colorObject.material = startingColor;
+                if (itemsOnPad < desiredNrOfObjects)
+                {
+                    affected.ExecuteAction();
+                    colorObject.material = startingColor;
+                }
             }
         }
     }
