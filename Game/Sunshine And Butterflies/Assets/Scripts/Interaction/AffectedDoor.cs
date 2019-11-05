@@ -62,6 +62,7 @@ public class AffectedDoor : AffectedObject
         {
             if (coroutineIsRunning == false)
             {
+                openDoor = !openDoor;
                 openAndCloseDoors = StartCoroutine(RotateDoors());
             }
 
@@ -94,10 +95,7 @@ public class AffectedDoor : AffectedObject
             ChangeRotationValues();
         }
         coroutineIsRunning = false;
-        if(usesPlates == false)
-        {
-            ChangeRotationValues();
-        }
+        
      
     }
     
