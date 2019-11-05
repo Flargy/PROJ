@@ -7,7 +7,7 @@ public class GUIManager : MonoBehaviour
 
     public void Play()
     {
-
+        Application.LoadLevel("StartTest");
     }
 
     public void Options()
