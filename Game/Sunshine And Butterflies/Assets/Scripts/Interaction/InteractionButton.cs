@@ -9,7 +9,6 @@ public class InteractionButton : Interactable
     [SerializeField] private bool onTimer = false;
     [SerializeField] private float durationToClose = 2.0f;
 
-    private Vector3 startPosition = Vector3.zero;
     private float lerpTime = 0;
     private float t = 0;
     private Vector3 pressedPosition = Vector3.zero;
