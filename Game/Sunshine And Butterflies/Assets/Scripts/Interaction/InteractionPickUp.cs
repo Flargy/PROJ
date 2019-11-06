@@ -95,7 +95,7 @@ public class InteractionPickUp : Interactable
         { 
             rb.velocity = Vector3.zero;
             transform.position = respawnPoint.position;
-            transform.rotation = respawnPoint.localRotation;
+            transform.rotation = respawnPoint.rotation * Quaternion.Euler(0, 90, 0);
         }
     }
 }

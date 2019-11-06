@@ -285,7 +285,7 @@ public class PlayerController : IInputActionCollection, IDisposable
             ""id"": ""111ae079-8c85-4e49-883c-a837293f14d3"",
             ""actions"": [
                 {
-                    ""name"": ""Accept"",
+                    ""name"": ""GUIAccept"",
                     ""type"": ""Button"",
                     ""id"": ""90c657bf-8e1c-4d8d-82b0-cfa06cf34814"",
                     ""expectedControlType"": """",
@@ -293,7 +293,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Move"",
+                    ""name"": ""GUIMove"",
                     ""type"": ""Value"",
                     ""id"": ""befc1fcb-2521-4385-8482-e1efee24a67c"",
                     ""expectedControlType"": ""Vector2"",
@@ -301,7 +301,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Back"",
+                    ""name"": ""GUIBack"",
                     ""type"": ""Button"",
                     ""id"": ""9958dc47-e8e9-4765-afd5-c40723e3c255"",
                     ""expectedControlType"": """",
@@ -317,7 +317,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Accept"",
+                    ""action"": ""GUIAccept"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -328,7 +328,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""GUIMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -339,7 +339,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""GUIMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -350,7 +350,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Back"",
+                    ""action"": ""GUIBack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -378,9 +378,9 @@ public class PlayerController : IInputActionCollection, IDisposable
         m_BreakingFree_BreakFree = m_BreakingFree.FindAction("BreakFree", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
-        m_Menu_Accept = m_Menu.FindAction("Accept", throwIfNotFound: true);
-        m_Menu_Move = m_Menu.FindAction("Move", throwIfNotFound: true);
-        m_Menu_Back = m_Menu.FindAction("Back", throwIfNotFound: true);
+        m_Menu_GUIAccept = m_Menu.FindAction("GUIAccept", throwIfNotFound: true);
+        m_Menu_GUIMove = m_Menu.FindAction("GUIMove", throwIfNotFound: true);
+        m_Menu_GUIBack = m_Menu.FindAction("GUIBack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -593,16 +593,16 @@ public class PlayerController : IInputActionCollection, IDisposable
     // Menu
     private readonly InputActionMap m_Menu;
     private IMenuActions m_MenuActionsCallbackInterface;
-    private readonly InputAction m_Menu_Accept;
-    private readonly InputAction m_Menu_Move;
-    private readonly InputAction m_Menu_Back;
+    private readonly InputAction m_Menu_GUIAccept;
+    private readonly InputAction m_Menu_GUIMove;
+    private readonly InputAction m_Menu_GUIBack;
     public struct MenuActions
     {
         private PlayerController m_Wrapper;
         public MenuActions(PlayerController wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Accept => m_Wrapper.m_Menu_Accept;
-        public InputAction @Move => m_Wrapper.m_Menu_Move;
-        public InputAction @Back => m_Wrapper.m_Menu_Back;
+        public InputAction @GUIAccept => m_Wrapper.m_Menu_GUIAccept;
+        public InputAction @GUIMove => m_Wrapper.m_Menu_GUIMove;
+        public InputAction @GUIBack => m_Wrapper.m_Menu_GUIBack;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -612,28 +612,28 @@ public class PlayerController : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_MenuActionsCallbackInterface != null)
             {
-                Accept.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnAccept;
-                Accept.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnAccept;
-                Accept.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnAccept;
-                Move.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnMove;
-                Move.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnMove;
-                Move.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnMove;
-                Back.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
-                Back.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
-                Back.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
+                GUIAccept.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnGUIAccept;
+                GUIAccept.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnGUIAccept;
+                GUIAccept.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnGUIAccept;
+                GUIMove.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnGUIMove;
+                GUIMove.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnGUIMove;
+                GUIMove.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnGUIMove;
+                GUIBack.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnGUIBack;
+                GUIBack.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnGUIBack;
+                GUIBack.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnGUIBack;
             }
             m_Wrapper.m_MenuActionsCallbackInterface = instance;
             if (instance != null)
             {
-                Accept.started += instance.OnAccept;
-                Accept.performed += instance.OnAccept;
-                Accept.canceled += instance.OnAccept;
-                Move.started += instance.OnMove;
-                Move.performed += instance.OnMove;
-                Move.canceled += instance.OnMove;
-                Back.started += instance.OnBack;
-                Back.performed += instance.OnBack;
-                Back.canceled += instance.OnBack;
+                GUIAccept.started += instance.OnGUIAccept;
+                GUIAccept.performed += instance.OnGUIAccept;
+                GUIAccept.canceled += instance.OnGUIAccept;
+                GUIMove.started += instance.OnGUIMove;
+                GUIMove.performed += instance.OnGUIMove;
+                GUIMove.canceled += instance.OnGUIMove;
+                GUIBack.started += instance.OnGUIBack;
+                GUIBack.performed += instance.OnGUIBack;
+                GUIBack.canceled += instance.OnGUIBack;
             }
         }
     }
@@ -660,8 +660,8 @@ public class PlayerController : IInputActionCollection, IDisposable
     }
     public interface IMenuActions
     {
-        void OnAccept(InputAction.CallbackContext context);
-        void OnMove(InputAction.CallbackContext context);
-        void OnBack(InputAction.CallbackContext context);
+        void OnGUIAccept(InputAction.CallbackContext context);
+        void OnGUIMove(InputAction.CallbackContext context);
+        void OnGUIBack(InputAction.CallbackContext context);
     }
 }

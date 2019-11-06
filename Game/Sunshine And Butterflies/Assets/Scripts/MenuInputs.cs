@@ -20,7 +20,7 @@ public class MenuInputs : MonoBehaviour
         Debug.Log("Input: Move");
     }
 
-    public void Onback()
+    public void OnBack()
     {
         Debug.Log("Input: Back");
     }
