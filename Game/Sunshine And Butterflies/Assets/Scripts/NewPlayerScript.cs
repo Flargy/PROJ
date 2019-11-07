@@ -105,7 +105,7 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnInteract()
     {
-        if (isLifted == false && crouching == false)
+        if (isLifted == false && crouching == false && airBorne == false)
         {
             RaycastHit ray;
             if (CarryingAObject == false) 
@@ -122,7 +122,7 @@ public class NewPlayerScript : MonoBehaviour
                 }
             }
 
-            else if (CarryingAObject == true && carriedObject != null) 
+            else if (CarryingAObject == true && carriedObject != null == airBorne == false) 
             {
                 carriedObject.GetComponent<Interactable>().Interact(gameObject);
             }

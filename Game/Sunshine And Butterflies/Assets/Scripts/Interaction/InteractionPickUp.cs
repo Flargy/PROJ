@@ -97,5 +97,9 @@ public class InteractionPickUp : Interactable
             transform.position = respawnPoint.position;
             transform.rotation = respawnPoint.rotation * Quaternion.Euler(0, 90, 0);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

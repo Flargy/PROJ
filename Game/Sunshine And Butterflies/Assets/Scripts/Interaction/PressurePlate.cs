@@ -8,7 +8,8 @@ public class PressurePlate : MonoBehaviour
     [SerializeField] private int desiredNrOfObjects = 1;
     [SerializeField] private Material activatedColor = null;
     [SerializeField] private MeshRenderer colorObject = null;
-    private int itemsOnPad;
+    [SerializeField] private DoorLightChange[] lights = null;
+    private float itemsOnPad;
     private Material startingColor = null;
 
     private void Start()
@@ -30,6 +31,11 @@ public class PressurePlate : MonoBehaviour
                     colorObject.material = activatedColor;
                 }
             }
+
+            foreach(DoorLightChange light in lights)
+            {
+                light.ChangeEmission(itemsOnPad / desiredNrOfObjects);
+            }
         }
     }
 
@@ -45,6 +51,11 @@ public class PressurePlate : MonoBehaviour
                     affected.ExecuteAction();
                     colorObject.material = startingColor;
                 }
+            }
+
+            foreach(DoorLightChange light in lights)
+            {
+                light.ChangeEmission(itemsOnPad / desiredNrOfObjects);
             }
         }
     }
