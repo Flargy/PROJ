@@ -18,7 +18,7 @@ public class DoorLightChange : MonoBehaviour
 
     public void ChangeEmission(float strength)
     {
-        Debug.Log(strength);
+
         lightRenderer.GetPropertyBlock(propertyBlock);
         propertyBlock.SetColor("_EmissionColor", activationColor * (strength * 3));
         lightRenderer.SetPropertyBlock(propertyBlock);
