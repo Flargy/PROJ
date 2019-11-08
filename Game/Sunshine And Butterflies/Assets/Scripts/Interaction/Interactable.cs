@@ -5,6 +5,7 @@ public class Interactable : MonoBehaviour
     public float interactionRadius = 2.0f; // Position for player to stand when interacting
     public float interactionCooldownTimer = 2.0f;
     public bool interacting = false;
+    public GameObject interactionIcon = null;
     
 
     public virtual void Interact(GameObject player)
@@ -36,6 +37,16 @@ public class Interactable : MonoBehaviour
         {
             Interact(player);
         }
+    }
+
+    public void ShowInteraction()
+    {
+        interactionIcon.SetActive(true);
+    }
+
+    public void HideInteraction()
+    {
+        interactionIcon.SetActive(false);
     }
 
    
