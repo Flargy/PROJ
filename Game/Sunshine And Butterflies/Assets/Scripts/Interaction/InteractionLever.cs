@@ -6,6 +6,7 @@ public class InteractionLever : Interactable
 {
     [SerializeField] private List<AffectedObject> affected = null;
     [SerializeField] private GameObject rendererHolder = null;
+    [SerializeField] private GameObject clockHand = null;
     [SerializeField] private List<Sprite> sprites = null;
     [SerializeField] private GameObject sceneCamera = null;
     [SerializeField] private float QTETimer = 3.0f;
@@ -20,6 +21,7 @@ public class InteractionLever : Interactable
     private bool playerHasAnswered = false;
     private SpriteRenderer renderQTE = null;
     private Coroutine activateQTE = null;
+    float t = 0;
 
 
     private void Start()
@@ -77,6 +79,7 @@ public class InteractionLever : Interactable
     {
         if (abortQTE == true && interactingPlayer != null)
         {
+            rendererHolder.SetActive(false);
             interactingPlayer.GetComponent<NewPlayerScript>().SwapLiftingState();
             interactingPlayer.SwapToMovement();
             QTETimer = originalQTETimer;
@@ -92,12 +95,23 @@ public class InteractionLever : Interactable
                 affectedObject.ExecuteAction();
             }
 
+            if(clockHand != null)
+            {
+                clockHand.SetActive(false);
+            }
+
         }
     }
 
     private void DisplayWantedInput()
     {
         renderQTE.sprite = sprites[correctAnswer];
+        if(clockHand != null)
+        {
+
+            clockHand.SetActive(true);
+            StartCoroutine(TurnClock());
+        }
     }
 
     private IEnumerator StartQTE()
@@ -118,9 +132,25 @@ public class InteractionLever : Interactable
         StopQTE();
     }
 
+    private IEnumerator TurnClock()
+    {
+        clockHand.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        while (t <  0.99f)
+        {
+            t += Time.deltaTime / QTETimer;
+            clockHand.transform.localRotation = Quaternion.Euler(Vector3.Lerp(Vector3.zero, new Vector3(0, 0, 358), t));
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        t = 0;
+    }
+
     private IEnumerator InteractionCooldown()
     {
         yield return new WaitForSeconds(interactionCooldownTimer);
         interacting = false;
     }
+
+    
 }
