@@ -8,6 +8,7 @@ public class PlayerSounds : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip[] footStepsSounds;
     public AudioClip[] jumpingSounds;
+    public AudioClip landingSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,5 +38,10 @@ public class PlayerSounds : MonoBehaviour
         audioSource.PlayOneShot(audioSource.clip);
         jumpingSounds[n] = jumpingSounds[0];
         jumpingSounds[0] = audioSource.clip;
+    }
+
+    public void PlayLandingSound()
+    {
+        audioSource.PlayOneShot(landingSound);
     }
 }
