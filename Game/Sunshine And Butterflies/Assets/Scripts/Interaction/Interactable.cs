@@ -51,6 +51,11 @@ public class Interactable : MonoBehaviour
         interactionIcon.SetActive(false);
     }
 
+    public void StartInteraction()
+    {
+        StartCoroutine(InteractionCooldown());
+    }
+
     public virtual IEnumerator InteractionCooldown()
     {
         interacting = true;

@@ -35,11 +35,11 @@ public class InteractionButton : Interactable
         notPressedPosition = button.transform.position;
     }
 
-    private IEnumerator InteractionCooldown()
-    {
-        yield return new WaitForSeconds(interactionCooldownTimer);
-        interacting = false;
-    }
+    //private IEnumerator InteractionCooldown()
+    //{
+    //    yield return new WaitForSeconds(interactionCooldownTimer);
+    //    interacting = false;
+    //}
 
     private IEnumerator ButtonMovement()
     {

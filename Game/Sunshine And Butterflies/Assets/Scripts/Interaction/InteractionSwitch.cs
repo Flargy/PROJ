@@ -7,6 +7,7 @@ public class InteractionSwitch : Interactable
     [SerializeField] private List<AffectedObject> affectedObjects = null;
     [SerializeField] private GameObject button1 = null;
     [SerializeField] private GameObject button2 = null;
+    [SerializeField] private List<Interactable> connectedSwitches = null;
 
     private float lerpTime = 0;
     private float t = 0;
@@ -27,15 +28,22 @@ public class InteractionSwitch : Interactable
                 affected.ExecuteAction();
 
             }
+            foreach(Interactable otherSwitch in connectedSwitches)
+            {
+                if(otherSwitch.interacting == false)
+                {
+                    otherSwitch.StartInteraction();
+                }
+            }
         }
     }
 
-    public override IEnumerator InteractionCooldown()
-    {
-        interacting = true;
-        yield return new WaitForSeconds(interactionCooldownTimer);
-        interacting = false;
-    }
+    //public override IEnumerator InteractionCooldown()
+    //{
+    //    interacting = true;
+    //    yield return new WaitForSeconds(interactionCooldownTimer);
+    //    interacting = false;
+    //}
 
     private void Start()
     {
