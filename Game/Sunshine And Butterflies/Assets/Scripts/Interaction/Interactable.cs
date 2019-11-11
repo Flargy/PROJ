@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
@@ -49,5 +51,11 @@ public class Interactable : MonoBehaviour
         interactionIcon.SetActive(false);
     }
 
-   
+    public virtual IEnumerator InteractionCooldown()
+    {
+        interacting = true;
+        yield return new WaitForSeconds(interactionCooldownTimer);
+        interacting = false;
+    }
+
 }

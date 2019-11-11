@@ -19,7 +19,6 @@ public class InteractionSwitch : Interactable
     {
         if (interacting == false)
         {
-            interacting = true;
             StartCoroutine(InteractionCooldown());
             StartCoroutine(ButtonMovement());
             foreach (AffectedObject affected in affectedObjects)
@@ -31,8 +30,9 @@ public class InteractionSwitch : Interactable
         }
     }
 
-    private IEnumerator InteractionCooldown()
+    public override IEnumerator InteractionCooldown()
     {
+        interacting = true;
         yield return new WaitForSeconds(interactionCooldownTimer);
         interacting = false;
     }

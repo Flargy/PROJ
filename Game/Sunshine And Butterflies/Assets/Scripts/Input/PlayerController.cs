@@ -65,6 +65,14 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Start"",
+                    ""type"": ""Button"",
+                    ""id"": ""e13ed10e-5cc0-4c5a-8d87-70e0dadb2ef0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -131,6 +139,17 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""084d51e2-de39-4ff8-b19e-f3af91e755c3"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -367,6 +386,7 @@ public class PlayerController : IInputActionCollection, IDisposable
         m_Gameplay_Toss = m_Gameplay.FindAction("Toss", throwIfNotFound: true);
         m_Gameplay_Rotate = m_Gameplay.FindAction("Rotate", throwIfNotFound: true);
         m_Gameplay_Crouch = m_Gameplay.FindAction("Crouch", throwIfNotFound: true);
+        m_Gameplay_Start = m_Gameplay.FindAction("Start", throwIfNotFound: true);
         // QTE
         m_QTE = asset.FindActionMap("QTE", throwIfNotFound: true);
         m_QTE_Down = m_QTE.FindAction("Down", throwIfNotFound: true);
@@ -436,6 +456,7 @@ public class PlayerController : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Toss;
     private readonly InputAction m_Gameplay_Rotate;
     private readonly InputAction m_Gameplay_Crouch;
+    private readonly InputAction m_Gameplay_Start;
     public struct GameplayActions
     {
         private PlayerController m_Wrapper;
@@ -446,6 +467,7 @@ public class PlayerController : IInputActionCollection, IDisposable
         public InputAction @Toss => m_Wrapper.m_Gameplay_Toss;
         public InputAction @Rotate => m_Wrapper.m_Gameplay_Rotate;
         public InputAction @Crouch => m_Wrapper.m_Gameplay_Crouch;
+        public InputAction @Start => m_Wrapper.m_Gameplay_Start;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -473,6 +495,9 @@ public class PlayerController : IInputActionCollection, IDisposable
                 Crouch.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCrouch;
                 Crouch.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCrouch;
                 Crouch.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCrouch;
+                Start.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStart;
+                Start.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStart;
+                Start.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStart;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -495,6 +520,9 @@ public class PlayerController : IInputActionCollection, IDisposable
                 Crouch.started += instance.OnCrouch;
                 Crouch.performed += instance.OnCrouch;
                 Crouch.canceled += instance.OnCrouch;
+                Start.started += instance.OnStart;
+                Start.performed += instance.OnStart;
+                Start.canceled += instance.OnStart;
             }
         }
     }
@@ -646,6 +674,7 @@ public class PlayerController : IInputActionCollection, IDisposable
         void OnToss(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+        void OnStart(InputAction.CallbackContext context);
     }
     public interface IQTEActions
     {

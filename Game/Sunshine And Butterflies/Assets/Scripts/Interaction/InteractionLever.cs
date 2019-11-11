@@ -146,11 +146,12 @@ public class InteractionLever : Interactable
         t = 0;
     }
 
-    private IEnumerator InteractionCooldown()
-    {
-        yield return new WaitForSeconds(interactionCooldownTimer);
-        interacting = false;
-    }
+    //public IEnumerator InteractionCooldown()
+    //{
+    //    interacting = true;
+    //    yield return new WaitForSeconds(interactionCooldownTimer);
+    //    interacting = false;
+    //}
 
     
 }
