@@ -32,8 +32,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6143082170055800015}
-  - {fileID: 1616005205499638719}
   - {fileID: 2572905206890791510}
+  - {fileID: 695661738513504321}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -111,15 +111,18 @@ MonoBehaviour:
   interactionRadius: 1.25
   interactionCooldownTimer: 2
   interacting: 0
+  interactionIcon: {fileID: 0}
   affected:
   - {fileID: 0}
   rendererHolder: {fileID: 6677522397642399378}
+  clockHand: {fileID: 0}
   sprites:
   - {fileID: 21300000, guid: 5c0411dd7fedc7f4d8fcd0208dc969a1, type: 3}
   - {fileID: 21300000, guid: 2a65f82f839a6a140958add34b21ed02, type: 3}
   - {fileID: 21300000, guid: f849bf5f5fce6ca4eb4370884fc88327, type: 3}
   - {fileID: 21300000, guid: aacfd7c5211733e448806556e80e51c5, type: 3}
   sceneCamera: {fileID: 0}
+  leverAxis: {fileID: 7819716190373827128}
   QTETimer: 3
   cutoffTime: 0.15
 --- !u!1 &6677522397642399378
@@ -151,7 +154,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1417186583900881765}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7443896026841596298
 SpriteRenderer:
@@ -202,6 +205,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7819716190373827128
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 695661738513504321}
+  m_Layer: 0
+  m_Name: LeverAxis
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &695661738513504321
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7819716190373827128}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.043, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1616005205499638719}
+  m_Father: {fileID: 1417186583900881765}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8017648527204753614
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,7 +248,7 @@ GameObject:
   - component: {fileID: 1290088032560260632}
   - component: {fileID: 372289402534578815}
   - component: {fileID: 566370820158727383}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: sPAK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,12 +262,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8017648527204753614}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.0916554e-18, y: -0.00010982578, z: -0.06961789}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.043109827, z: -0.06961789}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1417186583900881765}
-  m_RootOrder: 1
+  m_Father: {fileID: 695661738513504321}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1290088032560260632
 MeshFilter:
@@ -306,7 +340,7 @@ GameObject:
   - component: {fileID: 6143082170055800015}
   - component: {fileID: 1739846243982130171}
   - component: {fileID: 4030662539204932214}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Bolts1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

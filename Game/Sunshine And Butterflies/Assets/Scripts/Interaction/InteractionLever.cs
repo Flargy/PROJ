@@ -9,6 +9,7 @@ public class InteractionLever : Interactable
     [SerializeField] private GameObject clockHand = null;
     [SerializeField] private List<Sprite> sprites = null;
     [SerializeField] private GameObject sceneCamera = null;
+    [SerializeField] private GameObject leverAxis = null;
     [SerializeField] private float QTETimer = 3.0f;
     [SerializeField] private float cutoffTime = 0.15f;
     private PlayerQTE interactingPlayer = null;
@@ -22,6 +23,7 @@ public class InteractionLever : Interactable
     private SpriteRenderer renderQTE = null;
     private Coroutine activateQTE = null;
     float t = 0;
+    float leverPullDownTime = 0.0f;
 
 
     private void Start()
@@ -45,6 +47,7 @@ public class InteractionLever : Interactable
             interactingPlayer.GetComponent<NewPlayerScript>().SwapLiftingState();
             interactingPlayer.SwapToQTE(this);
             activateQTE = StartCoroutine(StartQTE());
+            StartCoroutine(RotateLever());
             interacting = true;
         }
     }
@@ -90,6 +93,7 @@ public class InteractionLever : Interactable
             renderQTE.sprite = null;
             playerHasAnswered = false;
             StartCoroutine(InteractionCooldown());
+            StartCoroutine(RotateLever());
             foreach (AffectedObject affectedObject in affected)
             {
                 affectedObject.ExecuteAction();
@@ -144,6 +148,24 @@ public class InteractionLever : Interactable
         }
 
         t = 0;
+    }
+
+    private IEnumerator RotateLever()
+    {
+        Vector3 currentRotation = leverAxis.transform.localRotation.eulerAngles;
+        Vector3 endRotation = Vector3.zero;
+        if(currentRotation.x == 0)
+        {
+            endRotation = new Vector3(60, 0, 0);
+        }
+        
+        while(leverPullDownTime < 1.0f)
+        {
+            leverPullDownTime += Time.deltaTime / 2;
+            leverAxis.transform.localRotation = Quaternion.Euler(Vector3.Lerp(currentRotation, endRotation, leverPullDownTime));
+            yield return new WaitForEndOfFrame();
+        }
+        leverPullDownTime = 0.0f;
     }
 
     //public IEnumerator InteractionCooldown()

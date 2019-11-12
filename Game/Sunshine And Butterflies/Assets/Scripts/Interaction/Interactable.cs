@@ -43,12 +43,18 @@ public class Interactable : MonoBehaviour
 
     public void ShowInteraction()
     {
-        interactionIcon.SetActive(true);
+        if(interactionIcon != null)
+        {
+            interactionIcon.SetActive(true);
+        }
     }
 
     public void HideInteraction()
     {
-        interactionIcon.SetActive(false);
+        if (interactionIcon != null)
+        {
+            interactionIcon.SetActive(false);
+        }
     }
 
     public void StartInteraction()

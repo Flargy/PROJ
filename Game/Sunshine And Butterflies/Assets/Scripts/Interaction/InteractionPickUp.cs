@@ -8,8 +8,10 @@ public class InteractionPickUp : Interactable
     [SerializeField] private float verticalYeetForce = 40.0f;
     [SerializeField] private Vector3 offsetVector = Vector3.zero;
     [SerializeField] private Transform respawnPoint = null;
+    [SerializeField] private bool showTrajectory = false;
 
     private Rigidbody rb;
+    private RenderPath rp;
     private bool isPickedUp;
     private GameObject currentHolder;
     public float holdDistance = 0.5f;
@@ -19,7 +21,10 @@ public class InteractionPickUp : Interactable
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
+        if(showTrajectory == true)
+        {
+            rp = GetComponent<RenderPath>();
+        }
     }
 
     private void Update()
@@ -44,6 +49,10 @@ public class InteractionPickUp : Interactable
             isPickedUp = true;
             currentHolder = player;
             player.GetComponent<NewPlayerScript>().PickUpObject(gameObject);
+            if(showTrajectory == true)
+            {
+                rp.SwapLifted();
+            }
 
         }
         else if(player == currentHolder)
@@ -61,6 +70,7 @@ public class InteractionPickUp : Interactable
         isPickedUp = false;
         rb.useGravity = true;
         rb.constraints = RigidbodyConstraints.None;
+        LineDisplay();
     }
 
     public override void Toss()
@@ -71,6 +81,7 @@ public class InteractionPickUp : Interactable
         rb.useGravity = true;
         currentHolder = null;
         rb.constraints = RigidbodyConstraints.None;
+        LineDisplay();
 
     }
 
@@ -100,6 +111,14 @@ public class InteractionPickUp : Interactable
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void LineDisplay()
+    {
+        if (showTrajectory == true)
+        {
+            rp.SwapLifted();
         }
     }
 }
