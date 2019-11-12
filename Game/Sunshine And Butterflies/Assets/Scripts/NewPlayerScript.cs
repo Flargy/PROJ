@@ -46,13 +46,11 @@ public class NewPlayerScript : MonoBehaviour
         if (airBorne == false && interacting == false && isLifted == false && crouching == false)
         {
             ApplyGroundVelocity();
-            //TurnToFace();
         }
         else if (airBorne == true && isLifted == false)
         {
             jumpGroundCheckDelay += Time.deltaTime;
-            ApplyAirVelocity();
-            //TurnToFace();
+            ApplyAirVelocity(); // tried changing the air velocity to ground velocity instead. was actually not that bad
             if (GroundCheck() == true && jumpGroundCheckDelay >= 0.3f)
             {
                 airBorne = false;
@@ -64,18 +62,9 @@ public class NewPlayerScript : MonoBehaviour
         
     }
 
-    public void TurnToFace()
-    {
-        Vector3 movementVector = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-        if (movementVector != Vector3.zero)
-        {
-            transform.rotation = Quaternion.LookRotation(movementVector);
-        }
-    }
-
     private void FaceTowardsDirection()
     {
-        if (movementVector.magnitude >= 0.01f)
+        if (movementVector.magnitude >= 0.01f && airBorne == false)
         {
             lookDirection = new Vector3(movementVector.x, 0, movementVector.y);
             faceDirection += lookDirection.normalized * Time.deltaTime * 10;
@@ -87,7 +76,7 @@ public class NewPlayerScript : MonoBehaviour
 
 
         }
-        else if(rotationVector.magnitude >= 0.01f)
+        else if(rotationVector.magnitude >= 0.01f && airBorne == false)
         {
             lookDirection = new Vector3(rotationVector.x, 0, rotationVector.y);
             faceDirection += lookDirection.normalized * Time.deltaTime * 6;
@@ -97,9 +86,19 @@ public class NewPlayerScript : MonoBehaviour
             }
             transform.LookAt(transform.position + faceDirection);
         }
+        else if (movementVector.magnitude >= 0.01f && airBorne == true)
+        {
+            lookDirection = new Vector3(movementVector.x, 0, movementVector.y);
+            faceDirection += lookDirection.normalized * Time.deltaTime * 6;
+            if (faceDirection.magnitude > 1)
+            {
+                faceDirection = faceDirection.normalized;
+            }
+            transform.LookAt(transform.position + faceDirection);
+        }
 
 
-       
+
 
     }
 
@@ -168,12 +167,20 @@ public class NewPlayerScript : MonoBehaviour
 
     public void ApplyAirVelocity()
     {
-        Vector2 currentVelocity = new Vector2(rb.velocity.x, rb.velocity.z);
-        float turndot = Vector2.Dot(currentVelocity, movementVector);
-        if (turndot < 0.3)
-        {
-            rb.velocity += (new Vector3(movementVector.x, 0, movementVector.y) * 0.05f);
+        //Vector2 currentVelocity = new Vector2(rb.velocity.x, rb.velocity.z);
+        //float turndot = Vector2.Dot(currentVelocity, movementVector);
+        //if (turndot < 0.2)
+        //{
+        //    rb.velocity += (new Vector3(movementVector.x, 0, movementVector.y) * 0.5f);
 
+        //}
+
+        rb.velocity = (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0);
+        if (new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude >= 2.51f)
+        {
+            float yVelocity = rb.velocity.y;
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, 2.5f) * 0.9f;
+            rb.velocity = new Vector3(rb.velocity.x, yVelocity, rb.velocity.z);
         }
 
     }
