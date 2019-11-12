@@ -8,7 +8,7 @@ public class GUIManager : MonoBehaviour
 
     public void PlayButton()
     {
-        Application.LoadLevel("StartTest");
+        Application.LoadLevel("Eku_Test");
     }
 
     public void OptionsButton()
