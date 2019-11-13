@@ -30,11 +30,12 @@ public class NewPlayerScript : MonoBehaviour
     private Vector3 rotationVector = Vector3.zero;
     private Vector3 respawnPoint = Vector3.zero;
     private Animator anim = null;
+    private float groundCheckDelay = 0.0f;
 
     void Start()
     {
         capsule = GetComponent<CapsuleCollider>();
-        box = GetComponent<BoxCollider>();
+        box = GetComponentInChildren<BoxCollider>();
         rb = GetComponent<Rigidbody>();
         interactScript = GetComponent<Interactable>();
         anim = GetComponent<Animator>();
@@ -55,6 +56,19 @@ public class NewPlayerScript : MonoBehaviour
             {
                 airBorne = false;
                 jumpGroundCheckDelay = 0.0f;
+            }
+        }
+        else if(isLifted == true)
+        {
+            groundCheckDelay += Time.deltaTime;
+            if(groundCheckDelay >= 0.5f)
+            {
+                if(GroundCheck() == true)
+                {
+                    Debug.Log("hitting ground");
+                    isLifted = false;
+                    groundCheckDelay = 0.0f;
+                }
             }
         }
 
@@ -168,16 +182,21 @@ public class NewPlayerScript : MonoBehaviour
     public void ApplyAirVelocity()
     {
         //Vector2 currentVelocity = new Vector2(rb.velocity.x, rb.velocity.z);
-        //float turndot = Vector2.Dot(currentVelocity, movementVector);
-        //if (turndot < 0.2)
+        //float turndot = Vector2.Dot(currentVelocity.normalized, movementVector.normalized);
+        //Debug.Log(turndot);
+        //if (turndot < 0.9 && movementVector.magnitude > 0.2f)
         //{
-        //    rb.velocity += (new Vector3(movementVector.x, 0, movementVector.y) * 0.5f);
+        ////    //rb.velocity += (new Vector3(movementVector.x, 0, movementVector.y) * 0.05f);
+        //    float yVelocity = rb.velocity.y;
+        //    Vector2 horizontal = new Vector2(rb.velocity.x, rb.velocity.z);
+        //    horizontal = Vector2.ClampMagnitude(horizontal, 2.5f) * 0.9f;
+        //    rb.velocity = new Vector3(horizontal.x, yVelocity, horizontal.y);
 
         //}
 
-        rb.velocity = (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0);
-        if (new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude >= 2.51f)
+        if (movementVector.magnitude >= 0.2f)
         {
+            rb.velocity = (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0);
             float yVelocity = rb.velocity.y;
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, 2.5f) * 0.9f;
             rb.velocity = new Vector3(rb.velocity.x, yVelocity, rb.velocity.z);
@@ -209,6 +228,7 @@ public class NewPlayerScript : MonoBehaviour
         if(CarryingAObject == true && carriedObject != null)
         {
             carriedObject.GetComponent<Interactable>().Toss();
+            StartCoroutine(FreezePlayer(0.5f));
         }
     }
 
@@ -255,11 +275,13 @@ public class NewPlayerScript : MonoBehaviour
     public void BecomeLifted()
     {
         isLifted = true;
+        movementVector = Vector2.zero;
+        anim.SetFloat("Moving", 0.0f);
     }
 
     public void Released()
     {
-        isLifted = false;
+        //isLifted = false;
         airBorne = true;
         if (crouching == true)
         {
@@ -281,6 +303,13 @@ public class NewPlayerScript : MonoBehaviour
     {
         rb.velocity = Vector3.zero;
         transform.position = respawnPoint; 
+    }
+
+    public IEnumerator FreezePlayer(float freezeTime)
+    {
+        interacting = true;
+        yield return new WaitForSeconds(freezeTime);
+        interacting = false;
     }
 
     
