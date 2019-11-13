@@ -137,7 +137,7 @@ public class NewPlayerScript : MonoBehaviour
 
             else if (CarryingAObject == true && carriedObject != null == airBorne == false) 
             {
-                if (Physics.Raycast(transform.position, transform.forward, 0.8f, 1) == false)
+                if (Physics.Raycast(transform.position, transform.forward, 0.8f, LayerMask.NameToLayer("Walls")) == false)
                 {
                     carriedObject.GetComponent<Interactable>().Interact(gameObject);
                 }
