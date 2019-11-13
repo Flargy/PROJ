@@ -36,10 +36,16 @@ public class Interactable : MonoBehaviour
 
     public void DistanceCheck(GameObject player)
     {
-        if((player.transform.position - transform.position).sqrMagnitude < interactionRadius * interactionRadius)
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, (player.transform.position + Vector3.up * 0.6f) - transform.position, out hit, interactionRadius, LayerMask.GetMask("Walls")) == false)
         {
-            Interact(player);
+            if ((player.transform.position - transform.position).sqrMagnitude < interactionRadius * interactionRadius)
+            {
+                Interact(player);
+            }
         }
+       
+        
     }
 
     public void ShowInteraction()

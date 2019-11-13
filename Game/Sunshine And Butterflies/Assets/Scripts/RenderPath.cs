@@ -43,7 +43,7 @@ public class RenderPath : MonoBehaviour
 
             for (float t = 0.0f; t <= maxTime; t += timeResolution)
             {
-                Debug.Log("counter");
+
                 lr.positionCount = index + 1;
                 lr.SetPosition(index, currentPosition);
                 if (Physics.Raycast(currentPosition, velocityVector, out hit, 1.0f, hitLayer))
