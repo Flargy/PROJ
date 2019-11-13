@@ -51,7 +51,7 @@ public class NewPlayerScript : MonoBehaviour
         else if (airBorne == true && isLifted == false)
         {
             jumpGroundCheckDelay += Time.deltaTime;
-            ApplyAirVelocity(); // tried changing the air velocity to ground velocity instead. was actually not that bad
+            ApplyAirVelocity(); 
             if (GroundCheck() == true && jumpGroundCheckDelay >= 0.3f)
             {
                 airBorne = false;
@@ -186,21 +186,32 @@ public class NewPlayerScript : MonoBehaviour
         //Debug.Log(turndot);
         //if (turndot < 0.9 && movementVector.magnitude > 0.2f)
         //{
-        ////    //rb.velocity += (new Vector3(movementVector.x, 0, movementVector.y) * 0.05f);
+        ////    //rb.velocity += (new Vector3(movementVector.x, 0, movementVector.y) * Time.deltaTime);
         //    float yVelocity = rb.velocity.y;
         //    Vector2 horizontal = new Vector2(rb.velocity.x, rb.velocity.z);
         //    horizontal = Vector2.ClampMagnitude(horizontal, 2.5f) * 0.9f;
         //    rb.velocity = new Vector3(horizontal.x, yVelocity, horizontal.y);
 
         //}
+        float yVelocity = rb.velocity.y;
+        Vector2 noGravityVector = new Vector2(rb.velocity.x, rb.velocity.z);
 
-        if (movementVector.magnitude >= 0.2f)
+        if (movementVector.magnitude >= 0.1f)
         {
             rb.velocity = (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0);
-            float yVelocity = rb.velocity.y;
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, 2.5f) * 0.9f;
             rb.velocity = new Vector3(rb.velocity.x, yVelocity, rb.velocity.z);
         }
+        else if(movementVector.magnitude < 0.1f && noGravityVector.magnitude > 0.0f)
+        {
+            noGravityVector += -noGravityVector * Time.deltaTime;
+            rb.velocity = new Vector3(noGravityVector.x, yVelocity, noGravityVector.y);
+        }
+        if(rb.velocity.y < 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (0.5f) * Time.deltaTime;
+        }
+        
 
     }
 

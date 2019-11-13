@@ -12,6 +12,7 @@ public class InteractionLever : Interactable
     [SerializeField] private GameObject leverAxis = null;
     [SerializeField] private float QTETimer = 3.0f;
     [SerializeField] private float cutoffTime = 0.15f;
+    [SerializeField] private List<Interactable> connectedSwitches = null;
     private PlayerQTE interactingPlayer = null;
     private int correctAnswer = 0;
     private int playerAnswer = 0;
@@ -40,6 +41,13 @@ public class InteractionLever : Interactable
             foreach(AffectedObject affectedObject in affected)
             {
                 affectedObject.ExecuteAction();
+            }
+            foreach (Interactable otherSwitch in connectedSwitches)
+            {
+                if (otherSwitch.interacting == false)
+                {
+                    otherSwitch.StartInteraction();
+                }
             }
             rendererHolder.SetActive(true);
             rendererHolder.transform.LookAt(sceneCamera.transform.position, Vector3.up);
