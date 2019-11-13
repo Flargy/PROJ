@@ -9,6 +9,7 @@ public class Interactable : MonoBehaviour
     public bool interacting = false;
     public GameObject interactionIcon = null;
     
+    //Possible improvements: Break out the list and cooldown start function to this script
 
     public virtual void Interact(GameObject player)
     {
