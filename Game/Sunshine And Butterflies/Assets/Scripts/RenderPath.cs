@@ -43,6 +43,7 @@ public class RenderPath : MonoBehaviour
 
             for (float t = 0.0f; t <= maxTime; t += timeResolution)
             {
+
                 lr.positionCount = index + 1;
                 lr.SetPosition(index, currentPosition);
                 if (Physics.Raycast(currentPosition, velocityVector, out hit, 1.0f, hitLayer))
@@ -64,9 +65,14 @@ public class RenderPath : MonoBehaviour
                     }
                     break;
                 }
+                
                 currentPosition += velocityVector * timeResolution;
                 velocityVector += Physics.gravity * timeResolution;
                 index++;
+            }
+            if(Physics.Raycast(currentPosition, velocityVector, 1.0f, hitLayer) == false && boxDisplayInstance != null)
+            {
+                Destroy(boxDisplayInstance);
             }
         }
     }

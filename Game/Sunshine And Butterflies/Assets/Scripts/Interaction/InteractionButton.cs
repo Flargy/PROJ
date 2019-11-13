@@ -8,6 +8,7 @@ public class InteractionButton : Interactable
     [SerializeField] private GameObject button = null;
     [SerializeField] private bool onTimer = false;
     [SerializeField] private float durationToClose = 2.0f;
+    [SerializeField] private List<Interactable> connectedSwitches = null;
 
     private float lerpTime = 0;
     private float t = 0;
@@ -25,6 +26,13 @@ public class InteractionButton : Interactable
             if(onTimer == true)
             {
                 StartCoroutine(OnATimer());
+            }
+            foreach (Interactable otherSwitch in connectedSwitches)
+            {
+                if (otherSwitch.interacting == false)
+                {
+                    otherSwitch.StartInteraction();
+                }
             }
         }
     }
