@@ -137,7 +137,10 @@ public class NewPlayerScript : MonoBehaviour
 
             else if (CarryingAObject == true && carriedObject != null == airBorne == false) 
             {
-                carriedObject.GetComponent<Interactable>().Interact(gameObject);
+                if (Physics.Raycast(transform.position, transform.forward, 0.8f, 1) == false)
+                {
+                    carriedObject.GetComponent<Interactable>().Interact(gameObject);
+                }
             }
         }
 
