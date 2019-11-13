@@ -7,6 +7,7 @@ public class NewPlayerScript : MonoBehaviour
 {
     [SerializeField] private LayerMask groundLayer = 1;
     [SerializeField] private LayerMask interactionLayer = 1;
+    [SerializeField] private LayerMask wallLayer = 1;
     [SerializeField] private float moveSpeed = 6.0f;
     [SerializeField] private float jumpPower = 5.0f;
 
@@ -137,7 +138,7 @@ public class NewPlayerScript : MonoBehaviour
 
             else if (CarryingAObject == true && carriedObject != null == airBorne == false) 
             {
-                if (Physics.Raycast(transform.position, transform.forward, 0.8f, 18) == false)
+                if (Physics.Raycast(transform.position, transform.forward, 0.8f, wallLayer) == false)
                 {
                     carriedObject.GetComponent<Interactable>().Interact(gameObject);
                 }
