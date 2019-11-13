@@ -70,7 +70,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""name"": ""Start"",
                     ""type"": ""Button"",
                     ""id"": ""e13ed10e-5cc0-4c5a-8d87-70e0dadb2ef0"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -326,6 +326,14 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""5b528a24-96f9-4e4b-a21e-28bc24da8339"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -372,6 +380,17 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""action"": ""GUIBack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3887126f-7f5a-4df7-81c8-07af1ae94d17"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -401,6 +420,7 @@ public class PlayerController : IInputActionCollection, IDisposable
         m_Menu_GUIAccept = m_Menu.FindAction("GUIAccept", throwIfNotFound: true);
         m_Menu_GUIMove = m_Menu.FindAction("GUIMove", throwIfNotFound: true);
         m_Menu_GUIBack = m_Menu.FindAction("GUIBack", throwIfNotFound: true);
+        m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -624,6 +644,7 @@ public class PlayerController : IInputActionCollection, IDisposable
     private readonly InputAction m_Menu_GUIAccept;
     private readonly InputAction m_Menu_GUIMove;
     private readonly InputAction m_Menu_GUIBack;
+    private readonly InputAction m_Menu_Pause;
     public struct MenuActions
     {
         private PlayerController m_Wrapper;
@@ -631,6 +652,7 @@ public class PlayerController : IInputActionCollection, IDisposable
         public InputAction @GUIAccept => m_Wrapper.m_Menu_GUIAccept;
         public InputAction @GUIMove => m_Wrapper.m_Menu_GUIMove;
         public InputAction @GUIBack => m_Wrapper.m_Menu_GUIBack;
+        public InputAction @Pause => m_Wrapper.m_Menu_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -649,6 +671,9 @@ public class PlayerController : IInputActionCollection, IDisposable
                 GUIBack.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnGUIBack;
                 GUIBack.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnGUIBack;
                 GUIBack.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnGUIBack;
+                Pause.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnPause;
+                Pause.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnPause;
+                Pause.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_MenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -662,6 +687,9 @@ public class PlayerController : IInputActionCollection, IDisposable
                 GUIBack.started += instance.OnGUIBack;
                 GUIBack.performed += instance.OnGUIBack;
                 GUIBack.canceled += instance.OnGUIBack;
+                Pause.started += instance.OnPause;
+                Pause.performed += instance.OnPause;
+                Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -692,5 +720,6 @@ public class PlayerController : IInputActionCollection, IDisposable
         void OnGUIAccept(InputAction.CallbackContext context);
         void OnGUIMove(InputAction.CallbackContext context);
         void OnGUIBack(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
