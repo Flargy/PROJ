@@ -42,7 +42,6 @@ public class MenuInputs : MonoBehaviour
             pauseMenuUI.SetActive(true);
             Time.timeScale = 0f;
 
-        
     }
 
     public void OnResume()
