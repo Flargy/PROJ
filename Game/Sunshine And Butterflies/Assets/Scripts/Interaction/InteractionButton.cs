@@ -14,12 +14,16 @@ public class InteractionButton : Interactable
     private float t = 0;
     private Vector3 pressedPosition = Vector3.zero;
     private Vector3 notPressedPosition = Vector3.zero;
+    private AudioSource audioSource;
+    public AudioClip buttonSound;
 
     public override void Interact(GameObject player)
     {
         if (interacting == false)
         {
             affectedObject.ExecuteAction();
+            Debug.Log("Play Sound");
+            audioSource.PlayOneShot(buttonSound);
             interacting = true;
             StartCoroutine(InteractionCooldown());
             StartCoroutine(ButtonMovement());
@@ -39,6 +43,8 @@ public class InteractionButton : Interactable
 
     private void Start()
     {
+
+        audioSource = GetComponent<AudioSource>();
         pressedPosition = button.transform.position - ((button.transform.up * 0.1f));
         notPressedPosition = button.transform.position;
     }
