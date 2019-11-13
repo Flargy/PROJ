@@ -32,6 +32,9 @@ public class NewPlayerScript : MonoBehaviour
     private Animator anim = null;
     private float groundCheckDelay = 0.0f;
 
+    private PlayerInput playerInput = null;
+    private MenuInputs menuInputs = null;
+
     void Start()
     {
         capsule = GetComponent<CapsuleCollider>();
@@ -39,6 +42,11 @@ public class NewPlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         interactScript = GetComponent<Interactable>();
         anim = GetComponent<Animator>();
+
+        playerInput = GetComponent<PlayerInput>();
+        menuInputs = GetComponent<MenuInputs>();
+        Debug.Log(menuInputs);
+
     }
 
     void Update()
@@ -312,5 +320,11 @@ public class NewPlayerScript : MonoBehaviour
         interacting = false;
     }
 
+    public void OnStart()
+    {
+        Debug.Log("Input: Start");
+        menuInputs.OnStart();
+        playerInput.SwitchCurrentActionMap("Menu");
+    }
     
 }
