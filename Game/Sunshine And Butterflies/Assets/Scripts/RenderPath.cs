@@ -11,7 +11,8 @@ public class RenderPath : MonoBehaviour
     [SerializeField] private LayerMask hitLayer = -1;
 
     private LineRenderer lr;
-    private GameObject boxDisplayInstance = null;
+    private GameObject boxDisplayInstanceFar = null;
+    //private GameObject boxDisplayInstanceNear = null;
     private bool isLifted = false;
 
     private void Start()
@@ -24,9 +25,10 @@ public class RenderPath : MonoBehaviour
     {
         isLifted = !isLifted;
         lr.enabled = isLifted;
-        if(boxDisplayInstance != null)
+        if(boxDisplayInstanceFar != null)
         {
-            Destroy(boxDisplayInstance);
+            Destroy(boxDisplayInstanceFar);
+            //Destroy(boxDisplayInstanceNear);
         }
     }
 
@@ -41,6 +43,19 @@ public class RenderPath : MonoBehaviour
         Vector3 currentPosition = transform.position;
         RaycastHit hit;
 
+        //if(boxDisplay != null)
+        //    {
+        //        if(boxDisplayInstanceNear != null)
+        //        {
+        //            boxDisplayInstanceNear.transform.position = transform.position + transform.forward * 0.5f + transform.up * -1.35f;
+        //            boxDisplayInstanceNear.transform.rotation = transform.rotation;
+        //        }
+        //        else
+        //        {
+        //            boxDisplayInstanceNear = Instantiate(boxDisplay, transform.position + transform.forward * 0.5f + transform.up * -1.5f, Quaternion.identity) as GameObject;
+        //        }
+        //    }
+
             for (float t = 0.0f; t <= maxTime; t += timeResolution)
             {
 
@@ -53,14 +68,14 @@ public class RenderPath : MonoBehaviour
 
                     if (boxDisplay != null)
                     {
-                        if (boxDisplayInstance != null)
+                        if (boxDisplayInstanceFar != null)
                         {
-                            boxDisplayInstance.transform.position = hit.point + Vector3.up * 0.2f;
-                            boxDisplayInstance.transform.rotation = transform.rotation;
+                            boxDisplayInstanceFar.transform.position = hit.point + Vector3.up * 0.2f;
+                            boxDisplayInstanceFar.transform.rotation = transform.rotation;
                         }
                         else
                         {
-                            boxDisplayInstance = Instantiate(boxDisplay, hit.point + Vector3.up * 0.2f, Quaternion.identity) as GameObject;
+                            boxDisplayInstanceFar = Instantiate(boxDisplay, hit.point + Vector3.up * 0.2f, Quaternion.identity) as GameObject;
                         }
                     }
                     break;
@@ -70,9 +85,9 @@ public class RenderPath : MonoBehaviour
                 velocityVector += Physics.gravity * timeResolution;
                 index++;
             }
-            if(Physics.Raycast(currentPosition, velocityVector, 1.0f, hitLayer) == false && boxDisplayInstance != null)
+            if(Physics.Raycast(currentPosition, velocityVector, 1.0f, hitLayer) == false && boxDisplayInstanceFar != null)
             {
-                Destroy(boxDisplayInstance);
+                Destroy(boxDisplayInstanceFar);
             }
         }
     }

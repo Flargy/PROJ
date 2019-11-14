@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class NewPlayerScript : MonoBehaviour
 {
@@ -46,13 +47,12 @@ public class NewPlayerScript : MonoBehaviour
 
         playerInput = GetComponent<PlayerInput>();
         menuInputs = GetComponent<MenuInputs>();
-        
 
     }
 
     void Update()
     {
-        
+
         if (airBorne == false && interacting == false && isLifted == false && crouching == false)
         {
             ApplyGroundVelocity();
@@ -60,19 +60,19 @@ public class NewPlayerScript : MonoBehaviour
         else if (airBorne == true && isLifted == false)
         {
             jumpGroundCheckDelay += Time.deltaTime;
-            ApplyAirVelocity(); 
+            ApplyAirVelocity();
             if (GroundCheck() == true && jumpGroundCheckDelay >= 0.3f)
             {
                 airBorne = false;
                 jumpGroundCheckDelay = 0.0f;
             }
         }
-        else if(isLifted == true)
+        else if (isLifted == true)
         {
             groundCheckDelay += Time.deltaTime;
-            if(groundCheckDelay >= 0.5f)
+            if (groundCheckDelay >= 0.5f)
             {
-                if(GroundCheck() == true)
+                if (GroundCheck() == true)
                 {
                     Debug.Log("hitting ground");
                     isLifted = false;
@@ -82,7 +82,7 @@ public class NewPlayerScript : MonoBehaviour
         }
 
         FaceTowardsDirection();
-        
+
     }
 
     private void FaceTowardsDirection()
@@ -99,16 +99,38 @@ public class NewPlayerScript : MonoBehaviour
 
 
         }
-        else if(rotationVector.magnitude >= 0.01f && airBorne == false)
+        //else if(rotationVector.magnitude >= 0.01f && airBorne == false)
+        //{
+        //    lookDirection = new Vector3(rotationVector.x, 0, rotationVector.y);
+        //    faceDirection += lookDirection.normalized * Time.deltaTime * 6;
+        //    if (faceDirection.magnitude > 1)
+        //    {
+        //        faceDirection = faceDirection.normalized;
+        //    }
+        //    transform.LookAt(transform.position + faceDirection);
+        //}
+
+        else if (rotationVector.magnitude >= 0.01f && airBorne == false)
         {
-            lookDirection = new Vector3(rotationVector.x, 0, rotationVector.y);
-            faceDirection += lookDirection.normalized * Time.deltaTime * 6;
-            if (faceDirection.magnitude > 1)
+            float xValue = rotationVector.x;
+            //lookDirection = new Vector3(rotationVector.x, 0, rotationVector.y);
+            //faceDirection += lookDirection.normalized * Time.deltaTime * 6;
+            //if (faceDirection.magnitude > 1)
+            //{
+            //    faceDirection = faceDirection.normalized;
+            //}
+            //transform.LookAt(transform.position + faceDirection);
+
+            if (xValue > 0.01)
             {
-                faceDirection = faceDirection.normalized;
+                transform.rotation = transform.rotation * Quaternion.Euler(0, 3 * xValue, 0);
             }
-            transform.LookAt(transform.position + faceDirection);
+            else if (xValue < -0.01)
+            {
+                transform.rotation = transform.rotation * Quaternion.Euler(0, 2.3f * xValue, 0);
+            }
         }
+
         else if (movementVector.magnitude >= 0.01f && airBorne == true)
         {
             lookDirection = new Vector3(movementVector.x, 0, movementVector.y);
@@ -130,9 +152,9 @@ public class NewPlayerScript : MonoBehaviour
         if (isLifted == false && crouching == false && airBorne == false)
         {
             RaycastHit ray;
-            if (CarryingAObject == false) 
+            if (CarryingAObject == false)
             {
-                capsuleTop = transform.position -(transform.forward * 0.1f) + (capsule.center + Vector3.up * (capsule.height / 2 - capsule.radius));
+                capsuleTop = transform.position - (transform.forward * 0.1f) + (capsule.center + Vector3.up * (capsule.height / 2 - capsule.radius));
                 capsuleBottom = transform.position - (transform.forward * 0.1f) + (capsule.center + Vector3.down * (capsule.height / 2 - capsule.radius));
                 if (Physics.CapsuleCast(capsuleTop, capsuleBottom, capsule.radius, transform.forward, out ray, 2, interactionLayer))
                 {
@@ -144,7 +166,7 @@ public class NewPlayerScript : MonoBehaviour
                 }
             }
 
-            else if (CarryingAObject == true && carriedObject != null == airBorne == false) 
+            else if (CarryingAObject == true && carriedObject != null == airBorne == false)
             {
                 if (Physics.Raycast(transform.position, transform.forward, 0.8f, wallLayer) == false)
                 {
@@ -214,16 +236,16 @@ public class NewPlayerScript : MonoBehaviour
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, 2.5f) * 0.9f;
             rb.velocity = new Vector3(rb.velocity.x, yVelocity, rb.velocity.z);
         }
-        else if(movementVector.magnitude < 0.1f && noGravityVector.magnitude > 0.0f)
+        else if (movementVector.magnitude < 0.1f && noGravityVector.magnitude > 0.0f)
         {
             noGravityVector += -noGravityVector * Time.deltaTime;
             rb.velocity = new Vector3(noGravityVector.x, yVelocity, noGravityVector.y);
         }
-        if(rb.velocity.y < 0)
+        if (rb.velocity.y < 0)
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (0.5f) * Time.deltaTime;
         }
-        
+
 
     }
 
@@ -248,10 +270,9 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnToss()
     {
-        if(CarryingAObject == true && carriedObject != null)
+        if (CarryingAObject == true && carriedObject != null)
         {
             carriedObject.GetComponent<Interactable>().Toss();
-            StartCoroutine(FreezePlayer(0.5f));
         }
     }
 
@@ -276,11 +297,17 @@ public class NewPlayerScript : MonoBehaviour
             crouching = false;
             anim.SetBool("isCrouching", false);
         }
-    }  
+    }
 
     public void OnRotate(InputValue value)
     {
         rotationVector = value.Get<Vector2>();
+    }
+
+    public void OnRestart()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
 
     //Player to player interactions
@@ -315,7 +342,7 @@ public class NewPlayerScript : MonoBehaviour
 
     }
 
-    
+
 
     public void ChangeSpawnPoint()
     {
@@ -325,7 +352,7 @@ public class NewPlayerScript : MonoBehaviour
     public void Respawn()
     {
         rb.velocity = Vector3.zero;
-        transform.position = respawnPoint; 
+        transform.position = respawnPoint;
     }
 
     public IEnumerator FreezePlayer(float freezeTime)
@@ -341,5 +368,5 @@ public class NewPlayerScript : MonoBehaviour
         menuInputs.OnStart();
         playerInput.SwitchCurrentActionMap("Menu");
     }
-    
+
 }
