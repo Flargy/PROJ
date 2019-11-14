@@ -22,8 +22,6 @@ public class InteractionButton : Interactable
         if (interacting == false)
         {
             affectedObject.ExecuteAction();
-            Debug.Log("Play Sound");
-            audioSource.PlayOneShot(buttonSound);
             interacting = true;
             StartCoroutine(InteractionCooldown());
             StartCoroutine(ButtonMovement());
@@ -65,6 +63,7 @@ public class InteractionButton : Interactable
             yield return new WaitForEndOfFrame();
         }
 
+        audioSource.PlayOneShot(buttonSound);
         t = 0.0f;
         lerpTime = 0.0f;
 
