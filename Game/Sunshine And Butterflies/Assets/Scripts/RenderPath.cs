@@ -19,6 +19,7 @@ public class RenderPath : MonoBehaviour
     {
         lr = GetComponent<LineRenderer>();
         lr.enabled = false;
+        
     }
 
     public void SwapLifted()
