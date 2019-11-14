@@ -25,7 +25,7 @@ public class CheckpointUpdate : MonoBehaviour
         }
         if (counter == respawnPositions.Length)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         counter++;
 
