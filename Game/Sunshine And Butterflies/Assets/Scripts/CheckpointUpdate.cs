@@ -16,11 +16,11 @@ public class CheckpointUpdate : MonoBehaviour
             if(firstPlayer == null)
             {
                 firstPlayer = other.gameObject;
-                other.GetComponent<NewPlayerScript>().ChangeSpawnPoint(respawnPositions[counter].position);
+                other.GetComponent<NewPlayerScript>().ChangeSpawnPoint(respawnPositions[counter -1].position);
             }
             else if(firstPlayer != other.gameObject)
             {
-                other.GetComponent<NewPlayerScript>().ChangeSpawnPoint(respawnPositions[counter].position);
+                other.GetComponent<NewPlayerScript>().ChangeSpawnPoint(respawnPositions[counter -1].position);
             }
         }
         if (counter == respawnPositions.Length)
