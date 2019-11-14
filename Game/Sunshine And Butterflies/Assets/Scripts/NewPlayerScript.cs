@@ -46,7 +46,7 @@ public class NewPlayerScript : MonoBehaviour
 
         playerInput = GetComponent<PlayerInput>();
         menuInputs = GetComponent<MenuInputs>();
-        Debug.Log(menuInputs);
+        
 
     }
 

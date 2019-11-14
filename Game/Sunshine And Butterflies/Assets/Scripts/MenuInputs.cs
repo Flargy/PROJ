@@ -19,35 +19,38 @@ public class MenuInputs : MonoBehaviour
 
     public void OnAccept()
     {
-        Debug.Log("Input: Accepted");
+        //Debug.Log("Input: Accepted");
     }
 
 
     public void OnMove(InputValue input)
     {
         moveInput = input.Get<Vector2>();
-        Debug.Log("Input: Move");
+        //Debug.Log("Input: Move");
     }
 
     public void OnBack()
     {
-        Debug.Log("Input: Back");
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        playerInput.SwitchCurrentActionMap("Gameplay");
+        //Debug.Log("Input: Back");
+        //pauseMenuUI.SetActive(false);
+        //Time.timeScale = 1f;
+        //playerInput.SwitchCurrentActionMap("Gameplay");
     }
 
     public void OnStart()
     {
-            pauseMenuUI.SetActive(true);
-            Time.timeScale = 0f;
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        Debug.Log(playerInput.currentActionMap);
+
 
     }
 
-    public void OnResume()
+    public void PauseResume()
     {
             pauseMenuUI.SetActive(false);
             Time.timeScale = 1f;
             playerInput.SwitchCurrentActionMap("Gameplay");
+            Debug.Log(playerInput.currentActionMap);
     }
 }
