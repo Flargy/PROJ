@@ -7,7 +7,7 @@ public class CheckpointUpdate : MonoBehaviour
     [SerializeField] private Transform[] respawnPositions = null;
 
     private GameObject firstPlayer = null;
-    private int counter = 1;
+    private int counter = 0;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,18 +16,20 @@ public class CheckpointUpdate : MonoBehaviour
             if(firstPlayer == null)
             {
                 firstPlayer = other.gameObject;
-                other.GetComponent<NewPlayerScript>().ChangeSpawnPoint(respawnPositions[counter -1].position);
+                other.GetComponent<NewPlayerScript>().ChangeSpawnPoint(respawnPositions[counter].position);
+                counter++;
             }
             else if(firstPlayer != other.gameObject)
             {
-                other.GetComponent<NewPlayerScript>().ChangeSpawnPoint(respawnPositions[counter -1].position);
+                other.GetComponent<NewPlayerScript>().ChangeSpawnPoint(respawnPositions[counter].position);
+                counter++;
             }
         }
         if (counter == respawnPositions.Length)
         {
             Destroy(gameObject);
         }
-        counter++;
+        
 
     }
 
