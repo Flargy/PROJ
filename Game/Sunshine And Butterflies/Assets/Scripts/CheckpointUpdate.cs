@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CheckpointUpdate : MonoBehaviour
 {
-    [SerializeField] private List<Transform> respawnPositions = null;
+    [SerializeField] private Transform[] respawnPositions = null;
 
     private GameObject firstPlayer = null;
-    private int counter = 0;
+    private int counter = 1;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,14 +16,23 @@ public class CheckpointUpdate : MonoBehaviour
             if(firstPlayer == null)
             {
                 firstPlayer = other.gameObject;
-                counter++;
                 other.GetComponent<NewPlayerScript>().ChangeSpawnPoint(respawnPositions[counter].position);
             }
             else if(firstPlayer != other.gameObject)
             {
                 other.GetComponent<NewPlayerScript>().ChangeSpawnPoint(respawnPositions[counter].position);
-                Destroy(this);
             }
         }
+        if (counter == respawnPositions.Length)
+        {
+            Destroy(this);
+        }
+        counter++;
+
+    }
+
+    private void Start()
+    {
+        Debug.Log(respawnPositions.Length);
     }
 }
