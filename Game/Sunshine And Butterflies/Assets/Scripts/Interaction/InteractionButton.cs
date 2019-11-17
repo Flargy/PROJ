@@ -15,7 +15,8 @@ public class InteractionButton : Interactable
     private Vector3 pressedPosition = Vector3.zero;
     private Vector3 notPressedPosition = Vector3.zero;
     private AudioSource audioSource;
-    public AudioClip buttonSound;
+    public AudioClip buttonSoundIn;
+    public AudioClip buttonSoundOut;
 
     public override void Interact(GameObject player)
     {
@@ -62,8 +63,8 @@ public class InteractionButton : Interactable
             lerpTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-
-        audioSource.PlayOneShot(buttonSound);
+        audioSource.PlayOneShot(buttonSoundIn);
+        Debug.Log("Ljud 1");
         t = 0.0f;
         lerpTime = 0.0f;
 
@@ -74,6 +75,8 @@ public class InteractionButton : Interactable
             lerpTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        audioSource.PlayOneShot(buttonSoundOut);
+        Debug.Log("Ljud 2");
         t = 0.0f;
         lerpTime = 0.0f;
     }
