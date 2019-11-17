@@ -11,10 +11,14 @@ public class PressurePlate : MonoBehaviour
     [SerializeField] private DoorLightChange[] lights = null;
     private float itemsOnPad;
     private Material startingColor = null;
+    private AudioSource audioSource;
+    public AudioClip activatedSound;
+    public AudioClip deActivatedSound;
 
     private void Start()
     {
         startingColor = colorObject.material;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,6 +33,7 @@ public class PressurePlate : MonoBehaviour
                 {
                     affected.ExecuteAction();
                     colorObject.material = activatedColor;
+                    audioSource.PlayOneShot(activatedSound);
                 }
             }
 
@@ -50,6 +55,7 @@ public class PressurePlate : MonoBehaviour
                 {
                     affected.ExecuteAction();
                     colorObject.material = startingColor;
+                    audioSource.PlayOneShot(deActivatedSound);
                 }
             }
 
