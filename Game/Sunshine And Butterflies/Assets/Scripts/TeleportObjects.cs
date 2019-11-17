@@ -7,13 +7,22 @@ public class TeleportObjects : MonoBehaviour
     [SerializeField] private Transform teleportToLocation = null;
     [SerializeField] private float transferTime = 2.0f;
     [SerializeField] private float transportForce = 2.0f;
+    private AudioSource audioSource;
+    public AudioClip boxTeleportSound;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("CarryBox"))
         {
+            
             StartCoroutine(MoveBox(other.gameObject));
+            
         }
     }
 
@@ -21,6 +30,7 @@ public class TeleportObjects : MonoBehaviour
     {
         box.GetComponent<Interactable>().Teleport();
         box.SetActive(false);
+        audioSource.PlayOneShot(boxTeleportSound);
         box.transform.rotation = teleportToLocation.rotation * Quaternion.Euler(0, 90, 0);
         box.GetComponent<Rigidbody>().velocity = teleportToLocation.forward * transportForce;
         yield return new WaitForSeconds(transferTime);
