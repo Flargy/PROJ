@@ -16,6 +16,9 @@ public class InteractionSwitch : Interactable
     private Vector3 button2From = Vector3.zero;
     private Vector3 button2To = Vector3.zero;
 
+    private AudioSource audioSource;
+    public AudioClip SwitchSound;
+
     public override void Interact(GameObject player)
     {
         if (interacting == false)
@@ -51,6 +54,8 @@ public class InteractionSwitch : Interactable
         button1From = button1.transform.position;
         button2To = button2.transform.position - ((button2.transform.forward * -0.1f));
         button2From = button2.transform.position;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private IEnumerator ButtonMovement()
@@ -64,6 +69,7 @@ public class InteractionSwitch : Interactable
             yield return new WaitForEndOfFrame();
         }
 
+        audioSource.PlayOneShot(SwitchSound);
         t = 0.0f;
         lerpTime = 0.0f;
 
