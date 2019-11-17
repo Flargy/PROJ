@@ -41,16 +41,16 @@ public class MenuInputs : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        Debug.Log(playerInput.currentActionMap);
 
 
     }
 
     public void PauseResume()
     {
-            pauseMenuUI.SetActive(false);
-            Time.timeScale = 1f;
-            playerInput.SwitchCurrentActionMap("Gameplay");
-            Debug.Log(playerInput.currentActionMap);
+        playerInput.SwitchCurrentActionMap("Gameplay");
+        Debug.Log(playerInput.currentActionMap);
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        //playerInput.SwitchCurrentActionMap("Gameplay");
     }
 }
