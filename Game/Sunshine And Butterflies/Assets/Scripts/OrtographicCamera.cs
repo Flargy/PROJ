@@ -9,6 +9,7 @@ public class OrtographicCamera : MonoBehaviour
     [SerializeField] private float screenOffset = 4.0f;
     [SerializeField] private float minimumSize = 5.0f;
     [SerializeField] private Transform[] players = null;
+    [SerializeField] private Vector3 cameraOffset = Vector3.zero;
 
     private Camera cameraReference = null;
     private float zoomSpeed = 0.0f;
@@ -30,7 +31,7 @@ public class OrtographicCamera : MonoBehaviour
     {
         FindAveragePosition();
 
-        transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref movementvelocity, delayTime);
+        transform.position = Vector3.SmoothDamp(transform.position, desiredPosition + cameraOffset, ref movementvelocity, delayTime);
     }
 
     private void FindAveragePosition()
@@ -76,10 +77,9 @@ public class OrtographicCamera : MonoBehaviour
             }
             Vector3 targetLocalPosition = transform.InverseTransformPoint(target.position);
 
-            Vector3 desiredPositionToTarget = targetLocalPosition - desiredLocalPosition;
+            Vector3 desiredPositionToTarget = new Vector3(targetLocalPosition.x, 0, targetLocalPosition.z) - desiredLocalPosition;
 
             size = Mathf.Max(size, Mathf.Abs(desiredPositionToTarget.y));
-
             size = Mathf.Max(size, Mathf.Abs(desiredPositionToTarget.x) / cameraReference.aspect);
         }
 
