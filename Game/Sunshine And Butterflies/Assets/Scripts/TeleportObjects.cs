@@ -30,8 +30,8 @@ public class TeleportObjects : MonoBehaviour
     {
         box.GetComponent<Interactable>().Teleport();
         box.SetActive(false);
-        audioSource.PlayOneShot(boxTeleportSound);
         box.transform.rotation = teleportToLocation.rotation * Quaternion.Euler(0, 90, 0);
+        audioSource.PlayOneShot(boxTeleportSound);
         box.GetComponent<Rigidbody>().velocity = teleportToLocation.forward * transportForce;
         yield return new WaitForSeconds(transferTime);
         box.transform.position = teleportToLocation.position;

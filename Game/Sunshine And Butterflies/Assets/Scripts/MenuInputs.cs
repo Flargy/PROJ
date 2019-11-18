@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class MenuInputs : MonoBehaviour
 {
+    [SerializeField] private NewPlayerScript player1 = null;
+    [SerializeField] private NewPlayerScript player2 = null;
+
     private Vector2 moveInput;
     public GameObject pauseMenuUI;
     private PlayerInput playerInput = null;
@@ -42,7 +45,7 @@ public class MenuInputs : MonoBehaviour
 
     public void PauseResume()
     {
-        playerInput.SwitchCurrentActionMap("Gameplay");
+        //playerInput.SwitchCurrentActionMap("Gameplay");
         Debug.Log(playerInput.currentActionMap);
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
