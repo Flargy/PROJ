@@ -50,7 +50,7 @@ public class PressurePlate : MonoBehaviour
                 light.ChangeEmission(itemsOnPad / desiredNrOfObjects);
             }
         }
-        Debug.Log("On: " + itemsOnPad);
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -73,7 +73,6 @@ public class PressurePlate : MonoBehaviour
                 light.ChangeEmission(itemsOnPad / desiredNrOfObjects);
             }
         }
-        Debug.Log("Off: " + itemsOnPad);
     }
 
     public bool GetPushed()
