@@ -7,11 +7,9 @@ public class ArrowTrap : MonoBehaviour
 
     public GameObject[] arrowSpawns;
     public GameObject arrow;
-
     public bool timerBased;
     public float fireTimer = 3f;
     public float timer = 0f;
-    // Start is called before the first frame update
 
     private void OnTriggerEnter(Collider other)
     {
@@ -34,7 +32,6 @@ public class ArrowTrap : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (timerBased == true)

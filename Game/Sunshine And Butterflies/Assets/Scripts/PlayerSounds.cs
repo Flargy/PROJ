@@ -9,13 +9,11 @@ public class PlayerSounds : MonoBehaviour
     public AudioClip[] footStepsSounds;
     public AudioClip[] jumpingSounds;
     public AudioClip landingSound;
-    // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
 

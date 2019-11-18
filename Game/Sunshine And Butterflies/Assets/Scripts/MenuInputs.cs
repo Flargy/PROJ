@@ -7,10 +7,7 @@ public class MenuInputs : MonoBehaviour
 {
     private Vector2 moveInput;
     public GameObject pauseMenuUI;
-    
-
     private PlayerInput playerInput = null;
-
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -22,11 +19,9 @@ public class MenuInputs : MonoBehaviour
         //Debug.Log("Input: Accepted");
     }
 
-
     public void OnMove(InputValue input)
     {
         moveInput = input.Get<Vector2>();
-        //Debug.Log("Input: Move");
     }
 
     public void OnBack()
@@ -51,6 +46,5 @@ public class MenuInputs : MonoBehaviour
         Debug.Log(playerInput.currentActionMap);
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
-        //playerInput.SwitchCurrentActionMap("Gameplay");
     }
 }
