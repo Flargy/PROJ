@@ -296,6 +296,11 @@ public class NewPlayerScript : MonoBehaviour
             box.enabled = false;
             crouching = false;
             anim.SetBool("isCrouching", false);
+            RaycastHit plateHit;
+            if(Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out plateHit, 1f, LayerMask.GetMask("PressurePlate")))
+            {
+                plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
+            }
         }
     }
 

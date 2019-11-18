@@ -23,6 +23,7 @@ public class InteractionLever : Interactable
     private bool playerHasAnswered = false;
     private SpriteRenderer renderQTE = null;
     private Coroutine activateQTE = null;
+    private Coroutine leverRotation = null;
     float t = 0;
     float leverPullDownTime = 0.0f;
 
@@ -55,7 +56,7 @@ public class InteractionLever : Interactable
             interactingPlayer.GetComponent<NewPlayerScript>().SwapLiftingState();
             interactingPlayer.SwapToQTE(this);
             activateQTE = StartCoroutine(StartQTE());
-            StartCoroutine(RotateLever());
+            leverRotation = StartCoroutine(RotateLever());
             interacting = true;
         }
     }
@@ -82,6 +83,7 @@ public class InteractionLever : Interactable
         {
             abortQTE = true;
             StopCoroutine(activateQTE);
+            StopCoroutine(leverRotation);
             StopQTE();
         }
     }
@@ -101,7 +103,7 @@ public class InteractionLever : Interactable
             renderQTE.sprite = null;
             playerHasAnswered = false;
             StartCoroutine(InteractionCooldown());
-            StartCoroutine(RotateLever());
+            leverRotation = StartCoroutine(RotateLever());
             foreach (AffectedObject affectedObject in affected)
             {
                 affectedObject.ExecuteAction();
@@ -160,6 +162,7 @@ public class InteractionLever : Interactable
 
     private IEnumerator RotateLever()
     {
+        leverPullDownTime = 0.0f;
         Vector3 currentRotation = leverAxis.transform.localRotation.eulerAngles;
         Vector3 endRotation = Vector3.zero;
         if(currentRotation.x == 0)
@@ -173,7 +176,6 @@ public class InteractionLever : Interactable
             leverAxis.transform.localRotation = Quaternion.Euler(Vector3.Lerp(currentRotation, endRotation, leverPullDownTime));
             yield return new WaitForEndOfFrame();
         }
-        leverPullDownTime = 0.0f;
     }
 
     //public IEnumerator InteractionCooldown()

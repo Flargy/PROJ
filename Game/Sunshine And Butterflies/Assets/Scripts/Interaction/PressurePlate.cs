@@ -10,8 +10,10 @@ public class PressurePlate : MonoBehaviour
     [SerializeField] private MeshRenderer colorObject = null;
     [SerializeField] private DoorLightChange[] lights = null;
     private float itemsOnPad;
+    private bool crouchedOn = false;
     private Material startingColor = null;
     private AudioSource audioSource;
+    private GameObject playerOnPad = null;
     public AudioClip activatedSound;
     public AudioClip deActivatedSound;
 
@@ -21,12 +23,18 @@ public class PressurePlate : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    public void LowerCounter()
+    {
+        itemsOnPad--;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") || other.CompareTag("CarryBox"))
         {
+            
             itemsOnPad++;
-
+            
             foreach (AffectedObject affected in affectedObject)
             {
                 if (itemsOnPad == desiredNrOfObjects)
@@ -42,6 +50,7 @@ public class PressurePlate : MonoBehaviour
                 light.ChangeEmission(itemsOnPad / desiredNrOfObjects);
             }
         }
+        Debug.Log("On: " + itemsOnPad);
     }
 
     private void OnTriggerExit(Collider other)
@@ -64,6 +73,7 @@ public class PressurePlate : MonoBehaviour
                 light.ChangeEmission(itemsOnPad / desiredNrOfObjects);
             }
         }
+        Debug.Log("Off: " + itemsOnPad);
     }
 
     public bool GetPushed()
