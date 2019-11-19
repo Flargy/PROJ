@@ -33,8 +33,4 @@ public class CheckpointUpdate : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        Debug.Log(respawnPositions.Length);
-    }
 }

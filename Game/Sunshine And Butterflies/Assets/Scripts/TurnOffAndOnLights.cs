@@ -14,11 +14,13 @@ public class TurnOffAndOnLights : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        playerCount++;
-        if(playerCount == 2)
+        if (other.CompareTag("Player"))
         {
-            activated = true;
-            StartCoroutine(ChangeLights());
+            playerCount++;
+            if (playerCount == 2)
+                activated = true;
+                StartCoroutine(ChangeLights());
+            }
         }
     }
 
@@ -34,7 +36,6 @@ public class TurnOffAndOnLights : MonoBehaviour
         {
             foreach(Light light in oldLights)
             {
-                t += Time.deltaTime;
                 light.intensity = Mathf.Lerp(lightStrength, 0, t);
                 yield return new WaitForEndOfFrame();
                 if(light.intensity < 0.1f)
@@ -42,6 +43,7 @@ public class TurnOffAndOnLights : MonoBehaviour
                     light.gameObject.SetActive(false);
                 }
             }
+            t += Time.deltaTime;
         }
 
         t = 0.0f;
@@ -55,11 +57,12 @@ public class TurnOffAndOnLights : MonoBehaviour
         {
             foreach(Light light in newLights)
             {
-                t += Time.deltaTime;
                 light.intensity = Mathf.Lerp(0, litStrength, t);
                 yield return new WaitForEndOfFrame();
             }
+            t += Time.deltaTime;
         }
         t = 0.0f;
+        Destroy(gameObject);
     }
 }
