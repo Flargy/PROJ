@@ -47,7 +47,7 @@ public class PressurePlate : MonoBehaviour
 
             foreach(DoorLightChange light in lights)
             {
-                light.ChangeEmission(itemsOnPad / desiredNrOfObjects);
+                light.ChangeEmission(Mathf.Min(itemsOnPad / desiredNrOfObjects, 1.0f));
             }
         }
 
@@ -70,7 +70,7 @@ public class PressurePlate : MonoBehaviour
 
             foreach(DoorLightChange light in lights)
             {
-                light.ChangeEmission(itemsOnPad / desiredNrOfObjects);
+                light.ChangeEmission(Mathf.Min(itemsOnPad / desiredNrOfObjects, 1.0f));
             }
         }
     }
