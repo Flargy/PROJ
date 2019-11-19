@@ -130,10 +130,16 @@ public class InteractionLever : Interactable
 
     private IEnumerator StartQTE()
     {
+        int newNumber = correctAnswer;
         while(abortQTE == false)
         {
             playerHasAnswered = false;
-            correctAnswer = Random.Range(correctAnswer + 1, 4) % 4;
+            while (newNumber == correctAnswer)
+            {
+                newNumber = Random.Range(0, 4);
+            }
+            correctAnswer = newNumber;
+            //correctAnswer = Random.Range(correctAnswer + 1, 4) % 4;
             DisplayWantedInput();
             yield return new WaitForSeconds(QTETimer);
             QTETimer -= cutoffTime;
