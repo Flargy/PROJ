@@ -11,6 +11,7 @@ public class NewPlayerScript : MonoBehaviour
     [SerializeField] private LayerMask wallLayer = 1;
     [SerializeField] private float moveSpeed = 6.0f;
     [SerializeField] private float jumpPower = 5.0f;
+    [SerializeField] private GameObject mainCam = null;
 
     private Rigidbody rb = null;
     private Vector2 movementVector = Vector2.zero;
@@ -18,6 +19,7 @@ public class NewPlayerScript : MonoBehaviour
     private bool CarryingAObject = false;
     private bool airBorne = false;
     private bool crouching = false;
+    private bool usingScreenNorth = false;
     private GameObject carriedObject;
     private float jumpGroundCheckDelay = 0.0f;
     private bool isLifted = false;
@@ -74,7 +76,6 @@ public class NewPlayerScript : MonoBehaviour
             {
                 if (GroundCheck() == true)
                 {
-                    Debug.Log("hitting ground");
                     isLifted = false;
                     groundCheckDelay = 0.0f;
                 }
@@ -89,7 +90,14 @@ public class NewPlayerScript : MonoBehaviour
     {
         if (movementVector.magnitude >= 0.01f && airBorne == false)
         {
-            lookDirection = new Vector3(movementVector.x, 0, movementVector.y);
+            if (usingScreenNorth == false)
+            {
+                lookDirection = new Vector3(movementVector.x, 0, movementVector.y);
+            }
+            else
+            {
+                lookDirection = Quaternion.Euler(0, mainCam.transform.rotation.eulerAngles.y, 0) * new Vector3(movementVector.x, 0, movementVector.y);
+            }
             faceDirection += lookDirection.normalized * Time.deltaTime * 10;
             if (faceDirection.magnitude > 1)
             {
@@ -110,30 +118,44 @@ public class NewPlayerScript : MonoBehaviour
         //    transform.LookAt(transform.position + faceDirection);
         //}
 
-        else if (rotationVector.magnitude >= 0.01f && airBorne == false)
+        else if (rotationVector.magnitude >= 0.8f && airBorne == false)
         {
             float xValue = rotationVector.x;
-            //lookDirection = new Vector3(rotationVector.x, 0, rotationVector.y);
-            //faceDirection += lookDirection.normalized * Time.deltaTime * 6;
-            //if (faceDirection.magnitude > 1)
-            //{
-            //    faceDirection = faceDirection.normalized;
-            //}
-            //transform.LookAt(transform.position + faceDirection);
+            if (usingScreenNorth == false)
+            {
+                lookDirection = new Vector3(rotationVector.x, 0, rotationVector.y);
+            }
+            else
+            {
+                lookDirection = Quaternion.Euler(0, mainCam.transform.rotation.eulerAngles.y, 0) * new Vector3(rotationVector.x, 0, rotationVector.y);
+            }
+            faceDirection += lookDirection.normalized * Time.deltaTime * 6;
+            if (faceDirection.magnitude > 1)
+            {
+                faceDirection = faceDirection.normalized;
+            }
+            transform.LookAt(transform.position + faceDirection);
 
-            if (xValue > 0.01)
-            {
-                transform.rotation = transform.rotation * Quaternion.Euler(0, 3 * xValue, 0);
-            }
-            else if (xValue < -0.01)
-            {
-                transform.rotation = transform.rotation * Quaternion.Euler(0, 2.3f * xValue, 0);
-            }
+            //if (xValue > 0.01)
+            //{
+            //    transform.rotation = transform.rotation * Quaternion.Euler(0, 3 * xValue, 0);
+            //}
+            //else if (xValue < -0.01)
+            //{
+            //    transform.rotation = transform.rotation * Quaternion.Euler(0, 2.3f * xValue, 0);
+            //}
         }
 
         else if (movementVector.magnitude >= 0.01f && airBorne == true)
         {
-            lookDirection = new Vector3(movementVector.x, 0, movementVector.y);
+            if (usingScreenNorth == false)
+            {
+                lookDirection = new Vector3(movementVector.x, 0, movementVector.y);
+            }
+            else
+            {
+                lookDirection = Quaternion.Euler(0, mainCam.transform.rotation.eulerAngles.y, 0) * new Vector3(movementVector.x, 0, movementVector.y);
+            }
             faceDirection += lookDirection.normalized * Time.deltaTime * 6;
             if (faceDirection.magnitude > 1)
             {
@@ -193,13 +215,24 @@ public class NewPlayerScript : MonoBehaviour
 
     public void ApplyGroundVelocity()
     {
-        rb.velocity = (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0);
+        
+        if (usingScreenNorth == false)
+        {
+            rb.velocity = (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0);
+        }
+        else
+        {
+            //rb.velocity = Vector3.ProjectOnPlane(mainCam.transform.rotation * (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0), Vector3.up);
+            rb.velocity = Quaternion.Euler(0, mainCam.transform.rotation.eulerAngles.y, 0) * (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0);
+        }
         if (new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude >= 2.51f)
         {
             float yVelocity = rb.velocity.y;
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, 2.5f);
             rb.velocity = new Vector3(rb.velocity.x, yVelocity, rb.velocity.z);
         }
+        
+      
     }
 
     public bool GroundCheck()
@@ -234,7 +267,14 @@ public class NewPlayerScript : MonoBehaviour
         {
             rb.velocity = (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0);
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, 2.5f) * 0.9f;
-            rb.velocity = new Vector3(rb.velocity.x, yVelocity, rb.velocity.z);
+            if (usingScreenNorth == false)
+            {
+                rb.velocity = new Vector3(rb.velocity.x, yVelocity, rb.velocity.z);
+            }
+            else
+            {
+                rb.velocity = Quaternion.Euler(0, mainCam.transform.rotation.eulerAngles.y, 0) * new Vector3(rb.velocity.x, yVelocity, rb.velocity.z);
+            }
         }
         else if (movementVector.magnitude < 0.1f && noGravityVector.magnitude > 0.0f)
         {
@@ -356,6 +396,10 @@ public class NewPlayerScript : MonoBehaviour
 
     public void Respawn()
     {
+        if(CarryingAObject == true && carriedObject != null)
+        {
+            carriedObject.GetComponent<Interactable>().Interact(gameObject);
+        }
         rb.velocity = Vector3.zero;
         transform.position = respawnPoint;
     }
@@ -374,6 +418,11 @@ public class NewPlayerScript : MonoBehaviour
         Debug.Log(playerInput.currentActionMap);
         menuInputs.OnStart();
         //playerInput.SwitchCurrentActionMap("Menu");
+    }
+
+    public void SwapTrueNorth()
+    {
+        usingScreenNorth = !usingScreenNorth;   
     }
 
 }

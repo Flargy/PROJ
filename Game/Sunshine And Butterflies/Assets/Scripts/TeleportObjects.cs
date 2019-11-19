@@ -18,7 +18,7 @@ public class TeleportObjects : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("CarryBox"))
+        if (other.CompareTag("CarryBox") || other.CompareTag("Misc"))
         {
             
             StartCoroutine(MoveBox(other.gameObject));

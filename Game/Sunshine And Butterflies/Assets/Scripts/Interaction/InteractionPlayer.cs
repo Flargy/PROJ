@@ -9,12 +9,15 @@ public class InteractionPlayer : Interactable
     [SerializeField] private float horizontalYeetForce = 300.0f;
     [SerializeField] private float verticalYeetForce = 40.0f;
     [SerializeField] private float verticalOffest = 1.0f;
+    [SerializeField] private float inputPickupDelay = 3.0f;
 
     private NewPlayerScript thisPlayer;
     
     private Rigidbody rb = null;
     private bool isLifted = false;
     private PlayerInput playerInput = null;
+    private Coroutine breakFree = null;
+    private bool noMovementAllowed = true;
 
     private void Start()
     {
@@ -41,6 +44,7 @@ public class InteractionPlayer : Interactable
             otherPlayer.GetComponent<NewPlayerScript>().PickUpObject(gameObject);
             thisPlayer.BecomeLifted();
             playerInput.SwitchCurrentActionMap("BreakingFree");
+            breakFree = StartCoroutine(BreakFreeDelay());
         }
          else if(isLifted == true)
         {
@@ -56,6 +60,7 @@ public class InteractionPlayer : Interactable
         otherPlayer.GetComponent<NewPlayerScript>().DropObject();
         rb.AddForce((otherPlayer.transform.rotation * Vector3.forward * horizontalYeetForce) + (Vector3.up * verticalYeetForce));
         playerInput.SwitchCurrentActionMap("Gameplay");
+        noMovementAllowed = true;
     }
 
     public void GetPutDown()
@@ -65,11 +70,22 @@ public class InteractionPlayer : Interactable
         rb.useGravity = true;
         otherPlayer.GetComponent<NewPlayerScript>().DropObject();
         playerInput.SwitchCurrentActionMap("Gameplay");
+        noMovementAllowed = true;
 
     }
 
     public void OnBreakFree()
     {
-        GetPutDown();
+        if (noMovementAllowed == false)
+        {
+            GetPutDown();
+            noMovementAllowed = true;
+        }
+    }
+
+    private IEnumerator BreakFreeDelay()
+    {
+        yield return new WaitForSeconds(inputPickupDelay);
+        noMovementAllowed = false;
     }
 }
