@@ -18,6 +18,7 @@ public class TurnOffAndOnLights : MonoBehaviour
         {
             playerCount++;
             if (playerCount == 2)
+            {
                 activated = true;
                 StartCoroutine(ChangeLights());
             }
