@@ -6,9 +6,9 @@ public class PlayerSounds : MonoBehaviour
 {
 
     private AudioSource audioSource = null;
-    [SerializeField] private AudioClip[] footStepsSounds;
-    [SerializeField] private AudioClip[] jumpingSounds;
-    [SerializeField] private AudioClip landingSound;
+    [SerializeField] private AudioClip[] footStepsSounds = null;
+    [SerializeField] private AudioClip[] jumpingSounds = null;
+    [SerializeField] private AudioClip landingSound = null;
     void Start()
     {
         audioSource = GetComponent<AudioSource>();

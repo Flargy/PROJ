@@ -5,9 +5,9 @@ using UnityEngine;
 public class ArrowTrap : MonoBehaviour
 {
 
-    [SerializeField] private GameObject[] arrowSpawns;
-    [SerializeField] private GameObject arrow;
-    [SerializeField] private bool timerBased;
+    [SerializeField] private GameObject[] arrowSpawns = null;
+    [SerializeField] private GameObject arrow = null;
+    [SerializeField] private bool timerBased = true;
     [SerializeField] private float fireTimer = 3f;
     [SerializeField] private float timer = 0f;
 

@@ -10,14 +10,14 @@ public class CameraRotation : MonoBehaviour
     private bool startNextRotation = true;
     [SerializeField] private bool rotateRight;
 
-    [SerializeField] private float yaw;
-    [SerializeField] private float pitch;
-    [SerializeField] private float secondsToRotate;
+    [SerializeField] private float yaw = 0;
+    [SerializeField] private float pitch = 0;
+    [SerializeField] private float secondsToRotate = 0;
     [SerializeField] private float rotateSwitchTime;
 
     private void Start()
     {
-
+        
         camHead = transform.GetChild(0);
         camHead.localRotation = Quaternion.AngleAxis(pitch, Vector3.forward);
         SetUpStartRotation();

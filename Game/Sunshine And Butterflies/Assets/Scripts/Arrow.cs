@@ -5,12 +5,12 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
 
-    public AudioClip fireSound;
-    public AudioClip hitSound;
+    [SerializeField] private AudioClip fireSound = null;
+    [SerializeField] private AudioClip hitSound;
 
     private AudioSource arrowSound = null;
 
-    [SerializeField] private float arrowVelocity;
+    [SerializeField] private float arrowVelocity = 0;
     [SerializeField] private float arroLife = 2.0f;
     private float timer = 0;
     void Start()

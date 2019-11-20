@@ -259,7 +259,7 @@ PrefabInstance:
     - target: {fileID: 4210332914815518282, guid: 5c6a1d6da3761724ba936954aeac6519,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4210332914815518278, guid: 5c6a1d6da3761724ba936954aeac6519,
         type: 3}
@@ -836,11 +836,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 716925572}
     m_Modifications:
-    - target: {fileID: 7399544437941822342, guid: 016f0402dba75334b98b31fc01e671fa,
-        type: 3}
-      propertyPath: m_Name
-      value: Switch
-      objectReference: {fileID: 0}
     - target: {fileID: 5830806570500067733, guid: 016f0402dba75334b98b31fc01e671fa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -911,6 +906,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7399544437941822342, guid: 016f0402dba75334b98b31fc01e671fa,
+        type: 3}
+      propertyPath: m_Name
+      value: Switch
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 016f0402dba75334b98b31fc01e671fa, type: 3}
 --- !u!1001 &456421736
@@ -920,11 +920,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3115189702860824702, guid: 3916919bf9ebb784098317e298017e61,
-        type: 3}
-      propertyPath: m_Name
-      value: Wall_Asylum_Door_300x300_Scripted
-      objectReference: {fileID: 0}
     - target: {fileID: 2116754906951946861, guid: 3916919bf9ebb784098317e298017e61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -979,6 +974,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115189702860824702, guid: 3916919bf9ebb784098317e298017e61,
+        type: 3}
+      propertyPath: m_Name
+      value: Wall_Asylum_Door_300x300_Scripted
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3916919bf9ebb784098317e298017e61, type: 3}
@@ -1132,6 +1132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cea4cfaff6187349a92324f41145dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1: {fileID: 0}
+  player2: {fileID: 0}
   pauseMenuUI: {fileID: 1013821044}
 --- !u!114 &609952625
 MonoBehaviour:
@@ -2074,11 +2076,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 716925572}
     m_Modifications:
-    - target: {fileID: 7244844973060189905, guid: 889b0cdd50f4d4c4aade5f93333b8959,
-        type: 3}
-      propertyPath: m_Name
-      value: Button
-      objectReference: {fileID: 0}
     - target: {fileID: 8685999697633593947, guid: 889b0cdd50f4d4c4aade5f93333b8959,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2148,6 +2145,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.23513818
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244844973060189905, guid: 889b0cdd50f4d4c4aade5f93333b8959,
+        type: 3}
+      propertyPath: m_Name
+      value: Button
       objectReference: {fileID: 0}
     - target: {fileID: 2679521861416088438, guid: 889b0cdd50f4d4c4aade5f93333b8959,
         type: 3}
@@ -2582,6 +2584,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cea4cfaff6187349a92324f41145dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1: {fileID: 0}
+  player2: {fileID: 0}
   pauseMenuUI: {fileID: 1013821044}
 --- !u!1001 &1175073457
 PrefabInstance:
@@ -2598,7 +2602,7 @@ PrefabInstance:
     - target: {fileID: 6583160332750226835, guid: 54863e7aae9d04442afa1717e04fdcf9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6583160332750226834, guid: 54863e7aae9d04442afa1717e04fdcf9,
         type: 3}
@@ -2663,7 +2667,7 @@ PrefabInstance:
     - target: {fileID: 6583160333575141097, guid: 54863e7aae9d04442afa1717e04fdcf9,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -11.111
+      value: 112.16156
       objectReference: {fileID: 0}
     - target: {fileID: 6583160333575141097, guid: 54863e7aae9d04442afa1717e04fdcf9,
         type: 3}
@@ -2673,7 +2677,7 @@ PrefabInstance:
     - target: {fileID: 6583160333575141097, guid: 54863e7aae9d04442afa1717e04fdcf9,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -7.569
+      value: -171.239
       objectReference: {fileID: 0}
     - target: {fileID: 6583160333526684258, guid: 54863e7aae9d04442afa1717e04fdcf9,
         type: 3}
@@ -2687,6 +2691,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5561349426305759274, guid: 3c9ca953c72cc644493ec6c75717645e,
         type: 3}
+    - target: {fileID: 6583160333526684257, guid: 54863e7aae9d04442afa1717e04fdcf9,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 114.16156
+      objectReference: {fileID: 0}
+    - target: {fileID: 6583160333526684257, guid: 54863e7aae9d04442afa1717e04fdcf9,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 2.062
+      objectReference: {fileID: 0}
+    - target: {fileID: 6583160333526684257, guid: 54863e7aae9d04442afa1717e04fdcf9,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: -171.239
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54863e7aae9d04442afa1717e04fdcf9, type: 3}
 --- !u!1 &1183707048
@@ -3274,11 +3293,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2877209496763401428, guid: b62c56d4c5adbb04186f8052d011e850,
-        type: 3}
-      propertyPath: m_Name
-      value: Pressure Plate
-      objectReference: {fileID: 0}
     - target: {fileID: 7086587859558039046, guid: b62c56d4c5adbb04186f8052d011e850,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3339,6 +3353,11 @@ PrefabInstance:
       propertyPath: affectedObject.Array.data[0]
       value: 
       objectReference: {fileID: 2139385432}
+    - target: {fileID: 2877209496763401428, guid: b62c56d4c5adbb04186f8052d011e850,
+        type: 3}
+      propertyPath: m_Name
+      value: Pressure Plate
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b62c56d4c5adbb04186f8052d011e850, type: 3}
 --- !u!1 &1589220490 stripped
@@ -3623,11 +3642,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 716925572}
     m_Modifications:
-    - target: {fileID: 2734109833829183862, guid: 9fd6e92831465f345a07dbef4ce2512d,
-        type: 3}
-      propertyPath: m_Name
-      value: Lever
-      objectReference: {fileID: 0}
     - target: {fileID: 1417186583900881765, guid: 9fd6e92831465f345a07dbef4ce2512d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3697,6 +3711,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 4.9694624
+      objectReference: {fileID: 0}
+    - target: {fileID: 2734109833829183862, guid: 9fd6e92831465f345a07dbef4ce2512d,
+        type: 3}
+      propertyPath: m_Name
+      value: Lever
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fd6e92831465f345a07dbef4ce2512d, type: 3}
@@ -4076,11 +4095,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 141896121155817406, guid: 974c9b2ced6f8104d983d6d114aa02ec,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 141896121155817411, guid: 974c9b2ced6f8104d983d6d114aa02ec,
         type: 3}
       propertyPath: players.Array.size
@@ -4100,6 +4114,11 @@ PrefabInstance:
         type: 3}
       propertyPath: offset.y
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 141896121155817406, guid: 974c9b2ced6f8104d983d6d114aa02ec,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974c9b2ced6f8104d983d6d114aa02ec, type: 3}
@@ -4495,7 +4514,7 @@ PrefabInstance:
     - target: {fileID: 7870087283631148454, guid: 091482aa6f24cca49a406b866fbb883f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7870087283631148458, guid: 091482aa6f24cca49a406b866fbb883f,
         type: 3}
