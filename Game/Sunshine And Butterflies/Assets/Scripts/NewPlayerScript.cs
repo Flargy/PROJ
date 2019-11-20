@@ -201,7 +201,14 @@ public class NewPlayerScript : MonoBehaviour
 
     public void PickUpObject(GameObject carried)
     {
-        anim.SetBool("isLifting", true);
+        if(carried.tag == "Player")//Eku
+        {
+            anim.SetBool("isLiftingPlayer", true);
+
+        }
+        else {
+            anim.SetTrigger("LiftObject");//Eku
+            anim.SetBool("isLiftingObject", true); }//Eku
         canBeLifted = false;
         carriedObject = carried;
         CarryingAObject = true;
@@ -209,7 +216,8 @@ public class NewPlayerScript : MonoBehaviour
 
     public void DropObject()
     {
-        anim.SetBool("isLifting", false);
+        anim.SetBool("isLiftingPlayer", false);//Eku
+        anim.SetBool("isLiftingObject", false);//Eku
         canBeLifted = true;
         carriedObject = null;
         CarryingAObject = false;
@@ -314,7 +322,7 @@ public class NewPlayerScript : MonoBehaviour
     {
         if (CarryingAObject == true && carriedObject != null)
         {
-            anim.SetTrigger("Tossing");
+            anim.SetTrigger("Tossing");//Eku
             carriedObject.GetComponent<Interactable>().Toss();
         }
     }
@@ -373,7 +381,7 @@ public class NewPlayerScript : MonoBehaviour
     public void BecomeLifted()
     {
         isLifted = true;
-        anim.SetBool("isCarried", true);
+        anim.SetBool("isCarried", true);//Eku
         movementVector = Vector2.zero;
         anim.SetFloat("Moving", 0.0f);
     }
@@ -381,7 +389,7 @@ public class NewPlayerScript : MonoBehaviour
     public void Released()
     {
         //isLifted = false;
-        anim.SetBool("isCarried", false);
+        anim.SetBool("isCarried", false);//Eku
         airBorne = true;
         if (crouching == true)
         {
