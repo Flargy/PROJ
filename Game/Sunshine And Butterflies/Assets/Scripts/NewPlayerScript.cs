@@ -201,6 +201,7 @@ public class NewPlayerScript : MonoBehaviour
 
     public void PickUpObject(GameObject carried)
     {
+        anim.SetBool("isLifting", true);
         canBeLifted = false;
         carriedObject = carried;
         CarryingAObject = true;
@@ -208,6 +209,7 @@ public class NewPlayerScript : MonoBehaviour
 
     public void DropObject()
     {
+        anim.SetBool("isLifting", false);
         canBeLifted = true;
         carriedObject = null;
         CarryingAObject = false;
@@ -312,6 +314,7 @@ public class NewPlayerScript : MonoBehaviour
     {
         if (CarryingAObject == true && carriedObject != null)
         {
+            anim.SetTrigger("Tossing");
             carriedObject.GetComponent<Interactable>().Toss();
         }
     }
@@ -370,6 +373,7 @@ public class NewPlayerScript : MonoBehaviour
     public void BecomeLifted()
     {
         isLifted = true;
+        anim.SetBool("isCarried", true);
         movementVector = Vector2.zero;
         anim.SetFloat("Moving", 0.0f);
     }
@@ -377,6 +381,7 @@ public class NewPlayerScript : MonoBehaviour
     public void Released()
     {
         //isLifted = false;
+        anim.SetBool("isCarried", false);
         airBorne = true;
         if (crouching == true)
         {

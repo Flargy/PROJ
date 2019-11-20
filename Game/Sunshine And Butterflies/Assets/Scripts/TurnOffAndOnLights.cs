@@ -27,7 +27,7 @@ public class TurnOffAndOnLights : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        playerCount--;
+        //playerCount--;
     }
 
     private IEnumerator ChangeLights()
