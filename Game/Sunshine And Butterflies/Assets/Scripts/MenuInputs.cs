@@ -9,7 +9,7 @@ public class MenuInputs : MonoBehaviour
     [SerializeField] private NewPlayerScript player2 = null;
 
     private Vector2 moveInput;
-    public GameObject pauseMenuUI;
+    [SerializeField]private GameObject pauseMenuUI;
     private PlayerInput playerInput = null;
     private void Start()
     {

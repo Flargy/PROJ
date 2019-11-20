@@ -8,10 +8,10 @@ public class Arrow : MonoBehaviour
     public AudioClip fireSound;
     public AudioClip hitSound;
 
-    private AudioSource arrowSound;
+    private AudioSource arrowSound = null;
 
-    public float arrowVelocity;
-    public float arroLife = 2.0f;
+    [SerializeField] private float arrowVelocity;
+    [SerializeField] private float arroLife = 2.0f;
     private float timer = 0;
     void Start()
     {

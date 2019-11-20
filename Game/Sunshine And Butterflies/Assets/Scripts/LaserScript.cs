@@ -5,16 +5,15 @@ using UnityEngine;
 public class LaserScript : MonoBehaviour
 {
 
-    public AudioClip laserBeamSound;
+    private AudioSource laserSound = null;
 
-    private AudioSource laserSound;
+    [SerializeField] private AudioClip laserBeamSound;
+    [SerializeField] private Transform startPoint;
+    [SerializeField] private Transform endPoint;
+    private LineRenderer laserLine = null;
 
-    public Transform startPoint;
-    public Transform endPoint;
-    LineRenderer laserLine;
-
-    public GameObject Laser;
-    public bool trapEnable = true;
+    [SerializeField] private GameObject Laser;
+    [SerializeField] private bool trapEnable = true;
     // Start is called before the first frame update
     void Start()
     {

@@ -5,15 +5,15 @@ using UnityEngine;
 public class CameraRotation : MonoBehaviour
 {
 
-    Transform camHead;
+    private Transform camHead = null;
 
-    bool startNextRotation = true;
-    public bool rotateRight;
+    private bool startNextRotation = true;
+    [SerializeField] private bool rotateRight;
 
-    public float yaw;
-    public float pitch;
-    public float secondsToRotate;
-    public float rotateSwitchTime;
+    [SerializeField] private float yaw;
+    [SerializeField] private float pitch;
+    [SerializeField] private float secondsToRotate;
+    [SerializeField] private float rotateSwitchTime;
 
     private void Start()
     {

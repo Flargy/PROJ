@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class TrapDoor : MonoBehaviour
 {
-    public Rigidbody leftDoor;
-    public Rigidbody rightDoor;
+    [SerializeField] private Rigidbody leftDoor;
+    [SerializeField] private Rigidbody rightDoor;
 
-    public bool itsATrap;
+    [SerializeField] private bool itsATrap;
 
     void Start()
     {

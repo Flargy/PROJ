@@ -5,11 +5,11 @@ using UnityEngine;
 public class ArrowTrap : MonoBehaviour
 {
 
-    public GameObject[] arrowSpawns;
-    public GameObject arrow;
-    public bool timerBased;
-    public float fireTimer = 3f;
-    public float timer = 0f;
+    [SerializeField] private GameObject[] arrowSpawns;
+    [SerializeField] private GameObject arrow;
+    [SerializeField] private bool timerBased;
+    [SerializeField] private float fireTimer = 3f;
+    [SerializeField] private float timer = 0f;
 
     private void OnTriggerEnter(Collider other)
     {

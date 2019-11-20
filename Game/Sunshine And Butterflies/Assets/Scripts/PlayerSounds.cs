@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerSounds : MonoBehaviour
 {
 
-    private AudioSource audioSource;
-    public AudioClip[] footStepsSounds;
-    public AudioClip[] jumpingSounds;
-    public AudioClip landingSound;
+    private AudioSource audioSource = null;
+    [SerializeField] private AudioClip[] footStepsSounds;
+    [SerializeField] private AudioClip[] jumpingSounds;
+    [SerializeField] private AudioClip landingSound;
     void Start()
     {
         audioSource = GetComponent<AudioSource>();

@@ -6,7 +6,7 @@ public class Detection : MonoBehaviour
 {
 
     [SerializeField] private LayerMask detectionLayer;
-    Transform lens;
+    private Transform lens;
     void Start()
     {
         lens = transform.parent.GetComponent<Transform>();
