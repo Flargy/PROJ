@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerSounds : MonoBehaviour
 {
 
-    private AudioSource audioSource = null;
+    private AudioSource audioSource;
     [SerializeField] private AudioClip[] footStepsSounds = null;
     [SerializeField] private AudioClip[] jumpingSounds = null;
     [SerializeField] private AudioClip landingSound = null;
