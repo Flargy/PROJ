@@ -433,6 +433,11 @@ public class NewPlayerScript : MonoBehaviour
         //playerInput.SwitchCurrentActionMap("Menu");
     }
 
+    public void SwapToGameplayAM()
+    {
+        playerInput.SwitchCurrentActionMap("Gameplay");
+    }
+
     public void SwapTrueNorth()
     {
         usingScreenNorth = !usingScreenNorth;   

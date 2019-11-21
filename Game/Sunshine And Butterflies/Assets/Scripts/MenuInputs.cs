@@ -45,7 +45,6 @@ public class MenuInputs : MonoBehaviour
 
     public void PauseResume()
     {
-        //playerInput.SwitchCurrentActionMap("Gameplay");
         Debug.Log(playerInput.currentActionMap);
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;

@@ -412,6 +412,63 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Pause"",
+            ""id"": ""c3610341-c9b7-4d51-ba4b-cbe6da75039a"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""fc3b6b2f-30ba-4761-9edb-09880a9fedb9"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Accept"",
+                    ""type"": ""Button"",
+                    ""id"": ""d31309c3-c2c3-4a5f-aeed-c544f3c80363"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""680be056-3713-4dbf-a77b-7f17395e28c2"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6bdc3aa6-3daf-4f3a-b7fa-277310a5c8a1"",
+                    ""path"": ""<Gamepad>/dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""702506c3-e49b-40b3-b30d-b45d971d694f"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Accept"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -441,6 +498,10 @@ public class PlayerController : IInputActionCollection, IDisposable
         m_Menu_Move = m_Menu.FindAction("Move", throwIfNotFound: true);
         m_Menu_Back = m_Menu.FindAction("Back", throwIfNotFound: true);
         m_Menu_Start = m_Menu.FindAction("Start", throwIfNotFound: true);
+        // Pause
+        m_Pause = asset.FindActionMap("Pause", throwIfNotFound: true);
+        m_Pause_Move = m_Pause.FindAction("Move", throwIfNotFound: true);
+        m_Pause_Accept = m_Pause.FindAction("Accept", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -722,6 +783,47 @@ public class PlayerController : IInputActionCollection, IDisposable
         }
     }
     public MenuActions @Menu => new MenuActions(this);
+
+    // Pause
+    private readonly InputActionMap m_Pause;
+    private IPauseActions m_PauseActionsCallbackInterface;
+    private readonly InputAction m_Pause_Move;
+    private readonly InputAction m_Pause_Accept;
+    public struct PauseActions
+    {
+        private PlayerController m_Wrapper;
+        public PauseActions(PlayerController wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Pause_Move;
+        public InputAction @Accept => m_Wrapper.m_Pause_Accept;
+        public InputActionMap Get() { return m_Wrapper.m_Pause; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PauseActions set) { return set.Get(); }
+        public void SetCallbacks(IPauseActions instance)
+        {
+            if (m_Wrapper.m_PauseActionsCallbackInterface != null)
+            {
+                Move.started -= m_Wrapper.m_PauseActionsCallbackInterface.OnMove;
+                Move.performed -= m_Wrapper.m_PauseActionsCallbackInterface.OnMove;
+                Move.canceled -= m_Wrapper.m_PauseActionsCallbackInterface.OnMove;
+                Accept.started -= m_Wrapper.m_PauseActionsCallbackInterface.OnAccept;
+                Accept.performed -= m_Wrapper.m_PauseActionsCallbackInterface.OnAccept;
+                Accept.canceled -= m_Wrapper.m_PauseActionsCallbackInterface.OnAccept;
+            }
+            m_Wrapper.m_PauseActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                Move.started += instance.OnMove;
+                Move.performed += instance.OnMove;
+                Move.canceled += instance.OnMove;
+                Accept.started += instance.OnAccept;
+                Accept.performed += instance.OnAccept;
+                Accept.canceled += instance.OnAccept;
+            }
+        }
+    }
+    public PauseActions @Pause => new PauseActions(this);
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -750,5 +852,10 @@ public class PlayerController : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
         void OnStart(InputAction.CallbackContext context);
+    }
+    public interface IPauseActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnAccept(InputAction.CallbackContext context);
     }
 }
