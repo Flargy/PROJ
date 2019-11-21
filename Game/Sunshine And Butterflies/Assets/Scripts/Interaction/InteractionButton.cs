@@ -25,7 +25,10 @@ public class InteractionButton : Interactable
             affectedObject.ExecuteAction();
             interacting = true;
             StartCoroutine(InteractionCooldown());
-            StartCoroutine(ButtonMovement());
+            if(button != null)
+            { 
+                StartCoroutine(ButtonMovement());
+            }
             if(onTimer == true)
             {
                 StartCoroutine(OnATimer());
@@ -44,8 +47,11 @@ public class InteractionButton : Interactable
     {
 
         audioSource = GetComponent<AudioSource>();
-        pressedPosition = button.transform.position - ((button.transform.up * 0.1f));
+        if(button != null)
+        { 
+            pressedPosition = button.transform.position - ((button.transform.up * 0.1f));
         notPressedPosition = button.transform.position;
+        }
     }
 
     //private IEnumerator InteractionCooldown()
