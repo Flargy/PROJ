@@ -12,6 +12,7 @@ public class NewPlayerScript : MonoBehaviour
     [SerializeField] private float moveSpeed = 6.0f;
     [SerializeField] private float jumpPower = 5.0f;
     [SerializeField] private GameObject mainCam = null;
+    [SerializeField] private GameObject dropShadow = null;
 
     private Rigidbody rb = null;
     private Vector2 movementVector = Vector2.zero;
@@ -35,6 +36,7 @@ public class NewPlayerScript : MonoBehaviour
     private Vector3 respawnPoint = Vector3.zero;
     private Animator anim = null;
     private float groundCheckDelay = 0.0f;
+    private GameObject dropShadowInstance = null;
 
     private PlayerInput playerInput = null;
     private MenuInputs menuInputs = null;
@@ -61,11 +63,14 @@ public class NewPlayerScript : MonoBehaviour
         }
         else if (airBorne == true && isLifted == false)
         {
+            DrawDropShadow();
             jumpGroundCheckDelay += Time.deltaTime;
             ApplyAirVelocity();
             if (GroundCheck() == true && jumpGroundCheckDelay >= 0.3f)
             {
                 airBorne = false;
+                Destroy(dropShadowInstance);
+                dropShadowInstance = null;
                 jumpGroundCheckDelay = 0.0f;
             }
         }
@@ -84,6 +89,23 @@ public class NewPlayerScript : MonoBehaviour
 
         FaceTowardsDirection();
 
+    }
+
+    private void DrawDropShadow()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, Vector3.down, out hit, 10.0f, LayerMask.NameToLayer("Ground")))
+        {
+            if(dropShadowInstance != null)
+            {
+                dropShadowInstance.transform.position = hit.point + Vector3.up * 0.05f;
+            }
+            else if(dropShadowInstance == null)
+            {
+                dropShadowInstance = Instantiate(dropShadow, hit.point + Vector3.up * 0.05f, Quaternion.Euler(90f,0f,0f));
+
+            }
+        }
     }
 
     private void FaceTowardsDirection()
