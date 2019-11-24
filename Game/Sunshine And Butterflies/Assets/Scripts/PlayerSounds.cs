@@ -9,6 +9,8 @@ public class PlayerSounds : MonoBehaviour
     [SerializeField] private AudioClip[] footStepsSounds = null;
     [SerializeField] private AudioClip[] jumpingSounds = null;
     [SerializeField] private AudioClip landingSound = null;
+    [SerializeField] private AudioClip rustleSound;
+    
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -42,4 +44,17 @@ public class PlayerSounds : MonoBehaviour
     {
         audioSource.PlayOneShot(landingSound);
     }
+
+    public void PlayRustle()
+    {
+
+        audioSource.PlayOneShot(rustleSound);
+        //Debug.Log("Rustle");
+        //int n = Random.Range(1, rustleSound.Length);
+        //audioSource.clip = rustleSound[n];
+        //audioSource.PlayOneShot(audioSource.clip);
+        //rustleSound[n] = rustleSound[0];
+        //rustleSound[0] = audioSource.clip;
+    }
+
 }
