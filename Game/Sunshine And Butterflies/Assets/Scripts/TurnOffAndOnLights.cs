@@ -7,6 +7,7 @@ public class TurnOffAndOnLights : MonoBehaviour
     [SerializeField] private List<Light> oldLights;
     [SerializeField] private List<Light> newLights;
     [SerializeField] private float litStrength = 0.5f;
+    [SerializeField] private float duration = 1f;
     private float lightStrength = 0.0f;
     private float t = 0.0f;
     private int playerCount = 0;
@@ -32,22 +33,10 @@ public class TurnOffAndOnLights : MonoBehaviour
 
     private IEnumerator ChangeLights()
     {
-        lightStrength = oldLights[1].intensity;
-        while(t < 1.0f)
-        {
-            foreach(Light light in oldLights)
-            {
-                light.intensity = Mathf.Lerp(lightStrength, 0, t);
-                yield return new WaitForEndOfFrame();
-                if(light.intensity < 0.1f)
-                {
-                    light.gameObject.SetActive(false);
-                }
-            }
-            t += Time.deltaTime;
+        if(oldLights.Count > 1) 
+        { 
+            lightStrength = oldLights[0].intensity;
         }
-
-        t = 0.0f;
         foreach (Light light in newLights)
         {
            
@@ -62,6 +51,20 @@ public class TurnOffAndOnLights : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
             t += Time.deltaTime;
+        }
+        t = 0.0f;
+        while(t < 1.0f)
+        {
+            foreach(Light light in oldLights)
+            {
+                light.intensity = Mathf.Lerp(lightStrength, 0, t);
+                yield return new WaitForEndOfFrame();
+                if(light.intensity < 0.1f)
+                {
+                    light.gameObject.SetActive(false);
+                }
+            }
+            t += Time.deltaTime/duration;
         }
         t = 0.0f;
         Destroy(gameObject);
