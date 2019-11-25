@@ -11,8 +11,10 @@ public class SeeThroughWallRaycast : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.DrawRay(transform.position + Vector3.up * 0.6f, cam.transform.position - transform.position);
+
         RaycastHit hit;
-        if(Physics.SphereCast(transform.position + Vector3.up * 0.6f, 0.45f, cam.transform.position - transform.position, out hit, 10.0f, wallLayer))
+        if(Physics.SphereCast(transform.position + Vector3.up * 0.6f, 1.5f, cam.transform.position - (transform.position + Vector3.up * 0.6f), out hit, 10.0f, wallLayer))
         {
             seeThrough.transform.LookAt(transform.position - cam.transform.position, Vector3.up);
             if (seeThrough.activeSelf == false)
