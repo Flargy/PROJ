@@ -533,7 +533,7 @@ GameObject:
   - component: {fileID: 269765695}
   - component: {fileID: 269765694}
   m_Layer: 9
-  m_Name: Directional Light (1)
+  m_Name: Directional Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -550,7 +550,7 @@ Light:
   serializedVersion: 9
   m_Type: 1
   m_Color: {r: 0.4669811, g: 0.7162316, b: 1, a: 1}
-  m_Intensity: 0.25
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1864,7 +1864,7 @@ MonoBehaviour:
   - {fileID: 1717264904}
   - {fileID: 1313074606}
   litStrength: 10
-  t: 0.5
+  duration: 1
 --- !u!4 &490344074 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2482176027802224862, guid: dcccd76cb68291747a212d07a46fa0f4,
@@ -2056,7 +2056,7 @@ MonoBehaviour:
   - {fileID: 2045358668}
   - {fileID: 1819534834}
   litStrength: 10
-  t: 0.5
+  duration: 2
 --- !u!65 &538957138
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2068,8 +2068,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.3349285, y: 1, z: 6.011579}
-  m_Center: {x: 1.1674643, y: 0, z: 2.5057895}
+  m_Size: {x: 3.3349285, y: 2.3890476, z: 5.9119086}
+  m_Center: {x: 1.1674643, y: 0.12214756, z: 2.5556247}
 --- !u!65 &538957139
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2081,8 +2081,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.3665752, y: 1.7598171, z: 6.042989}
-  m_Center: {x: -9.189094, y: 1.6300914, z: -0.38850534}
+  m_Size: {x: 3.6601806, y: 1.9145608, z: 6.042989}
+  m_Center: {x: -9.335895, y: 1.5527196, z: -0.38850546}
 --- !u!114 &539417607 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3286666705399486966, guid: ea60a4f440bb732458440fb0213083b5,
@@ -2900,12 +2900,12 @@ GameObject:
   - component: {fileID: 770509163}
   - component: {fileID: 770509162}
   m_Layer: 9
-  m_Name: Directional Light
+  m_Name: Dev Mode Directional Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &770509162
 Light:
   m_ObjectHideFlags: 0
@@ -2917,7 +2917,7 @@ Light:
   serializedVersion: 9
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.51
+  m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2926,10 +2926,10 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -2954,7 +2954,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 16777015
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -2973,13 +2973,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770509161}
-  m_LocalRotation: {x: 0.28933907, y: -0.24963823, z: 0.07844563, w: 0.920766}
-  m_LocalPosition: {x: 11.17, y: 23.7, z: -0.17}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.4359, y: 1.4359, z: 1.4359}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 34.889, y: -30.339, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1001 &792537996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4283,7 +4283,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &997222979
 Transform:
   m_ObjectHideFlags: 0
@@ -4341,7 +4341,7 @@ MonoBehaviour:
   - {fileID: 1546005732}
   - {fileID: 1708894585}
   litStrength: 10
-  t: 0
+  duration: 1
 --- !u!1001 &1020805178
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4649,7 +4649,7 @@ MonoBehaviour:
   oldLights: []
   newLights: []
   litStrength: 10
-  t: 0.5
+  duration: 1
 --- !u!1 &1064910351
 GameObject:
   m_ObjectHideFlags: 0
@@ -5213,7 +5213,7 @@ MonoBehaviour:
   - {fileID: 1619611916}
   - {fileID: 919179853}
   litStrength: 10
-  t: 0.5
+  duration: 1
 --- !u!1 &1219547338
 GameObject:
   m_ObjectHideFlags: 0
@@ -6057,7 +6057,7 @@ Light:
   serializedVersion: 9
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10
+  m_Intensity: 0
   m_Range: 5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -6965,7 +6965,7 @@ Light:
   serializedVersion: 9
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10
+  m_Intensity: 0
   m_Range: 5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -7805,8 +7805,8 @@ MonoBehaviour:
   - {fileID: 1107045260}
   - {fileID: 1698859259}
   - {fileID: 1107045260}
-  litStrength: 5
-  t: 0.5
+  litStrength: 10
+  duration: 1
 --- !u!114 &1858509435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7823,7 +7823,7 @@ MonoBehaviour:
   newLights:
   - {fileID: 2007431205}
   litStrength: 2.5
-  t: 0.5
+  duration: 1
 --- !u!114 &1858509436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7841,7 +7841,7 @@ MonoBehaviour:
   - {fileID: 102121697}
   - {fileID: 366379766}
   litStrength: 5
-  t: 0.5
+  duration: 1
 --- !u!114 &1859492971 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5403644693503150983, guid: ea60a4f440bb732458440fb0213083b5,
@@ -8909,7 +8909,7 @@ MonoBehaviour:
   - {fileID: 1616719382}
   - {fileID: 1064910353}
   litStrength: 10
-  t: 0.5
+  duration: 1
 --- !u!1 &2077895588
 GameObject:
   m_ObjectHideFlags: 0
@@ -10251,6 +10251,16 @@ PrefabInstance:
       propertyPath: players.Array.data[1]
       value: 
       objectReference: {fileID: 1720069207}
+    - target: {fileID: 6043005351007721844, guid: 116ac96fa3d5f98479016640585f9a40,
+        type: 3}
+      propertyPath: cameraOffset.x
+      value: 2.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043005351007721844, guid: 116ac96fa3d5f98479016640585f9a40,
+        type: 3}
+      propertyPath: cameraOffset.z
+      value: 2.67
+      objectReference: {fileID: 0}
     - target: {fileID: 6043005349961004662, guid: 116ac96fa3d5f98479016640585f9a40,
         type: 3}
       propertyPath: players.Array.data[0]
