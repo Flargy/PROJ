@@ -79,7 +79,7 @@ public class OrtographicCamera : MonoBehaviour
 
             Vector3 desiredPositionToTarget = new Vector3(targetLocalPosition.x, 0, targetLocalPosition.z) - desiredLocalPosition;
 
-            size = Mathf.Max(size, Mathf.Abs(desiredPositionToTarget.y));
+            size = Mathf.Max(size, Mathf.Abs(desiredPositionToTarget.z/2));
             size = Mathf.Max(size, Mathf.Abs(desiredPositionToTarget.x) / cameraReference.aspect);
         }
 
