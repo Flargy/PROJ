@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerSounds : MonoBehaviour
 {
@@ -9,8 +10,11 @@ public class PlayerSounds : MonoBehaviour
     [SerializeField] private AudioClip[] footStepsSounds = null;
     [SerializeField] private AudioClip[] jumpingSounds = null;
     [SerializeField] private AudioClip landingSound = null;
-    [SerializeField] private AudioClip rustleSound;
-    
+    [SerializeField] private AudioClip rustleSound = null;
+    [SerializeField] private AudioMixerSnapshot mainMusicSnapShot;
+    [SerializeField] private AudioMixerSnapshot secondaryMusicSnapShot;
+
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -19,6 +23,22 @@ public class PlayerSounds : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("FirstSceneSecondaryAmbience"))
+        {
+            secondaryMusicSnapShot.TransitionTo(0.5f);
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("FirstSceneSecondaryAmbience"))
+        {
+            mainMusicSnapShot.TransitionTo(0.5f);
+        }
     }
 
     public void PlayFootStepSound()
@@ -49,12 +69,7 @@ public class PlayerSounds : MonoBehaviour
     {
 
         audioSource.PlayOneShot(rustleSound);
-        //Debug.Log("Rustle");
-        //int n = Random.Range(1, rustleSound.Length);
-        //audioSource.clip = rustleSound[n];
-        //audioSource.PlayOneShot(audioSource.clip);
-        //rustleSound[n] = rustleSound[0];
-        //rustleSound[0] = audioSource.clip;
+
     }
 
 }
