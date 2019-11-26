@@ -21,6 +21,12 @@ public class PressurePlate : MonoBehaviour
     {
         startingColor = colorObject.material;
         audioSource = GetComponent<AudioSource>();
+        EventHandeler.Current.RegisterListener(EventHandeler.EVENT_TYPE.TestEvent, EventDebug);
+    }
+
+    public void EventDebug(EventInfo info)
+    {
+        Debug.Log("Event done");
     }
 
     public void LowerCounter()
@@ -30,6 +36,9 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        TestEventInfo tei = new TestEventInfo();
+        EventHandeler.Current.FireEvent(EventHandeler.EVENT_TYPE.TestEvent, tei);
+
         if (other.CompareTag("Player") || other.CompareTag("CarryBox"))
         {
             
