@@ -22,7 +22,7 @@ public class SeeThroughWallRaycast : MonoBehaviour
         RaycastHit hit;
         if(Physics.SphereCast(transform.position + Vector3.up * 0.6f, radius, cam.transform.position - (transform.position + Vector3.up * 0.6f), out hit, 10.0f, wallLayer))
         {
-            seeThrough.transform.LookAt(cam.transform.position, Vector3.up);
+            seeThrough.transform.LookAt(transform.position - cam.transform.position, Vector3.up);
             if (seeThrough.activeSelf == false)
             {
                 seeThrough.SetActive(true);
