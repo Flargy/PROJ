@@ -449,10 +449,9 @@ public class NewPlayerScript : MonoBehaviour
     public void OnStart()
     {
         Debug.Log("Input: Start");
-        //playerInput.SwitchCurrentActionMap("Menu");
+        playerInput.SwitchCurrentActionMap("Menu");
         Debug.Log(playerInput.currentActionMap);
         menuInputs.OnStart();
-        //playerInput.SwitchCurrentActionMap("Menu");
     }
 
     public void SwapToGameplayAM()

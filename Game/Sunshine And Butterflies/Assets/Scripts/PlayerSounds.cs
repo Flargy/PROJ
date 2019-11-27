@@ -11,8 +11,8 @@ public class PlayerSounds : MonoBehaviour
     [SerializeField] private AudioClip[] jumpingSounds = null;
     [SerializeField] private AudioClip landingSound = null;
     [SerializeField] private AudioClip rustleSound = null;
-    [SerializeField] private AudioMixerSnapshot mainMusicSnapShot;
-    [SerializeField] private AudioMixerSnapshot secondaryMusicSnapShot;
+    [SerializeField] private AudioMixerSnapshot mainMusicSnapShot = null;
+    [SerializeField] private AudioMixerSnapshot secondaryMusicSnapShot = null;
 
 
     void Start()

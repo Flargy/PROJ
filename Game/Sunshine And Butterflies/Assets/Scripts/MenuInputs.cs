@@ -19,7 +19,7 @@ public class MenuInputs : MonoBehaviour
 
     public void OnAccept()
     {
-        //Debug.Log("Input: Accepted");
+
     }
 
     public void OnMove(InputValue input)
@@ -29,7 +29,6 @@ public class MenuInputs : MonoBehaviour
 
     public void OnBack()
     {
-        //Debug.Log("Input: Back");
         //pauseMenuUI.SetActive(false);
         //Time.timeScale = 1f;
         //playerInput.SwitchCurrentActionMap("Gameplay");
@@ -45,8 +44,9 @@ public class MenuInputs : MonoBehaviour
 
     public void PauseResume()
     {
-        Debug.Log(playerInput.currentActionMap);
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
+        playerInput.SwitchCurrentActionMap("Gameplay");
+
     }
 }
