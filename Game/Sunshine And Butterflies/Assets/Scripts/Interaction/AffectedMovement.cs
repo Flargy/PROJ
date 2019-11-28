@@ -11,6 +11,7 @@ public class AffectedMovement : AffectedObject
     private float t = 0;
     private Vector3 goToPosition = Vector3.zero;
     private Vector3 goFromPosition = Vector3.zero;
+    private Rigidbody rb = null;
 
     public override void ExecuteAction()
     {
@@ -20,7 +21,8 @@ public class AffectedMovement : AffectedObject
 
     private void Start()
     {
-        startPosition = transform.position;
+        rb = GetComponentInChildren<Rigidbody>();
+        startPosition = rb.transform.position;
         goToPosition = endPosition.position;
         goFromPosition = startPosition;
     }
@@ -30,20 +32,21 @@ public class AffectedMovement : AffectedObject
         while(lerpTime < actionDuration)
         {
             t += Time.deltaTime / actionDuration;
-            transform.position = Vector3.Lerp(goFromPosition, goToPosition, t);
+            //transform.position = Vector3.Lerp(goFromPosition, goToPosition, t);
+            rb.MovePosition(Vector3.Lerp(goFromPosition, goToPosition, t));
             lerpTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
 
         if(goFromPosition == startPosition)
         {
-            goFromPosition = transform.position;
+            goFromPosition = rb.transform.position;
             goToPosition = startPosition;
         }
         else
         {
             goToPosition = endPosition.position;
-            goFromPosition = transform.position;
+            goFromPosition = rb.transform.position;
         }
         t = 0.0f;
         lerpTime = 0.0f;

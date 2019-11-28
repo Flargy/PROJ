@@ -94,7 +94,7 @@ public class NewPlayerScript : MonoBehaviour
     private void DrawDropShadow()
     {
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, Vector3.down, out hit, 10.0f, LayerMask.NameToLayer("Ground")))
+        if(Physics.Raycast(transform.position, Vector3.down, out hit, 5.0f, LayerMask.NameToLayer("Ground")))
         {
             if(dropShadowInstance != null)
             {
@@ -247,24 +247,25 @@ public class NewPlayerScript : MonoBehaviour
 
     public void ApplyGroundVelocity()
     {
-        
-        if (usingScreenNorth == false)
+        if (movementVector.magnitude > 0.05f)
         {
-            rb.velocity = (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0);
+            if (usingScreenNorth == false)
+            {
+                rb.velocity = (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0);
+            }
+            else
+            {
+                //rb.velocity = Vector3.ProjectOnPlane(mainCam.transform.rotation * (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0), Vector3.up);
+                rb.velocity = Quaternion.Euler(0, mainCam.transform.rotation.eulerAngles.y, 0) * (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0);
+            }
+            if (new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude >= 2.51f)
+            {
+                float yVelocity = rb.velocity.y;
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, 2.5f);
+                rb.velocity = new Vector3(rb.velocity.x, yVelocity, rb.velocity.z);
+            }
+
         }
-        else
-        {
-            //rb.velocity = Vector3.ProjectOnPlane(mainCam.transform.rotation * (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0), Vector3.up);
-            rb.velocity = Quaternion.Euler(0, mainCam.transform.rotation.eulerAngles.y, 0) * (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0);
-        }
-        if (new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude >= 2.51f)
-        {
-            float yVelocity = rb.velocity.y;
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, 2.5f);
-            rb.velocity = new Vector3(rb.velocity.x, yVelocity, rb.velocity.z);
-        }
-        
-      
     }
 
     public bool GroundCheck()
