@@ -225,7 +225,8 @@ public class NewPlayerScript : MonoBehaviour
     {
         if(carried.tag == "Player")//Eku
         {
-            anim.SetBool("isLiftingPlayer", true);
+            anim.SetTrigger("LiftPlayer");
+            anim.SetBool("isLiftingObject", false);
 
         }
         else {
@@ -238,7 +239,6 @@ public class NewPlayerScript : MonoBehaviour
 
     public void DropObject()
     {
-        anim.SetBool("isLiftingPlayer", false);//Eku
         anim.SetBool("isLiftingObject", false);//Eku
         canBeLifted = true;
         carriedObject = null;
@@ -346,6 +346,7 @@ public class NewPlayerScript : MonoBehaviour
         {
             anim.SetTrigger("Tossing");//Eku
             carriedObject.GetComponent<Interactable>().Toss();
+            anim.SetBool("isLiftingObject", false);//Eku
         }
     }
 

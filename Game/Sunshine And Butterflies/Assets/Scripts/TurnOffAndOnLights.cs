@@ -57,6 +57,7 @@ public class TurnOffAndOnLights : MonoBehaviour
         {
             foreach(Light light in oldLights)
             {
+                
                 light.intensity = Mathf.Lerp(lightStrength, 0, t);
                 yield return new WaitForEndOfFrame();
                 if(light.intensity < 0.1f)
@@ -66,7 +67,12 @@ public class TurnOffAndOnLights : MonoBehaviour
             }
             t += Time.deltaTime/duration;
         }
+        foreach(Light light in oldLights)
+        {
+            //Debug.Log(light.gameObject.name);
+        }
+
         t = 0.0f;
-        Destroy(gameObject);
+        Destroy(this);
     }
 }

@@ -14,9 +14,6 @@ public class InteractionPickUp : Interactable
     private RenderPath rp;
     private bool isPickedUp;
     private GameObject currentHolder;
-    public float holdDistance = 0.5f;
-    public float holdOffset = 1.0f;
-    
 
     private void Start()
     {
