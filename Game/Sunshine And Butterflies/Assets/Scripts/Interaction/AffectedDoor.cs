@@ -57,7 +57,7 @@ public class AffectedDoor : AffectedObject
             }
             else 
             {
-                openAndCloseDoors = StartCoroutine(RotateDoors());
+                openAndCloseDoors = StartCoroutine(RotateDoors()); // shouldnt be needed
             }
 
         }
@@ -106,15 +106,14 @@ public class AffectedDoor : AffectedObject
 
     private void ChangeRotationValues()
     {
+        fromRotation = transform.localRotation.eulerAngles;
         if (openDoor == true)
         {
-            fromRotation = transform.localRotation.eulerAngles;
             toRotation = endRotation;
         }
         else
         {
             toRotation = originalRotation;
-            fromRotation = transform.localRotation.eulerAngles;
         }
         
         ;

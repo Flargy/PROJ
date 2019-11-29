@@ -41,6 +41,14 @@ public class InteractionPickUp : Interactable
     {
         if(isPickedUp == false)
         {
+            if (CompareTag("CarryBox"))
+            {
+                RaycastHit plateHit;
+                if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out plateHit, 1f, LayerMask.GetMask("PressurePlate")))
+                {
+                    plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
+                }
+            }
             transform.rotation = Quaternion.Euler(Vector3.zero);
             rb.velocity = Vector3.zero;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
@@ -59,6 +67,8 @@ public class InteractionPickUp : Interactable
             {
                 rp.SwapLifted();
             }
+
+            
 
         }
         else if(player == currentHolder)

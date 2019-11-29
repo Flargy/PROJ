@@ -12,11 +12,18 @@ public class AffectedMovement : AffectedObject
     private Vector3 goToPosition = Vector3.zero;
     private Vector3 goFromPosition = Vector3.zero;
     private Rigidbody rb = null;
+    private Coroutine movement = null;
+    private bool coroutineIsRunning = false;
 
     public override void ExecuteAction()
     {
-        
-        StartCoroutine(ChangePosition());
+        if(coroutineIsRunning == true)
+        {
+            StopCoroutine(movement);
+            SwapLocationValues();
+            coroutineIsRunning = false;
+        }
+        movement = StartCoroutine(ChangePosition());
     }
 
     private void Start()
@@ -29,6 +36,7 @@ public class AffectedMovement : AffectedObject
 
     private IEnumerator ChangePosition()
     {
+        coroutineIsRunning = true;
         while(lerpTime < actionDuration)
         {
             t += Time.deltaTime / actionDuration;
@@ -38,18 +46,26 @@ public class AffectedMovement : AffectedObject
             yield return new WaitForEndOfFrame();
         }
 
-        if(goFromPosition == startPosition)
+        SwapLocationValues();
+
+        
+        coroutineIsRunning = false;
+
+    }
+
+    private void SwapLocationValues()
+    {
+        t = 0.0f;
+        lerpTime = 0.0f;
+        goFromPosition = rb.transform.position;
+        if (goToPosition == endPosition.position)
         {
-            goFromPosition = rb.transform.position;
             goToPosition = startPosition;
         }
         else
         {
             goToPosition = endPosition.position;
-            goFromPosition = rb.transform.position;
         }
-        t = 0.0f;
-        lerpTime = 0.0f;
     }
 
     

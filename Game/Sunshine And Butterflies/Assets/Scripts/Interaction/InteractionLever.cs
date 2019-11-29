@@ -65,6 +65,7 @@ public class InteractionLever : Interactable
     {
         if(takeInput == true)
         {
+            takeInput = false;
             playerHasAnswered = true;
             playerAnswer = answerID;
             CheckAnswer();
@@ -92,6 +93,7 @@ public class InteractionLever : Interactable
     {
         if (abortQTE == true && interactingPlayer != null)
         {
+            takeInput = true;
             rendererHolder.SetActive(false);
             interactingPlayer.GetComponent<NewPlayerScript>().SwapLiftingState();
             interactingPlayer.SwapToMovement();
@@ -141,6 +143,7 @@ public class InteractionLever : Interactable
             correctAnswer = newNumber;
             //correctAnswer = Random.Range(correctAnswer + 1, 4) % 4;
             DisplayWantedInput();
+            takeInput = true;
             yield return new WaitForSeconds(QTETimer);
             QTETimer -= cutoffTime;
             if(playerHasAnswered == false)

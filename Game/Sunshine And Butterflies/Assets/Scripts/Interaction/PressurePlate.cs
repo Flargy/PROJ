@@ -29,6 +29,10 @@ public class PressurePlate : MonoBehaviour
     public void LowerCounter()
     {
         itemsOnPad--;
+        if(itemsOnPad < desiredNrOfObjects)
+        {
+            colorObject.material = startingColor;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,16 +41,17 @@ public class PressurePlate : MonoBehaviour
 
         if (other.CompareTag("Player") || other.CompareTag("CarryBox"))
         {
-            
             itemsOnPad++;
-            
-            foreach (AffectedObject affected in affectedObject)
+            if (itemsOnPad == desiredNrOfObjects)
             {
-                if (itemsOnPad == desiredNrOfObjects)
+               
+                colorObject.material = activatedColor;
+                audioSource.PlayOneShot(activatedSound);
+                foreach (AffectedObject affected in affectedObject)
                 {
+                
                     affected.ExecuteAction();
-                    colorObject.material = activatedColor;
-                    audioSource.PlayOneShot(activatedSound);
+                    
                 }
             }
 
@@ -63,13 +68,15 @@ public class PressurePlate : MonoBehaviour
         if (other.CompareTag("Player") || other.CompareTag("CarryBox"))
         {
             itemsOnPad--;
-            foreach (AffectedObject affected in affectedObject)
+            if (itemsOnPad < desiredNrOfObjects)
             {
-                if (itemsOnPad < desiredNrOfObjects)
+                colorObject.material = startingColor;
+                audioSource.PlayOneShot(deActivatedSound);
+                foreach (AffectedObject affected in affectedObject)
                 {
+                
                     affected.ExecuteAction();
-                    colorObject.material = startingColor;
-                    audioSource.PlayOneShot(deActivatedSound);
+                    
                 }
             }
 
