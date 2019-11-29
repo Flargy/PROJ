@@ -9,15 +9,18 @@ public class InteractionPickUp : Interactable
     [SerializeField] private Vector3 offsetVector = Vector3.zero;
     [SerializeField] private Transform respawnPoint = null;
     [SerializeField] private bool showTrajectory = false;
+    [SerializeField] private float animationDuration = 0.0f;
 
     private Rigidbody rb;
     private RenderPath rp;
     private bool isPickedUp;
     private GameObject currentHolder;
+    private BoxCollider[] colliders;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        colliders = GetComponentsInChildren<BoxCollider>();
         if(showTrajectory == true)
         {
             rp = GetComponent<RenderPath>();
@@ -28,7 +31,7 @@ public class InteractionPickUp : Interactable
     {
         if (isPickedUp == true)
         {
-            rb.MovePosition(currentHolder.transform.position + offsetVector);
+            rb.MovePosition(currentHolder.transform.position + currentHolder.transform.localRotation * offsetVector);
             transform.rotation = currentHolder.transform.rotation;
             
         }
@@ -45,7 +48,13 @@ public class InteractionPickUp : Interactable
             transform.position += Vector3.up;
             isPickedUp = true;
             currentHolder = player;
-            player.GetComponent<NewPlayerScript>().PickUpObject(gameObject);
+            //GetComponent<BoxCollider>().enabled = false;
+            //GetComponentInChildren<BoxCollider>().enabled = false;
+            foreach(BoxCollider box in colliders)
+            {
+                box.enabled = false;
+            }
+            player.GetComponent<NewPlayerScript>().PickUpObject(gameObject, animationDuration);
             if(showTrajectory == true)
             {
                 rp.SwapLifted();
@@ -67,6 +76,12 @@ public class InteractionPickUp : Interactable
         isPickedUp = false;
         rb.useGravity = true;
         rb.constraints = RigidbodyConstraints.None;
+        //GetComponent<BoxCollider>().enabled = true;
+        //GetComponentInChildren<BoxCollider>().enabled = true;
+        foreach (BoxCollider box in colliders)
+        {
+            box.enabled = true;
+        }
         LineDisplay();
     }
 
@@ -78,6 +93,12 @@ public class InteractionPickUp : Interactable
         rb.useGravity = true;
         currentHolder = null;
         rb.constraints = RigidbodyConstraints.None;
+        //GetComponent<BoxCollider>().enabled = true;
+        //GetComponentInChildren<BoxCollider>().enabled = true;
+        foreach (BoxCollider box in colliders)
+        {
+            box.enabled = true;
+        }
         LineDisplay();
 
     }

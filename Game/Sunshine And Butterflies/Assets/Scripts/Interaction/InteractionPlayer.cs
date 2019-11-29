@@ -8,8 +8,9 @@ public class InteractionPlayer : Interactable
     [SerializeField] private GameObject otherPlayer = null;
     [SerializeField] private float horizontalYeetForce = 300.0f;
     [SerializeField] private float verticalYeetForce = 40.0f;
-    [SerializeField] private float verticalOffest = 1.0f;
+    [SerializeField] private Vector3 offsetVector = Vector3.zero;
     [SerializeField] private float inputPickupDelay = 3.0f;
+    [SerializeField] private float animationDuration = 1.0f;
 
     private NewPlayerScript thisPlayer;
     
@@ -30,7 +31,7 @@ public class InteractionPlayer : Interactable
     {
         if (isLifted)
         {
-            rb.MovePosition(otherPlayer.transform.position + Vector3.up * verticalOffest);
+            rb.MovePosition(otherPlayer.transform.position + otherPlayer.transform.localRotation * offsetVector);
         }
     }
 
@@ -41,7 +42,7 @@ public class InteractionPlayer : Interactable
             rb.velocity = Vector3.zero;
             isLifted = true;
             rb.useGravity = false;
-            otherPlayer.GetComponent<NewPlayerScript>().PickUpObject(gameObject);
+            otherPlayer.GetComponent<NewPlayerScript>().PickUpObject(gameObject, animationDuration);
             thisPlayer.BecomeLifted();
             playerInput.SwitchCurrentActionMap("BreakingFree");
             breakFree = StartCoroutine(BreakFreeDelay());

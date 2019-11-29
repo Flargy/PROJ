@@ -221,20 +221,23 @@ public class NewPlayerScript : MonoBehaviour
 
     }
 
-    public void PickUpObject(GameObject carried)
+    public void PickUpObject(GameObject carried, float freezeTime)
     {
         if(carried.tag == "Player")//Eku
         {
             anim.SetTrigger("LiftPlayer");
-            anim.SetBool("isLiftingObject", false);
+            anim.SetBool("isLiftingObject", true);
 
         }
-        else {
+        else 
+        {
             anim.SetTrigger("LiftObject");//Eku
-            anim.SetBool("isLiftingObject", true); }//Eku
+            anim.SetBool("isLiftingObject", true); 
+        }//Eku
         canBeLifted = false;
         carriedObject = carried;
         CarryingAObject = true;
+        StartCoroutine(FreezePlayer(freezeTime));
     }
 
     public void DropObject()
@@ -329,6 +332,10 @@ public class NewPlayerScript : MonoBehaviour
             movementVector = value.Get<Vector2>();
             anim.SetFloat("Moving", movementVector.normalized.magnitude);
         }
+        else
+        {
+            anim.SetFloat("Moving", 0f);
+        }
     }
 
     public void OnJump()
@@ -363,6 +370,7 @@ public class NewPlayerScript : MonoBehaviour
             capsule.enabled = false;
             box.enabled = true;
             crouching = true;
+            movementVector = Vector3.zero;
             anim.SetBool("isCrouching", true);
         }
         else if (crouching == true && isLifted == false)
@@ -444,6 +452,7 @@ public class NewPlayerScript : MonoBehaviour
     public IEnumerator FreezePlayer(float freezeTime)
     {
         interacting = true;
+        movementVector = Vector3.zero;
         yield return new WaitForSeconds(freezeTime);
         interacting = false;
     }
