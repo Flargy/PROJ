@@ -17,6 +17,7 @@ public class AffectedDoor : AffectedObject
     private bool openDoor = true;
     private Coroutine openAndCloseDoors = null;
 
+
     public override void ExecuteAction()
     {
         if(coroutineIsRunning == true)
@@ -59,7 +60,6 @@ public class AffectedDoor : AffectedObject
             {
                 openAndCloseDoors = StartCoroutine(RotateDoors()); // shouldnt be needed
             }
-
         }
 
         if (usesPlates == false)
@@ -94,28 +94,33 @@ public class AffectedDoor : AffectedObject
             lerpTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        if(usesPlates == false)
+
+        if (usesPlates == false)
         {
             ChangeRotationValues();
+
         }
         coroutineIsRunning = false;
-        
-     
+
     }
-    
+
 
     private void ChangeRotationValues()
     {
         fromRotation = transform.localRotation.eulerAngles;
         if (openDoor == true)
         {
+            
             toRotation = endRotation;
+
         }
         else
         {
+
             toRotation = originalRotation;
+
         }
-        
+
         ;
         t = 0.0f;
         lerpTime = 0.0f;
