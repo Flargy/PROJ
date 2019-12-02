@@ -62,6 +62,8 @@ public class InteractionButton : Interactable
 
     private IEnumerator ButtonMovement()
     {
+        audioSource.PlayOneShot(buttonSoundIn);
+
         while (lerpTime < 1)
         {
             t += Time.deltaTime;
@@ -69,7 +71,7 @@ public class InteractionButton : Interactable
             lerpTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        audioSource.PlayOneShot(buttonSoundIn);
+        
         Debug.Log("Ljud 1");
         t = 0.0f;
         lerpTime = 0.0f;
