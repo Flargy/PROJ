@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class AffectedMovement : AffectedObject
 {
     [SerializeField] private Vector3 startPosition = Vector3.zero;
     [SerializeField] private Transform endPosition = null;
+    [SerializeField] private PhysicMaterial startMaterial, movementMaterial = null;
 
     private float lerpTime = 0;
     private float t = 0;
@@ -14,6 +16,7 @@ public class AffectedMovement : AffectedObject
     private Rigidbody rb = null;
     private Coroutine movement = null;
     private bool coroutineIsRunning = false;
+    private BoxCollider box = null;
 
     public override void ExecuteAction()
     {
@@ -32,10 +35,19 @@ public class AffectedMovement : AffectedObject
         startPosition = rb.transform.position;
         goToPosition = endPosition.position;
         goFromPosition = startPosition;
+        try{
+
+            box = rb.gameObject.GetComponent<BoxCollider>();
+        }
+        catch(Exception e)
+        {
+
+        }
     }
 
     private IEnumerator ChangePosition()
     {
+        box.material = movementMaterial;
         coroutineIsRunning = true;
         while(lerpTime < actionDuration)
         {
@@ -47,7 +59,7 @@ public class AffectedMovement : AffectedObject
         }
 
         SwapLocationValues();
-
+        box.material = startMaterial;
         
         coroutineIsRunning = false;
 
