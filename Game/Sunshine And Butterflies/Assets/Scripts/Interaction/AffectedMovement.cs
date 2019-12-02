@@ -16,7 +16,7 @@ public class AffectedMovement : AffectedObject
     private Rigidbody rb = null;
     private Coroutine movement = null;
     private bool coroutineIsRunning = false;
-    private BoxCollider box = null;
+    private BoxCollider[] boxes;
 
     public override void ExecuteAction()
     {
@@ -35,13 +35,16 @@ public class AffectedMovement : AffectedObject
         startPosition = rb.transform.position;
         goToPosition = endPosition.position;
         goFromPosition = startPosition;        
-        box = rb.gameObject.GetComponent<BoxCollider>();
+        boxes = rb.gameObject.GetComponents<BoxCollider>();
         
     }
 
     private IEnumerator ChangePosition()
     {
-        box.material = movementMaterial;
+        foreach(BoxCollider box in boxes)
+        {
+            box.material = movementMaterial;
+        }
         coroutineIsRunning = true;
         while(lerpTime < actionDuration)
         {
@@ -53,7 +56,10 @@ public class AffectedMovement : AffectedObject
         }
 
         SwapLocationValues();
-        box.material = startMaterial;
+        foreach(BoxCollider box in boxes)
+        {
+            box.material = startMaterial;
+        }
         
         coroutineIsRunning = false;
 
