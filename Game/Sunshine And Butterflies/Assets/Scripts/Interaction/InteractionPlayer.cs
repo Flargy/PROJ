@@ -18,12 +18,15 @@ public class InteractionPlayer : Interactable
     private bool isLifted = false;
     private PlayerInput playerInput = null;
     private Coroutine breakFree = null;
-    private bool noMovementAllowed = true;
+    private bool noMovementAllowed = true; 
+    private Collider[] colliders;//Eku
 
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
+        colliders = GetComponents<Collider>();//Eku
+        Debug.Log(colliders);
         thisPlayer = GetComponent<NewPlayerScript>();
     }
 
@@ -32,6 +35,7 @@ public class InteractionPlayer : Interactable
         if (isLifted)
         {
             rb.MovePosition(otherPlayer.transform.position + otherPlayer.transform.localRotation * offsetVector);
+            transform.rotation = otherPlayer.transform.rotation;
         }
     }
 
@@ -44,6 +48,10 @@ public class InteractionPlayer : Interactable
             rb.useGravity = false;
             otherPlayer.GetComponent<NewPlayerScript>().PickUpObject(gameObject, animationDuration);
             thisPlayer.BecomeLifted();
+            foreach (Collider col in colliders)
+            {
+                col.enabled = false;//Eku
+            }
             playerInput.SwitchCurrentActionMap("BreakingFree");
             breakFree = StartCoroutine(BreakFreeDelay());
         }
@@ -60,6 +68,10 @@ public class InteractionPlayer : Interactable
         thisPlayer.Released();
         otherPlayer.GetComponent<NewPlayerScript>().DropObject();
         rb.AddForce((otherPlayer.transform.rotation * Vector3.forward * horizontalYeetForce) + (Vector3.up * verticalYeetForce));
+        foreach (Collider col in colliders)
+        {
+            col.enabled = true;//Eku
+        }
         playerInput.SwitchCurrentActionMap("Gameplay");
         noMovementAllowed = true;
     }
@@ -70,6 +82,10 @@ public class InteractionPlayer : Interactable
         isLifted = false;
         rb.useGravity = true;
         otherPlayer.GetComponent<NewPlayerScript>().DropObject();
+        foreach (Collider col in colliders)
+        {
+            col.enabled = true;//Eku
+        }
         playerInput.SwitchCurrentActionMap("Gameplay");
         noMovementAllowed = true;
 
