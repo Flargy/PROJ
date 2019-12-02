@@ -27,9 +27,14 @@ public class InteractionLever : Interactable
     float t = 0;
     float leverPullDownTime = 0.0f;
 
+    private AudioSource audioSource;
+    public AudioClip pushDownLever;
+    public AudioClip releaseLever;
+
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         renderQTE = rendererHolder.GetComponent<SpriteRenderer>();
         rendererHolder.SetActive(false);
         originalQTETimer = QTETimer;
@@ -174,12 +179,22 @@ public class InteractionLever : Interactable
         leverPullDownTime = 0.0f;
         Vector3 currentRotation = leverAxis.transform.localRotation.eulerAngles;
         Vector3 endRotation = Vector3.zero;
-        if(currentRotation.x == 0)
+        if (currentRotation.x == 0)
         {
             endRotation = new Vector3(60, 0, 0);
+            // ^ljud
+            Debug.Log("LjudPushDown");
+            audioSource.PlayOneShot(pushDownLever);
+
         }
-        
-        while(leverPullDownTime < 1.0f)
+        else 
+        {
+            // andra ljudet
+            Debug.Log("LjudRelease");
+            audioSource.PlayOneShot(releaseLever);
+        }
+
+        while (leverPullDownTime < 1.0f)
         {
             leverPullDownTime += Time.deltaTime / 2;
             leverAxis.transform.localRotation = Quaternion.Euler(Vector3.Lerp(currentRotation, endRotation, leverPullDownTime));
