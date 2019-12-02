@@ -34,15 +34,9 @@ public class AffectedMovement : AffectedObject
         rb = GetComponentInChildren<Rigidbody>();
         startPosition = rb.transform.position;
         goToPosition = endPosition.position;
-        goFromPosition = startPosition;
-        try{
-
-            box = rb.gameObject.GetComponent<BoxCollider>();
-        }
-        catch(Exception e)
-        {
-
-        }
+        goFromPosition = startPosition;        
+        box = rb.gameObject.GetComponent<BoxCollider>();
+        
     }
 
     private IEnumerator ChangePosition()
