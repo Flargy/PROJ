@@ -7,6 +7,9 @@ public class AffectedDoor : AffectedObject
     [SerializeField] private List<PressurePlate> plates = null;
     [SerializeField] private bool usesPlates = false;
     [SerializeField] private Vector3 endRotation = Vector3.zero;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip openSound;
+    [SerializeField] private AudioClip closeSound;
 
     private float lerpTime = 0;
     private float t = 0;
@@ -79,6 +82,7 @@ public class AffectedDoor : AffectedObject
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         originalRotation = transform.localRotation.eulerAngles;
         fromRotation = transform.localRotation.eulerAngles;
         toRotation = endRotation;
@@ -86,6 +90,12 @@ public class AffectedDoor : AffectedObject
 
     private IEnumerator RotateDoors()
     {
+        if (toRotation == endRotation)
+        {
+            Debug.Log("OpenSound");
+            audioSource.PlayOneShot(openSound);
+        }
+
         coroutineIsRunning = true;
         while (lerpTime < actionDuration)
         {
@@ -110,15 +120,14 @@ public class AffectedDoor : AffectedObject
         fromRotation = transform.localRotation.eulerAngles;
         if (openDoor == true)
         {
-            
+            Debug.Log("CloseSound");
             toRotation = endRotation;
+            audioSource.PlayOneShot(closeSound);
 
         }
         else
         {
-
             toRotation = originalRotation;
-
         }
 
         ;
