@@ -13,6 +13,7 @@ public class NewPlayerScript : MonoBehaviour
     [SerializeField] private float jumpPower = 5.0f;
     [SerializeField] private GameObject mainCam = null;
     [SerializeField] private GameObject dropShadow = null;
+    [SerializeField] private float jumpVelocityClampValue = 7.0f;
 
     private Rigidbody rb = null;
     private Vector2 movementVector = Vector2.zero;
@@ -342,7 +343,10 @@ public class NewPlayerScript : MonoBehaviour
     {
         if (GroundCheck() == true && interacting == false && isLifted == false && CarryingAObject == false && crouching == false)
         {
-            rb.velocity += Vector3.up * jumpPower;
+            //rb.velocity += Vector3.up * jumpPower;
+            Vector3 clampedY = new Vector3(0, rb.velocity.y + 1 * jumpPower, 0);
+            clampedY = Vector3.ClampMagnitude(clampedY, jumpVelocityClampValue);
+            rb.velocity += clampedY;
             airBorne = true;
             anim.SetTrigger("isJumping");
         }
