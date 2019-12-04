@@ -81,7 +81,7 @@ public class InteractionPickUp : Interactable
     public void Drop()
     {
         currentHolder.GetComponent<NewPlayerScript>().DropObject();
-        transform.position = currentHolder.transform.position + currentHolder.transform.forward * 0.5f + currentHolder.transform.up * 0.3f;
+        transform.position = currentHolder.transform.position + currentHolder.transform.forward * 0.5f + currentHolder.transform.up * 0.6f;
         currentHolder = null;
         isPickedUp = false;
         rb.useGravity = true;
