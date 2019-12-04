@@ -345,7 +345,7 @@ public class NewPlayerScript : MonoBehaviour
             //rb.velocity += Vector3.up * jumpPower;
             Vector3 clampedY = new Vector3(0, rb.velocity.y + 1 * jumpPower, 0);
             clampedY = Vector3.ClampMagnitude(clampedY, jumpVelocityClampValue);
-            rb.velocity += clampedY;
+            rb.velocity = new Vector3(rb.velocity.x, clampedY.y, rb.velocity.z);
             airBorne = true;
             anim.SetTrigger("isJumping");
         }
@@ -368,7 +368,7 @@ public class NewPlayerScript : MonoBehaviour
 
     private void Crouch()
     {
-        if (CarryingAObject == false && canBeLifted == true && airBorne == false && interacting == false && crouching == false && isLifted == false)
+        if (CarryingAObject == false && canBeLifted == true && airBorne == false && interacting == false && crouching == false && isLifted == false && airBorne == false)
         {
             capsule.enabled = false;
             foreach (Collider col in colliders)
@@ -421,11 +421,7 @@ public class NewPlayerScript : MonoBehaviour
 
     public void BecomeLifted()
     {
-        RaycastHit plateHit;
-        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out plateHit, 1f, LayerMask.GetMask("PressurePlate")))
-        {
-            plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
-        }
+        
         isLifted = true;
         anim.SetBool("isCarried", true);//Eku
         movementVector = Vector2.zero;
