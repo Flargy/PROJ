@@ -5,8 +5,9 @@ using UnityEngine;
 public class BreakableWall : MonoBehaviour
 {
     [SerializeField] private float force = 200.0f;
+    [SerializeField] private float timeToDestroy = 4.0f;
     private Rigidbody[] rb;
-
+    private bool hasBeenUsed = false;
     void Start()
     {
         rb = GetComponentsInChildren<Rigidbody>();
@@ -14,7 +15,7 @@ public class BreakableWall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("CarryBox"))
+        if (other.CompareTag("CarryBox") && hasBeenUsed == false)
         {
             foreach(Rigidbody rig in rb)
             {
@@ -22,9 +23,14 @@ public class BreakableWall : MonoBehaviour
                 rig.useGravity = true;
                 rig.AddForce(rig.gameObject.transform.forward * force);
             }
-            Destroy(this);
+            hasBeenUsed = true;
+           
         }
     }
 
-
+    private IEnumerator DestroyDebris()
+    {
+        yield return new WaitForSeconds(timeToDestroy);
+        Destroy(gameObject);
+    }
 }

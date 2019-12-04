@@ -300,6 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 200
+  timeToDestroy: 4
 --- !u!4 &89836995
 Transform:
   m_ObjectHideFlags: 0
@@ -2239,12 +2240,12 @@ PrefabInstance:
         type: 3}
       propertyPath: colliders.Array.data[0]
       value: 
-      objectReference: {fileID: 294618270}
+      objectReference: {fileID: 144171963}
     - target: {fileID: 1118350022118625947, guid: 07eceb29cd30cb24fa48d57650dea131,
         type: 3}
       propertyPath: colliders.Array.data[1]
       value: 
-      objectReference: {fileID: 144171963}
+      objectReference: {fileID: 294618270}
     - target: {fileID: 4189003849032116783, guid: 07eceb29cd30cb24fa48d57650dea131,
         type: 3}
       propertyPath: m_Enabled
@@ -2303,7 +2304,7 @@ PrefabInstance:
     - target: {fileID: 9162830869905605388, guid: 07eceb29cd30cb24fa48d57650dea131,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7828213930459941405, guid: 07eceb29cd30cb24fa48d57650dea131,
         type: 3}
@@ -2323,7 +2324,7 @@ PrefabInstance:
     - target: {fileID: 6813663365787532236, guid: 07eceb29cd30cb24fa48d57650dea131,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6153498473236549802, guid: 07eceb29cd30cb24fa48d57650dea131,
         type: 3}
@@ -2572,6 +2573,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fd6e92831465f345a07dbef4ce2512d, type: 3}
+--- !u!65 &1291649552 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 5453044174852199633, guid: 1fecd8af4580a5f48ab4441e2407d026,
+    type: 3}
+  m_PrefabInstance: {fileID: 1646115011}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1301103619 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5319874060637918816, guid: 13e2cd18977e65b41b4712aea64bb2d6,
@@ -3242,12 +3249,12 @@ PrefabInstance:
         type: 3}
       propertyPath: colliders.Array.data[0]
       value: 
-      objectReference: {fileID: 1819265048}
+      objectReference: {fileID: 1291649552}
     - target: {fileID: 1920443402355342726, guid: 1fecd8af4580a5f48ab4441e2407d026,
         type: 3}
       propertyPath: colliders.Array.data[1]
       value: 
-      objectReference: {fileID: 144171963}
+      objectReference: {fileID: 1819265048}
     - target: {fileID: 8935464080365796635, guid: 1fecd8af4580a5f48ab4441e2407d026,
         type: 3}
       propertyPath: otherPlayer

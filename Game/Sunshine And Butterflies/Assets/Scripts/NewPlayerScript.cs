@@ -373,7 +373,7 @@ public class NewPlayerScript : MonoBehaviour
             capsule.enabled = false;
             foreach (Collider col in colliders)
             {
-                col.enabled = true;
+                col.enabled = !col.enabled;
             }
             crouching = true;
             movementVector = Vector3.zero;
@@ -384,12 +384,19 @@ public class NewPlayerScript : MonoBehaviour
             capsule.enabled = true;
             foreach (Collider col in colliders)
             {
-                col.enabled = false;
+                col.enabled = !col.enabled;
             }
             crouching = false;
             anim.SetBool("isCrouching", false);
             RaycastHit plateHit;
-            if(Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out plateHit, 1f, LayerMask.GetMask("PressurePlate")))
+            //if(Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out plateHit, 1f, LayerMask.GetMask("PressurePlate")))
+            //{
+            //    plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
+            //}
+
+            capsuleTop = transform.position + capsule.center + Vector3.up * (capsule.height / 2.1f - capsule.radius);
+            capsuleBottom = transform.position + capsule.center + Vector3.down * (capsule.height / 2.1f - capsule.radius);
+            if (Physics.CapsuleCast(capsuleTop, capsuleBottom, capsule.radius, Vector3.down, out plateHit, 0.15f, LayerMask.GetMask("PressurePlate")))
             {
                 plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
             }
