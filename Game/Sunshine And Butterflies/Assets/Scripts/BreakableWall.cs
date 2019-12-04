@@ -22,6 +22,7 @@ public class BreakableWall : MonoBehaviour
                 rig.useGravity = true;
                 rig.AddForce(rig.gameObject.transform.forward * force);
             }
+            Destroy(this);
         }
     }
 
