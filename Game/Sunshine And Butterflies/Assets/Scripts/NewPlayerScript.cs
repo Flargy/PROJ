@@ -14,6 +14,7 @@ public class NewPlayerScript : MonoBehaviour
     [SerializeField] private GameObject mainCam = null;
     [SerializeField] private GameObject dropShadow = null;
     [SerializeField] private float jumpVelocityClampValue = 7.0f;
+    [SerializeField] Collider[] colliders;
 
     private Rigidbody rb = null;
     private Vector2 movementVector = Vector2.zero;
@@ -28,7 +29,6 @@ public class NewPlayerScript : MonoBehaviour
     private bool canBeLifted = true;
     private Interactable interactScript = null;
     private CapsuleCollider capsule = null;
-    private BoxCollider box = null;
     private Vector3 capsuleTop = Vector3.zero;
     private Vector3 capsuleBottom = Vector3.zero;
     private Vector3 lookDirection = Vector3.zero;
@@ -45,7 +45,6 @@ public class NewPlayerScript : MonoBehaviour
     void Start()
     {
         capsule = GetComponent<CapsuleCollider>();
-        box = GetComponentInChildren<BoxCollider>();
         rb = GetComponent<Rigidbody>();
         interactScript = GetComponent<Interactable>();
         anim = GetComponent<Animator>();
@@ -372,7 +371,10 @@ public class NewPlayerScript : MonoBehaviour
         if (CarryingAObject == false && canBeLifted == true && airBorne == false && interacting == false && crouching == false && isLifted == false)
         {
             capsule.enabled = false;
-            box.enabled = true;
+            foreach (Collider col in colliders)
+            {
+                col.enabled = true;
+            }
             crouching = true;
             movementVector = Vector3.zero;
             anim.SetBool("isCrouching", true);
@@ -380,7 +382,10 @@ public class NewPlayerScript : MonoBehaviour
         else if (crouching == true && isLifted == false)
         {
             capsule.enabled = true;
-            box.enabled = false;
+            foreach (Collider col in colliders)
+            {
+                col.enabled = false;
+            }
             crouching = false;
             anim.SetBool("isCrouching", false);
             RaycastHit plateHit;
@@ -416,6 +421,11 @@ public class NewPlayerScript : MonoBehaviour
 
     public void BecomeLifted()
     {
+        RaycastHit plateHit;
+        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out plateHit, 1f, LayerMask.GetMask("PressurePlate")))
+        {
+            plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
+        }
         isLifted = true;
         anim.SetBool("isCarried", true);//Eku
         movementVector = Vector2.zero;
@@ -430,7 +440,10 @@ public class NewPlayerScript : MonoBehaviour
         if (crouching == true)
         {
             capsule.enabled = true;
-            box.enabled = false;
+            foreach (Collider col in colliders)
+            {
+                col.enabled = false;
+            }
             crouching = false;
         }
 

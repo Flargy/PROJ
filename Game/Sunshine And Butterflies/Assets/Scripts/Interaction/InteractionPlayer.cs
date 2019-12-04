@@ -43,15 +43,15 @@ public class InteractionPlayer : Interactable
     {
          if(thisPlayer.CanBeLifted() == true && isLifted == false)
         {
+            thisPlayer.BecomeLifted();
             rb.velocity = Vector3.zero;
             isLifted = true;
             rb.useGravity = false;
             otherPlayer.GetComponent<NewPlayerScript>().PickUpObject(gameObject, animationDuration);
-            thisPlayer.BecomeLifted();
-            foreach (Collider col in colliders)
-            {
-                col.enabled = false;//Eku
-            }
+            //foreach (Collider col in colliders)
+            //{
+            //    col.enabled = false;//Eku
+            //}
             playerInput.SwitchCurrentActionMap("BreakingFree");
             breakFree = StartCoroutine(BreakFreeDelay());
         }
@@ -68,10 +68,10 @@ public class InteractionPlayer : Interactable
         thisPlayer.Released();
         otherPlayer.GetComponent<NewPlayerScript>().DropObject();
         rb.AddForce((otherPlayer.transform.rotation * Vector3.forward * horizontalYeetForce) + (Vector3.up * verticalYeetForce));
-        foreach (Collider col in colliders)
-        {
-            col.enabled = true;//Eku
-        }
+        //foreach (Collider col in colliders)
+        //{
+        //    col.enabled = true;//Eku
+        //}
         playerInput.SwitchCurrentActionMap("Gameplay");
         noMovementAllowed = true;
     }
@@ -82,10 +82,10 @@ public class InteractionPlayer : Interactable
         isLifted = false;
         rb.useGravity = true;
         otherPlayer.GetComponent<NewPlayerScript>().DropObject();
-        foreach (Collider col in colliders)
-        {
-            col.enabled = true;//Eku
-        }
+        //foreach (Collider col in colliders)
+        //{
+        //    col.enabled = true;//Eku
+        //}
         playerInput.SwitchCurrentActionMap("Gameplay");
         noMovementAllowed = true;
 

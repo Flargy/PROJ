@@ -226,6 +226,10 @@ MonoBehaviour:
   mainCam: {fileID: 0}
   dropShadow: {fileID: 85049227436657652, guid: 81ea84b733776bb4ba1ca99d6de6287f,
     type: 3}
+  jumpVelocityClampValue: 7
+  colliders:
+  - {fileID: 7254360519868745842}
+  - {fileID: 1070278923231003023}
 --- !u!114 &1274222993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,7 +277,7 @@ MonoBehaviour:
   otherPlayer: {fileID: 0}
   horizontalYeetForce: 300
   verticalYeetForce: 40
-  offsetVector: {x: 0, y: 1.07, z: 0.365}
+  offsetVector: {x: 0, y: 1.25, z: 0.2}
   inputPickupDelay: 3
   animationDuration: 2
 --- !u!136 &1339301099900889633
@@ -301,8 +305,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.28
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Radius: 0.2618165
+  m_Center: {x: 0, y: 0.9818165, z: 0}
 --- !u!114 &21045138272880561
 MonoBehaviour:
   m_ObjectHideFlags: 0
