@@ -26,7 +26,6 @@ public class InteractionPlayer : Interactable
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
         colliders = GetComponents<Collider>();//Eku
-        Debug.Log(colliders);
         thisPlayer = GetComponent<NewPlayerScript>();
     }
 
