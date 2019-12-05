@@ -9,6 +9,17 @@ public class SeeThroughWallRaycast : MonoBehaviour
     [SerializeField] private GameObject cam = null;
     [SerializeField] private float radius = 1.0f;
 
+    private List<Vector3> castPoints;
+
+    private void Awake()
+    {
+        castPoints = new List<Vector3>();
+        castPoints.Add(Vector3.up * 0.6f);
+        castPoints.Add(Vector3.up * 0.6f + Vector3.right * radius);
+        castPoints.Add(Vector3.up * 0.6f + Vector3.left * radius);
+        castPoints.Add(Vector3.up * 0.6f + Vector3.up * radius);
+        castPoints.Add(Vector3.up * 0.6f + Vector3.down * radius);
+    }
 
     private void FixedUpdate()
     {
@@ -20,26 +31,44 @@ public class SeeThroughWallRaycast : MonoBehaviour
 
 
         RaycastHit hit;
-        if(Physics.SphereCast(transform.position + Vector3.up * 0.6f, radius, cam.transform.position - (transform.position + Vector3.up * 0.6f), out hit, 10.0f, wallLayer))
+        
+        for ( int i = 0; i < 5; i++)
         {
-            seeThrough.transform.LookAt(cam.transform.position, Vector3.up);
-            if (seeThrough.activeSelf == false)
+            if(Physics.Raycast(transform.position + castPoints[i], cam.transform.position - transform.position, out hit, 20.0f, wallLayer))
             {
-                seeThrough.SetActive(true);
+                seeThrough.transform.LookAt(cam.transform.position, Vector3.up);
+                if (seeThrough.activeSelf == false)
+                {
+                    seeThrough.SetActive(true);
+                    break;
+                }
+               
+            }
+            else
+            {
+                if (seeThrough.activeSelf == true)
+                {
+                    seeThrough.SetActive(false);
+                }
             }
         }
-        else
-        {
-            if(seeThrough.activeSelf == true)
-            {
-                seeThrough.SetActive(false);
-            }
-        }
+
+
+        //if(Physics.SphereCast(transform.position + Vector3.up * 0.6f, radius, cam.transform.position - (transform.position + Vector3.up * 0.6f), out hit, 10.0f, wallLayer))
+        //{
+        //    seeThrough.transform.LookAt(cam.transform.position, Vector3.up);
+        //    if (seeThrough.activeSelf == false)
+        //    {
+        //        seeThrough.SetActive(true);
+        //    }
+        //}
+        //else
+        //{
+        //    if(seeThrough.activeSelf == true)
+        //    {
+        //        seeThrough.SetActive(false);
+        //    }
+        //}
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position + Vector3.up * 0.6f, radius);
-    }
 }
