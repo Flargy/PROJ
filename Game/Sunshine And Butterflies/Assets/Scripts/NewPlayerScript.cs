@@ -340,10 +340,10 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnJump()
     {
-        if (GroundCheck() == true && interacting == false && isLifted == false && CarryingAObject == false && crouching == false)
+        if (GroundCheck() == true && interacting == false && isLifted == false && CarryingAObject == false && crouching == false && airBorne == false)
         {
             //rb.velocity += Vector3.up * jumpPower;
-            Vector3 clampedY = new Vector3(0, rb.velocity.y + 1 * jumpPower, 0);
+            Vector3 clampedY = new Vector3(0, jumpPower, 0);
             clampedY = Vector3.ClampMagnitude(clampedY, jumpVelocityClampValue);
             rb.velocity = new Vector3(rb.velocity.x, clampedY.y, rb.velocity.z);
             airBorne = true;
