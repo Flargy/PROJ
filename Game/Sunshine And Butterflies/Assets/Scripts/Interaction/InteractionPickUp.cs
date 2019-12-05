@@ -44,7 +44,8 @@ public class InteractionPickUp : Interactable
             if (CompareTag("CarryBox"))
             {
                 RaycastHit plateHit;
-                if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out plateHit, 1f, LayerMask.GetMask("PressurePlate")))
+                //if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out plateHit, 1f, LayerMask.GetMask("PressurePlate")))
+                if(Physics.BoxCast(transform.position + Vector3.up * 0.5f, colliders[0].size/2, Vector3.down, out plateHit, Quaternion.identity, 1.0f, LayerMask.GetMask("PressurePlate") ))
                 {
                     plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
                 }
