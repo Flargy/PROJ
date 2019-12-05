@@ -18,7 +18,7 @@ public class ChangeSceneTrigger : MonoBehaviour
             if (playerCount == 2)
             {
                 activated = true;
-
+                ChangeScene();
             }
         }
     }
