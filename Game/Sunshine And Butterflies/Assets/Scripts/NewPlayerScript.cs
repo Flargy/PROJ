@@ -194,7 +194,7 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnInteract()
     {
-        if (isLifted == false && crouching == false && airBorne == false)
+        if (isLifted == false && crouching == false && airBorne == false && canPickUp)
         {
             RaycastHit ray;
             if (CarryingAObject == false)
