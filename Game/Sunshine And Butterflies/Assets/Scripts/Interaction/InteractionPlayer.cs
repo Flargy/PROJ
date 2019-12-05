@@ -42,6 +42,7 @@ public class InteractionPlayer : Interactable
     {
          if(thisPlayer.CanBeLifted() == true && isLifted == false)
         {
+            breakFree = StartCoroutine(BreakFreeDelay());
             thisPlayer.BecomeLifted();
             rb.velocity = Vector3.zero;
             isLifted = true;
@@ -52,7 +53,6 @@ public class InteractionPlayer : Interactable
             //    col.enabled = false;//Eku
             //}
             playerInput.SwitchCurrentActionMap("BreakingFree");
-            breakFree = StartCoroutine(BreakFreeDelay());
         }
          else if(isLifted == true)
         {

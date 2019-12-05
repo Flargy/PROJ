@@ -23,6 +23,7 @@ public class NewPlayerScript : MonoBehaviour
     private bool airBorne = false;
     private bool crouching = false;
     private bool usingScreenNorth = false;
+    private bool canPickUp = true;
     private GameObject carriedObject;
     private float jumpGroundCheckDelay = 0.0f;
     private bool isLifted = false;
@@ -246,6 +247,7 @@ public class NewPlayerScript : MonoBehaviour
         canBeLifted = true;
         carriedObject = null;
         CarryingAObject = false;
+        StartCoroutine(PickupDelay());
     }
 
     public void ApplyGroundVelocity()
@@ -475,6 +477,13 @@ public class NewPlayerScript : MonoBehaviour
         movementVector = Vector3.zero;
         yield return new WaitForSeconds(freezeTime);
         interacting = false;
+    }
+
+    private IEnumerator PickupDelay()
+    {
+        canPickUp = false;
+        yield return new WaitForSeconds(1.0f);
+        canPickUp = true;
     }
 
     public void OnStart()
