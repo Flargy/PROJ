@@ -9,7 +9,7 @@ public class NewPlayerScript : MonoBehaviour
     [SerializeField] private LayerMask groundLayer = 1;
     [SerializeField] private LayerMask interactionLayer = 1;
     [SerializeField] private LayerMask wallLayer = 1;
-    [SerializeField] private float moveSpeed = 6.0f;
+    [SerializeField] private float moveSpeed = 2.5f;
     [SerializeField] private float jumpPower = 5.0f;
     [SerializeField] private GameObject mainCam = null;
     [SerializeField] private GameObject dropShadow = null;
@@ -263,10 +263,10 @@ public class NewPlayerScript : MonoBehaviour
                 //rb.velocity = Vector3.ProjectOnPlane(mainCam.transform.rotation * (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0), Vector3.up);
                 rb.velocity = Quaternion.Euler(0, mainCam.transform.rotation.eulerAngles.y, 0) * (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0);
             }
-            if (new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude >= 2.51f)
+            if (new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude >= moveSpeed)
             {
                 float yVelocity = rb.velocity.y;
-                rb.velocity = Vector3.ClampMagnitude(rb.velocity, 2.5f);
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, moveSpeed);
                 rb.velocity = new Vector3(rb.velocity.x, yVelocity, rb.velocity.z);
             }
 

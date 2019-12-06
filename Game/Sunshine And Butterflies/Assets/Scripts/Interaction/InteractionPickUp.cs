@@ -10,6 +10,7 @@ public class InteractionPickUp : Interactable
     [SerializeField] private Transform respawnPoint = null;
     [SerializeField] private bool showTrajectory = false;
     [SerializeField] private float animationDuration = 0.0f;
+    [SerializeField] private float pickupAnimationDelay = 1.0f;
 
     private Rigidbody rb;
     private RenderPath rp;
@@ -25,11 +26,12 @@ public class InteractionPickUp : Interactable
         {
             rp = GetComponent<RenderPath>();
         }
+        
     }
 
     private void Update()
     {
-        if (isPickedUp == true)
+        if (isPickedUp == true && interacting == true)
         {
             rb.MovePosition(currentHolder.transform.position + currentHolder.transform.localRotation * offsetVector);
             transform.rotation = currentHolder.transform.rotation;
@@ -39,7 +41,7 @@ public class InteractionPickUp : Interactable
 
     public override void Interact(GameObject player)
     {
-        if(isPickedUp == false)
+        if(interacting == false)
         {
             if (CompareTag("CarryBox"))
             {
@@ -50,13 +52,16 @@ public class InteractionPickUp : Interactable
                     plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
                 }
             }
-            transform.rotation = Quaternion.Euler(Vector3.zero);
-            rb.velocity = Vector3.zero;
-            rb.constraints = RigidbodyConstraints.FreezeRotation;
-            rb.useGravity = false;
-            transform.position += Vector3.up;
-            isPickedUp = true;
+            interacting = true;
             currentHolder = player;
+            rb.velocity = Vector3.zero;
+            rb.useGravity = false;
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
+            //transform.rotation = Quaternion.Euler(Vector3.zero);
+            //transform.position += Vector3.up;
+            
+            StartCoroutine(PickupDelay());
+
             //GetComponent<BoxCollider>().enabled = false;
             //GetComponentInChildren<BoxCollider>().enabled = false;
             foreach(BoxCollider box in colliders)
@@ -64,10 +69,7 @@ public class InteractionPickUp : Interactable
                 box.enabled = false;
             }
             player.GetComponent<NewPlayerScript>().PickUpObject(gameObject, animationDuration);
-            if(showTrajectory == true)
-            {
-                rp.SwapLifted();
-            }
+            
 
             
 
@@ -85,6 +87,7 @@ public class InteractionPickUp : Interactable
         transform.position = currentHolder.transform.position + currentHolder.transform.forward * 0.5f + currentHolder.transform.up * 0.6f;
         currentHolder = null;
         isPickedUp = false;
+        interacting = false;
         rb.useGravity = true;
         rb.constraints = RigidbodyConstraints.None;
         //GetComponent<BoxCollider>().enabled = true;
@@ -101,6 +104,7 @@ public class InteractionPickUp : Interactable
         currentHolder.GetComponent<NewPlayerScript>().DropObject();
         rb.AddForce((currentHolder.transform.rotation * Vector3.forward * horizontalYeetForce) + (Vector3.up * verticalYeetForce));
         isPickedUp = false;
+        interacting = false;
         rb.useGravity = true;
         currentHolder = null;
         rb.constraints = RigidbodyConstraints.None;
@@ -145,6 +149,16 @@ public class InteractionPickUp : Interactable
 
     private void LineDisplay()
     {
+        if (showTrajectory == true)
+        {
+            rp.SwapLifted();
+        }
+    }
+
+    private IEnumerator PickupDelay()
+    {
+        yield return new WaitForSeconds(pickupAnimationDelay);
+        isPickedUp = true;
         if (showTrajectory == true)
         {
             rp.SwapLifted();
