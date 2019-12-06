@@ -18,7 +18,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.6
+    value: 0.82
   threshold:
     overrideState: 1
     value: 1
@@ -47,6 +47,43 @@ MonoBehaviour:
   dirtIntensity:
     overrideState: 1
     value: 0
+--- !u!114 &-5956211597842305404
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f6f3f7c722b4544b97e3c75840aa33, type: 3}
+  m_Name: AutoExposure
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  filtering:
+    overrideState: 1
+    value: {x: 50, y: 95}
+  minLuminance:
+    overrideState: 1
+    value: 0.2
+  maxLuminance:
+    overrideState: 1
+    value: 1
+  keyValue:
+    overrideState: 1
+    value: 1
+  eyeAdaptation:
+    overrideState: 1
+    value: 0
+  speedUp:
+    overrideState: 1
+    value: 2
+  speedDown:
+    overrideState: 1
+    value: 1
 --- !u!114 &-4667274983407957949
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -108,6 +145,7 @@ MonoBehaviour:
   - {fileID: -4667274983407957949}
   - {fileID: -7887141818194189124}
   - {fileID: 7687228437277749584}
+  - {fileID: -5956211597842305404}
 --- !u!114 &88546031073036217
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -212,13 +250,13 @@ MonoBehaviour:
     value: 100
   lift:
     overrideState: 1
-    value: {x: 1, y: 0.9508661, z: 0.95605797, w: 0}
+    value: {x: 1, y: 0.95375437, z: 0.9707765, w: 0}
   gamma:
     overrideState: 1
-    value: {x: 1, y: 0.9356209, z: 0.87615067, w: 0}
+    value: {x: 1, y: 0.88328004, z: 0.9906171, w: 0}
   gain:
     overrideState: 1
-    value: {x: 1, y: 0.9762278, z: 0.9656836, w: 0}
+    value: {x: 1, y: 0.64838505, z: 0.77831167, w: 0}
   masterCurve:
     overrideState: 0
     value:
@@ -1440,10 +1478,10 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.41
+    value: 0.34
   size:
     overrideState: 1
-    value: 1
+    value: 0.74
   lumContrib:
     overrideState: 1
     value: 0.8
