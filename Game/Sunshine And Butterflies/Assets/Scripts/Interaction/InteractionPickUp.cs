@@ -43,15 +43,7 @@ public class InteractionPickUp : Interactable
     {
         if(interacting == false)
         {
-            if (CompareTag("CarryBox"))
-            {
-                RaycastHit plateHit;
-                //if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out plateHit, 1f, LayerMask.GetMask("PressurePlate")))
-                if(Physics.BoxCast(transform.position + Vector3.up * 0.5f, colliders[0].size/2, Vector3.down, out plateHit, Quaternion.identity, 0.45f, LayerMask.GetMask("PressurePlate") ))
-                {
-                    plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
-                }
-            }
+            
             interacting = true;
             currentHolder = player;
             rb.velocity = Vector3.zero;
@@ -162,6 +154,15 @@ public class InteractionPickUp : Interactable
         if (showTrajectory == true)
         {
             rp.SwapLifted();
+        }
+        if (CompareTag("CarryBox"))
+        {
+            RaycastHit plateHit;
+            //if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out plateHit, 1f, LayerMask.GetMask("PressurePlate")))
+            if (Physics.BoxCast(transform.position + Vector3.up * 0.5f, colliders[0].size / 2, Vector3.down, out plateHit, Quaternion.identity, 0.45f, LayerMask.GetMask("PressurePlate")))
+            {
+                plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
+            }
         }
     }
 }

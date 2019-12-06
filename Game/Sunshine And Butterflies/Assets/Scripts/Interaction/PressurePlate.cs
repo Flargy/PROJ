@@ -28,7 +28,8 @@ public class PressurePlate : MonoBehaviour
 
     public void LowerCounter()
     {
-        itemsOnPad--;
+        itemsOnPad = Mathf.Max(0, itemsOnPad -1);
+        Debug.Log(itemsOnPad);
         if(itemsOnPad < desiredNrOfObjects)
         {
             colorObject.material = startingColor;
@@ -67,7 +68,7 @@ public class PressurePlate : MonoBehaviour
     {
         if (other.CompareTag("Player") || other.CompareTag("CarryBox"))
         {
-            itemsOnPad--;
+            itemsOnPad = Mathf.Max(0, itemsOnPad - 1);
             if (itemsOnPad < desiredNrOfObjects)
             {
                 colorObject.material = startingColor;

@@ -206,7 +206,7 @@ public class NewPlayerScript : MonoBehaviour
 
                     Interactable interactionObject = ray.collider.GetComponent<Interactable>();
                     interactionObject.DistanceCheck(gameObject);
-
+                    StartCoroutine(PickupDelay());
 
                 }
             }
@@ -304,7 +304,7 @@ public class NewPlayerScript : MonoBehaviour
         if (movementVector.magnitude >= 0.1f)
         {
             rb.velocity = (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0);
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, 2.5f) * 0.9f;
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, moveSpeed) * 0.9f;
             if (usingScreenNorth == false)
             {
                 rb.velocity = new Vector3(rb.velocity.x, yVelocity, rb.velocity.z);
@@ -344,7 +344,6 @@ public class NewPlayerScript : MonoBehaviour
     {
         if (GroundCheck() == true && interacting == false && isLifted == false && CarryingAObject == false && crouching == false && airBorne == false)
         {
-            //rb.velocity += Vector3.up * jumpPower;
             Vector3 clampedY = new Vector3(0, jumpPower, 0);
             clampedY = Vector3.ClampMagnitude(clampedY, jumpVelocityClampValue);
             rb.velocity = new Vector3(rb.velocity.x, clampedY.y, rb.velocity.z);
@@ -397,7 +396,7 @@ public class NewPlayerScript : MonoBehaviour
             //}
 
             capsuleTop = transform.position + capsule.center + Vector3.up * (capsule.height / 2.1f - capsule.radius);
-            capsuleBottom = transform.position + capsule.center + Vector3.down * (capsule.height / 2.1f - capsule.radius);
+            capsuleBottom = transform.position + capsule.center + Vector3.down * (capsule.height / 2.5f - capsule.radius);
             if (Physics.CapsuleCast(capsuleTop, capsuleBottom, capsule.radius, Vector3.down, out plateHit, 0.15f, LayerMask.GetMask("PressurePlate")))
             {
                 plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
