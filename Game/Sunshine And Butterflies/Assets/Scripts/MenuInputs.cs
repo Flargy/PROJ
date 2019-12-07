@@ -7,16 +7,25 @@ using UnityEngine.EventSystems;
 
 public class MenuInputs : MonoBehaviour
 {
+    //public Toggle trueNorthToggle;
     //[SerializeField] private NewPlayerScript player1 = null;
     //[SerializeField] private NewPlayerScript player2 = null;
     private Vector2 moveInput;
-    [SerializeField]private GameObject pauseMenuUI;
+    [SerializeField] private GameObject pauseMenuUI;
     private PlayerInput playerInput = null;
     private EventSystem es = null;
     private Button btn = null;
 
     public static bool isGamePaused = false;
-    
+    private static NewPlayerScript Player;
+
+    //public static MenuInputs Instance;
+
+    //private void Awake()
+    //{
+    //    Instance = this;
+    //}
+
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -51,8 +60,22 @@ public class MenuInputs : MonoBehaviour
         Time.timeScale = 0f;
         isGamePaused = true;
 
-
     }
+
+    //public void OnStartFromNewPlayerScript(NewPlayerScript player)
+    //{
+    //    pauseMenuUI.SetActive(true);
+    //    btn = GameObject.Find("ResumeButton").GetComponent<Button>();
+    //    es = GameObject.Find("PauseMenuEventSystem").GetComponent<EventSystem>();
+    //    es.SetSelectedGameObject(btn.gameObject);
+    //    //playerInput.SwitchCurrentActionMap("Menu");
+    //    Time.timeScale = 0f;
+    //    isGamePaused = true;
+
+    //    Player = player;
+    //    if (trueNorthToggle != null)
+    //        trueNorthToggle.isOn = Player.UsingScreenNorth;
+    //}
 
     public void PauseResume()
     {
@@ -77,4 +100,9 @@ public class MenuInputs : MonoBehaviour
         es = GameObject.Find("PauseMenuEventSystem").GetComponent<EventSystem>();
         es.SetSelectedGameObject(btn.gameObject);
     }
+
+    //public void ToggleHandler(bool value)
+    //{
+    //    Player.SetTrueNorth(value);
+    //}
 }

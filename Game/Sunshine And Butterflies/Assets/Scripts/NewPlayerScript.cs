@@ -55,6 +55,8 @@ public class NewPlayerScript : MonoBehaviour
 
     }
 
+
+    //public bool UsingScreenNorth => usingScreenNorth;
     void Update()
     {
 
@@ -487,9 +489,10 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnStart()
     {
-        //Debug.Log("Input: Start");
+        Debug.Log("Input: Start for player: " + gameObject.name);
         //playerInput.SwitchCurrentActionMap("Menu");
         //Debug.Log(playerInput.currentActionMap);
+        //MenuInputs.Instance.OnStartFromNewPlayerScript(this);
         menuInputs.OnStart();
     }
 
@@ -502,5 +505,10 @@ public class NewPlayerScript : MonoBehaviour
     {
         usingScreenNorth = !usingScreenNorth;   
     }
+
+    //public void SetTrueNorth(bool value)
+    //{
+    //    usingScreenNorth = value;
+    //}
 
 }
