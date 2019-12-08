@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7921628721974266636}
   - component: {fileID: -4432568835302456497}
   - component: {fileID: 6504127831082645239}
+  - component: {fileID: 1207089706498682036}
   m_Layer: 9
   m_Name: Box
   m_TagString: CarryBox
@@ -136,8 +137,8 @@ MonoBehaviour:
   offsetVector: {x: 0, y: 1.5, z: 0}
   respawnPoint: {fileID: 0}
   showTrajectory: 1
-  holdDistance: 0
-  holdOffset: 1.5
+  animationDuration: 0
+  pickupAnimationDelay: 1
 --- !u!120 &5231960782195611254
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -264,8 +265,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: c95cab5529598864f90084cfce7c4e68, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -740,6 +741,20 @@ MonoBehaviour:
     - {x: 0.57735026, y: 0.57735026, z: -0.57735026}
     - {x: 0.57735026, y: 0.57735026, z: 0.57735026}
     - {x: 0.57735026, y: -0.57735026, z: 0.57735026}
+--- !u!114 &1207089706498682036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946768521394480097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd27f90e8dc60aa469d0fa3ce023a8e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  howToPlaySound: 1
+  source: {fileID: -4432568835302456497}
 --- !u!1 &6334278292182488420
 GameObject:
   m_ObjectHideFlags: 0
