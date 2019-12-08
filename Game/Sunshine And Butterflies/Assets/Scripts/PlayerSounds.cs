@@ -21,11 +21,6 @@ public class PlayerSounds : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    void Update()
-    {
-
-    }
-
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("FirstSceneSecondaryAmbience"))

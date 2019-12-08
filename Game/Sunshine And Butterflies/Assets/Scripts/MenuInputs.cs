@@ -34,22 +34,12 @@ public class MenuInputs : MonoBehaviour
         //pauseMenuUI.SetActive(false);
     }
 
-    public void OnAccept()
-    {
-
-    }
 
     public void OnMove(InputValue input)
     {
         moveInput = input.Get<Vector2>();
     }
 
-    public void OnBack()
-    {
-        //pauseMenuUI.SetActive(false);
-        //Time.timeScale = 1f;
-        //playerInput.SwitchCurrentActionMap("Gameplay");
-    }
 
     public void OnStart()
     {
@@ -134,13 +124,20 @@ public class MenuInputs : MonoBehaviour
 
     public void PlayButton()
     {
-        SceneManager.LoadScene("Level_1_1");
+        Debug.Log("Level loaded");
+        //SceneManager.LoadScene("Level_1_1");
 
     }
 
 
     public void QuitBUtton()
     {
+        Debug.Log("Closing game");
         Application.Quit();
+    }
+
+    public void ControllerButton()
+    {
+        Debug.Log("Control scheme");
     }
 }

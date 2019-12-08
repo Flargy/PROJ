@@ -42,9 +42,9 @@ public class AffectedDoor : AffectedObject
             {
                 if (pressedPlate.GetPushed() == false)
                 {
-                    Debug.Log("CloseSound");
+                    //Debug.Log("CloseSound");
                     toRotation = endRotation;
-                    audioSource.PlayOneShot(closeSound);
+                    //audioSource.PlayOneShot(closeSound);
                     openDoor = false;
                     break;
                 }
@@ -116,13 +116,13 @@ public class AffectedDoor : AffectedObject
 
         }
 
-        /*
-        if (!opening) 
+
+        if (!opening)
         {
             Debug.Log("CloseSound");
             toRotation = endRotation;
             audioSource.PlayOneShot(closeSound);
-        }*/
+        }
 
         coroutineIsRunning = false;
 
