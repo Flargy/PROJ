@@ -94,11 +94,25 @@ public class MenuInputs : MonoBehaviour
         es = GameObject.Find("PauseMenuEventSystem").GetComponent<EventSystem>();
         es.SetSelectedGameObject(btn.gameObject);
     }
+    
+    public void MainMenuOptionsBackSelection()
+    {
+        btn = GameObject.Find("BackButton").GetComponent<Button>();
+        es = GameObject.Find("MainMenuEventSystem").GetComponent<EventSystem>();
+        es.SetSelectedGameObject(btn.gameObject);
+    }
 
     public void ResumeButtonSelection()
     {
         btn = GameObject.Find("ResumeButton").GetComponent<Button>();
         es = GameObject.Find("PauseMenuEventSystem").GetComponent<EventSystem>();
+        es.SetSelectedGameObject(btn.gameObject);
+    }
+
+    public void MainMenuPlayButtonSelection()
+    {
+        btn = GameObject.Find("PlayButton").GetComponent<Button>();
+        es = GameObject.Find("MainMenuEventSystem").GetComponent<EventSystem>();
         es.SetSelectedGameObject(btn.gameObject);
     }
 
