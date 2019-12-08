@@ -13,6 +13,9 @@ public class InteractionLever : Interactable
     [SerializeField] private float QTETimer = 3.0f;
     [SerializeField] private float cutoffTime = 0.15f;
     [SerializeField] private List<Interactable> connectedSwitches = null;
+    [SerializeField] private AudioSource correct;
+    [SerializeField] private AudioSource incorrect;
+
     private PlayerQTE interactingPlayer = null;
     private int correctAnswer = 0;
     private int playerAnswer = 0;
@@ -84,6 +87,7 @@ public class InteractionLever : Interactable
         {
             abortQTE = false;
             renderQTE.sprite = null;
+            correct.Play();
         }
         else
         {
@@ -91,6 +95,7 @@ public class InteractionLever : Interactable
             StopCoroutine(activateQTE);
             StopCoroutine(leverRotation);
             StopQTE();
+            incorrect.Play();
         }
     }
 
