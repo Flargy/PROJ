@@ -42,6 +42,7 @@ public class NewPlayerScript : MonoBehaviour
 
     private PlayerInput playerInput = null;
     private MenuInputs menuInputs = null;
+    private PlayerSounds playerSounds;
 
     void Start()
     {
@@ -49,6 +50,7 @@ public class NewPlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         interactScript = GetComponent<Interactable>();
         anim = GetComponent<Animator>();
+        playerSounds = GetComponent<PlayerSounds>();
 
         playerInput = GetComponent<PlayerInput>();
         menuInputs = GetComponent<MenuInputs>();
@@ -237,6 +239,13 @@ public class NewPlayerScript : MonoBehaviour
             anim.SetTrigger("LiftObject");//Eku
             anim.SetBool("isLiftingObject", true); 
         }//Eku
+
+        playerSounds.PlayPickup();
+
+        var crateSound = carried.GetComponent<CrateSound>();
+        if(crateSound != null && crateSound.howToPlaySound == CrateSound.HowToPlaySound.Pickup)
+            crateSound.shouldPlaySound = true;
+
         canBeLifted = false;
         carriedObject = carried;
         CarryingAObject = true;

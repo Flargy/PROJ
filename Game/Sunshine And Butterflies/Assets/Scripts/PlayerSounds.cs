@@ -11,6 +11,7 @@ public class PlayerSounds : MonoBehaviour
     [SerializeField] private AudioClip[] jumpingSounds = null;
     [SerializeField] private AudioClip landingSound = null;
     [SerializeField] private AudioClip rustleSound = null;
+    [SerializeField] private AudioClip pickupSound = null;
     [SerializeField] private AudioMixerSnapshot mainMusicSnapShot = null;
     [SerializeField] private AudioMixerSnapshot secondaryMusicSnapShot = null;
 
@@ -70,6 +71,11 @@ public class PlayerSounds : MonoBehaviour
 
         audioSource.PlayOneShot(rustleSound);
 
+    }
+
+    public void PlayPickup() 
+    {
+        audioSource.PlayOneShot(pickupSound);
     }
 
 }
