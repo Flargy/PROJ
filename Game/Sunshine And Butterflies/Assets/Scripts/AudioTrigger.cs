@@ -8,6 +8,8 @@ public class AudioTrigger : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField] private AudioClip triggerSound;
 
+    private List<GameObject> playersInArea = new List<GameObject>();
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -17,13 +19,18 @@ public class AudioTrigger : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            playersInArea.Add(other.gameObject);
             audioSource.PlayOneShot(triggerSound);
         }
     }
 
     public void OnTriggerExit(Collider other)
     {
-        audioSource.Stop();
+        if (playersInArea.Contains(other.gameObject))
+            playersInArea.Remove(other.gameObject);
+
+        if (playersInArea.Count == 0)
+            audioSource.Stop();
     }
 
 }
