@@ -18,7 +18,7 @@ public class MenuInputs : MonoBehaviour
     private Button btn = null;
 
     public static bool isGamePaused = false;
-    private static NewPlayerScript Player;
+    // private static NewPlayerScript Player;
 
     //public static MenuInputs Instance;
 
@@ -83,7 +83,11 @@ public class MenuInputs : MonoBehaviour
         pauseMenuUI.SetActive(false);
         es.SetSelectedGameObject(null);
         Time.timeScale = 1f;
-        playerInput.SwitchCurrentActionMap("Gameplay");
+        var allPlayerÏnputComponents = FindObjectsOfType<PlayerInput>();
+        foreach (var p in allPlayerÏnputComponents)
+            p.SwitchCurrentActionMap("Gameplay");
+
+        //playerInput.SwitchCurrentActionMap("Gameplay");
         isGamePaused = false;
 
     }
