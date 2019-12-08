@@ -21,4 +21,9 @@ public class AudioTrigger : MonoBehaviour
         }
     }
 
+    public void OnTriggerExit(Collider other)
+    {
+        audioSource.Stop();
+    }
+
 }
