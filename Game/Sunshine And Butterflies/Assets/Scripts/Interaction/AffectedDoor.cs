@@ -42,8 +42,10 @@ public class AffectedDoor : AffectedObject
             {
                 if (pressedPlate.GetPushed() == false)
                 {
+                    Debug.Log("CloseSound");
+                    toRotation = endRotation;
+                    audioSource.PlayOneShot(closeSound);
                     openDoor = false;
-
                     break;
                 }
                 else if (pressedPlate.GetPushed() == true)
@@ -53,6 +55,7 @@ public class AffectedDoor : AffectedObject
                 }
 
             }
+
             ChangeRotationValues();
 
             if (openDoor == true)
@@ -90,11 +93,13 @@ public class AffectedDoor : AffectedObject
 
     private IEnumerator RotateDoors()
     {
-        if (toRotation == endRotation)
+        var opening = toRotation == endRotation;
+        if (opening)
         {
             Debug.Log("OpenSound");
             audioSource.PlayOneShot(openSound);
         }
+
 
         coroutineIsRunning = true;
         while (lerpTime < actionDuration)
@@ -110,6 +115,15 @@ public class AffectedDoor : AffectedObject
             ChangeRotationValues();
 
         }
+
+        /*
+        if (!opening) 
+        {
+            Debug.Log("CloseSound");
+            toRotation = endRotation;
+            audioSource.PlayOneShot(closeSound);
+        }*/
+
         coroutineIsRunning = false;
 
     }
@@ -123,7 +137,6 @@ public class AffectedDoor : AffectedObject
             Debug.Log("CloseSound");
             toRotation = endRotation;
             audioSource.PlayOneShot(closeSound);
-
         }
         else
         {
