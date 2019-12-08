@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class MenuInputs : MonoBehaviour
 {
@@ -105,4 +106,23 @@ public class MenuInputs : MonoBehaviour
     //{
     //    Player.SetTrueNorth(value);
     //}
+
+    /*
+     * -------------------
+     * MAIN MENU FUNCTIONS 
+     * --------------------
+     * --------------------
+     */
+
+    public void PlayButton()
+    {
+        SceneManager.LoadScene("Level_1_1");
+
+    }
+
+
+    public void QuitBUtton()
+    {
+        Application.Quit();
+    }
 }
