@@ -8,9 +8,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuInputs : MonoBehaviour
 {
-    //public Toggle trueNorthToggle;
-    //[SerializeField] private NewPlayerScript player1 = null;
-    //[SerializeField] private NewPlayerScript player2 = null;
+    public Toggle trueNorthToggle;
+    [SerializeField] private NewPlayerScript player1 = null;
+    [SerializeField] private NewPlayerScript player2 = null;
     private Vector2 moveInput;
     [SerializeField] private GameObject pauseMenuUI;
     private PlayerInput playerInput = null;
@@ -18,14 +18,14 @@ public class MenuInputs : MonoBehaviour
     private Button btn = null;
 
     public static bool isGamePaused = false;
-    // private static NewPlayerScript Player;
+    private NewPlayerScript currentPlayerPaused;
 
-    //public static MenuInputs Instance;
+    public static MenuInputs Instance;
 
-    //private void Awake()
-    //{
-    //    Instance = this;
-    //}
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -35,49 +35,60 @@ public class MenuInputs : MonoBehaviour
     }
 
 
-    public void OnMove(InputValue input)
-    {
-        moveInput = input.Get<Vector2>();
-    }
+    //public void OnNavigate(InputValue input)
+    //{
+    //    moveInput = input.Get<Vector2>();
+    //}
 
 
-    public void OnStart()
-    {
-        pauseMenuUI.SetActive(true);
-        btn = GameObject.Find("ResumeButton").GetComponent<Button>();
-        es = GameObject.Find("PauseMenuEventSystem").GetComponent<EventSystem>();
-        es.SetSelectedGameObject(btn.gameObject);
-        playerInput.SwitchCurrentActionMap("Menu");
-        Time.timeScale = 0f;
-        isGamePaused = true;
-
-    }
-
-    //public void OnStartFromNewPlayerScript(NewPlayerScript player)
+    //public void OnStart()
     //{
     //    pauseMenuUI.SetActive(true);
     //    btn = GameObject.Find("ResumeButton").GetComponent<Button>();
     //    es = GameObject.Find("PauseMenuEventSystem").GetComponent<EventSystem>();
     //    es.SetSelectedGameObject(btn.gameObject);
-    //    //playerInput.SwitchCurrentActionMap("Menu");
+    //    playerInput.SwitchCurrentActionMap("Menu");
     //    Time.timeScale = 0f;
     //    isGamePaused = true;
 
-    //    Player = player;
-    //    if (trueNorthToggle != null)
-    //        trueNorthToggle.isOn = Player.UsingScreenNorth;
     //}
+
+    public void OnStartFromNewPlayerScript(NewPlayerScript player)
+    {
+        pauseMenuUI.SetActive(true);
+        btn = GameObject.Find("ResumeButton").GetComponent<Button>();
+        es = GameObject.Find("PauseMenuEventSystem").GetComponent<EventSystem>();
+        es.SetSelectedGameObject(btn.gameObject);
+        //playerInput.SwitchCurrentActionMap("Menu");
+        Time.timeScale = 0f;
+        isGamePaused = true;
+
+        currentPlayerPaused = player;
+        if (trueNorthToggle != null)
+            trueNorthToggle.isOn = currentPlayerPaused.UsingScreenNorth;
+
+        if(player == player1)
+        {
+            player2.SwapToPaused();
+        }
+        else
+        {
+            player1.SwapToPaused();
+        }
+    }
 
     public void PauseResume()
     {
         pauseMenuUI.SetActive(false);
         es.SetSelectedGameObject(null);
         Time.timeScale = 1f;
-        var allPlayerÏnputComponents = FindObjectsOfType<PlayerInput>();
-        foreach (var p in allPlayerÏnputComponents)
-            p.SwitchCurrentActionMap("Gameplay");
+        //var allPlayerÏnputComponents = FindObjectsOfType<PlayerInput>();
+        //foreach (var p in allPlayerÏnputComponents)
+        //    p.SwitchCurrentActionMap("Gameplay");
 
         //playerInput.SwitchCurrentActionMap("Gameplay");
+        player1.SwapToGameplayAM();
+        player2.SwapToGameplayAM();
         isGamePaused = false;
 
     }
@@ -110,10 +121,10 @@ public class MenuInputs : MonoBehaviour
         es.SetSelectedGameObject(btn.gameObject);
     }
 
-    //public void ToggleHandler(bool value)
-    //{
-    //    Player.SetTrueNorth(value);
-    //}
+    public void ToggleHandler(bool value)
+    {
+        currentPlayerPaused.SetTrueNorth(value);
+    }
 
     /*
      * -------------------
@@ -139,5 +150,11 @@ public class MenuInputs : MonoBehaviour
     public void ControllerButton()
     {
         Debug.Log("Control scheme");
+    }
+
+    public void SwapOutline()
+    {
+        SwapOutlineEventInfo soei = new SwapOutlineEventInfo();
+        EventHandeler.Current.FireEvent(EventHandeler.EVENT_TYPE.SwapOutlineEvent, soei);
     }
 }

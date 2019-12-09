@@ -67,12 +67,12 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Start"",
+                    ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""e13ed10e-5cc0-4c5a-8d87-70e0dadb2ef0"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press""
                 },
                 {
                     ""name"": ""Restart"",
@@ -212,7 +212,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Start"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -386,7 +386,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Move"",
+                    ""name"": ""Navigate"",
                     ""type"": ""Value"",
                     ""id"": ""befc1fcb-2521-4385-8482-e1efee24a67c"",
                     ""expectedControlType"": ""Vector2"",
@@ -429,7 +429,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -440,7 +440,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -471,59 +471,8 @@ public class PlayerController : IInputActionCollection, IDisposable
         {
             ""name"": ""Pause"",
             ""id"": ""c3610341-c9b7-4d51-ba4b-cbe6da75039a"",
-            ""actions"": [
-                {
-                    ""name"": ""Move"",
-                    ""type"": ""Value"",
-                    ""id"": ""fc3b6b2f-30ba-4761-9edb-09880a9fedb9"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Accept"",
-                    ""type"": ""Button"",
-                    ""id"": ""d31309c3-c2c3-4a5f-aeed-c544f3c80363"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """"
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""680be056-3713-4dbf-a77b-7f17395e28c2"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6bdc3aa6-3daf-4f3a-b7fa-277310a5c8a1"",
-                    ""path"": ""<Gamepad>/dpad"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""702506c3-e49b-40b3-b30d-b45d971d694f"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Accept"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
+            ""actions"": [],
+            ""bindings"": []
         }
     ],
     ""controlSchemes"": []
@@ -536,7 +485,7 @@ public class PlayerController : IInputActionCollection, IDisposable
         m_Gameplay_Toss = m_Gameplay.FindAction("Toss", throwIfNotFound: true);
         m_Gameplay_Rotate = m_Gameplay.FindAction("Rotate", throwIfNotFound: true);
         m_Gameplay_Crouch = m_Gameplay.FindAction("Crouch", throwIfNotFound: true);
-        m_Gameplay_Start = m_Gameplay.FindAction("Start", throwIfNotFound: true);
+        m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
         m_Gameplay_Restart = m_Gameplay.FindAction("Restart", throwIfNotFound: true);
         // QTE
         m_QTE = asset.FindActionMap("QTE", throwIfNotFound: true);
@@ -550,13 +499,11 @@ public class PlayerController : IInputActionCollection, IDisposable
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Accept = m_Menu.FindAction("Accept", throwIfNotFound: true);
-        m_Menu_Move = m_Menu.FindAction("Move", throwIfNotFound: true);
+        m_Menu_Navigate = m_Menu.FindAction("Navigate", throwIfNotFound: true);
         m_Menu_Back = m_Menu.FindAction("Back", throwIfNotFound: true);
         m_Menu_Start = m_Menu.FindAction("Start", throwIfNotFound: true);
         // Pause
         m_Pause = asset.FindActionMap("Pause", throwIfNotFound: true);
-        m_Pause_Move = m_Pause.FindAction("Move", throwIfNotFound: true);
-        m_Pause_Accept = m_Pause.FindAction("Accept", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -612,7 +559,7 @@ public class PlayerController : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Toss;
     private readonly InputAction m_Gameplay_Rotate;
     private readonly InputAction m_Gameplay_Crouch;
-    private readonly InputAction m_Gameplay_Start;
+    private readonly InputAction m_Gameplay_Pause;
     private readonly InputAction m_Gameplay_Restart;
     public struct GameplayActions
     {
@@ -624,7 +571,7 @@ public class PlayerController : IInputActionCollection, IDisposable
         public InputAction @Toss => m_Wrapper.m_Gameplay_Toss;
         public InputAction @Rotate => m_Wrapper.m_Gameplay_Rotate;
         public InputAction @Crouch => m_Wrapper.m_Gameplay_Crouch;
-        public InputAction @Start => m_Wrapper.m_Gameplay_Start;
+        public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         public InputAction @Restart => m_Wrapper.m_Gameplay_Restart;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
@@ -653,9 +600,9 @@ public class PlayerController : IInputActionCollection, IDisposable
                 Crouch.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCrouch;
                 Crouch.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCrouch;
                 Crouch.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCrouch;
-                Start.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStart;
-                Start.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStart;
-                Start.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStart;
+                Pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                Pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                Pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
                 Restart.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRestart;
                 Restart.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRestart;
                 Restart.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRestart;
@@ -681,9 +628,9 @@ public class PlayerController : IInputActionCollection, IDisposable
                 Crouch.started += instance.OnCrouch;
                 Crouch.performed += instance.OnCrouch;
                 Crouch.canceled += instance.OnCrouch;
-                Start.started += instance.OnStart;
-                Start.performed += instance.OnStart;
-                Start.canceled += instance.OnStart;
+                Pause.started += instance.OnPause;
+                Pause.performed += instance.OnPause;
+                Pause.canceled += instance.OnPause;
                 Restart.started += instance.OnRestart;
                 Restart.performed += instance.OnRestart;
                 Restart.canceled += instance.OnRestart;
@@ -786,7 +733,7 @@ public class PlayerController : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Menu;
     private IMenuActions m_MenuActionsCallbackInterface;
     private readonly InputAction m_Menu_Accept;
-    private readonly InputAction m_Menu_Move;
+    private readonly InputAction m_Menu_Navigate;
     private readonly InputAction m_Menu_Back;
     private readonly InputAction m_Menu_Start;
     public struct MenuActions
@@ -794,7 +741,7 @@ public class PlayerController : IInputActionCollection, IDisposable
         private PlayerController m_Wrapper;
         public MenuActions(PlayerController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Accept => m_Wrapper.m_Menu_Accept;
-        public InputAction @Move => m_Wrapper.m_Menu_Move;
+        public InputAction @Navigate => m_Wrapper.m_Menu_Navigate;
         public InputAction @Back => m_Wrapper.m_Menu_Back;
         public InputAction @Start => m_Wrapper.m_Menu_Start;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
@@ -809,9 +756,9 @@ public class PlayerController : IInputActionCollection, IDisposable
                 Accept.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnAccept;
                 Accept.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnAccept;
                 Accept.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnAccept;
-                Move.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnMove;
-                Move.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnMove;
-                Move.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnMove;
+                Navigate.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnNavigate;
+                Navigate.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnNavigate;
+                Navigate.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnNavigate;
                 Back.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
                 Back.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
                 Back.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
@@ -825,9 +772,9 @@ public class PlayerController : IInputActionCollection, IDisposable
                 Accept.started += instance.OnAccept;
                 Accept.performed += instance.OnAccept;
                 Accept.canceled += instance.OnAccept;
-                Move.started += instance.OnMove;
-                Move.performed += instance.OnMove;
-                Move.canceled += instance.OnMove;
+                Navigate.started += instance.OnNavigate;
+                Navigate.performed += instance.OnNavigate;
+                Navigate.canceled += instance.OnNavigate;
                 Back.started += instance.OnBack;
                 Back.performed += instance.OnBack;
                 Back.canceled += instance.OnBack;
@@ -842,14 +789,10 @@ public class PlayerController : IInputActionCollection, IDisposable
     // Pause
     private readonly InputActionMap m_Pause;
     private IPauseActions m_PauseActionsCallbackInterface;
-    private readonly InputAction m_Pause_Move;
-    private readonly InputAction m_Pause_Accept;
     public struct PauseActions
     {
         private PlayerController m_Wrapper;
         public PauseActions(PlayerController wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Pause_Move;
-        public InputAction @Accept => m_Wrapper.m_Pause_Accept;
         public InputActionMap Get() { return m_Wrapper.m_Pause; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -859,22 +802,10 @@ public class PlayerController : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_PauseActionsCallbackInterface != null)
             {
-                Move.started -= m_Wrapper.m_PauseActionsCallbackInterface.OnMove;
-                Move.performed -= m_Wrapper.m_PauseActionsCallbackInterface.OnMove;
-                Move.canceled -= m_Wrapper.m_PauseActionsCallbackInterface.OnMove;
-                Accept.started -= m_Wrapper.m_PauseActionsCallbackInterface.OnAccept;
-                Accept.performed -= m_Wrapper.m_PauseActionsCallbackInterface.OnAccept;
-                Accept.canceled -= m_Wrapper.m_PauseActionsCallbackInterface.OnAccept;
             }
             m_Wrapper.m_PauseActionsCallbackInterface = instance;
             if (instance != null)
             {
-                Move.started += instance.OnMove;
-                Move.performed += instance.OnMove;
-                Move.canceled += instance.OnMove;
-                Accept.started += instance.OnAccept;
-                Accept.performed += instance.OnAccept;
-                Accept.canceled += instance.OnAccept;
             }
         }
     }
@@ -887,7 +818,7 @@ public class PlayerController : IInputActionCollection, IDisposable
         void OnToss(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
-        void OnStart(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
         void OnRestart(InputAction.CallbackContext context);
     }
     public interface IQTEActions
@@ -904,13 +835,11 @@ public class PlayerController : IInputActionCollection, IDisposable
     public interface IMenuActions
     {
         void OnAccept(InputAction.CallbackContext context);
-        void OnMove(InputAction.CallbackContext context);
+        void OnNavigate(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
         void OnStart(InputAction.CallbackContext context);
     }
     public interface IPauseActions
     {
-        void OnMove(InputAction.CallbackContext context);
-        void OnAccept(InputAction.CallbackContext context);
     }
 }

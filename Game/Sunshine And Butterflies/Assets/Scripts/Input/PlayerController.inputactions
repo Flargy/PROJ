@@ -54,12 +54,12 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Start",
+                    "name": "Pause",
                     "type": "Button",
                     "id": "e13ed10e-5cc0-4c5a-8d87-70e0dadb2ef0",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press"
                 },
                 {
                     "name": "Restart",
@@ -199,7 +199,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Start",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -373,7 +373,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Move",
+                    "name": "Navigate",
                     "type": "Value",
                     "id": "befc1fcb-2521-4385-8482-e1efee24a67c",
                     "expectedControlType": "Vector2",
@@ -416,7 +416,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -427,7 +427,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -458,59 +458,8 @@
         {
             "name": "Pause",
             "id": "c3610341-c9b7-4d51-ba4b-cbe6da75039a",
-            "actions": [
-                {
-                    "name": "Move",
-                    "type": "Value",
-                    "id": "fc3b6b2f-30ba-4761-9edb-09880a9fedb9",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Accept",
-                    "type": "Button",
-                    "id": "d31309c3-c2c3-4a5f-aeed-c544f3c80363",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "680be056-3713-4dbf-a77b-7f17395e28c2",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6bdc3aa6-3daf-4f3a-b7fa-277310a5c8a1",
-                    "path": "<Gamepad>/dpad",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "702506c3-e49b-40b3-b30d-b45d971d694f",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Accept",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": []

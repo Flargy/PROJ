@@ -58,7 +58,7 @@ public class NewPlayerScript : MonoBehaviour
     }
 
 
-    //public bool UsingScreenNorth => usingScreenNorth;
+    public bool UsingScreenNorth => usingScreenNorth;
     void Update()
     {
 
@@ -496,13 +496,13 @@ public class NewPlayerScript : MonoBehaviour
         canPickUp = true;
     }
 
-    public void OnStart()
+    public void OnPause()
     {
         Debug.Log("Input: Start for player: " + gameObject.name);
         playerInput.SwitchCurrentActionMap("Menu");
-        //Debug.Log(playerInput.currentActionMap);
-        //MenuInputs.Instance.OnStartFromNewPlayerScript(this);
-        menuInputs.OnStart();
+        Debug.Log("player input = " + playerInput.currentActionMap);
+        MenuInputs.Instance.OnStartFromNewPlayerScript(this);
+        //menuInputs.OnStart();
     }
 
     public void SwapToGameplayAM()
@@ -510,14 +510,19 @@ public class NewPlayerScript : MonoBehaviour
         playerInput.SwitchCurrentActionMap("Gameplay");
     }
 
+    public void SwapToPaused()
+    {
+        playerInput.SwitchCurrentActionMap("Pause");
+    }
+
     public void SwapTrueNorth()
     {
         usingScreenNorth = !usingScreenNorth;   
     }
 
-    //public void SetTrueNorth(bool value)
-    //{
-    //    usingScreenNorth = value;
-    //}
+    public void SetTrueNorth(bool value)
+    {
+        usingScreenNorth = value;
+    }
 
 }
