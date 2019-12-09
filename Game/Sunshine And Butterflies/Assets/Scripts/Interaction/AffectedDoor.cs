@@ -94,7 +94,7 @@ public class AffectedDoor : AffectedObject
     private IEnumerator RotateDoors()
     {
         var opening = toRotation == endRotation;
-        if (opening)
+        if (opening && coroutineIsRunning == false)
         {
             Debug.Log("OpenSound");
             audioSource.PlayOneShot(openSound);
@@ -117,7 +117,7 @@ public class AffectedDoor : AffectedObject
         }
 
 
-        if (!opening)
+        if (opening == false)
         {
             Debug.Log("CloseSound");
             toRotation = endRotation;
@@ -134,9 +134,7 @@ public class AffectedDoor : AffectedObject
         fromRotation = transform.localRotation.eulerAngles;
         if (openDoor == true)
         {
-            Debug.Log("CloseSound");
             toRotation = endRotation;
-            audioSource.PlayOneShot(closeSound);
         }
         else
         {
