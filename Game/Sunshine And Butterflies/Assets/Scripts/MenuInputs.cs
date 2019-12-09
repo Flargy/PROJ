@@ -11,11 +11,13 @@ public class MenuInputs : MonoBehaviour
     public Toggle trueNorthToggle;
     [SerializeField] private NewPlayerScript player1 = null;
     [SerializeField] private NewPlayerScript player2 = null;
-    private Vector2 moveInput;
     [SerializeField] private GameObject pauseMenuUI;
+    private Vector2 moveInput;
     private PlayerInput playerInput = null;
     private EventSystem es = null;
     private Button btn = null;
+    private Scene scene;
+    
 
     public static bool isGamePaused = false;
     private NewPlayerScript currentPlayerPaused;
@@ -30,6 +32,7 @@ public class MenuInputs : MonoBehaviour
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
+        scene = SceneManager.GetActiveScene();
 
         //pauseMenuUI.SetActive(false);
     }
@@ -124,6 +127,12 @@ public class MenuInputs : MonoBehaviour
     public void ToggleHandler(bool value)
     {
         currentPlayerPaused.SetTrueNorth(value);
+    }
+
+
+    public void RestartCurrentScene()
+    {
+        //Application.LoadLevel(scene.name);
     }
 
     /*
