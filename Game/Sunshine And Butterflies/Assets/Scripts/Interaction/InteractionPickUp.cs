@@ -165,4 +165,9 @@ public class InteractionPickUp : Interactable
             }
         }
     }
+
+    private IEnumerator RaisePosition()
+    {
+        yield return new WaitForEndOfFrame();
+    }
 }
