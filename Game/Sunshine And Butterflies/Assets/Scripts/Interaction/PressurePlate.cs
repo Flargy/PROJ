@@ -29,10 +29,21 @@ public class PressurePlate : MonoBehaviour
     public void LowerCounter()
     {
         itemsOnPad = Mathf.Max(0, itemsOnPad -1);
-        Debug.Log(itemsOnPad);
-        if(itemsOnPad < desiredNrOfObjects)
+
+        if (itemsOnPad < desiredNrOfObjects)
         {
             colorObject.material = startingColor;
+            audioSource.PlayOneShot(deActivatedSound);
+            foreach (AffectedObject affected in affectedObject)
+            {
+
+                affected.ExecuteAction();
+
+            }
+        }
+        foreach (DoorLightChange light in lights)
+        {
+            light.ChangeEmission(Mathf.Min(itemsOnPad / desiredNrOfObjects, 1.0f));
         }
     }
 
