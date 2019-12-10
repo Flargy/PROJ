@@ -7,6 +7,7 @@ public class AffectedLibraryPlatforms : AffectedObject
     [SerializeField] private Vector3 startPosition = Vector3.zero;
     [SerializeField] private Transform endPosition = null;
     [SerializeField] private PhysicMaterial startMaterial, movementMaterial = null;
+    [SerializeField] private bool willUpdateStartPosition = false;
 
     private float lerpTime = 0;
     private float t = 0;
@@ -43,7 +44,7 @@ public class AffectedLibraryPlatforms : AffectedObject
 
     private IEnumerator ChangePosition()
     {
-        if(activatedFirstTime == false)
+        if(activatedFirstTime == false && willUpdateStartPosition == true && startPosition != rb.transform.position)
         {
             startPosition = rb.transform.position;
             activatedFirstTime = true;
