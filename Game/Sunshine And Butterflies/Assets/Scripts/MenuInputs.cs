@@ -20,7 +20,7 @@ public class MenuInputs : MonoBehaviour
     
 
     public static bool isGamePaused = false;
-    private NewPlayerScript currentPlayerPaused;
+    private static NewPlayerScript currentPlayerPaused;
 
     public static MenuInputs Instance;
 
@@ -127,6 +127,7 @@ public class MenuInputs : MonoBehaviour
     public void ToggleHandler(bool value)
     {
         currentPlayerPaused.SetTrueNorth(value);
+        Debug.Log("toggle for " + currentPlayerPaused.name + " value: " + value);
     }
 
 
