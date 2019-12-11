@@ -247,6 +247,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07eceb29cd30cb24fa48d57650dea131, type: 3}
+--- !u!4 &223575447 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5089755446774057493, guid: 07eceb29cd30cb24fa48d57650dea131,
+    type: 3}
+  m_PrefabInstance: {fileID: 223575446}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &236619944
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,6 +394,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PauseMenuCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5926098621820577946, guid: 7bef16939f7f56c4c9b9e508e7a3c258,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2106952929}
+    - target: {fileID: 5926098621820577946, guid: 7bef16939f7f56c4c9b9e508e7a3c258,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 5926098621820577946, guid: 7bef16939f7f56c4c9b9e508e7a3c258,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6077297539053228990, guid: 7bef16939f7f56c4c9b9e508e7a3c258,
         type: 3}
@@ -533,21 +554,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
       value: ResumeButtonSelection
-      objectReference: {fileID: 0}
-    - target: {fileID: 5926098621820577946, guid: 7bef16939f7f56c4c9b9e508e7a3c258,
-        type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2106952929}
-    - target: {fileID: 5926098621820577946, guid: 7bef16939f7f56c4c9b9e508e7a3c258,
-        type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ToggleHandler
-      objectReference: {fileID: 0}
-    - target: {fileID: 5926098621820577946, guid: 7bef16939f7f56c4c9b9e508e7a3c258,
-        type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5429740006054589775, guid: 7bef16939f7f56c4c9b9e508e7a3c258,
         type: 3}
@@ -866,6 +872,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 329ef7af3c404984ca79eb6051298d4b, type: 2}
+    - target: {fileID: 4711613538614346512, guid: 0223c676abea9b349ba42cffc59d11e8,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 15.120222
+      objectReference: {fileID: 0}
+    - target: {fileID: 4711613538614346512, guid: 0223c676abea9b349ba42cffc59d11e8,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 7.060112
+      objectReference: {fileID: 0}
     - target: {fileID: 7336723855598043498, guid: 0223c676abea9b349ba42cffc59d11e8,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -901,16 +917,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bad89d5567a8a9b459d4f511a25f9366, type: 2}
-    - target: {fileID: 4711613538614346512, guid: 0223c676abea9b349ba42cffc59d11e8,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 15.120222
-      objectReference: {fileID: 0}
-    - target: {fileID: 4711613538614346512, guid: 0223c676abea9b349ba42cffc59d11e8,
-        type: 3}
-      propertyPath: m_Center.x
-      value: 7.060112
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0223c676abea9b349ba42cffc59d11e8, type: 3}
 --- !u!1001 &643428669
@@ -933,7 +939,7 @@ PrefabInstance:
     - target: {fileID: 6043005351007721845, guid: 116ac96fa3d5f98479016640585f9a40,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6043005351007721845, guid: 116ac96fa3d5f98479016640585f9a40,
         type: 3}
@@ -979,6 +985,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043005351007721844, guid: 116ac96fa3d5f98479016640585f9a40,
+        type: 3}
+      propertyPath: players.Array.data[0]
+      value: 
+      objectReference: {fileID: 223575447}
+    - target: {fileID: 6043005351007721844, guid: 116ac96fa3d5f98479016640585f9a40,
+        type: 3}
+      propertyPath: players.Array.data[1]
+      value: 
+      objectReference: {fileID: 828687074}
+    - target: {fileID: 6043005351007721844, guid: 116ac96fa3d5f98479016640585f9a40,
+        type: 3}
+      propertyPath: cameraOffset.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043005351007721844, guid: 116ac96fa3d5f98479016640585f9a40,
+        type: 3}
+      propertyPath: cameraOffset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043005351007721844, guid: 116ac96fa3d5f98479016640585f9a40,
+        type: 3}
+      propertyPath: cameraOffset.z
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 116ac96fa3d5f98479016640585f9a40, type: 3}
@@ -1142,6 +1173,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fecd8af4580a5f48ab4441e2407d026, type: 3}
+--- !u!4 &828687074 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6017255429612791048, guid: 1fecd8af4580a5f48ab4441e2407d026,
+    type: 3}
+  m_PrefabInstance: {fileID: 828687073}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &829904252
 PrefabInstance:
   m_ObjectHideFlags: 0

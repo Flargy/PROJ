@@ -147,6 +147,7 @@ public class MenuInputs : MonoBehaviour
     {
         Debug.Log("Level loaded");
         //SceneManager.LoadScene("Level_1_1");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);//Eku
 
     }
 

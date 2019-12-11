@@ -30,6 +30,6 @@ public class ChangeSceneTrigger : MonoBehaviour
 
     private void ChangeScene()
     {
-        SceneManager.LoadScene(sceneNumber);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
     }
 }
