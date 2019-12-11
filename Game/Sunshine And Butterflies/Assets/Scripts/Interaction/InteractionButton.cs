@@ -11,6 +11,7 @@ public class InteractionButton : Interactable
     [SerializeField] private float durationToClose = 2.0f;
     [SerializeField] private List<Interactable> connectedSwitches = null;
     [SerializeField] private float animationDuration = 0.5f;
+    [SerializeField] private float actionDelay = 0.0f;
 
     private float lerpTime = 0;
     private float t = 0;
@@ -22,7 +23,7 @@ public class InteractionButton : Interactable
 
     public override void Interact(GameObject player)
     {
-        if (interacting == false)
+        if (interacting == false && actionDelay <= 0)
         {
             if(affectedObjectList.Length == 0)
             {
@@ -55,6 +56,12 @@ public class InteractionButton : Interactable
             player.GetComponent<NewPlayerScript>().Freeze(animationDuration);
             player.GetComponent<NewPlayerScript>().StartAnimation("Push Button");
         }
+        else if(interacting == false && actionDelay < 0)
+        {
+            player.GetComponent<NewPlayerScript>().Freeze(animationDuration);
+            player.GetComponent<NewPlayerScript>().StartAnimation("Push Button");
+            StartCoroutine(ActionDelay());
+        }
     }
 
     private void Start()
@@ -67,12 +74,6 @@ public class InteractionButton : Interactable
         notPressedPosition = button.transform.position;
         }
     }
-
-    //private IEnumerator InteractionCooldown()
-    //{
-    //    yield return new WaitForSeconds(interactionCooldownTimer);
-    //    interacting = false;
-    //}
 
     private IEnumerator ButtonMovement()
     {
@@ -109,5 +110,41 @@ public class InteractionButton : Interactable
         affectedObject.ExecuteAction();
     }
 
+    private IEnumerator ActionDelay()
+    {
+        yield return new WaitForSeconds(actionDelay);
+
+        if (interacting == false)
+        {
+            if (affectedObjectList.Length == 0)
+            {
+                affectedObject.ExecuteAction();
+            }
+            else
+            {
+                foreach (AffectedObject obj in affectedObjectList)
+                {
+                    obj.ExecuteAction();
+                }
+            }
+            interacting = true;
+            StartCoroutine(InteractionCooldown());
+            if (button != null)
+            {
+                StartCoroutine(ButtonMovement());
+            }
+            if (onTimer == true)
+            {
+                StartCoroutine(OnATimer());
+            }
+            foreach (Interactable otherSwitch in connectedSwitches)
+            {
+                if (otherSwitch.interacting == false)
+                {
+                    otherSwitch.StartInteraction();
+                }
+            }
+        }
+    }
     
 }
