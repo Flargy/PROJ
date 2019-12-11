@@ -36,6 +36,7 @@ public class AffectedCrushingWall : AffectedObject
         goToPosition = endPosition.position;
         goFromPosition = startPosition;
         boxes = rb.gameObject.GetComponents<BoxCollider>();
+        deathColliderHolder.SetActive(false);
 
     }
 

@@ -62,10 +62,10 @@ public class InteractionLever : Interactable
             rendererHolder.transform.LookAt(sceneCamera.transform.position, Vector3.up);
             interactingPlayer = player.GetComponent<PlayerQTE>();
             interactingPlayer.GetComponent<NewPlayerScript>().SwapLiftingState();
-            interactingPlayer.SwapToQTE(this);
-            activateQTE = StartCoroutine(StartQTE());
-            leverRotation = StartCoroutine(RotateLever());
+            interactingPlayer.SwapToQTE(this, gameObject);
+            
             interacting = true;
+            StartCoroutine(AnimationDelay());
         }
     }
 
@@ -106,6 +106,7 @@ public class InteractionLever : Interactable
             takeInput = true;
             rendererHolder.SetActive(false);
             interactingPlayer.GetComponent<NewPlayerScript>().SwapLiftingState();
+            interactingPlayer.GetComponent<NewPlayerScript>().StartAnimation("FailQTE");
             interactingPlayer.SwapToMovement();
             QTETimer = originalQTETimer;
             playerAnswer = 0;
@@ -207,12 +208,13 @@ public class InteractionLever : Interactable
         }
     }
 
-    //public IEnumerator InteractionCooldown()
-    //{
-    //    interacting = true;
-    //    yield return new WaitForSeconds(interactionCooldownTimer);
-    //    interacting = false;
-    //}
+    private IEnumerator AnimationDelay()
+    {
+        yield return new WaitForSeconds(0.7f);
+        activateQTE = StartCoroutine(StartQTE());
+        leverRotation = StartCoroutine(RotateLever());
+        interactingPlayer.GetComponent<NewPlayerScript>().StartAnimation("Pull Lever");
+    }
 
     
 }

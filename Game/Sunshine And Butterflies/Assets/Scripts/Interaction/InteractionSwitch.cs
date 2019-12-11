@@ -8,6 +8,7 @@ public class InteractionSwitch : Interactable
     [SerializeField] private GameObject button1 = null;
     [SerializeField] private GameObject button2 = null;
     [SerializeField] private List<Interactable> connectedSwitches = null;
+    [SerializeField] private float animationDuration = 0.5f;
 
     private float lerpTime = 0;
     private float t = 0;
@@ -38,15 +39,10 @@ public class InteractionSwitch : Interactable
                     otherSwitch.StartInteraction();
                 }
             }
+            player.GetComponent<NewPlayerScript>().Freeze(animationDuration);
+            player.GetComponent<NewPlayerScript>().StartAnimation("Push Button");
         }
     }
-
-    //public override IEnumerator InteractionCooldown()
-    //{
-    //    interacting = true;
-    //    yield return new WaitForSeconds(interactionCooldownTimer);
-    //    interacting = false;
-    //}
 
     private void Start()
     {

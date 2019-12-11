@@ -17,6 +17,10 @@ public class InteractionPickUp : Interactable
     private bool isPickedUp;
     private GameObject currentHolder;
     private BoxCollider[] colliders;
+    private float t = 0;
+    private float lerpTime = 0;
+    private Vector3 goToPosition = Vector3.zero;
+    private Vector3 goFromPosition = Vector3.zero;
 
     private void Start()
     {
@@ -150,11 +154,7 @@ public class InteractionPickUp : Interactable
     private IEnumerator PickupDelay()
     {
         yield return new WaitForSeconds(pickupAnimationDelay);
-        isPickedUp = true;
-        if (showTrajectory == true)
-        {
-            rp.SwapLifted();
-        }
+        
         if (CompareTag("CarryBox"))
         {
             RaycastHit plateHit;
@@ -163,6 +163,43 @@ public class InteractionPickUp : Interactable
             {
                 plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
             }
+        }
+        StartCoroutine(RaisePosition());
+    }
+
+    private IEnumerator RaisePosition()
+    {
+        goFromPosition = rb.transform.position;
+        goToPosition = currentHolder.transform.position + (currentHolder.transform.localRotation * offsetVector) + currentHolder.transform.forward;
+
+        while (lerpTime < 0.5f)
+        {
+            t += Time.deltaTime / 0.5f;
+            //transform.position = Vector3.Lerp(goFromPosition, goToPosition, t);
+            rb.MovePosition(Vector3.Lerp(goFromPosition, goToPosition, t));
+            lerpTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        t = 0;
+        lerpTime = 0;
+        goFromPosition = rb.transform.position;
+        goToPosition = currentHolder.transform.position + (currentHolder.transform.localRotation * offsetVector);
+
+        while (lerpTime < 0.5f)
+        {
+            t += Time.deltaTime / 0.5f;
+            //transform.position = Vector3.Lerp(goFromPosition, goToPosition, t);
+            rb.MovePosition(Vector3.Lerp(goFromPosition, goToPosition, t));
+            lerpTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        t = 0;
+        lerpTime = 0;
+        isPickedUp = true;
+
+        if (showTrajectory == true)
+        {
+            rp.SwapLifted();
         }
     }
 }

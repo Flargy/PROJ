@@ -465,7 +465,6 @@ public class NewPlayerScript : MonoBehaviour
     }
 
 
-
     public void ChangeSpawnPoint(Vector3 respawnposition)
     {
         respawnPoint = respawnposition;
@@ -479,6 +478,16 @@ public class NewPlayerScript : MonoBehaviour
         }
         rb.velocity = Vector3.zero;
         transform.position = respawnPoint;
+    }
+
+    public void StartAnimation(string triggerName)
+    {
+        anim.SetTrigger(triggerName);
+    }
+
+    public void Freeze(float freezeDuration)
+    {
+        StartCoroutine(FreezePlayer(freezeDuration));
     }
 
     public IEnumerator FreezePlayer(float freezeTime)
