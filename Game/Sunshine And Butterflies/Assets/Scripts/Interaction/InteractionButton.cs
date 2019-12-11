@@ -5,6 +5,7 @@ using UnityEngine;
 public class InteractionButton : Interactable
 {
     [SerializeField] private AffectedObject affectedObject = null;
+    [SerializeField] private AffectedObject[] affectedObjectList = null;
     [SerializeField] private GameObject button = null;
     [SerializeField] private bool onTimer = false;
     [SerializeField] private float durationToClose = 2.0f;
@@ -22,7 +23,17 @@ public class InteractionButton : Interactable
     {
         if (interacting == false)
         {
-            affectedObject.ExecuteAction();
+            if(affectedObjectList.Length == 0)
+            {
+                affectedObject.ExecuteAction();
+            }
+            else
+            {
+                foreach(AffectedObject obj in affectedObjectList)
+                {
+                    obj.ExecuteAction();
+                }
+            }
             interacting = true;
             StartCoroutine(InteractionCooldown());
             if(button != null)
