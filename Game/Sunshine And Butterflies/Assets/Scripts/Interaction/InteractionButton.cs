@@ -10,6 +10,7 @@ public class InteractionButton : Interactable
     [SerializeField] private bool onTimer = false;
     [SerializeField] private float durationToClose = 2.0f;
     [SerializeField] private List<Interactable> connectedSwitches = null;
+    [SerializeField] private float animationDuration = 0.5f;
 
     private float lerpTime = 0;
     private float t = 0;
@@ -51,6 +52,8 @@ public class InteractionButton : Interactable
                     otherSwitch.StartInteraction();
                 }
             }
+            player.GetComponent<NewPlayerScript>().Freeze(animationDuration);
+            player.GetComponent<NewPlayerScript>().StartAnimation("Push Button");
         }
     }
 

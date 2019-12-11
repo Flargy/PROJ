@@ -480,6 +480,16 @@ public class NewPlayerScript : MonoBehaviour
         transform.position = respawnPoint;
     }
 
+    public void StartAnimation(string triggerName)
+    {
+        anim.SetTrigger(triggerName);
+    }
+
+    public void Freeze(float freezeDuration)
+    {
+        StartCoroutine(FreezePlayer(freezeDuration));
+    }
+
     public IEnumerator FreezePlayer(float freezeTime)
     {
         interacting = true;

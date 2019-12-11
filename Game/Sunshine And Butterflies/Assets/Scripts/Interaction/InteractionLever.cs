@@ -106,6 +106,7 @@ public class InteractionLever : Interactable
             takeInput = true;
             rendererHolder.SetActive(false);
             interactingPlayer.GetComponent<NewPlayerScript>().SwapLiftingState();
+            interactingPlayer.GetComponent<NewPlayerScript>().StartAnimation("FailQTE");
             interactingPlayer.SwapToMovement();
             QTETimer = originalQTETimer;
             playerAnswer = 0;
@@ -212,6 +213,7 @@ public class InteractionLever : Interactable
         yield return new WaitForSeconds(0.7f);
         activateQTE = StartCoroutine(StartQTE());
         leverRotation = StartCoroutine(RotateLever());
+        interactingPlayer.GetComponent<NewPlayerScript>().StartAnimation("Pull Lever");
     }
 
     
