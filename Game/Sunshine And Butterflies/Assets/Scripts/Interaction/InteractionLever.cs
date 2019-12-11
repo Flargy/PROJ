@@ -202,7 +202,7 @@ public class InteractionLever : Interactable
 
         while (leverPullDownTime < 1.0f)
         {
-            leverPullDownTime += Time.deltaTime / 2;
+            leverPullDownTime += Time.deltaTime / 1.5f;
             leverAxis.transform.localRotation = Quaternion.Euler(Vector3.Lerp(currentRotation, endRotation, leverPullDownTime));
             yield return new WaitForEndOfFrame();
         }

@@ -170,11 +170,11 @@ public class InteractionPickUp : Interactable
     private IEnumerator RaisePosition()
     {
         goFromPosition = rb.transform.position;
-        goToPosition = currentHolder.transform.position + (currentHolder.transform.localRotation * offsetVector) + currentHolder.transform.forward;
+        goToPosition = currentHolder.transform.position + (currentHolder.transform.localRotation * offsetVector) + currentHolder.transform.forward * 0.3f;
 
-        while (lerpTime < 0.5f)
+        while (lerpTime < 0.8f)
         {
-            t += Time.deltaTime / 0.5f;
+            t += Time.deltaTime / 0.8f;
             //transform.position = Vector3.Lerp(goFromPosition, goToPosition, t);
             rb.MovePosition(Vector3.Lerp(goFromPosition, goToPosition, t));
             lerpTime += Time.deltaTime;
@@ -185,9 +185,9 @@ public class InteractionPickUp : Interactable
         goFromPosition = rb.transform.position;
         goToPosition = currentHolder.transform.position + (currentHolder.transform.localRotation * offsetVector);
 
-        while (lerpTime < 0.5f)
+        while (lerpTime < 0.3f)
         {
-            t += Time.deltaTime / 0.5f;
+            t += Time.deltaTime / 0.3f;
             //transform.position = Vector3.Lerp(goFromPosition, goToPosition, t);
             rb.MovePosition(Vector3.Lerp(goFromPosition, goToPosition, t));
             lerpTime += Time.deltaTime;
