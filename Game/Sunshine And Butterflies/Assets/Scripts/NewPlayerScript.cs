@@ -315,7 +315,7 @@ public class NewPlayerScript : MonoBehaviour
         if (movementVector.magnitude >= 0.1f)
         {
             rb.velocity = (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0);
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, moveSpeed) * 0.9f;
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, moveSpeed);
             if (usingScreenNorth == false)
             {
                 rb.velocity = new Vector3(rb.velocity.x, yVelocity, rb.velocity.z);
