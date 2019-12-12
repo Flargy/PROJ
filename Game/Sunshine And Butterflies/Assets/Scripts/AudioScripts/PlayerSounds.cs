@@ -12,8 +12,7 @@ public class PlayerSounds : MonoBehaviour
     [SerializeField] private AudioClip landingSound = null;
     [SerializeField] private AudioClip rustleSound = null;
     [SerializeField] private AudioClip pickupSound = null;
-    [SerializeField] private AudioMixerSnapshot mainMusicSnapShot = null;
-    [SerializeField] private AudioMixerSnapshot secondaryMusicSnapShot = null;
+
 
 
     void Start()
@@ -21,21 +20,6 @@ public class PlayerSounds : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("FirstSceneSecondaryAmbience"))
-        {
-            secondaryMusicSnapShot.TransitionTo(0.5f);
-        }
-    }
-
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("FirstSceneSecondaryAmbience"))
-        {
-            mainMusicSnapShot.TransitionTo(0.5f);
-        }
-    }
 
     public void PlayFootStepSound()
     {
