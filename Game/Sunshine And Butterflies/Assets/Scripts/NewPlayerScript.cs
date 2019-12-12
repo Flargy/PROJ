@@ -104,7 +104,7 @@ public class NewPlayerScript : MonoBehaviour
     private void DrawDropShadow()
     {
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, Vector3.down, out hit, 5.0f, LayerMask.NameToLayer("Ground")))
+        if(Physics.Raycast(transform.position, Vector3.down, out hit, 5.0f, groundLayer))
         {
             if(dropShadowInstance != null)
             {
@@ -385,6 +385,13 @@ public class NewPlayerScript : MonoBehaviour
     public void OnCrouch()
     {
         Crouch();
+        RaycastHit plateHit;
+        capsuleTop = transform.position + capsule.center + Vector3.up * (capsule.height / 2.1f - capsule.radius);
+        capsuleBottom = transform.position + capsule.center + Vector3.down * (capsule.height / 2.5f - capsule.radius);
+        if (Physics.CapsuleCast(capsuleTop, capsuleBottom, capsule.radius, Vector3.down, out plateHit, 0.15f, LayerMask.GetMask("PressurePlate")))
+        {
+            plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
+        }
     }
 
     private void Crouch()
@@ -409,18 +416,12 @@ public class NewPlayerScript : MonoBehaviour
             }
             crouching = false;
             anim.SetBool("isCrouching", false);
-            RaycastHit plateHit;
             //if(Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out plateHit, 1f, LayerMask.GetMask("PressurePlate")))
             //{
             //    plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
             //}
 
-            capsuleTop = transform.position + capsule.center + Vector3.up * (capsule.height / 2.1f - capsule.radius);
-            capsuleBottom = transform.position + capsule.center + Vector3.down * (capsule.height / 2.5f - capsule.radius);
-            if (Physics.CapsuleCast(capsuleTop, capsuleBottom, capsule.radius, Vector3.down, out plateHit, 0.15f, LayerMask.GetMask("PressurePlate")))
-            {
-                plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
-            }
+            
         }
     }
 

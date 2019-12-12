@@ -55,7 +55,15 @@ public class InteractionPickUp : Interactable
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             //transform.rotation = Quaternion.Euler(Vector3.zero);
             //transform.position += Vector3.up;
-            
+            if (CompareTag("CarryBox"))
+            {
+                RaycastHit plateHit;
+                //if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out plateHit, 1f, LayerMask.GetMask("PressurePlate")))
+                if (Physics.BoxCast(transform.position + Vector3.up * 0.5f, colliders[0].size / 2, Vector3.down, out plateHit, Quaternion.identity, 0.45f, LayerMask.GetMask("PressurePlate")))
+                {
+                    plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
+                }
+            }
             StartCoroutine(PickupDelay());
 
             //GetComponent<BoxCollider>().enabled = false;
@@ -147,7 +155,7 @@ public class InteractionPickUp : Interactable
     {
         if (showTrajectory == true)
         {
-            rp.SwapLifted();
+            rp.HidePath();
         }
     }
 
@@ -155,15 +163,7 @@ public class InteractionPickUp : Interactable
     {
         yield return new WaitForSeconds(pickupAnimationDelay);
         
-        if (CompareTag("CarryBox"))
-        {
-            RaycastHit plateHit;
-            //if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out plateHit, 1f, LayerMask.GetMask("PressurePlate")))
-            if (Physics.BoxCast(transform.position + Vector3.up * 0.5f, colliders[0].size / 2, Vector3.down, out plateHit, Quaternion.identity, 0.45f, LayerMask.GetMask("PressurePlate")))
-            {
-                plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
-            }
-        }
+        
         StartCoroutine(RaisePosition());
     }
 
@@ -199,7 +199,7 @@ public class InteractionPickUp : Interactable
 
         if (showTrajectory == true)
         {
-            rp.SwapLifted();
+            rp.ShowPath();
         }
     }
 }

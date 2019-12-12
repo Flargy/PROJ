@@ -24,7 +24,10 @@ public class ChangeSceneTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        playerCount--;
+        if (other.CompareTag("Player"))
+        {
+            playerCount--;
+        }
     }
 
     private void ChangeScene()
