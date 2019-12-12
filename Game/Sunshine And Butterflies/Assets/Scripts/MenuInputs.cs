@@ -158,9 +158,9 @@ public class MenuInputs : MonoBehaviour
         Application.Quit();
     }
 
-    public void ControllerButton()
+    public void ControllerBackButton()
     {
-        Debug.Log("Control scheme");
+
     }
 
     public void SwapOutline()
