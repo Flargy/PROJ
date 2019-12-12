@@ -2322,17 +2322,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1118350022118625947, guid: 07eceb29cd30cb24fa48d57650dea131,
-        type: 3}
-      propertyPath: dropShadow
-      value: 
-      objectReference: {fileID: 85049227436657652, guid: 81ea84b733776bb4ba1ca99d6de6287f,
-        type: 3}
-    - target: {fileID: 1118350022118625947, guid: 07eceb29cd30cb24fa48d57650dea131,
-        type: 3}
-      propertyPath: mainCam
-      value: 
-      objectReference: {fileID: 125166055}
     - target: {fileID: 5089755446774057493, guid: 07eceb29cd30cb24fa48d57650dea131,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2388,9 +2377,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5593859519870245480, guid: 07eceb29cd30cb24fa48d57650dea131,
+    - target: {fileID: 1118350022118625947, guid: 07eceb29cd30cb24fa48d57650dea131,
         type: 3}
-      propertyPath: cam
+      propertyPath: dropShadow
+      value: 
+      objectReference: {fileID: 85049227436657652, guid: 81ea84b733776bb4ba1ca99d6de6287f,
+        type: 3}
+    - target: {fileID: 1118350022118625947, guid: 07eceb29cd30cb24fa48d57650dea131,
+        type: 3}
+      propertyPath: mainCam
       value: 
       objectReference: {fileID: 125166055}
     - target: {fileID: 4189003849032116783, guid: 07eceb29cd30cb24fa48d57650dea131,
@@ -2408,6 +2403,11 @@ PrefabInstance:
       propertyPath: secondaryMusicSnapShot
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5593859519870245480, guid: 07eceb29cd30cb24fa48d57650dea131,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 125166055}
     - target: {fileID: 6516300270907608826, guid: 07eceb29cd30cb24fa48d57650dea131,
         type: 3}
       propertyPath: pauseMenuUI
@@ -4690,6 +4690,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 343713263}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2090566413 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4298329963865885524, guid: 7bef16939f7f56c4c9b9e508e7a3c258,
+    type: 3}
+  m_PrefabInstance: {fileID: 5211522077016999384}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2099454360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5251,6 +5257,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
       value: ResumeButtonSelection
+      objectReference: {fileID: 0}
+    - target: {fileID: 2419956737344014449, guid: 7bef16939f7f56c4c9b9e508e7a3c258,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2090566413}
+    - target: {fileID: 2419956737344014449, guid: 7bef16939f7f56c4c9b9e508e7a3c258,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 5429740006054589775, guid: 7bef16939f7f56c4c9b9e508e7a3c258,
         type: 3}
