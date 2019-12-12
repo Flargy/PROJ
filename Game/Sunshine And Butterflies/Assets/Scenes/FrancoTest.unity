@@ -532,6 +532,11 @@ PrefabInstance:
       propertyPath: m_ClearFlags
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7806553607701543740, guid: 116ac96fa3d5f98479016640585f9a40,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 116ac96fa3d5f98479016640585f9a40, type: 3}
 --- !u!1 &288625112 stripped
@@ -819,6 +824,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7244844973060189905, guid: 889b0cdd50f4d4c4aade5f93333b8959,
+        type: 3}
+      propertyPath: m_Name
+      value: Button
+      objectReference: {fileID: 0}
     - target: {fileID: 8685999697633593947, guid: 889b0cdd50f4d4c4aade5f93333b8959,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -874,11 +884,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7244844973060189905, guid: 889b0cdd50f4d4c4aade5f93333b8959,
-        type: 3}
-      propertyPath: m_Name
-      value: Button
-      objectReference: {fileID: 0}
     - target: {fileID: 2679521861416088438, guid: 889b0cdd50f4d4c4aade5f93333b8959,
         type: 3}
       propertyPath: affectedObject
@@ -893,6 +898,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3115189702860824702, guid: 3916919bf9ebb784098317e298017e61,
+        type: 3}
+      propertyPath: m_Name
+      value: Wall_Asylum_Door_300x300_Scripted
+      objectReference: {fileID: 0}
     - target: {fileID: 2116754906951946861, guid: 3916919bf9ebb784098317e298017e61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -948,11 +958,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3115189702860824702, guid: 3916919bf9ebb784098317e298017e61,
-        type: 3}
-      propertyPath: m_Name
-      value: Wall_Asylum_Door_300x300_Scripted
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3916919bf9ebb784098317e298017e61, type: 3}
 --- !u!114 &533254034 stripped
@@ -979,6 +984,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec8db4597b69984c817c0c9fb7e409a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &592996860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 592996863}
+  - component: {fileID: 592996862}
+  - component: {fileID: 592996861}
+  m_Layer: 0
+  m_Name: CrossFadeAmbient
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &592996861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592996860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f57ae833ad8e449a3912aad0a62643, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound1: {fileID: 8300000, guid: dcfbb0554a8e3714ba9cb4d5f7fc7527, type: 3}
+  sound2: {fileID: 8300000, guid: 1c251000101e27c4d99bf2cbe1859b30, type: 3}
+  crossFader: {fileID: 592996862}
+--- !u!114 &592996862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592996860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ddc1eebcb518304796827a0730b67f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDuration: 1
+  _volume: 1
+--- !u!4 &592996863
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592996860}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 37
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &671572563
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,6 +1247,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 26187195}
     m_Modifications:
+    - target: {fileID: 7244844973060189905, guid: 889b0cdd50f4d4c4aade5f93333b8959,
+        type: 3}
+      propertyPath: m_Name
+      value: Button
+      objectReference: {fileID: 0}
     - target: {fileID: 8685999697633593947, guid: 889b0cdd50f4d4c4aade5f93333b8959,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1235,11 +1306,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7244844973060189905, guid: 889b0cdd50f4d4c4aade5f93333b8959,
-        type: 3}
-      propertyPath: m_Name
-      value: Button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 889b0cdd50f4d4c4aade5f93333b8959, type: 3}
@@ -1777,7 +1843,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &844459780
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2388,6 +2454,11 @@ PrefabInstance:
       propertyPath: mainCam
       value: 
       objectReference: {fileID: 125166055}
+    - target: {fileID: 5593859519870245480, guid: 07eceb29cd30cb24fa48d57650dea131,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 125166055}
     - target: {fileID: 4189003849032116783, guid: 07eceb29cd30cb24fa48d57650dea131,
         type: 3}
       propertyPath: m_UIInputModule
@@ -2403,11 +2474,6 @@ PrefabInstance:
       propertyPath: secondaryMusicSnapShot
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 5593859519870245480, guid: 07eceb29cd30cb24fa48d57650dea131,
-        type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 125166055}
     - target: {fileID: 6516300270907608826, guid: 07eceb29cd30cb24fa48d57650dea131,
         type: 3}
       propertyPath: pauseMenuUI
@@ -2842,6 +2908,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4090196967049824979, guid: b2f2126130510bb40b5f98a467146f2c,
+        type: 3}
+      propertyPath: m_Name
+      value: BlipblopBox_ver3 (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 1051614291774699712, guid: b2f2126130510bb40b5f98a467146f2c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2896,11 +2967,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4090196967049824979, guid: b2f2126130510bb40b5f98a467146f2c,
-        type: 3}
-      propertyPath: m_Name
-      value: BlipblopBox_ver3 (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2f2126130510bb40b5f98a467146f2c, type: 3}
@@ -3223,6 +3289,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2877209496763401428, guid: b62c56d4c5adbb04186f8052d011e850,
+        type: 3}
+      propertyPath: m_Name
+      value: Pressure Plate
+      objectReference: {fileID: 0}
     - target: {fileID: 7086587859558039046, guid: b62c56d4c5adbb04186f8052d011e850,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3283,11 +3354,6 @@ PrefabInstance:
       propertyPath: affectedObject.Array.data[0]
       value: 
       objectReference: {fileID: 2139385432}
-    - target: {fileID: 2877209496763401428, guid: b62c56d4c5adbb04186f8052d011e850,
-        type: 3}
-      propertyPath: m_Name
-      value: Pressure Plate
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b62c56d4c5adbb04186f8052d011e850, type: 3}
 --- !u!1 &1589220490 stripped
@@ -3388,6 +3454,65 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 18.44}
+--- !u!1 &1639021518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1639021521}
+  - component: {fileID: 1639021520}
+  - component: {fileID: 1639021519}
+  m_Layer: 0
+  m_Name: AmbientTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1639021519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639021518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e4c51db1240f046b3f487977b594c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ambientSoundPlayer: {fileID: 592996861}
+  playersRequired: 2
+--- !u!65 &1639021520
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639021518}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3, z: 3}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1639021521
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639021518}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 167.39, y: 1.51, z: -162.56}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 38
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1677331133
 GameObject:
   m_ObjectHideFlags: 0
@@ -3493,6 +3618,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 716925572}
     m_Modifications:
+    - target: {fileID: 2734109833829183862, guid: 9fd6e92831465f345a07dbef4ce2512d,
+        type: 3}
+      propertyPath: m_Name
+      value: Lever
+      objectReference: {fileID: 0}
     - target: {fileID: 1417186583900881765, guid: 9fd6e92831465f345a07dbef4ce2512d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3563,11 +3693,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 4.9694624
       objectReference: {fileID: 0}
-    - target: {fileID: 2734109833829183862, guid: 9fd6e92831465f345a07dbef4ce2512d,
-        type: 3}
-      propertyPath: m_Name
-      value: Lever
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fd6e92831465f345a07dbef4ce2512d, type: 3}
 --- !u!1001 &1713368381
@@ -3577,6 +3702,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4090196967049824979, guid: b2f2126130510bb40b5f98a467146f2c,
+        type: 3}
+      propertyPath: m_Name
+      value: BlipblopBox_ver3 (6)
+      objectReference: {fileID: 0}
     - target: {fileID: 1051614291774699712, guid: b2f2126130510bb40b5f98a467146f2c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3631,11 +3761,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4090196967049824979, guid: b2f2126130510bb40b5f98a467146f2c,
-        type: 3}
-      propertyPath: m_Name
-      value: BlipblopBox_ver3 (6)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2f2126130510bb40b5f98a467146f2c, type: 3}
@@ -4061,6 +4186,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2946768521394480097, guid: 5d6ee23e9d8c1344ba4849afd43542ef,
+        type: 3}
+      propertyPath: m_Name
+      value: Box
+      objectReference: {fileID: 0}
     - target: {fileID: 940844355912514139, guid: 5d6ee23e9d8c1344ba4849afd43542ef,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4115,11 +4245,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2946768521394480097, guid: 5d6ee23e9d8c1344ba4849afd43542ef,
-        type: 3}
-      propertyPath: m_Name
-      value: Box
       objectReference: {fileID: 0}
     - target: {fileID: 8008325782514407423, guid: 5d6ee23e9d8c1344ba4849afd43542ef,
         type: 3}
@@ -4273,7 +4398,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1907842840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4622,6 +4747,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2946768521394480097, guid: 5d6ee23e9d8c1344ba4849afd43542ef,
+        type: 3}
+      propertyPath: m_Name
+      value: Box (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 940844355912514139, guid: 5d6ee23e9d8c1344ba4849afd43542ef,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4677,11 +4807,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2946768521394480097, guid: 5d6ee23e9d8c1344ba4849afd43542ef,
-        type: 3}
-      propertyPath: m_Name
-      value: Box (1)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d6ee23e9d8c1344ba4849afd43542ef, type: 3}
 --- !u!4 &2090022941 stripped
@@ -4703,6 +4828,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3810339315334747864, guid: 22e0c281d80f8bf47b4ae5573232d34c,
+        type: 3}
+      propertyPath: m_Name
+      value: BlipBlopBox_ver2 (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 196560465645364427, guid: 22e0c281d80f8bf47b4ae5573232d34c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4757,11 +4887,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3810339315334747864, guid: 22e0c281d80f8bf47b4ae5573232d34c,
-        type: 3}
-      propertyPath: m_Name
-      value: BlipBlopBox_ver2 (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22e0c281d80f8bf47b4ae5573232d34c, type: 3}
