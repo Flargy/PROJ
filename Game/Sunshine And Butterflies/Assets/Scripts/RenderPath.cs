@@ -33,6 +33,23 @@ public class RenderPath : MonoBehaviour
         }
     }
 
+    public void ShowPath()
+    {
+        isLifted = true;
+        lr.enabled = true;
+    }
+
+    public void HidePath()
+    {
+        isLifted = false;
+        lr.enabled = false;
+        if (boxDisplayInstanceFar != null)
+        {
+            Destroy(boxDisplayInstanceFar);
+            //Destroy(boxDisplayInstanceNear);
+        }
+    }
+
     private void Update()
     {
         if(isLifted == true) { 

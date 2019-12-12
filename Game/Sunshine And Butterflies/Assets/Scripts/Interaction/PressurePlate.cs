@@ -28,30 +28,15 @@ public class PressurePlate : MonoBehaviour
 
     public void LowerCounter()
     {
-        itemsOnPad = Mathf.Max(0, itemsOnPad -1);
 
-        if (itemsOnPad < desiredNrOfObjects)
-        {
-            colorObject.material = startingColor;
-            audioSource.PlayOneShot(deActivatedSound);
-            foreach (AffectedObject affected in affectedObject)
-            {
-
-                affected.ExecuteAction();
-
-            }
-        }
-        foreach (DoorLightChange light in lights)
-        {
-            light.ChangeEmission(Mathf.Min(itemsOnPad / desiredNrOfObjects, 1.0f));
-        }
+        StartCoroutine(CounterDelay());
     }
 
     private void OnTriggerEnter(Collider other)
     {
         
 
-        if (other.CompareTag("Player") || other.CompareTag("CarryBox"))
+        if (other.CompareTag("Player") || other.CompareTag("CarryBox") || other.CompareTag("CrouchCollider"))
         {
             itemsOnPad++;
             if (itemsOnPad == desiredNrOfObjects)
@@ -77,7 +62,7 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("CarryBox"))
+        if (other.CompareTag("Player") || other.CompareTag("CarryBox") || other.CompareTag("CrouchCollider"))
         {
             itemsOnPad = Mathf.Max(0, itemsOnPad - 1);
             if (itemsOnPad < desiredNrOfObjects)
@@ -108,6 +93,28 @@ public class PressurePlate : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    private IEnumerator CounterDelay()
+    {
+        yield return new WaitForEndOfFrame();
+        itemsOnPad = Mathf.Max(0, itemsOnPad - 1);
+
+        if (itemsOnPad < desiredNrOfObjects)
+        {
+            colorObject.material = startingColor;
+            audioSource.PlayOneShot(deActivatedSound);
+            foreach (AffectedObject affected in affectedObject)
+            {
+
+                affected.ExecuteAction();
+
+            }
+        }
+        foreach (DoorLightChange light in lights)
+        {
+            light.ChangeEmission(Mathf.Min(itemsOnPad / desiredNrOfObjects, 1.0f));
         }
     }
 }

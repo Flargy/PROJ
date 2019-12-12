@@ -93,7 +93,8 @@ public class OrtographicCamera : MonoBehaviour
 
         size = Mathf.Max(size, minimumSize);
 
-        return size;
+
+        return Mathf.Clamp(size, minimumSize, 7.0f);
     }
 
     

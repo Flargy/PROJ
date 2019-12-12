@@ -15,8 +15,9 @@ public class BreakableWall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("CarryBox") && hasBeenUsed == false)
+        if (other.attachedRigidbody.velocity.magnitude > 5.5f && hasBeenUsed == false)
         {
+            Debug.Log(other.attachedRigidbody.velocity.magnitude);
             foreach(Rigidbody rig in rb)
             {
                 rig.isKinematic = false;
@@ -24,7 +25,7 @@ public class BreakableWall : MonoBehaviour
                 rig.AddForce(rig.gameObject.transform.forward * force);
             }
             hasBeenUsed = true;
-           
+            StartCoroutine(DestroyDebris());
         }
     }
 
