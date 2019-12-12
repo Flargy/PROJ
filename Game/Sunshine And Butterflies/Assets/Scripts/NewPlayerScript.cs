@@ -15,6 +15,7 @@ public class NewPlayerScript : MonoBehaviour
     [SerializeField] private GameObject dropShadow = null;
     [SerializeField] private float jumpVelocityClampValue = 7.0f;
     [SerializeField] Collider[] colliders;
+    [SerializeField] private FollowPlayer followPoint = null;
 
     private Rigidbody rb = null;
     private Vector2 movementVector = Vector2.zero;
@@ -74,6 +75,10 @@ public class NewPlayerScript : MonoBehaviour
             if (GroundCheck() == true && jumpGroundCheckDelay >= 0.3f)
             {
                 airBorne = false;
+                if(followPoint != null)
+                {
+                    followPoint.StartFollowingPlayer();
+                }
                 Destroy(dropShadowInstance);
                 dropShadowInstance = null;
                 jumpGroundCheckDelay = 0.0f;
@@ -359,6 +364,10 @@ public class NewPlayerScript : MonoBehaviour
             clampedY = Vector3.ClampMagnitude(clampedY, jumpVelocityClampValue);
             rb.velocity = new Vector3(rb.velocity.x, clampedY.y, rb.velocity.z);
             airBorne = true;
+            if(followPoint != null)
+            {
+                followPoint.StopFollowingPlayer();
+            }
             anim.SetTrigger("isJumping");
         }
     }

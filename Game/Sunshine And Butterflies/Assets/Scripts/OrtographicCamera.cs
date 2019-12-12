@@ -53,7 +53,13 @@ public class OrtographicCamera : MonoBehaviour
         {
             averagePosition /= numberOfTargets;
         }
-        averagePosition.y = transform.position.y; //this needs to change
+
+        /*
+         if player jumping == true
+            averagepos = transform.pos
+         */
+
+        //averagePosition.y = transform.position.y; //this needs to change
         desiredPosition = averagePosition;
     }
 
@@ -77,9 +83,9 @@ public class OrtographicCamera : MonoBehaviour
             }
             Vector3 targetLocalPosition = transform.InverseTransformPoint(target.position);
 
-            Vector3 desiredPositionToTarget = new Vector3(targetLocalPosition.x, 0, targetLocalPosition.z) - desiredLocalPosition;
+            Vector3 desiredPositionToTarget = targetLocalPosition - desiredLocalPosition;
 
-            size = Mathf.Max(size, Mathf.Abs(desiredPositionToTarget.z/2));
+            size = Mathf.Max(size, Mathf.Abs(desiredPositionToTarget.y));
             size = Mathf.Max(size, Mathf.Abs(desiredPositionToTarget.x) / cameraReference.aspect);
         }
 
