@@ -20,7 +20,11 @@ public class AffectedDoor : AffectedObject
     private bool openDoor = true;
     private Coroutine openAndCloseDoors = null;
 
-
+    /// <summary>
+    /// Activates the coroutine for opening doors.
+    /// Checks the value of each <see cref="PressurePlate"/> if it uses plates.
+    /// Interupts previous coroutine if activated again while a coroutine is still running.
+    /// </summary>
     public override void ExecuteAction()
     {
         if(coroutineIsRunning == true)
@@ -83,6 +87,9 @@ public class AffectedDoor : AffectedObject
 
     }
 
+    /// <summary>
+    /// Sets start values for variables
+    /// </summary>
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -91,6 +98,10 @@ public class AffectedDoor : AffectedObject
         toRotation = endRotation;
     }
 
+    /// <summary>
+    /// Rotates the attached object from and to the values <see cref="toRotation"/> and <see cref="fromRotation"/>
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator RotateDoors()
     {
         var opening = toRotation == endRotation;
@@ -128,7 +139,9 @@ public class AffectedDoor : AffectedObject
 
     }
 
-
+    /// <summary>
+    /// Changes the rotation values after each activation
+    /// </summary>
     private void ChangeRotationValues()
     {
         fromRotation = transform.localRotation.eulerAngles;

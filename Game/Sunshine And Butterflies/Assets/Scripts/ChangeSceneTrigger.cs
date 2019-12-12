@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class ChangeSceneTrigger : MonoBehaviour
 {
-    [SerializeField] private int sceneNumber = 0;
     
     private int playerCount = 0;
     private bool activated = false;

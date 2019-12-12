@@ -18,6 +18,10 @@ public class AffectedCrushingWall : AffectedObject
     private bool coroutineIsRunning = false;
     private BoxCollider[] boxes;
 
+
+    /// <summary>
+    /// Is triggered by an interactable object and starts the coroutine for moving objects
+    /// </summary>
     public override void ExecuteAction()
     {
         if (coroutineIsRunning == true)
@@ -29,6 +33,9 @@ public class AffectedCrushingWall : AffectedObject
         movement = StartCoroutine(ChangePosition());
     }
 
+    /// <summary>
+    /// Sets starting values to variables
+    /// </summary>
     private void Start()
     {
         rb = GetComponentInChildren<Rigidbody>();
@@ -40,6 +47,10 @@ public class AffectedCrushingWall : AffectedObject
 
     }
 
+    /// <summary>
+    /// Moves the rigidbody object to a specific location over a set amount of time and activates a killbox depending on position
+    /// </summary>
+    /// <returns> Returns a pause using the same time as the current frame</returns>
     private IEnumerator ChangePosition()
     {
        
@@ -63,6 +74,9 @@ public class AffectedCrushingWall : AffectedObject
 
     }
 
+    /// <summary>
+    /// Changes the values of from and to so that the next activation will send the object back to it's former position
+    /// </summary>
     private void SwapLocationValues()
     {
         t = 0.0f;

@@ -53,7 +53,7 @@ public class OrtographicCamera : MonoBehaviour
         {
             averagePosition /= numberOfTargets;
         }
-        averagePosition.y = transform.position.y;
+        averagePosition.y = transform.position.y; //this needs to change
         desiredPosition = averagePosition;
     }
 

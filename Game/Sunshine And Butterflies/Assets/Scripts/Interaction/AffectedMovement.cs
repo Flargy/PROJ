@@ -18,6 +18,9 @@ public class AffectedMovement : AffectedObject
     private bool coroutineIsRunning = false;
     private BoxCollider[] boxes;
 
+    /// <summary>
+    /// Starts the coroutines
+    /// </summary>
     public override void ExecuteAction()
     {
         if(coroutineIsRunning == true)
@@ -29,6 +32,9 @@ public class AffectedMovement : AffectedObject
         movement = StartCoroutine(ChangePosition());
     }
 
+    /// <summary>
+    /// Sets starting values
+    /// </summary>
     private void Start()
     {
         rb = GetComponentInChildren<Rigidbody>();
@@ -39,6 +45,10 @@ public class AffectedMovement : AffectedObject
         
     }
 
+    /// <summary>
+    /// Lerps position of <see cref="Rigidbody"/> affected object between <see cref="goFromPosition"/> to <see cref="goToPosition"/>
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ChangePosition()
     {
         foreach(BoxCollider box in boxes)
@@ -65,6 +75,9 @@ public class AffectedMovement : AffectedObject
 
     }
 
+    /// <summary>
+    /// Changes the value of <see cref="goFromPosition"/> and <see cref="goToPosition"/>
+    /// </summary>
     private void SwapLocationValues()
     {
         t = 0.0f;

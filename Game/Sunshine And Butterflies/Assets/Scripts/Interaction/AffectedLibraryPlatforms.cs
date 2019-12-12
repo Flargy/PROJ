@@ -20,6 +20,9 @@ public class AffectedLibraryPlatforms : AffectedObject
     private bool activatedFirstTime = false;
     private BoxCollider[] boxes;
 
+    /// <summary>
+    /// Activates coroutine to move objects.
+    /// </summary>
     public override void ExecuteAction()
     {
         if (coroutineIsRunning == true)
@@ -31,6 +34,9 @@ public class AffectedLibraryPlatforms : AffectedObject
         movement = StartCoroutine(ChangePosition());
     }
 
+    /// <summary>
+    /// Sets starting values
+    /// </summary>
     private void Start()
     {
         rb = GetComponentInChildren<Rigidbody>();
@@ -42,6 +48,10 @@ public class AffectedLibraryPlatforms : AffectedObject
 
     }
 
+    /// <summary>
+    /// Changes the position of the <see cref="Rigidbody"/> affected object
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ChangePosition()
     {
         if(activatedFirstTime == false && willUpdateStartPosition == true && startPosition != rb.transform.position)
@@ -74,6 +84,9 @@ public class AffectedLibraryPlatforms : AffectedObject
 
     }
 
+    /// <summary>
+    /// Changes the <see cref="goFromPosition"/> and <see cref="goToPosition"/>
+    /// </summary>
     private void SwapLocationValues()
     {
         t = 0.0f;

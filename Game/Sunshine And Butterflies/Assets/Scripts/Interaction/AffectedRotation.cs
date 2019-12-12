@@ -12,13 +12,18 @@ public class AffectedRotation : AffectedObject
     private Vector3 originalRotation = Vector3.zero;
     private Vector3 toRotation = Vector3.zero;
     
-
+    /// <summary>
+    /// Activates coroutine
+    /// </summary>
     public override void ExecuteAction()
     {
         StartCoroutine(ChangeRotation());
         
     }
 
+    /// <summary>
+    /// Sets starting values to variables
+    /// </summary>
     private void Start()
     {
         originalRotation = transform.rotation.eulerAngles;
@@ -27,6 +32,11 @@ public class AffectedRotation : AffectedObject
         
     }
 
+    /// <summary>
+    /// Lerps the rotation of the affected object from <see cref="fromRotation"/> to <see cref="toRotation"/>.
+    /// Changes rotation values when finished
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ChangeRotation()
     {
         while (lerpTime < actionDuration)

@@ -7,6 +7,9 @@ public class AffectedSpawner : AffectedObject
     
     private GameObject spawnObject;
 
+    /// <summary>
+    /// Spawns an instance of <see cref="spawnPrefab"/> if it doesn't exist in the level
+    /// </summary>
     public override void ExecuteAction()
     {
         if(spawnObject == null)
