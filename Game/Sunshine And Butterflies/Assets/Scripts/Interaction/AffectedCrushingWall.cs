@@ -79,13 +79,11 @@ public class AffectedCrushingWall : AffectedObject
     /// </summary>
     private void SwapLocationValues()
     {
-        Debug.Log("swapping values");
         t = 0.0f;
         lerpTime = 0.0f;
         goFromPosition = rb.transform.position;
         if (goToPosition == endPosition.position)
         {
-            Debug.Log("Going to start");
             goToPosition = startPosition;
         }
         else
