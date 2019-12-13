@@ -128,7 +128,7 @@ public class AffectedDoor : AffectedObject
         }
 
 
-        if (opening == false)
+        if (opening == false && coroutineIsRunning == false)
         {
             Debug.Log("CloseSound");
             toRotation = endRotation;
