@@ -16,10 +16,11 @@ public class ChangeSceneTrigger : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.CompareTag("Player"))
         {
             playerCount++;
-            if (playerCount == 2)
+            if (playerCount == 4)
             {
                 activated = true;
                 ChangeScene();
@@ -44,6 +45,6 @@ public class ChangeSceneTrigger : MonoBehaviour
     /// </summary>
     private void ChangeScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
     }
 }
