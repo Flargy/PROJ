@@ -21,6 +21,11 @@ public class InteractionButton : Interactable
     public AudioClip buttonSoundIn;
     public AudioClip buttonSoundOut;
 
+
+    /// <summary>
+    /// Activates the affected objects connected and plays animation on the interacting player.
+    /// </summary>
+    /// <param name="player"></param>
     public override void Interact(GameObject player)
     {
         if (interacting == false && actionDelay <= 0)
@@ -56,7 +61,7 @@ public class InteractionButton : Interactable
             player.GetComponent<NewPlayerScript>().Freeze(animationDuration);
             player.GetComponent<NewPlayerScript>().StartAnimation("Push Button");
         }
-        else if(interacting == false && actionDelay < 0)
+        else if(interacting == false && actionDelay > 0)
         {
             player.GetComponent<NewPlayerScript>().Freeze(animationDuration);
             player.GetComponent<NewPlayerScript>().StartAnimation("Push Button");
@@ -64,6 +69,9 @@ public class InteractionButton : Interactable
         }
     }
 
+    /// <summary>
+    /// Sets starting values.
+    /// </summary>
     private void Start()
     {
 
@@ -75,6 +83,10 @@ public class InteractionButton : Interactable
         }
     }
 
+    /// <summary>
+    /// Lerps the movement of the button in and out.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ButtonMovement()
     {
         audioSource.PlayOneShot(buttonSoundIn);
@@ -104,12 +116,20 @@ public class InteractionButton : Interactable
         lerpTime = 0.0f;
     }
 
+    /// <summary>
+    /// Reactivates the affected object after a set amount of time.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator OnATimer()
     {
         yield return new WaitForSeconds(durationToClose);
         affectedObject.ExecuteAction();
     }
 
+    /// <summary>
+    /// Creates a delay before activation.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ActionDelay()
     {
         yield return new WaitForSeconds(actionDelay);

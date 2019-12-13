@@ -22,6 +22,9 @@ public class InteractionPickUp : Interactable
     private Vector3 goToPosition = Vector3.zero;
     private Vector3 goFromPosition = Vector3.zero;
 
+    /// <summary>
+    /// Sets starting values to variables
+    /// </summary>
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -33,6 +36,9 @@ public class InteractionPickUp : Interactable
         
     }
 
+    /// <summary>
+    /// Moves the <see cref="Rigidbody"/> affected object towards the desired position.
+    /// </summary>
     private void Update()
     {
         if (isPickedUp == true && interacting == true)
@@ -43,6 +49,11 @@ public class InteractionPickUp : Interactable
         }
     }
 
+    /// <summary>
+    /// Sets values for being picked up and starts coroutines to change position.
+    /// Sends a raycast downwards to lower the count of possible pressure plates under it.
+    /// </summary>
+    /// <param name="player"></param>
     public override void Interact(GameObject player)
     {
         if(interacting == false)
@@ -85,6 +96,9 @@ public class InteractionPickUp : Interactable
         }
     }
 
+    /// <summary>
+    /// Resets the values on the picked up object and places it in front of the player.
+    /// </summary>
     public void Drop()
     {
         currentHolder.GetComponent<NewPlayerScript>().DropObject();
@@ -100,9 +114,13 @@ public class InteractionPickUp : Interactable
         {
             box.enabled = true;
         }
-        LineDisplay();
+        HideLine();
     }
 
+
+    /// <summary>
+    /// Resets the values of the picked up object and applies a force similar to a throw to it.
+    /// </summary>
     public override void Toss()
     {
         currentHolder.GetComponent<NewPlayerScript>().DropObject();
@@ -118,10 +136,13 @@ public class InteractionPickUp : Interactable
         {
             box.enabled = true;
         }
-        LineDisplay();
+        HideLine();
 
     }
 
+    /// <summary>
+    /// Teleports the object to a specific position.
+    /// </summary>
     public override void Teleport()
     {
         if(currentHolder != null)
@@ -137,6 +158,9 @@ public class InteractionPickUp : Interactable
 
     }
 
+    /// <summary>
+    /// Moves the box to it's designed respawn position.
+    /// </summary>
     public void Respawn()
     {
         if(respawnPoint != null)
@@ -151,7 +175,10 @@ public class InteractionPickUp : Interactable
         }
     }
 
-    private void LineDisplay()
+    /// <summary>
+    /// Deactivates the <see cref="LineRenderer"/> on the object if one is attached.
+    /// </summary>
+    private void HideLine()
     {
         if (showTrajectory == true)
         {
@@ -159,6 +186,10 @@ public class InteractionPickUp : Interactable
         }
     }
 
+    /// <summary>
+    /// Sets a delay before the pickup is activated to better match animations
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator PickupDelay()
     {
         yield return new WaitForSeconds(pickupAnimationDelay);
@@ -167,6 +198,10 @@ public class InteractionPickUp : Interactable
         StartCoroutine(RaisePosition());
     }
 
+    /// <summary>
+    /// Lerps the position of the <see cref="Rigidbody"/> affected object to simulate pickup up the object
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator RaisePosition()
     {
         goFromPosition = rb.transform.position;
@@ -175,7 +210,6 @@ public class InteractionPickUp : Interactable
         while (lerpTime < 0.8f)
         {
             t += Time.deltaTime / 0.8f;
-            //transform.position = Vector3.Lerp(goFromPosition, goToPosition, t);
             rb.MovePosition(Vector3.Lerp(goFromPosition, goToPosition, t));
             lerpTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
@@ -188,7 +222,6 @@ public class InteractionPickUp : Interactable
         while (lerpTime < 0.3f)
         {
             t += Time.deltaTime / 0.3f;
-            //transform.position = Vector3.Lerp(goFromPosition, goToPosition, t);
             rb.MovePosition(Vector3.Lerp(goFromPosition, goToPosition, t));
             lerpTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();

@@ -21,6 +21,9 @@ public class InteractionPlayer : Interactable
     private bool noMovementAllowed = true; 
     private Collider[] colliders;//Eku
 
+    /// <summary>
+    /// Sets starting values to variables.
+    /// </summary>
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -29,6 +32,9 @@ public class InteractionPlayer : Interactable
         thisPlayer = GetComponent<NewPlayerScript>();
     }
 
+    /// <summary>
+    /// Moves the <see cref="Rigidbody"/> affected object towards the desired position.
+    /// </summary>
     private void Update()
     {
         if (isLifted)
@@ -38,6 +44,10 @@ public class InteractionPlayer : Interactable
         }
     }
 
+    /// <summary>
+    /// Starts the player pickup interaction if <see cref="NewPlayerScript.CanBeLifted"/> function returns true.
+    /// </summary>
+    /// <param name="player"></param>
     public override void Interact(GameObject player)
     {
          if(thisPlayer.CanBeLifted() == true && isLifted == false)
@@ -48,10 +58,6 @@ public class InteractionPlayer : Interactable
             isLifted = true;
             rb.useGravity = false;
             otherPlayer.GetComponent<NewPlayerScript>().PickUpObject(gameObject, animationDuration);
-            //foreach (Collider col in colliders)
-            //{
-            //    col.enabled = false;//Eku
-            //}
             playerInput.SwitchCurrentActionMap("BreakingFree");
         }
          else if(isLifted == true)
@@ -60,6 +66,9 @@ public class InteractionPlayer : Interactable
         }
     }
 
+    /// <summary>
+    /// Resets variable values and applies a force similar to that of a throw to the <see cref="Rigidbody"/> affected object.
+    /// </summary>
     public override void Toss()
     {
         isLifted = false;
@@ -75,6 +84,9 @@ public class InteractionPlayer : Interactable
         noMovementAllowed = true;
     }
 
+    /// <summary>
+    /// Resets the values and releases the <see cref="Rigidbody"/> affected object.
+    /// </summary>
     public void GetPutDown()
     {
         thisPlayer.Released();
@@ -90,6 +102,9 @@ public class InteractionPlayer : Interactable
 
     }
 
+    /// <summary>
+    /// Releases the <see cref="Rigidbody"/> affected object object if <see cref="noMovementAllowed"/> is equal to false.
+    /// </summary>
     public void OnBreakFree()
     {
         if (noMovementAllowed == false)
@@ -99,6 +114,10 @@ public class InteractionPlayer : Interactable
         }
     }
 
+    /// <summary>
+    /// Applies a delay before the player can attempt to release themselves from the hold.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator BreakFreeDelay()
     {
         yield return new WaitForSeconds(inputPickupDelay);

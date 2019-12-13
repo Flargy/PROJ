@@ -20,6 +20,10 @@ public class InteractionSwitch : Interactable
     private AudioSource audioSource;
     public AudioClip SwitchSound;
 
+    /// <summary>
+    /// Activates <see cref="AffectedObject.ExecuteAction"/> for each of objects in the <see cref="affectedObjects"/> list.
+    /// </summary>
+    /// <param name="player"></param>
     public override void Interact(GameObject player)
     {
         if (interacting == false)
@@ -44,6 +48,9 @@ public class InteractionSwitch : Interactable
         }
     }
 
+    /// <summary>
+    /// Sets starting values to variables.
+    /// </summary>
     private void Start()
     {
         button1To = button1.transform.position - ((button1.transform.forward * 0.1f));
@@ -54,6 +61,10 @@ public class InteractionSwitch : Interactable
         audioSource = GetComponent<AudioSource>();
     }
 
+    /// <summary>
+    /// Lerps the position of the two buttons <see cref="button1"/> and <see cref="button2"/>.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ButtonMovement()
     {
         while (lerpTime < 1)
@@ -72,6 +83,13 @@ public class InteractionSwitch : Interactable
         SwapValues(button1From, button1To, button2From, button2To);
     }
 
+    /// <summary>
+    /// Swaps the lerp values used in <see cref="ButtonMovement"/> before next activation.
+    /// </summary>
+    /// <param name="b1f"></param>
+    /// <param name="b1t"></param>
+    /// <param name="b2f"></param>
+    /// <param name="b2t"></param>
     private void SwapValues(Vector3 b1f, Vector3 b1t, Vector3 b2f, Vector3 b2t)
     {
         button1From = b1t;

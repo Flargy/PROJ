@@ -7,29 +7,30 @@ public class SeeThroughWallRaycast : MonoBehaviour
     [SerializeField] private GameObject seeThrough = null;
     [SerializeField] private LayerMask wallLayer = 0;
     [SerializeField] private GameObject cam = null;
-    [SerializeField] private float radius = 1.0f;
+    [SerializeField] private float radius = 0.5f;
 
     private List<Vector3> castPoints;
 
+    /// <summary>
+    /// Fills the list <see cref="castPoints"/> with 5 different points
+    /// </summary>
     private void Awake()
     {
         castPoints = new List<Vector3>();
-        castPoints.Add(Vector3.up * 0.6f);
-        castPoints.Add(Vector3.up * 0.6f + Vector3.right * radius);
-        castPoints.Add(Vector3.up * 0.6f + Vector3.left * radius);
-        castPoints.Add(Vector3.up * 0.6f + Vector3.up * radius);
-        castPoints.Add(Vector3.up * 0.6f + Vector3.down * radius);
+        castPoints.Add(Vector3.up * 0.5f);
+        castPoints.Add(Vector3.up * 0.5f + Vector3.right * radius);
+        castPoints.Add(Vector3.up * 0.5f + Vector3.left * radius);
+        castPoints.Add(Vector3.up * 0.5f + Vector3.up * radius);
+        castPoints.Add(Vector3.up * 0.5f + Vector3.down * radius);
     }
 
+    /// <summary>
+    /// Sends raycasts towards the position of <see cref="cam"/> from each point in <see cref="castPoints"/>.
+    /// If any of the raycasts hits the desired layer it activates the <see cref="seeThrough"/> object.
+    /// </summary>
     private void FixedUpdate()
     {
-        Debug.DrawRay(transform.position + Vector3.up * 0.6f, cam.transform.position - transform.position + Vector3.up * 0.6f);
-        Debug.DrawRay(transform.position + Vector3.up * 0.6f + Vector3.right * radius, cam.transform.position - transform.position + Vector3.up * 0.6f);
-        Debug.DrawRay(transform.position + Vector3.up * 0.6f + Vector3.left * radius, cam.transform.position - transform.position + Vector3.up * 0.6f);
-        Debug.DrawRay(transform.position + Vector3.up * 0.6f + Vector3.up * radius, cam.transform.position - transform.position + Vector3.up * 0.6f);
-        Debug.DrawRay(transform.position + Vector3.up * 0.6f + Vector3.down * radius, cam.transform.position - transform.position + Vector3.up * 0.6f);
-
-
+        
         RaycastHit hit;
         
         for ( int i = 0; i < 5; i++)
@@ -52,23 +53,7 @@ public class SeeThroughWallRaycast : MonoBehaviour
                 }
             }
         }
-
-
-        //if(Physics.SphereCast(transform.position + Vector3.up * 0.6f, radius, cam.transform.position - (transform.position + Vector3.up * 0.6f), out hit, 10.0f, wallLayer))
-        //{
-        //    seeThrough.transform.LookAt(cam.transform.position, Vector3.up);
-        //    if (seeThrough.activeSelf == false)
-        //    {
-        //        seeThrough.SetActive(true);
-        //    }
-        //}
-        //else
-        //{
-        //    if(seeThrough.activeSelf == true)
-        //    {
-        //        seeThrough.SetActive(false);
-        //    }
-        //}
+        
     }
 
 }

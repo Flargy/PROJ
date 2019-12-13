@@ -34,7 +34,9 @@ public class InteractionLever : Interactable
     public AudioClip pushDownLever;
     public AudioClip releaseLever;
 
-
+    /// <summary>
+    /// Sets starting values.
+    /// </summary>
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -43,6 +45,10 @@ public class InteractionLever : Interactable
         originalQTETimer = QTETimer;
     }
 
+    /// <summary>
+    /// Initiates the startup for the quick time event and activates the affected object.
+    /// </summary>
+    /// <param name="player"></param>
     public override void Interact(GameObject player)
     {
         if (interacting == false)
@@ -69,6 +75,10 @@ public class InteractionLever : Interactable
         }
     }
 
+    /// <summary>
+    /// Receives input from the interacting player and activates <see cref="CheckAnswer"/>.
+    /// </summary>
+    /// <param name="answerID"></param>
     public void ReceiveAnswer(int answerID)
     {
         if(takeInput == true)
@@ -81,6 +91,10 @@ public class InteractionLever : Interactable
         }
     }
 
+    /// <summary>
+    /// Checks if the players input matches the variable <see cref="correctAnswer"/>.
+    /// Stops the QTE if <see cref="playerAnswer"/> doens't match <see cref="correctAnswer"/>.
+    /// </summary>
     private void CheckAnswer()
     {
         if(playerAnswer == correctAnswer)
@@ -99,6 +113,9 @@ public class InteractionLever : Interactable
         }
     }
 
+    /// <summary>
+    /// Stops the QTE and resets values.
+    /// </summary>
     private void StopQTE()
     {
         if (abortQTE == true && interactingPlayer != null)
@@ -130,6 +147,9 @@ public class InteractionLever : Interactable
         }
     }
 
+    /// <summary>
+    /// Displays the correct input.
+    /// </summary>
     private void DisplayWantedInput()
     {
         renderQTE.sprite = sprites[correctAnswer];
@@ -141,6 +161,10 @@ public class InteractionLever : Interactable
         }
     }
 
+    /// <summary>
+    /// Starts the QTE functionality on a loop.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator StartQTE()
     {
         int newNumber = correctAnswer;
@@ -166,6 +190,10 @@ public class InteractionLever : Interactable
         StopQTE();
     }
 
+    /// <summary>
+    /// Rotates the clock's hand 360 degrees.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator TurnClock()
     {
         clockHand.transform.localRotation = Quaternion.Euler(Vector3.zero);
@@ -180,6 +208,10 @@ public class InteractionLever : Interactable
         t = 0;
     }
 
+    /// <summary>
+    /// Rotates the lever to pull it down and release it back up
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator RotateLever()
     {
         leverPullDownTime = 0.0f;
@@ -188,15 +220,11 @@ public class InteractionLever : Interactable
         if (currentRotation.x == 0)
         {
             endRotation = new Vector3(60, 0, 0);
-            // ^ljud
-            Debug.Log("LjudPushDown");
             audioSource.PlayOneShot(pushDownLever);
 
         }
         else 
         {
-            // andra ljudet
-            Debug.Log("LjudRelease");
             audioSource.PlayOneShot(releaseLever);
         }
 
@@ -208,6 +236,10 @@ public class InteractionLever : Interactable
         }
     }
 
+    /// <summary>
+    /// Sets a delay before the animation is played while the player is placed in the right position.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator AnimationDelay()
     {
         yield return new WaitForSeconds(0.7f);

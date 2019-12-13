@@ -9,6 +9,11 @@ public class CheckpointUpdate : MonoBehaviour
     private GameObject firstPlayer = null;
     private int counter = 0;
 
+    /// <summary>
+    /// Updates the respawn position of the players who enter the trigger zone.
+    /// When 2 different players have entered the object destroys itself.
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

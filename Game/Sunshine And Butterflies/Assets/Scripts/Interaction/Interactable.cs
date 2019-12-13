@@ -27,7 +27,9 @@ public class Interactable : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// Draws the interaction radius in the editor
+    /// </summary>
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -48,6 +50,9 @@ public class Interactable : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Displays the interaction icon
+    /// </summary>
     public void ShowInteraction()
     {
         if(interactionIcon != null)
@@ -56,6 +61,9 @@ public class Interactable : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Hides the interaction icon
+    /// </summary>
     public void HideInteraction()
     {
         if (interactionIcon != null)
@@ -64,11 +72,18 @@ public class Interactable : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Initiates cooldown coroutine
+    /// </summary>
     public void StartInteraction()
     {
         StartCoroutine(InteractionCooldown());
     }
 
+    /// <summary>
+    /// Sets a cooldown before the object can be interacted with again
+    /// </summary>
+    /// <returns></returns>
     public virtual IEnumerator InteractionCooldown()
     {
         interacting = true;

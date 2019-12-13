@@ -17,25 +17,34 @@ public class PressurePlate : MonoBehaviour
     public AudioClip activatedSound;
     public AudioClip deActivatedSound;
 
+    /// <summary>
+    /// Sets starting values to variables.
+    /// </summary>
     private void Start()
     {
         startingColor = colorObject.material;
         audioSource = GetComponent<AudioSource>();
 
     }
-
     
-
+    /// <summary>
+    /// Starts a coroutine to lower the counter <see cref="itemsOnPad"/> on the object.
+    /// </summary>
     public void LowerCounter()
     {
 
         StartCoroutine(CounterDelay());
     }
 
+    /// <summary>
+    /// Increases the counter <see cref="itemsOnPad"/>.
+    /// Changes color and starts <see cref="AffectedObject.ExecuteAction"/> on each connected object in the <see cref="affectedObject"/> list if <see cref="itemsOnPad"/> is equals to <see cref="desiredNrOfObjects"/>.
+    /// Only reacts to objects tagged as "Player", "CarryBox" or "CrouchCollider"
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         
-
         if (other.CompareTag("Player") || other.CompareTag("CarryBox") || other.CompareTag("CrouchCollider"))
         {
             itemsOnPad++;
@@ -60,6 +69,12 @@ public class PressurePlate : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Lowers the counter <see cref="itemsOnPad"/>.
+    /// Changes color and starts <see cref="AffectedObject.ExecuteAction"/> on each connected object in the <see cref="affectedObject"/> list if <see cref="itemsOnPad"/> is less than <see cref="desiredNrOfObjects"/>.
+    /// Only reacts to objects tagged as "Player", "CarryBox" or "CrouchCollider"
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player") || other.CompareTag("CarryBox") || other.CompareTag("CrouchCollider"))
@@ -84,6 +99,10 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns whether or not the pressure plate has the desired amount of objects on it or not.
+    /// </summary>
+    /// <returns></returns>
     public bool GetPushed()
     {
         if(itemsOnPad >= desiredNrOfObjects)
@@ -96,6 +115,11 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Lowers the counter <see cref="itemsOnPad"/> at the end of the frame.
+    /// Changes color and starts <see cref="AffectedObject.ExecuteAction"/> on each connected object in the <see cref="affectedObject"/> list if <see cref="itemsOnPad"/> is less than <see cref="desiredNrOfObjects"/>.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator CounterDelay()
     {
         yield return new WaitForEndOfFrame();
