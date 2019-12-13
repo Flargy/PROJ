@@ -123,7 +123,17 @@ public class InteractionButton : Interactable
     private IEnumerator OnATimer()
     {
         yield return new WaitForSeconds(durationToClose);
-        affectedObject.ExecuteAction();
+        if (affectedObjectList.Length == 0)
+        {
+            affectedObject.ExecuteAction();
+        }
+        else
+        {
+            foreach (AffectedObject obj in affectedObjectList)
+            {
+                obj.ExecuteAction();
+            }
+        }
     }
 
     /// <summary>
