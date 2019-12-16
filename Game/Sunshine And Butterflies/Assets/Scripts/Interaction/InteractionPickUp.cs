@@ -72,7 +72,7 @@ public class InteractionPickUp : Interactable
             {
                 RaycastHit plateHit;
                 //if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out plateHit, 1f, LayerMask.GetMask("PressurePlate")))
-                if (Physics.BoxCast(transform.position + Vector3.up * 0.6f, colliders[0].size / 2, Vector3.down, out plateHit, Quaternion.identity, 0.45f, LayerMask.GetMask("PressurePlate")))
+                if (Physics.BoxCast(transform.position + Vector3.up * 0.6f, colliders[0].size / 2 + new Vector3(0.15f, 0.15f, 0.15f), Vector3.down, out plateHit, Quaternion.identity, 0.45f, LayerMask.GetMask("PressurePlate")))
                 {
                     plateHit.collider.GetComponent<PressurePlate>().LowerCounter();
                 }
