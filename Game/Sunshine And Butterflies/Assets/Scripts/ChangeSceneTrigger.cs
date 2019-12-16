@@ -8,6 +8,7 @@ public class ChangeSceneTrigger : MonoBehaviour
     
     private int playerCount = 0;
     private bool activated = false;
+    private GameObject currentPlayer = null;
 
     /// <summary>
     /// Increases the value of <see cref="playerCount"/> when an object tagged with "Player" enters the trigger zone.
@@ -19,11 +20,15 @@ public class ChangeSceneTrigger : MonoBehaviour
         
         if (other.CompareTag("Player"))
         {
-            playerCount++;
-            if (playerCount == 4)
+            if (other.gameObject != currentPlayer)
             {
-                activated = true;
-                ChangeScene();
+                currentPlayer = other.gameObject;
+                playerCount++;
+                if (playerCount >= 2)
+                {
+                    activated = true;
+                    ChangeScene();
+                }
             }
         }
     }
@@ -36,7 +41,8 @@ public class ChangeSceneTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerCount--;
+            playerCount = Mathf.Max(0, playerCount - 1);
+            currentPlayer = null;
         }
     }
 
@@ -45,6 +51,6 @@ public class ChangeSceneTrigger : MonoBehaviour
     /// </summary>
     private void ChangeScene()
     {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
     }
 }
