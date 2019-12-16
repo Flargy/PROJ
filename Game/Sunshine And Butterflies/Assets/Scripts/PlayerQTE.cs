@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//Main Author: Marcus Lundqvist
+
 public class PlayerQTE : MonoBehaviour
 {
     private InteractionLever currentLever = null;
@@ -16,13 +18,20 @@ public class PlayerQTE : MonoBehaviour
     private Quaternion fromRotation = Quaternion.identity;
     private Quaternion toRotation = Quaternion.identity;
 
-
+    /// <summary>
+    /// Sets values of variables on start.
+    /// </summary>
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
     }
 
+    /// <summary>
+    /// Swaps the players <see cref="PlayerInput.currentActionMap"/> to QTE and sets values of variables.
+    /// </summary>
+    /// <param name="lever">The script attached to the lever.</param>
+    /// <param name="leverPosition">The gameobject which the script is attached to.</param>
     public void SwapToQTE(InteractionLever lever, GameObject leverPosition)
     {
         currentLever = lever;
@@ -38,32 +47,50 @@ public class PlayerQTE : MonoBehaviour
         StartCoroutine(PlaceAndRotate());
     }
 
+    /// <summary>
+    /// Changes the players <see cref="PlayerInput.currentActionMap"/> back to Gameplay.
+    /// </summary>
     public void SwapToMovement()
     {
         playerInput.SwitchCurrentActionMap("Gameplay");
     }
 
+    /// <summary>
+    /// Sends value to <see cref="InteractionLever.ReceiveAnswer(int)"/>
+    /// </summary>
     public void OnDown()
     {
         currentLever.ReceiveAnswer(0);
     }
 
+    /// <summary>
+    /// Sends value to <see cref="InteractionLever.ReceiveAnswer(int)"/>
+    /// </summary>
     public void OnLeft()
     {
         currentLever.ReceiveAnswer(1);
     }
 
+    /// <summary>
+    /// Sends value to <see cref="InteractionLever.ReceiveAnswer(int)"/>
+    /// </summary>
     public void OnUp()
     {
         currentLever.ReceiveAnswer(2);
     }
 
+    /// <summary>
+    /// Sends value to <see cref="InteractionLever.ReceiveAnswer(int)"/>
+    /// </summary>
     public void OnRight()
     {
         currentLever.ReceiveAnswer(3);
     }
 
-
+    /// <summary>
+    /// Rotates the player towards the lever and places them in the correct position to match animations.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator PlaceAndRotate()
     {
         while (lerpTime < 0.7f)

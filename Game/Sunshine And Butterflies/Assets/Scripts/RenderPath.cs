@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class RenderPath : MonoBehaviour
 {
     [SerializeField] private GameObject boxDisplay = null;
@@ -15,13 +17,18 @@ public class RenderPath : MonoBehaviour
     //private GameObject boxDisplayInstanceNear = null;
     private bool isLifted = false;
 
+    /// <summary>
+    /// Sets start values of variables.
+    /// </summary>
     private void Start()
     {
         lr = GetComponent<LineRenderer>();
         lr.enabled = false;
-        
     }
 
+    /// <summary>
+    /// Changes the value of <see cref="isLifted"/> and enables the <see cref="LineRenderer"/>.
+    /// </summary>
     public void SwapLifted()
     {
         isLifted = !isLifted;
@@ -33,12 +40,18 @@ public class RenderPath : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Changes value of <see cref="isLifted"/> to true and enables the <see cref="LineRenderer"/>.
+    /// </summary>
     public void ShowPath()
     {
         isLifted = true;
         lr.enabled = true;
     }
 
+    /// <summary>
+    /// Changes the value of <see cref="isLifted"/> to false and disables the <see cref="LineRenderer"/> and destroys the <see cref="boxDisplayInstanceFar"/> if active.
+    /// </summary>
     public void HidePath()
     {
         isLifted = false;
@@ -50,6 +63,9 @@ public class RenderPath : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Fills the <see cref="LineRenderer"/> with positions and calculates where the box should hit.
+    /// </summary>
     private void Update()
     {
         if(isLifted == true) { 
