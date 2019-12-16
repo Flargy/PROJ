@@ -123,13 +123,6 @@ public class AffectedDoor : AffectedObject
             yield return new WaitForEndOfFrame();
         }
 
-        if (usesPlates == false)
-        {
-            ChangeRotationValues();
-
-        }
-
-
         if (opening == false)
         {
             Debug.Log("CloseSound");
@@ -137,6 +130,12 @@ public class AffectedDoor : AffectedObject
             audioSource.PlayOneShot(closeSound);
         }
 
+        if (usesPlates == false)
+        {
+            ChangeRotationValues();
+
+        }
+        
         coroutineIsRunning = false;
 
     }
