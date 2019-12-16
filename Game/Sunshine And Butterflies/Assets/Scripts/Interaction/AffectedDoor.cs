@@ -106,6 +106,10 @@ public class AffectedDoor : AffectedObject
     /// <returns></returns>
     private IEnumerator RotateDoors()
     {
+        if(fromRotation == toRotation)
+        {
+            yield break;
+        }
         var opening = toRotation == endRotation;
         if (opening && coroutineIsRunning == false)
         {
