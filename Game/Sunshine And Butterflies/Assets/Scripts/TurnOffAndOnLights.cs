@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class TurnOffAndOnLights : MonoBehaviour
 {
     [SerializeField] private List<Light> oldLights;
@@ -12,25 +14,46 @@ public class TurnOffAndOnLights : MonoBehaviour
     private float t = 0.0f;
     private int playerCount = 0;
     private bool activated = false;
+    private GameObject firstPlayer = null;
 
+    /// <summary>
+    /// Increases <see cref="playerCount"/> when a player enters the trigger zone.
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            playerCount++;
-            if (playerCount == 2)
+            if (other.gameObject != firstPlayer)
             {
-                activated = true;
-                StartCoroutine(ChangeLights());
+                firstPlayer = other.gameObject;
+                playerCount++;
+                if (playerCount >= 2)
+                {
+                    activated = true;
+                    StartCoroutine(ChangeLights());
+                }
             }
         }
     }
 
+    /// <summary>
+    /// Lowers the value of <see cref="playerCount"/> when <see langword="abstract"/>player exits.
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
-        playerCount--;
+        if (other.CompareTag("Player"))
+        {
+            playerCount = Mathf.Max(0, playerCount - 1);
+            firstPlayer = null;
+        }
     }
 
+    /// <summary>
+    /// Lerps the light intensity of lights.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ChangeLights()
     {
         if(oldLights.Count > 1) 

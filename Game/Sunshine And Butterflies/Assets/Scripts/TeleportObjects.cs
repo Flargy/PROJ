@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class TeleportObjects : MonoBehaviour
 {
     [SerializeField] private Transform teleportToLocation = null;
@@ -10,12 +12,18 @@ public class TeleportObjects : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip boxTeleportSound;
 
+    /// <summary>
+    /// Sets starting values to variables
+    /// </summary>
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
 
-
+    /// <summary>
+    /// Starts coroutine if a box or misc item enters the trigger zone.
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("CarryBox") || other.CompareTag("Misc"))
@@ -26,6 +34,11 @@ public class TeleportObjects : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Deactivates the item and relocates it to <see cref="teleportToLocation"/> after a delay of <see cref="transferTime"/>.
+    /// </summary>
+    /// <param name="box"></param>
+    /// <returns></returns>
     private IEnumerator MoveBox(GameObject box)
     {
         box.GetComponent<Interactable>().Teleport();

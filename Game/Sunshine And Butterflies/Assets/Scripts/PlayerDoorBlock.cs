@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class PlayerDoorBlock : MonoBehaviour
 {
     [SerializeField] private GameObject otherCollider = null;
 
     private bool done = false;
 
+    /// <summary>
+    /// Checks which player enters the trigger zone and activates <see cref="ChangeLayer(string)"/>.
+    /// </summary>
+    /// <param name="other">The object entering the trigger zone</param>
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && done == false)
@@ -25,6 +31,10 @@ public class PlayerDoorBlock : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Changes the layer of the trigger zone and makes it stop being a trigger.
+    /// </summary>
+    /// <param name="layerName"></param>
     public void ChangeLayer(string layerName)
     {
         gameObject.layer = LayerMask.NameToLayer(layerName);
