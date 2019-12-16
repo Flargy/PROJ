@@ -9,6 +9,7 @@ public class CheckpointUpdate : MonoBehaviour
     [SerializeField] private Transform[] respawnPositions = null;
 
     private GameObject firstPlayer = null;
+    private GameObject secondPlayer = null;
     private int counter = 0;
 
     /// <summary>
@@ -26,8 +27,9 @@ public class CheckpointUpdate : MonoBehaviour
                 other.GetComponent<NewPlayerScript>().ChangeSpawnPoint(respawnPositions[counter].position);
                 counter++;
             }
-            else if(firstPlayer != other.gameObject)
+            else if(firstPlayer != other.gameObject && secondPlayer == null)
             {
+                secondPlayer = other.gameObject;
                 other.GetComponent<NewPlayerScript>().ChangeSpawnPoint(respawnPositions[counter].position);
                 counter++;
             }
