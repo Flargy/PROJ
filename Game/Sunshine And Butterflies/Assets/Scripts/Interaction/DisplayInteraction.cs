@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class DisplayInteraction : MonoBehaviour
 {
     [SerializeField] private int otherPlayer = 0;

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class AffectedDoor : AffectedObject
 {
     [SerializeField] private List<PressurePlate> plates = null;
@@ -128,7 +130,7 @@ public class AffectedDoor : AffectedObject
         }
 
 
-        if (opening == false && coroutineIsRunning == false)
+        if (opening == false)
         {
             Debug.Log("CloseSound");
             toRotation = endRotation;

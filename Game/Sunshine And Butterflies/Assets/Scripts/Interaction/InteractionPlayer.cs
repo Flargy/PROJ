@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//Main Author: Marcus Lundqvist
+
 public class InteractionPlayer : Interactable
 {
     [SerializeField] private GameObject otherPlayer = null;

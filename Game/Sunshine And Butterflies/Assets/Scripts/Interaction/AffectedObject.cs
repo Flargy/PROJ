@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 /// <summary>
 /// The base class for all "Affected" scripts
 /// </summary>

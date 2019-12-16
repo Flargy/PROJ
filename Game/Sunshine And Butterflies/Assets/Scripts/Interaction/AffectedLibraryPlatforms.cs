@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class AffectedLibraryPlatforms : AffectedObject
 {
     [SerializeField] private Vector3 startPosition = Vector3.zero;

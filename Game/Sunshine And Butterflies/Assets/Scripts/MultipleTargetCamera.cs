@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class MultipleTargetCamera : MonoBehaviour
 {
     [SerializeField] private List<Transform> players = null;
@@ -17,11 +19,17 @@ public class MultipleTargetCamera : MonoBehaviour
     private float smoothTime = 0.5f;
     private Camera cam;
 
+    /// <summary>
+    /// Sets values on startup.
+    /// </summary>
     private void Start()
     {
         cam = GetComponent<Camera>();
     }
 
+    /// <summary>
+    /// Activates the functions <see cref="Move"/> and <see cref="Zoom"/>.
+    /// </summary>
     private void LateUpdate()
     {
         Move();
@@ -29,6 +37,9 @@ public class MultipleTargetCamera : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void Zoom()
     {
         float newZoom = Mathf.Lerp(maxZoom, minZoom, GreatestDistance() / zoomLimiter);
