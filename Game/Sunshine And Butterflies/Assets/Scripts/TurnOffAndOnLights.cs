@@ -28,7 +28,7 @@ public class TurnOffAndOnLights : MonoBehaviour
             {
                 firstPlayer = other.gameObject;
                 playerCount++;
-                if (playerCount == 2)
+                if (playerCount >= 2)
                 {
                     activated = true;
                     StartCoroutine(ChangeLights());
