@@ -23,6 +23,7 @@ public class SplashTimer : MonoBehaviour
     /// <returns></returns>
     private IEnumerator SceneDelay()
     {
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
         yield return new WaitForSeconds(timeDelayed);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
     }
