@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+//Main Author: Marcus Lundqvist
+
 public class AffectedMovement : AffectedObject
 {
     [SerializeField] private Vector3 startPosition = Vector3.zero;

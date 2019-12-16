@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class AffectedRotation : AffectedObject
 {
     [SerializeField] private Vector3 endRotation = Vector3.zero;

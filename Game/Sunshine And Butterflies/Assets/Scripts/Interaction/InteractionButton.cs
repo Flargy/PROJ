@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class InteractionButton : Interactable
 {
     [SerializeField] private AffectedObject affectedObject = null;

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class CheckpointUpdate : MonoBehaviour
 {
     [SerializeField] private Transform[] respawnPositions = null;

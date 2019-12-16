@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class FollowPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject holdingPlayer = null;
 
     private bool followPlayer = true;
 
+    /// <summary>
+    /// Follows the position of <see cref="holdingPlayer"/> if <see cref="followPlayer"/> is true.
+    /// </summary>
     void Update()
     {
         if(followPlayer == true)
@@ -20,11 +25,17 @@ public class FollowPlayer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Changes the value of <see cref="followPlayer"/> to false.
+    /// </summary>
     public void StopFollowingPlayer()
     {
         followPlayer = false;
     }
 
+    /// <summary>
+    /// Changes the value of <see cref="followPlayer"/> to true.
+    /// </summary>
     public void StartFollowingPlayer()
     {
         followPlayer = true;

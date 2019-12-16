@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class PressurePlate : MonoBehaviour
 {
     [SerializeField] private List<AffectedObject> affectedObject = null;

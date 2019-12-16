@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class CloseDoors : MonoBehaviour
 {
     [SerializeField] private GameObject[] doorsToClose;
@@ -13,6 +15,11 @@ public class CloseDoors : MonoBehaviour
     private int playerCount = 0;
     private bool activated = false;
 
+    /// <summary>
+    /// Increases the value of <see cref="playerCount"/> each time a player enters the trigger zone.
+    /// If the counter has reached a value of 2 it starts a coroutine.
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         
@@ -25,13 +32,23 @@ public class CloseDoors : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Lowers the counter if a player leaves the trigger zone.
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
-       
-          playerCount--;
+        if (other.CompareTag("Player"))
+        {
+            playerCount--;
+        }
         
     }
 
+    /// <summary>
+    /// Opens and closes doors through <see cref="Quaternion.Lerp(Quaternion, Quaternion, float)"/>
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator OpenAndCloseDoors()
     {
         
