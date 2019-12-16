@@ -64,7 +64,7 @@ public class AffectedMovement : AffectedObject
             //transform.position = Vector3.Lerp(goFromPosition, goToPosition, t);
             rb.MovePosition(Vector3.Lerp(goFromPosition, goToPosition, t));
             lerpTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         SwapLocationValues();
