@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class Interactable : MonoBehaviour
 {
     public float interactionRadius = 2.0f; // Position for player to stand when interacting

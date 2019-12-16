@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class InteractionSwitch : Interactable
 {
     [SerializeField] private List<AffectedObject> affectedObjects = null;

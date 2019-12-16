@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+//Main Author: Marcus Lundqvist
+
 public class NewPlayerScript : MonoBehaviour
 {
     [SerializeField] private LayerMask groundLayer = 1;

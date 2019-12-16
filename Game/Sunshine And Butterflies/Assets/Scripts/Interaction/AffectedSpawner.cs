@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class AffectedSpawner : AffectedObject
 {
     [SerializeField] private GameObject spawnPrefab = null;

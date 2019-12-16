@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class BreakableWall : MonoBehaviour
 {
     [SerializeField] private float force = 200.0f;

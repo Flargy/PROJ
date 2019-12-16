@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class InteractionPickUp : Interactable
 {
     [SerializeField] private float horizontalYeetForce = 300.0f;

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//Main Author: Marcus Lundqvist
+
 public class ChangeSceneTrigger : MonoBehaviour
 {
     

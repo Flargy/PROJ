@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Marcus Lundqvist
+
 public class AffectedButtonMultiple : Interactable
 {
     [SerializeField] private AffectedObject[] affectedObjectList = null;
