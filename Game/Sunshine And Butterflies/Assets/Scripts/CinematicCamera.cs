@@ -35,7 +35,7 @@ public class CinematicCamera : MonoBehaviour
             t += Time.deltaTime / movementDuration;
             transform.position = Vector3.Lerp(goFromPosition, goToPosition, t);
             lerpTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
     }
 }

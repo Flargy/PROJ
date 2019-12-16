@@ -99,7 +99,7 @@ public class PlayerQTE : MonoBehaviour
             rb.MovePosition(Vector3.Lerp(moveFromPosition, moveToPosition, t));
             rb.MoveRotation(Quaternion.Lerp(fromRotation, toRotation, t));
             lerpTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
         t = 0;
         lerpTime = 0;

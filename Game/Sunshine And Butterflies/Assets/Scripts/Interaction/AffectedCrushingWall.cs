@@ -66,7 +66,7 @@ public class AffectedCrushingWall : AffectedObject
             {
                 deathColliderHolder.SetActive(true);
             }
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         SwapLocationValues();

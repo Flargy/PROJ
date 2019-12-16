@@ -75,7 +75,7 @@ public class InteractionSwitch : Interactable
             button1.transform.position = Vector3.Lerp(button1From, button1To, t);
             button2.transform.position = Vector3.Lerp(button2From, button2To, t);
             lerpTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         audioSource.PlayOneShot(SwitchSound);

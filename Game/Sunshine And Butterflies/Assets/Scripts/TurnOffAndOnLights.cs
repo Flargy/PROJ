@@ -71,7 +71,7 @@ public class TurnOffAndOnLights : MonoBehaviour
             foreach(Light light in newLights)
             {
                 light.intensity = Mathf.Lerp(0, litStrength, t);
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
             t += Time.deltaTime;
         }
@@ -82,7 +82,7 @@ public class TurnOffAndOnLights : MonoBehaviour
             {
                 
                 light.intensity = Mathf.Lerp(lightStrength, 0, t);
-                yield return new WaitForEndOfFrame();
+                yield return null;
                 if(light.intensity < 0.1f)
                 {
                     light.gameObject.SetActive(false);

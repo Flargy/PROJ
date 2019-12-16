@@ -124,7 +124,7 @@ public class AffectedDoor : AffectedObject
             t += Time.deltaTime / actionDuration;
             transform.localRotation = Quaternion.Euler(Vector3.Lerp(fromRotation, toRotation, t));
             lerpTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         if (opening == false)

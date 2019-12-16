@@ -204,7 +204,7 @@ public class InteractionLever : Interactable
             t += Time.deltaTime / QTETimer;
             clockHand.transform.localRotation = Quaternion.Euler(Vector3.Lerp(Vector3.zero, new Vector3(0, 0, 358), t));
 
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         t = 0;
@@ -234,7 +234,7 @@ public class InteractionLever : Interactable
         {
             leverPullDownTime += Time.deltaTime / 1.5f;
             leverAxis.transform.localRotation = Quaternion.Euler(Vector3.Lerp(currentRotation, endRotation, leverPullDownTime));
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
     }
 

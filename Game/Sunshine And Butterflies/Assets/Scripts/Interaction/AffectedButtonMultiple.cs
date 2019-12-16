@@ -76,7 +76,7 @@ public class AffectedButtonMultiple : Interactable
             t += Time.deltaTime;
             button.transform.position = Vector3.Lerp(notPressedPosition, pressedPosition, t);
             lerpTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         t = 0.0f;
@@ -87,7 +87,7 @@ public class AffectedButtonMultiple : Interactable
             t += Time.deltaTime;
             button.transform.position = Vector3.Lerp(pressedPosition, notPressedPosition, t);
             lerpTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
         audioSource.PlayOneShot(buttonSoundOut);
         t = 0.0f;

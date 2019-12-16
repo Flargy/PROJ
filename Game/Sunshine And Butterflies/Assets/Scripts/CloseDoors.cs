@@ -64,7 +64,7 @@ public class CloseDoors : MonoBehaviour
             {
                 door.transform.rotation = Quaternion.Euler(Vector3.Lerp(closedRotation, openRotation, t));
             }
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
         Destroy(gameObject);
     }

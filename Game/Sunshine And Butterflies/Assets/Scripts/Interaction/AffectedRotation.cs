@@ -46,7 +46,7 @@ public class AffectedRotation : AffectedObject
             t += Time.deltaTime / actionDuration;
             transform.rotation = Quaternion.Euler(Vector3.Lerp(fromRotation, toRotation, t));
             lerpTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         if (fromRotation == originalRotation)

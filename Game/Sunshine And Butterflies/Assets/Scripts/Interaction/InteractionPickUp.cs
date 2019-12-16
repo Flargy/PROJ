@@ -214,7 +214,7 @@ public class InteractionPickUp : Interactable
             t += Time.deltaTime / 0.8f;
             rb.MovePosition(Vector3.Lerp(goFromPosition, goToPosition, t));
             lerpTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
         t = 0;
         lerpTime = 0;
@@ -226,7 +226,7 @@ public class InteractionPickUp : Interactable
             t += Time.deltaTime / 0.3f;
             rb.MovePosition(Vector3.Lerp(goFromPosition, goToPosition, t));
             lerpTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
         t = 0;
         lerpTime = 0;

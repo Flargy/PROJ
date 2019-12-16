@@ -124,7 +124,7 @@ public class PressurePlate : MonoBehaviour
     /// <returns></returns>
     private IEnumerator CounterDelay()
     {
-        yield return new WaitForEndOfFrame();
+        yield return null;
         itemsOnPad = Mathf.Max(0, itemsOnPad - 1);
 
         if (itemsOnPad < desiredNrOfObjects)

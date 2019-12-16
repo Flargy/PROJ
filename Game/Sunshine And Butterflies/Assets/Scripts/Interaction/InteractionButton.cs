@@ -98,7 +98,7 @@ public class InteractionButton : Interactable
             t += Time.deltaTime;
             button.transform.position = Vector3.Lerp(notPressedPosition, pressedPosition, t);
             lerpTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
         
         Debug.Log("Ljud 1");
@@ -110,7 +110,7 @@ public class InteractionButton : Interactable
             t += Time.deltaTime;
             button.transform.position = Vector3.Lerp(pressedPosition, notPressedPosition, t);
             lerpTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
         audioSource.PlayOneShot(buttonSoundOut);
         Debug.Log("Ljud 2");
