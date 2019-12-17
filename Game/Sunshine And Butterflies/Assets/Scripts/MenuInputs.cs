@@ -133,7 +133,7 @@ public class MenuInputs : MonoBehaviour
 
     public void RestartCurrentScene()
     {
-        //Application.LoadLevel(scene.name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     /*

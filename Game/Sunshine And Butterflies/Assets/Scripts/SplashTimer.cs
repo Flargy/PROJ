@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class SplashTimer : MonoBehaviour
 {
     [SerializeField] float timeDelayed = 0;
+    [SerializeField] bool goesToMain = false;
 
     /// <summary>
     /// Starts the coroutine.
@@ -24,7 +25,14 @@ public class SplashTimer : MonoBehaviour
     private IEnumerator SceneDelay()
     {
         yield return new WaitForSeconds(timeDelayed);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        if(goesToMain == false) 
+        { 
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        }
+        else
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 
 }
