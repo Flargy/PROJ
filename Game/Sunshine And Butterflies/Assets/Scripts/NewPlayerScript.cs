@@ -334,8 +334,8 @@ public class NewPlayerScript : MonoBehaviour
 
         if (movementVector.magnitude >= 0.1f)
         {
-            rb.velocity = (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed) + new Vector3(0, rb.velocity.y, 0);
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, moveSpeed);
+            Vector3 noY = (new Vector3(movementVector.x, 0, movementVector.y) * moveSpeed);
+            rb.velocity = Vector3.ClampMagnitude(noY, moveSpeed) + new Vector3(0, rb.velocity.y, 0);
             if (usingScreenNorth == false)
             {
                 rb.velocity = new Vector3(rb.velocity.x, yVelocity, rb.velocity.z);
@@ -347,7 +347,7 @@ public class NewPlayerScript : MonoBehaviour
         }
         else if (movementVector.magnitude < 0.1f && noGravityVector.magnitude > 0.0f)
         {
-            noGravityVector += -noGravityVector * Time.deltaTime;
+            //noGravityVector += -noGravityVector * Time.deltaTime;
             rb.velocity = new Vector3(noGravityVector.x, yVelocity, noGravityVector.y);
         }
         //if (rb.velocity.y < 0)
@@ -375,9 +375,11 @@ public class NewPlayerScript : MonoBehaviour
     {
         if (GroundCheck() == true && interacting == false && isLifted == false && CarryingAObject == false && crouching == false && airBorne == false)
         {
-            Vector3 clampedY = new Vector3(0, jumpPower, 0);
+            Vector3 clampedY = new Vector3(0, jumpPower, 1.0f);
             clampedY = Vector3.ClampMagnitude(clampedY, jumpVelocityClampValue);
             rb.velocity = new Vector3(rb.velocity.x, clampedY.y, rb.velocity.z);
+            rb.velocity += transform.forward * 0.5f;
+
             airBorne = true;
             if(followPoint != null)
             {
