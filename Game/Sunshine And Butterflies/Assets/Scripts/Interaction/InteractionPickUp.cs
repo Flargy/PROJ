@@ -177,6 +177,11 @@ public class InteractionPickUp : Interactable
         }
     }
 
+    public void ChangeRespawn(Transform newSpawnPos)
+    {
+        respawnPoint = newSpawnPos;
+    }
+
     /// <summary>
     /// Deactivates the <see cref="LineRenderer"/> on the object if one is attached.
     /// </summary>

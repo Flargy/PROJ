@@ -19,11 +19,11 @@ public class SeeThroughWallRaycast : MonoBehaviour
     private void Awake()
     {
         castPoints = new List<Vector3>();
-        castPoints.Add(Vector3.up * 0.5f);
-        castPoints.Add(Vector3.up * 0.5f + Vector3.right * radius);
-        castPoints.Add(Vector3.up * 0.5f + Vector3.left * radius);
-        castPoints.Add(Vector3.up * 0.5f + Vector3.up * radius);
-        castPoints.Add(Vector3.up * 0.5f + Vector3.down * radius);
+        castPoints.Add(Vector3.up * 0.6f);
+        castPoints.Add(Vector3.up * 0.6f + Vector3.right * radius);
+        castPoints.Add(Vector3.up * 0.6f + Vector3.left * radius);
+        castPoints.Add(Vector3.up * 0.6f + Vector3.up * radius);
+        castPoints.Add(Vector3.up * 0.6f + Vector3.down * radius);
     }
 
     /// <summary>

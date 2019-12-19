@@ -42,6 +42,7 @@ public class NewPlayerScript : MonoBehaviour
     private Animator anim = null;
     private float groundCheckDelay = 0.0f;
     private GameObject dropShadowInstance = null;
+    private float latestDropshadowDepth = 0.0f;
 
     private PlayerInput playerInput = null;
     private MenuInputs menuInputs = null;
@@ -64,15 +65,14 @@ public class NewPlayerScript : MonoBehaviour
     public bool UsingScreenNorth => usingScreenNorth;
     void Update()
     {
+        DrawDropShadow();
 
         if (airBorne == false && interacting == false && isLifted == false && crouching == false)
         {
             ApplyGroundVelocity();
-            DrawDropShadow();
         }
         else if (airBorne == true && isLifted == false)
         {
-            DrawDropShadow();
             jumpGroundCheckDelay += Time.deltaTime;
             ApplyAirVelocity();
             if (GroundCheck() == true && jumpGroundCheckDelay >= 0.3f)
@@ -107,7 +107,7 @@ public class NewPlayerScript : MonoBehaviour
     private void DrawDropShadow()
     {
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, Vector3.down, out hit, 5.0f, groundLayer))
+        if(Physics.Raycast(transform.position, Vector3.down, out hit, 8.0f, groundLayer))
         {
             if(dropShadowInstance != null)
             {
@@ -117,6 +117,18 @@ public class NewPlayerScript : MonoBehaviour
             {
                 dropShadowInstance = Instantiate(dropShadow, hit.point + Vector3.up * 0.05f, Quaternion.Euler(90f,0f,0f));
 
+            }
+            latestDropshadowDepth = hit.point.y;
+        }
+        else
+        {
+            if(dropShadowInstance != null)
+            {
+                if(Mathf.Abs(latestDropshadowDepth - transform.position.y) < 0.1f)
+                {
+                    latestDropshadowDepth = transform.position.y - 0.2f;
+                }
+                dropShadowInstance.transform.position = new Vector3(transform.position.x, latestDropshadowDepth, transform.position.z) + Vector3.up * 0.05f;
             }
         }
     }
