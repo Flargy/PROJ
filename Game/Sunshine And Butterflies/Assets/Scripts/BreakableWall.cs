@@ -27,7 +27,7 @@ public class BreakableWall : MonoBehaviour
     {
         if (other.attachedRigidbody.velocity.magnitude > 5.5f && hasBeenUsed == false)
         {
-            Debug.Log(other.attachedRigidbody.velocity.magnitude);
+
             foreach(Rigidbody rig in rb)
             {
                 rig.isKinematic = false;

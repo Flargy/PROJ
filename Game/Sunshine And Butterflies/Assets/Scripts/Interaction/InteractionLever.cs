@@ -24,7 +24,7 @@ public class InteractionLever : Interactable
     //private bool interacting = false;
     private bool abortQTE = false;
     private float originalQTETimer = 0.0f;
-    private bool takeInput = true;
+    private bool takeInput = false;
     private bool playerHasAnswered = false;
     private SpriteRenderer renderQTE = null;
     private Coroutine activateQTE = null;
@@ -55,24 +55,19 @@ public class InteractionLever : Interactable
     {
         if (interacting == false)
         {
-            foreach(AffectedObject affectedObject in affected)
-            {
-                affectedObject.ExecuteAction();
-            }
             foreach (Interactable otherSwitch in connectedSwitches)
             {
                 if (otherSwitch.interacting == false)
                 {
-                    otherSwitch.StartInteraction();
+                    otherSwitch.StopInteraction();
                 }
             }
-            rendererHolder.SetActive(true);
-            rendererHolder.transform.LookAt(sceneCamera.transform.position, Vector3.up);
+            
+            interacting = true;
             interactingPlayer = player.GetComponent<PlayerQTE>();
             interactingPlayer.GetComponent<NewPlayerScript>().SwapLiftingState();
             interactingPlayer.SwapToQTE(this, gameObject);
             
-            interacting = true;
             StartCoroutine(AnimationDelay());
         }
     }
@@ -122,7 +117,7 @@ public class InteractionLever : Interactable
     {
         if (abortQTE == true && interactingPlayer != null)
         {
-            takeInput = true;
+            takeInput = false;
             rendererHolder.SetActive(false);
             interactingPlayer.GetComponent<NewPlayerScript>().SwapLiftingState();
             interactingPlayer.GetComponent<NewPlayerScript>().StartAnimation("FailQTE");
@@ -140,8 +135,15 @@ public class InteractionLever : Interactable
             {
                 affectedObject.ExecuteAction();
             }
+            foreach (Interactable otherSwitch in connectedSwitches)
+            {
+                if (otherSwitch.interacting == true)
+                {
+                    otherSwitch.EnableInteraction();
+                }
+            }
 
-            if(clockHand != null)
+            if (clockHand != null)
             {
                 clockHand.SetActive(false);
             }
@@ -188,6 +190,7 @@ public class InteractionLever : Interactable
                 abortQTE = true;
             }
             
+
         }
         StopQTE();
     }
@@ -244,10 +247,18 @@ public class InteractionLever : Interactable
     /// <returns></returns>
     private IEnumerator AnimationDelay()
     {
-        yield return new WaitForSeconds(0.7f);
-        activateQTE = StartCoroutine(StartQTE());
         leverRotation = StartCoroutine(RotateLever());
         interactingPlayer.GetComponent<NewPlayerScript>().StartAnimation("Pull Lever");
+        yield return new WaitForSeconds(0.7f);
+        rendererHolder.SetActive(true);
+        rendererHolder.transform.LookAt(sceneCamera.transform.position, Vector3.up);
+        takeInput = true;
+        activateQTE = StartCoroutine(StartQTE());
+        
+        foreach (AffectedObject affectedObject in affected)
+        {
+            affectedObject.ExecuteAction();
+        }
     }
 
     

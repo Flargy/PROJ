@@ -10,6 +10,7 @@ public class Interactable : MonoBehaviour
     public float interactionCooldownTimer = 2.0f;
     public bool interacting = false;
     public GameObject interactionIcon = null;
+    private Coroutine interactionCoroutine = null;
     
     //Possible improvements: Break out the list and cooldown start function to this script
 
@@ -79,7 +80,25 @@ public class Interactable : MonoBehaviour
     /// </summary>
     public void StartInteraction()
     {
-        StartCoroutine(InteractionCooldown());
+        if (interactionCoroutine == null)
+        {
+            interactionCoroutine = StartCoroutine(InteractionCooldown());
+        }
+        else
+        {
+            StopCoroutine(interactionCoroutine);
+            interactionCoroutine = StartCoroutine(InteractionCooldown());
+        }
+    }
+
+    public void StopInteraction()
+    {
+        interacting = true;
+    }
+
+    public void EnableInteraction()
+    {
+        interacting = false;
     }
 
     /// <summary>
