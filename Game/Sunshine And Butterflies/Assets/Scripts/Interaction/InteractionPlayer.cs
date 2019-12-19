@@ -20,7 +20,8 @@ public class InteractionPlayer : Interactable
     private bool isLifted = false;
     private PlayerInput playerInput = null;
     private Coroutine breakFree = null;
-    private bool noMovementAllowed = true; 
+    private bool noMovementAllowed = true;
+    private RenderPath rp = null;
     private Collider[] colliders;//Eku
 
     /// <summary>
@@ -32,6 +33,7 @@ public class InteractionPlayer : Interactable
         rb = GetComponent<Rigidbody>();
         colliders = GetComponents<Collider>();//Eku
         thisPlayer = GetComponent<NewPlayerScript>();
+        rp = GetComponent<RenderPath>();
     }
 
     /// <summary>
@@ -59,6 +61,7 @@ public class InteractionPlayer : Interactable
             rb.velocity = Vector3.zero;
             isLifted = true;
             rb.useGravity = false;
+            rp.ShowPath();
             otherPlayer.GetComponent<NewPlayerScript>().PickUpObject(gameObject, animationDuration);
             playerInput.SwitchCurrentActionMap("BreakingFree");
         }
@@ -92,6 +95,7 @@ public class InteractionPlayer : Interactable
     public void GetPutDown()
     {
         thisPlayer.Released();
+        rp.HidePath();
         isLifted = false;
         rb.useGravity = true;
         otherPlayer.GetComponent<NewPlayerScript>().DropObject();

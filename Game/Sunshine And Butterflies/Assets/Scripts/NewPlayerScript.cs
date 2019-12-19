@@ -68,6 +68,7 @@ public class NewPlayerScript : MonoBehaviour
         if (airBorne == false && interacting == false && isLifted == false && crouching == false)
         {
             ApplyGroundVelocity();
+            DrawDropShadow();
         }
         else if (airBorne == true && isLifted == false)
         {
@@ -81,8 +82,8 @@ public class NewPlayerScript : MonoBehaviour
                 {
                     followPoint.StartFollowingPlayer();
                 }
-                Destroy(dropShadowInstance);
-                dropShadowInstance = null;
+                //Destroy(dropShadowInstance);
+                //dropShadowInstance = null;
                 jumpGroundCheckDelay = 0.0f;
             }
         }
@@ -337,10 +338,10 @@ public class NewPlayerScript : MonoBehaviour
             noGravityVector += -noGravityVector * Time.deltaTime;
             rb.velocity = new Vector3(noGravityVector.x, yVelocity, noGravityVector.y);
         }
-        if (rb.velocity.y < 0)
-        {
-            rb.velocity += Vector3.up * Physics.gravity.y * (0.5f) * Time.deltaTime;
-        }
+        //if (rb.velocity.y < 0)
+        //{
+        //    rb.velocity += Vector3.up * Physics.gravity.y * (0.5f) * Time.deltaTime;
+        //}
 
 
     }
