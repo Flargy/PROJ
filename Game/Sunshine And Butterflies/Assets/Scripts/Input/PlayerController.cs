@@ -72,7 +72,7 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""id"": ""e13ed10e-5cc0-4c5a-8d87-70e0dadb2ef0"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press""
+                    ""interactions"": ""Press(pressPoint=0.5,behavior=2)""
                 },
                 {
                     ""name"": ""Restart"",

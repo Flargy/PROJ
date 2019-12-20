@@ -45,7 +45,7 @@ public class NewPlayerScript : MonoBehaviour
     private float latestDropshadowDepth = 0.0f;
 
     private PlayerInput playerInput = null;
-    private MenuInputs menuInputs = null;
+   // private MenuInputs menuInputs = null;
     private PlayerSounds playerSounds;
 
     void Start()
@@ -57,7 +57,7 @@ public class NewPlayerScript : MonoBehaviour
         playerSounds = GetComponent<PlayerSounds>();
 
         playerInput = GetComponent<PlayerInput>();
-        menuInputs = GetComponent<MenuInputs>();
+        //menuInputs = GetComponent<MenuInputs>();
 
     }
 
@@ -534,14 +534,16 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnPause()
     {
+        Debug.Log("blep");
         playerInput.SwitchCurrentActionMap("Menu");
-        MenuInputs.Instance.OnStartFromNewPlayerScript(this);
+        NewPauseMenu.Instance.OnStartFromNewPlayerScript(this);
         //menuInputs.OnStart();
     }
 
     public void SwapToGameplayAM()
     {
-        playerInput.SwitchCurrentActionMap("Gameplay");
+         playerInput.SwitchCurrentActionMap("Gameplay");
+
     }
 
     public void SwapToPaused()
@@ -559,4 +561,8 @@ public class NewPlayerScript : MonoBehaviour
         usingScreenNorth = value;
     }
 
+    public bool GetNorth()
+    {
+        return UsingScreenNorth;
+    }
 }
