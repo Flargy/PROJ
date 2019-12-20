@@ -17,7 +17,6 @@ public class ArrowTrap : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             FireArrows();
-            Debug.Log("Collide");
 
         }
     }

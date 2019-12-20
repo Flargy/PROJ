@@ -14,7 +14,6 @@ public class Detection : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        Debug.Log("inside field");
         if(other.gameObject.CompareTag("Player"))
         {
             Vector3 direction = other.transform.position - lens.position;
@@ -22,7 +21,6 @@ public class Detection : MonoBehaviour
 
             if(Physics.Raycast(lens.transform.position, direction.normalized, out hit, 1000, detectionLayer))
             {
-                Debug.Log(hit.collider.name);
             }
         }
     }
@@ -31,7 +29,6 @@ public class Detection : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("test");
         }
     }
 }

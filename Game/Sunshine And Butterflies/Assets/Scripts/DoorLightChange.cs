@@ -7,10 +7,13 @@ using UnityEngine;
 public class DoorLightChange : MonoBehaviour
 {
     [SerializeField] private Color activationColor;
+    [SerializeField] private AudioClip activationSound = null;
+    [SerializeField] private bool playSound = false;
 
     private Renderer lightRenderer = null;
     private MaterialPropertyBlock propertyBlock = null;
     private Color startColor = Color.red;
+    private AudioSource source = null;
 
     /// <summary>
     /// Sets values to variables on startup.
@@ -20,6 +23,7 @@ public class DoorLightChange : MonoBehaviour
         lightRenderer = GetComponent<Renderer>();
         propertyBlock = new MaterialPropertyBlock();
         startColor = GetComponent<MeshRenderer>().material.GetColor("_EmissionColor");
+        source = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -41,6 +45,19 @@ public class DoorLightChange : MonoBehaviour
         }
         lightRenderer.SetPropertyBlock(propertyBlock);
 
+        if(strength >= 1 && playSound == true)
+        {
+            source.PlayOneShot(activationSound);
+            playSound = false;
+            StartCoroutine(SoundCooldown());
+        }
+
+    }
+
+    private IEnumerator SoundCooldown()
+    {
+        yield return new WaitForSeconds(2.0f);
+        playSound = true;
     }
 
    

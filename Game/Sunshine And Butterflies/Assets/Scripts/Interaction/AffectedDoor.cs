@@ -113,7 +113,7 @@ public class AffectedDoor : AffectedObject
         var opening = toRotation == endRotation;
         if (opening && coroutineIsRunning == false)
         {
-            Debug.Log("OpenSound");
+
             audioSource.PlayOneShot(openSound);
         }
 
@@ -129,7 +129,6 @@ public class AffectedDoor : AffectedObject
 
         if (opening == false)
         {
-            Debug.Log("CloseSound");
             toRotation = endRotation;
             audioSource.PlayOneShot(closeSound);
         }

@@ -1007,6 +1007,11 @@ PrefabInstance:
       propertyPath: animationDuration
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2679521861416088438, guid: 889b0cdd50f4d4c4aade5f93333b8959,
+        type: 3}
+      propertyPath: interactionRadius
+      value: 3.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 889b0cdd50f4d4c4aade5f93333b8959, type: 3}
 --- !u!4 &331450106 stripped
@@ -2026,6 +2031,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &816520617 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2679521861416088438, guid: 889b0cdd50f4d4c4aade5f93333b8959,
+    type: 3}
+  m_PrefabInstance: {fileID: 314855688}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829e80209a6acbc4c8be8bd716909dda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &873192213
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2161,21 +2178,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1091892943225190967, guid: f520c433167705646b903d966a8d15d6,
-        type: 3}
-      propertyPath: offsetVector.y
-      value: 1.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1091892943225190967, guid: f520c433167705646b903d966a8d15d6,
-        type: 3}
-      propertyPath: pickupAnimationDelay
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1091892943225190967, guid: f520c433167705646b903d966a8d15d6,
-        type: 3}
-      propertyPath: animationDuration
-      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f520c433167705646b903d966a8d15d6, type: 3}
@@ -4047,6 +4049,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4089153280740270447, guid: 9fd6e92831465f345a07dbef4ce2512d,
         type: 3}
+      propertyPath: connectedSwitches.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089153280740270447, guid: 9fd6e92831465f345a07dbef4ce2512d,
+        type: 3}
       propertyPath: affected.Array.data[0]
       value: 
       objectReference: {fileID: 1688320453}
@@ -4060,6 +4067,11 @@ PrefabInstance:
       propertyPath: interactionCooldownTimer
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4089153280740270447, guid: 9fd6e92831465f345a07dbef4ce2512d,
+        type: 3}
+      propertyPath: connectedSwitches.Array.data[0]
+      value: 
+      objectReference: {fileID: 816520617}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fd6e92831465f345a07dbef4ce2512d, type: 3}
 --- !u!1 &1192701657
@@ -5016,7 +5028,7 @@ PrefabInstance:
     - target: {fileID: 6017255429612791060, guid: 1fecd8af4580a5f48ab4441e2407d026,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6017255429612791048, guid: 1fecd8af4580a5f48ab4441e2407d026,
         type: 3}

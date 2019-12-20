@@ -13,7 +13,6 @@ public class AmbientTrigger : MonoBehaviour
         if (other.CompareTag("Player") && !players.Contains(other.gameObject))
         { 
             players.Add(other.gameObject);
-            Debug.Log("Player entered:^" + other.gameObject.name + " count:^" + players.Count);
         }
 
         CheckSound();
@@ -24,7 +23,6 @@ public class AmbientTrigger : MonoBehaviour
         if (other.CompareTag("Player") && players.Contains(other.gameObject))
         {
             players.Remove(other.gameObject);
-            Debug.Log("Player escaped:^" + other.gameObject.name + " count:^" + players.Count);
         }
 
         CheckSound();

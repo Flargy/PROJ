@@ -11,7 +11,6 @@ public class LeverRotate : AffectedObject
 
     private IEnumerator RotateObject()
     {
-        Debug.Log("rotation started");
         yield return new WaitForSeconds(1);
     }
 }

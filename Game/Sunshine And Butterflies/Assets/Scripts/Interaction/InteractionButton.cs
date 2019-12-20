@@ -101,7 +101,7 @@ public class InteractionButton : Interactable
             yield return null;
         }
         
-        Debug.Log("Ljud 1");
+
         t = 0.0f;
         lerpTime = 0.0f;
 
@@ -113,7 +113,6 @@ public class InteractionButton : Interactable
             yield return null;
         }
         audioSource.PlayOneShot(buttonSoundOut);
-        Debug.Log("Ljud 2");
         t = 0.0f;
         lerpTime = 0.0f;
     }

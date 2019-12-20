@@ -11,7 +11,6 @@ public class PropertyBlockTest : Interactable
 
     public override void Interact(GameObject player)
     {
-        Debug.Log("activated");
         ChangeColor();
     }
 

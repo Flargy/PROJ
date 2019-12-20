@@ -534,9 +534,7 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnPause()
     {
-        Debug.Log("Input: Start for player: " + gameObject.name);
         playerInput.SwitchCurrentActionMap("Menu");
-        Debug.Log("player input = " + playerInput.currentActionMap);
         MenuInputs.Instance.OnStartFromNewPlayerScript(this);
         //menuInputs.OnStart();
     }

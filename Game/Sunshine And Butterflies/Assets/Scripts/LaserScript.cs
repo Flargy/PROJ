@@ -45,7 +45,6 @@ public class LaserScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Dead");
         }
     }
 }
