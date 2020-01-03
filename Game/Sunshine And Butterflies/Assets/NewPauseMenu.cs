@@ -15,6 +15,7 @@ public class NewPauseMenu : MonoBehaviour
     [SerializeField] private GameObject controlBack = null;
     [SerializeField] private GameObject resumeButton = null;
     [SerializeField] private GameObject backButton = null;
+    [SerializeField] private Toggle outlineState = null;
     [SerializeField] private EventSystem eventSys = null;
     [SerializeField] private Text movementText = null;
 
@@ -60,6 +61,13 @@ public class NewPauseMenu : MonoBehaviour
             player2 = GameObject.Find("Player 2").GetComponent<NewPlayerScript>();
             player1.SetTrueNorth(player1North);
             player2.SetTrueNorth(player2North);
+            if (outlineState.isOn)
+            {
+
+                SwapOutline();
+
+            }
+                
         }
 
 
@@ -161,6 +169,7 @@ public class NewPauseMenu : MonoBehaviour
     {
         SwapOutlineEventInfo soei = new SwapOutlineEventInfo();
         EventHandeler.Current.FireEvent(EventHandeler.EVENT_TYPE.SwapOutlineEvent, soei);
+
     }
 
     public void ShowControls()
