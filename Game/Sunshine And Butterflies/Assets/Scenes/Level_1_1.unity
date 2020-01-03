@@ -8,8 +8,9 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: bcaad7648c88bb945acbd82a1e0bd910
+  m_OcclusionCullingData: {fileID: 36300000, guid: eb30d713197e77044ab2c8238f82fe44,
+    type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -1139,6 +1140,11 @@ PrefabInstance:
       propertyPath: followPoint
       value: 
       objectReference: {fileID: 934155895}
+    - target: {fileID: 5593859519870245480, guid: 07eceb29cd30cb24fa48d57650dea131,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 648753991}
     - target: {fileID: 7575830069029409286, guid: 07eceb29cd30cb24fa48d57650dea131,
         type: 3}
       propertyPath: otherPlayer
@@ -1174,11 +1180,6 @@ PrefabInstance:
       propertyPath: footStepsSounds.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: 27db63db810b1804d93ba3755d2ec917, type: 3}
-    - target: {fileID: 5593859519870245480, guid: 07eceb29cd30cb24fa48d57650dea131,
-        type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 648753991}
     - target: {fileID: 2920416987980344816, guid: 07eceb29cd30cb24fa48d57650dea131,
         type: 3}
       propertyPath: m_RootOrder
@@ -3226,16 +3227,16 @@ PrefabInstance:
       propertyPath: mainCam
       value: 
       objectReference: {fileID: 648753991}
-    - target: {fileID: 8935464080365796635, guid: 1fecd8af4580a5f48ab4441e2407d026,
-        type: 3}
-      propertyPath: otherPlayer
-      value: 
-      objectReference: {fileID: 401499935}
     - target: {fileID: 6377807264643954037, guid: 1fecd8af4580a5f48ab4441e2407d026,
         type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 648753991}
+    - target: {fileID: 8935464080365796635, guid: 1fecd8af4580a5f48ab4441e2407d026,
+        type: 3}
+      propertyPath: otherPlayer
+      value: 
+      objectReference: {fileID: 401499935}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fecd8af4580a5f48ab4441e2407d026, type: 3}
 --- !u!1 &949083871 stripped
@@ -6975,11 +6976,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6043005349961004554, guid: 116ac96fa3d5f98479016640585f9a40,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6043005351007721845, guid: 116ac96fa3d5f98479016640585f9a40,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7059,6 +7055,11 @@ PrefabInstance:
         type: 3}
       propertyPath: cameraOffset.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043005349961004554, guid: 116ac96fa3d5f98479016640585f9a40,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2818558681622976980, guid: 116ac96fa3d5f98479016640585f9a40,
         type: 3}
