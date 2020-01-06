@@ -63,9 +63,7 @@ public class NewPauseMenu : MonoBehaviour
             player2.SetTrueNorth(player2North);
             if (outlineState.isOn)
             {
-
-                SwapOutline();
-
+                SwapOutlineAuto();
             }
                 
         }
@@ -169,10 +167,9 @@ public class NewPauseMenu : MonoBehaviour
     {
         SwapOutlineEventInfo soei = new SwapOutlineEventInfo();
         EventHandeler.Current.FireEvent(EventHandeler.EVENT_TYPE.SwapOutlineEvent, soei);
-
     }
 
-    public void ShowControls()
+        public void ShowControls()
     {
         eventSys.SetSelectedGameObject(controlBack.gameObject);
     }

@@ -534,7 +534,7 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnPause()
     {
-        Debug.Log("blep");
+
         playerInput.SwitchCurrentActionMap("Menu");
         NewPauseMenu.Instance.OnStartFromNewPlayerScript(this);
         //menuInputs.OnStart();

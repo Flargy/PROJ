@@ -11,7 +11,7 @@ public class OutlineController : MonoBehaviour
     /// <summary>
     /// Sets values on start.
     /// </summary>
-    void Start()
+    void Awake()
     {
         line = GetComponent<Outline>();
         EventHandeler.Current.RegisterListener(EventHandeler.EVENT_TYPE.SwapOutlineEvent, ChangeOutline);
