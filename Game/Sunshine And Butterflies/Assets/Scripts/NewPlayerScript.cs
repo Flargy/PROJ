@@ -55,7 +55,7 @@ public class NewPlayerScript : MonoBehaviour
         interactScript = GetComponent<Interactable>();
         anim = GetComponent<Animator>();
         playerSounds = GetComponent<PlayerSounds>();
-
+        respawnPoint = transform.position;
         playerInput = GetComponent<PlayerInput>();
         //menuInputs = GetComponent<MenuInputs>();
 
