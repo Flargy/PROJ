@@ -63,7 +63,7 @@ public class NewPauseMenu : MonoBehaviour
             player2.SetTrueNorth(player2North);
             if (outlineState.isOn)
             {
-                SwapOutlineAuto();
+                SwapOutline();
             }
                 
         }
