@@ -211,6 +211,7 @@ public class InteractionPickUp : Interactable
     /// <returns></returns>
     private IEnumerator RaisePosition()
     {
+        HideInteraction();
         goFromPosition = rb.transform.position;
         goToPosition = currentHolder.transform.position + (currentHolder.transform.localRotation * offsetVector) + currentHolder.transform.forward * 0.3f;
 
