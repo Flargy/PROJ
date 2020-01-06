@@ -447,11 +447,6 @@ public class NewPlayerScript : MonoBehaviour
         rotationVector = value.Get<Vector2>();
     }
 
-    public void OnRestart()
-    {
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
-    }
 
     //Player to player interactions
 

@@ -73,14 +73,6 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press(pressPoint=0.5,behavior=2)""
-                },
-                {
-                    ""name"": ""Restart"",
-                    ""type"": ""Button"",
-                    ""id"": ""8fe736db-5ee1-4e7e-9076-2968696111f1"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -185,6 +177,17 @@ public class PlayerController : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""4d4d7189-2b70-4b4a-9e49-850d44483bca"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Toss"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""cae967dc-75ea-4ff5-a9c4-5f5c61f96d8f"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
@@ -213,17 +216,6 @@ public class PlayerController : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2190887a-2d4c-4e96-ab24-02c2dfc5a98e"",
-                    ""path"": ""<Gamepad>/select"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Restart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -486,7 +478,6 @@ public class PlayerController : IInputActionCollection, IDisposable
         m_Gameplay_Rotate = m_Gameplay.FindAction("Rotate", throwIfNotFound: true);
         m_Gameplay_Crouch = m_Gameplay.FindAction("Crouch", throwIfNotFound: true);
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
-        m_Gameplay_Restart = m_Gameplay.FindAction("Restart", throwIfNotFound: true);
         // QTE
         m_QTE = asset.FindActionMap("QTE", throwIfNotFound: true);
         m_QTE_Down = m_QTE.FindAction("Down", throwIfNotFound: true);
@@ -560,7 +551,6 @@ public class PlayerController : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Rotate;
     private readonly InputAction m_Gameplay_Crouch;
     private readonly InputAction m_Gameplay_Pause;
-    private readonly InputAction m_Gameplay_Restart;
     public struct GameplayActions
     {
         private PlayerController m_Wrapper;
@@ -572,7 +562,6 @@ public class PlayerController : IInputActionCollection, IDisposable
         public InputAction @Rotate => m_Wrapper.m_Gameplay_Rotate;
         public InputAction @Crouch => m_Wrapper.m_Gameplay_Crouch;
         public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
-        public InputAction @Restart => m_Wrapper.m_Gameplay_Restart;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -603,9 +592,6 @@ public class PlayerController : IInputActionCollection, IDisposable
                 Pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
                 Pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
                 Pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
-                Restart.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRestart;
-                Restart.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRestart;
-                Restart.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRestart;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -631,9 +617,6 @@ public class PlayerController : IInputActionCollection, IDisposable
                 Pause.started += instance.OnPause;
                 Pause.performed += instance.OnPause;
                 Pause.canceled += instance.OnPause;
-                Restart.started += instance.OnRestart;
-                Restart.performed += instance.OnRestart;
-                Restart.canceled += instance.OnRestart;
             }
         }
     }
@@ -819,7 +802,6 @@ public class PlayerController : IInputActionCollection, IDisposable
         void OnRotate(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
-        void OnRestart(InputAction.CallbackContext context);
     }
     public interface IQTEActions
     {
