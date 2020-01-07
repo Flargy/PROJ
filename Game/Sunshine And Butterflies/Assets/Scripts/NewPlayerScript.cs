@@ -111,11 +111,11 @@ public class NewPlayerScript : MonoBehaviour
         {
             if(dropShadowInstance != null)
             {
-                dropShadowInstance.transform.position = hit.point + Vector3.up * 0.05f;
+                dropShadowInstance.transform.position = hit.point + Vector3.up * 0.005f;
             }
             else if(dropShadowInstance == null)
             {
-                dropShadowInstance = Instantiate(dropShadow, hit.point + Vector3.up * 0.05f, Quaternion.Euler(90f,0f,0f));
+                dropShadowInstance = Instantiate(dropShadow, hit.point + Vector3.up * 0.005f, Quaternion.Euler(90f,0f,0f));
 
             }
             latestDropshadowDepth = hit.point.y;
