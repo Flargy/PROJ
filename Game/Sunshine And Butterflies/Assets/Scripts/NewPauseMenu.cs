@@ -65,6 +65,10 @@ public class NewPauseMenu : MonoBehaviour
             {
                 SwapOutline();
             }
+            if(SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 9 || SceneManager.GetActiveScene().buildIndex == 10)
+            {
+                Destroy(parent);
+            }
                 
         }
 
