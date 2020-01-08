@@ -50,7 +50,7 @@ public class InteractionLever : Interactable
 
     private void Awake()
     {
-        EventHandeler.Current.RegisterListener(EventHandeler.EVENT_TYPE.SwapOutlineEvent, ChangeTimeAdd);
+        EventHandeler.Current.RegisterListener(EventHandeler.EVENT_TYPE.ChangeQTEEvent, ChangeTimeAdd);
     }
 
     private void ChangeTimeAdd(EventInfo info)

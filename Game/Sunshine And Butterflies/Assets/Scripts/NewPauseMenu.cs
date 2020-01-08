@@ -194,6 +194,13 @@ public class NewPauseMenu : MonoBehaviour
         Destroy(parent);
     }
 
+    public void OpenDev()
+    {
+
+        eventSys.SetSelectedGameObject(devBack.gameObject);
+
+    }
+
     public void HideDev()
     {
         eventSys.SetSelectedGameObject(backButton.gameObject);
@@ -202,14 +209,14 @@ public class NewPauseMenu : MonoBehaviour
     public void IncreaseTime()
     {
         QTETimeAdd = Mathf.Min(2, QTETimeAdd + 0.1f);
-        QTENumber.text = QTETimeAdd.ToString();
+        QTENumber.text = QTETimeAdd.ToString("f1");
         FireTimeEvent();
     }
 
     public void DecreaseTime()
     {
-        QTETimeAdd = Mathf.Max(0, QTETimeAdd - 0.1f);
-        QTENumber.text = QTETimeAdd.ToString();
+        QTETimeAdd = Mathf.Max(-1, QTETimeAdd - 0.1f);
+        QTENumber.text = QTETimeAdd.ToString("f1");
         FireTimeEvent();
     }
 
