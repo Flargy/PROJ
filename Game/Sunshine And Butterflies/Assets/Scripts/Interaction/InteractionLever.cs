@@ -29,6 +29,7 @@ public class InteractionLever : Interactable
     private SpriteRenderer renderQTE = null;
     private Coroutine activateQTE = null;
     private Coroutine leverRotation = null;
+    private float timeAdd = 0.0f;
     float t = 0;
     float leverPullDownTime = 0.0f;
 
@@ -45,6 +46,17 @@ public class InteractionLever : Interactable
         renderQTE = rendererHolder.GetComponent<SpriteRenderer>();
         rendererHolder.SetActive(false);
         originalQTETimer = QTETimer;
+    }
+
+    private void Awake()
+    {
+        EventHandeler.Current.RegisterListener(EventHandeler.EVENT_TYPE.SwapOutlineEvent, ChangeTimeAdd);
+    }
+
+    private void ChangeTimeAdd(EventInfo info)
+    {
+        ChangeQTEEventInfo cqei = (ChangeQTEEventInfo)info;
+        timeAdd = cqei.time;
     }
 
     /// <summary>
@@ -183,7 +195,7 @@ public class InteractionLever : Interactable
             //correctAnswer = Random.Range(correctAnswer + 1, 4) % 4;
             DisplayWantedInput();
             takeInput = true;
-            yield return new WaitForSeconds(QTETimer);
+            yield return new WaitForSeconds(QTETimer + timeAdd);
             QTETimer -= cutoffTime;
             if(playerHasAnswered == false)
             {
@@ -204,7 +216,7 @@ public class InteractionLever : Interactable
         clockHand.transform.localRotation = Quaternion.Euler(Vector3.zero);
         while (t <  0.99f)
         {
-            t += Time.deltaTime / QTETimer;
+            t += Time.deltaTime / QTETimer + timeAdd;
             clockHand.transform.localRotation = Quaternion.Euler(Vector3.Lerp(Vector3.zero, new Vector3(0, 0, 358), t));
 
             yield return null;

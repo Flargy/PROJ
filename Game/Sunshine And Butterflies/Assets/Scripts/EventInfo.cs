@@ -13,6 +13,11 @@ public class SwapOutlineEventInfo : EventInfo
 {
 }
 
+public class ChangeQTEEventInfo : EventInfo
+{
+    public float time;
+}
+
 
 
 

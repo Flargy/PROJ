@@ -15,9 +15,12 @@ public class NewPauseMenu : MonoBehaviour
     [SerializeField] private GameObject controlBack = null;
     [SerializeField] private GameObject resumeButton = null;
     [SerializeField] private GameObject backButton = null;
+    [SerializeField] private GameObject devHolder = null;
+    [SerializeField] private GameObject devBack = null;
     [SerializeField] private Toggle outlineState = null;
     [SerializeField] private EventSystem eventSys = null;
     [SerializeField] private Text movementText = null;
+    [SerializeField] private Text QTENumber = null;
 
     private NewPlayerScript player1= null;
     private NewPlayerScript player2 = null;
@@ -26,6 +29,7 @@ public class NewPauseMenu : MonoBehaviour
     private string screenNorth= "Screen North";
     private bool player1North = false;
     private bool player2North = false;
+    private float QTETimeAdd = 0.0f;
 
     public static NewPauseMenu Instance;
 
@@ -69,6 +73,7 @@ public class NewPauseMenu : MonoBehaviour
             {
                 Destroy(parent);
             }
+            FireTimeEvent();
                 
         }
 
@@ -188,5 +193,31 @@ public class NewPauseMenu : MonoBehaviour
         SceneManager.LoadScene(1);
         Destroy(parent);
     }
+
+    public void HideDev()
+    {
+        eventSys.SetSelectedGameObject(backButton.gameObject);
+    }
+
+    public void IncreaseTime()
+    {
+        QTETimeAdd = Mathf.Min(2, QTETimeAdd + 0.1f);
+        QTENumber.text = QTETimeAdd.ToString();
+        FireTimeEvent();
+    }
+
+    public void DecreaseTime()
+    {
+        QTETimeAdd = Mathf.Max(0, QTETimeAdd - 0.1f);
+        QTENumber.text = QTETimeAdd.ToString();
+        FireTimeEvent();
+    }
+
+    private void FireTimeEvent()
+    {
+        ChangeQTEEventInfo cqei = new ChangeQTEEventInfo() {time = QTETimeAdd };
+        EventHandeler.Current.FireEvent(EventHandeler.EVENT_TYPE.ChangeQTEEvent, cqei);
+    }
+
 
 }

@@ -29,7 +29,7 @@ public class EventHandeler : MonoBehaviour
     /// <summary>
     /// Declarations of various kinds of event types.
     /// </summary>
-    public enum EVENT_TYPE { SwapOutlineEvent}
+    public enum EVENT_TYPE { SwapOutlineEvent, ChangeQTEEvent}
     public delegate void EventListener(EventInfo ei);
     Dictionary<EVENT_TYPE, List<EventListener>> eventListeners;
     Dictionary<EVENT_TYPE, List<EventListener>> removeListeners;
